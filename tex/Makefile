@@ -2,7 +2,7 @@ LATEX       = pdflatex -interaction=nonstopmode -halt-on-error
 BASH        = bash -c
 ECHO        = echo
 RM          = rm -rf
-TMP_SUFFS   = pdf aux bbl blg log dvi ps eps out brf
+TMP_SUFFS   = pdf aux bbl blg log dvi ps eps out brf fdb_latexmk fls synctex.gz
 CHECK_RERUN =
 GIT_PATH    = .git/
 
