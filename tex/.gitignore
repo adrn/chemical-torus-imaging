@@ -1,0 +1,24 @@
+# Latex
+*.aux
+*.bbl
+*.blg
+*.brf
+*.log
+*.out
+*.pdf
+*.synctex.gz*
+*Notes.bib
+*.png
+gitstuff.tex
+*.fdb_latexmk
+*.fls
+submit
+catalogs
+*.fits
+*.zip
+arxiv
+
+data/
+
+# Hogg
+*~
