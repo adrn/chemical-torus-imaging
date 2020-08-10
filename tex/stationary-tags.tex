@@ -28,138 +28,41 @@
 Chemical-tangents method:\\
 Identifying orbits in phase space through element-abundance invariances}}
 
-\author[0000-0003-2866-9403]{David W. Hogg}
-\affil{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
-\affil{Center for Data Science, New York University, 60 Fifth Ave, New York, NY 10011, USA}
-\affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
-\affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
+% \author[0000-0003-2866-9403]{David W. Hogg}
+% \affil{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
+% \affil{Center for Data Science, New York University, 60 Fifth Ave, New York, NY 10011, USA}
+% \affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
+% \affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
 
-\author[0000-0003-0872-7098]{Adrian~M.~Price-Whelan}
-\affil{Department of Astrophysical Sciences, Princeton University, Princeton, NJ 08544, USA}
+% \author[0000-0003-0872-7098]{Adrian~M.~Price-Whelan}
 
-\author[0000-0003-4996-9069]{Hans-Walter Rix}
-\affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
+% \author[0000-0003-4996-9069]{Hans-Walter Rix}
+% \affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
 
 \begin{abstract}\noindent
 % context
-Some stellar surface element abundances are invariants: They don't change with time.
-In this way they are like dynamical actions that are invariant along a stellar trajectory.
 % aims
-Here we capitalize on the invariance of element abundances to identify dynamical
-invariants, by using the fact that---for a phase-mixed population---the element-abundance
-distribution ought to depend only on dynamical invariants (such as the actions)
-but not at all on time-variable coordinates (such as the conjugate angles).
-That is, the stellar orbits should be tangent everywhere to the
-element-abundance level hyper-surfaces or iso-abundance contours in 6-d phase
-space, or orthogonal to the 6-d abundance gradients.
-For a first project, we consider only the vertical structure and dynamics of the Milky Way
-disk and only a few abundances, to demonstrate feasibility.
 % methods
-We make use of \galah\ and \gaia\ data on red-giant stars in the Solar Neighborhood.
-We parameterize the vertical density structure of the disk with a hyperbolic secant density
-structure parameterized by a central density and an
-exponential scale height.
-We fit the element-abundance distributions as Gaussians with means and variances that depend
-smoothly on vertical action.
-We visualize the residuals of the model in conjugate-angle space to show that the element abundance
-variations with angle vanish at the best-fit dynamical model.
 % results
-We find FOO WHATEVER.
-These chemical-tangents methods have great advantages over other methods
-for inferring dynamical actions or orbits: They are not sensitive to spectroscopic
-selection functions, which have aspects that can't be known precisely; they
-do not require taking second moments of velocity data, which are not usually measured
-well; and they do not require a full forward model of the distribution function,
-which is hard to model with sufficient flexibility.
 \end{abstract}
 
-\keywords{\raggedright
- astrometry
- ---
- Galaxy:~disk
- ---
- Galaxy:~fundamental~parameters
- ---
- Galaxy:~kinematics~and~dynamics
- ---
- methods:~data~analysis
- ---
- stars:~abundances
- ---
- stars:~kinematics~and~dynamics
-}
+% \keywords{\raggedright
+%  astrometry
+%  ---
+%  Galaxy:~disk
+%  ---
+%  Galaxy:~fundamental~parameters
+%  ---
+%  Galaxy:~kinematics~and~dynamics
+%  ---
+%  methods:~data~analysis
+%  ---
+%  stars:~abundances
+%  ---
+%  stars:~kinematics~and~dynamics
+% }
 
 \section{Introduction}
-
-Most old-school inferences about the gravitational potential of the
-Milky Way, or, equivalently, the gravitational acceleration field, or,
-equivalently, the mass density, are made by assuming that stars are
-phase-mixed on regular orbits.
-This assumption is valuable, because it permits inference of the
-dynamics from the current phase-space snapshot, and it leads to a
-simplification in which the distribution function can depend only on
-dynamical invariants, such as the dynamical actions.
-Within this assumption-context, there are several methods available to the
-contemporary astrophysical dynamicist:
-One is through \emph{moment relationships}, in which the Jeans equation (relating second moments
-of stellar velocities) connects mean products of velocities by a mixture of potential and
-tracer-density derivatives.
-Jeans modeling has the great advantage that---because it depends only on velocity
-moments---a survey selected in position-space can be used without much
-(or maybe any) sensitivity to the (usually complex) survey selection
-function.
-It has the disadvantage that it involves second moments of the velocity
-field, which are noisily measured in any finite data set, and also a lossy
-compression of the relevant data.
-Another method is full \emph{forward modeling} of the position and velocity
-data, with both the dynamics and the phase-space distribution function
-(which, by assumption, depends only on dynamical invariants) and the
-force law or potential as free functions.
-This has the advantage that it exploits all of kinematic information in
-the data set.
-But it has the great disadvantages of requiring an accurate selection function
-and requiring optimization or marginalization of very flexible models for
-the distribution function, which is not just technically challenging
-(\citealt{ss}, CITE OTHERS?),
-but it also puts the computational load on the part of the problem that is
-(usually) uninteresting.
-There are intermediate methods as well; in which some form of forward
-modeling is applied, but it is performed conditionally on position to reduce
-the sensitivity to the selection function (CITE).
-But suffice it to say that the old-school methods either strongly reduce the
-data through moments, or else require large computational efforts.
-
-A great deal has changed recently.
-There are now million-star-scale spectroscopic surveys that are returning not
-just kinematics but multi-element chemical abundances (\citealt{apogee, galah, sdssv}).
-These surveys have many motivations, but among them is the hope for
-chemical tagging (\citealt{freeman, jbh}), in which the (nearly) invariant surface
-abundances observable in a stellar atmosphere are used as tags that identify
-pairs or groups of stars that were born in the same molecular cloud at the same time,
-even if that time was far in the past.
-Because the chemical-tagging approach capitalizes on element-abundance invariants
-rather than dynamical invariants, it could potentially permit dynamical inferences
-about the Milky Way that do not rely on the phase-mixed assumption underlying
-most old-school methods.
-Chemical tagging has not yet successfully revealed the origins of
-the Milky Way, but element-abundance tags are starting to be specific enough to
-identify some kinds of coeval stars (\citealt{tagging}).
-It is also starting to be used to identify stars that have
-migrated far from their birth locations (\citealt{frankel}).
-In its most na\"ive or strongest form, chemical tagging works when high-dimensional
-element-abundance measurements create such a specific fingerprint for a star that it
-can only have one (or a few) possible birthplace events in the 3+1-dimensional past.
-That's an assumption, and one that is increasingly untenable
-(for example, \citealt{mitschang, ting, doppel}).
-It is time to look at either softer versions of the chemical-tagging goal, or else
-look at other ways of exploiting the near-invariance of surface abundances.
-
-The project reported here has the latter goal:
-We are going to use element-abundance invariances as a tool to discover dynamical
-invariants.
-Like the old-school methods we opened with, we will make the well-mixed assumption.
-But unlike the chemical-tagging approaches, we will not have to model or identify
-the origins of the stars we use.
 
 In a well-mixed population, stars are in a kinematic steady state:
 As time goes on, stars move along their orbits, but they don't change their dynamical
@@ -246,54 +149,54 @@ In what follows, a very limited project...
 
 \section{Data}
 
-For this project we make use of \galah\ Survey (\citealt{galah, galah2}) data taken
-with the \hermes\ instrument (\citealt{hermes10, hermes15}).
-\galah\ has released in its second data release (\citealt{galahdr2})
-XXX measurements of element abundances for YYY stars.
-These stars have good representation near the Sun, so the sample is ideally suited for studying
-the Solar Neighborhood and the nearby disk.
+% For this project we make use of \galah\ Survey (\citealt{galah, galah2}) data taken
+% with the \hermes\ instrument (\citealt{hermes10, hermes15}).
+% \galah\ has released in its second data release (\citealt{galahdr2})
+% XXX measurements of element abundances for YYY stars.
+% These stars have good representation near the Sun, so the sample is ideally suited for studying
+% the Solar Neighborhood and the nearby disk.
 
-In detail, we subsample the \galah\ data to HOGG WHAT REGION of phase space.
-This leaves HOGG HOW MANY stars.
-The subsample we use is shown in \figurename~\ref{fig:data}.
-\begin{figure}
-\caption{The data used in this \documentname.
-Each panel shows the stellar points in the plane
-of vertical position $z$ and vertical velocity $v_z$,
-colored by a different element abundance ratio.
-These are phase-space plots, but colored by the abundance ratios.
-It is clear in these plots that the abundance ratio level surfaces will be
-constraining on the orbits.\label{fig:data}}
-\end{figure}
+% In detail, we subsample the \galah\ data to HOGG WHAT REGION of phase space.
+% This leaves HOGG HOW MANY stars.
+% The subsample we use is shown in \figurename~\ref{fig:data}.
+% \begin{figure}
+% \caption{The data used in this \documentname.
+% Each panel shows the stellar points in the plane
+% of vertical position $z$ and vertical velocity $v_z$,
+% colored by a different element abundance ratio.
+% These are phase-space plots, but colored by the abundance ratios.
+% It is clear in these plots that the abundance ratio level surfaces will be
+% constraining on the orbits.\label{fig:data}}
+% \end{figure}
 
-There are many different abundance ratios we might use to constrain the vertical of the disk.
-structure.
-We choose HOGG WHAT RATIOS because they are well measured in \galah\ and they show strong
-vertical gradients.
-These abundance ratios are shown in \figurename~\ref{fig:data}.
-This choice is relatively arbitrary; there is no sense in which this project is making use
-of all the element-abundance information latent in the \galah\ data.
+% There are many different abundance ratios we might use to constrain the vertical of the disk.
+% structure.
+% We choose HOGG WHAT RATIOS because they are well measured in \galah\ and they show strong
+% vertical gradients.
+% These abundance ratios are shown in \figurename~\ref{fig:data}.
+% This choice is relatively arbitrary; there is no sense in which this project is making use
+% of all the element-abundance information latent in the \galah\ data.
 
-As we will describe below, the method depends critically on the element abundance
-measurements being consistent across stellar types.
-That is, it is critical that the element abundance measurments in luminous
-stars---which are observed to greater distances in general---are similar in their
-biases to the measurements in less luminous stars.
-That is, the abundance measurements don't necessarily have to be accurate, but
-they do have to be consistent.
-In \figurename~\ref{fig:testing}, HOGG SOMETHING IS SHOWN.
-\begin{figure}
-\caption{HOGG SOME KIND OF TEST that the element abundance measurements
-are consistent for stars of different surface gravities.\label{fig:testing}}
-\end{figure}
+% As we will describe below, the method depends critically on the element abundance
+% measurements being consistent across stellar types.
+% That is, it is critical that the element abundance measurments in luminous
+% stars---which are observed to greater distances in general---are similar in their
+% biases to the measurements in less luminous stars.
+% That is, the abundance measurements don't necessarily have to be accurate, but
+% they do have to be consistent.
+% In \figurename~\ref{fig:testing}, HOGG SOMETHING IS SHOWN.
+% \begin{figure}
+% \caption{HOGG SOME KIND OF TEST that the element abundance measurements
+% are consistent for stars of different surface gravities.\label{fig:testing}}
+% \end{figure}
 
-In addition to the \galah\ abundance data, we use radial-velocity measurements from \galah,
-and position and proper-motion measurements from \gaia\ (\citealt{gaia})
-\acronym{DR2} (\citealt{gaiadr2}).
-In detail, we matched \galah\ to \gaia\ HOGG HOW?
+% In addition to the \galah\ abundance data, we use radial-velocity measurements from \galah,
+% and position and proper-motion measurements from \gaia\ (\citealt{gaia})
+% \acronym{DR2} (\citealt{gaiadr2}).
+% In detail, we matched \galah\ to \gaia\ HOGG HOW?
 
-We assemble the \galah\ and \gaia\ information for each star into a Galactic position and
-velocity assuming HOGG WHAT THINGS about the Solar phase-space position in the Galaxy.
+% We assemble the \galah\ and \gaia\ information for each star into a Galactic position and
+% velocity assuming HOGG WHAT THINGS about the Solar phase-space position in the Galaxy.
 
 \section{Assumptions}
 
