@@ -6,7 +6,7 @@ TMP_SUFFS   = pdf aux bbl blg log dvi ps eps out brf
 CHECK_RERUN =
 GIT_PATH    = .git/
 
-NAME = dr16vac
+NAME = stationary-tags
 
 all: ${NAME}.pdf
 
