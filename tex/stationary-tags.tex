@@ -5,7 +5,12 @@
 
 \input{preamble.tex}
 
-% Project-specific macros - all others go in preamble.tex
+% text macros
+% \newcommand{\methodname}{Tag Moment Roulette}
+\newcommand{\methodname}{Action--Tag Modeling}
+\newcommand{\method}{\acronym{TMR}}
+
+% Project macros - all others go in preamble.tex
 \newcommand{\gaia}{\textsl{Gaia}}
 \newcommand{\dr}[1]{\acronym{DR}#1}
 \newcommand{\apogee}{\acronym{APOGEE}}
@@ -15,35 +20,65 @@
 \newcommand{\galah}{\acronym{GALAH}}
 \newcommand{\hermes}{\acronym{HERMES}}
 
-
-\setlength{\parindent}{1.4em} % trust in Hogg
-\shorttitle{sup}
-\shortauthors{people}
+\setlength{\parindent}{1.1\baselineskip} % trust in Hogg
+\shorttitle{tags are separable from angles}
+\shortauthors{apw, dwh, hwr, and more}
 
 \begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing % trust in Hogg
 \graphicspath{ {figures/} }
 \DeclareGraphicsExtensions{.pdf,.eps,.png}
 
 \title{\textbf{%
-Chemical-tangents method:\\
-Identifying orbits in phase space through element-abundance invariances}}
+\methodname:\\
+Identifying orbits in phase space through invariances\\
+of element-abundance distributions}}
 
-% \author[0000-0003-2866-9403]{David W. Hogg}
-% \affil{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
+\author[0000-0003-0872-7098]{Adrian~M.~Price-Whelan}
+\affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
+
+\author[0000-0003-2866-9403]{David W. Hogg}
+\affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
+\affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
+\affil{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
 % \affil{Center for Data Science, New York University, 60 Fifth Ave, New York, NY 10011, USA}
-% \affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
-% \affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
 
-% \author[0000-0003-0872-7098]{Adrian~M.~Price-Whelan}
+\author[0000-0003-4996-9069]{Hans-Walter Rix}
+\affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
 
-% \author[0000-0003-4996-9069]{Hans-Walter Rix}
-% \affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
+\author{Others}
 
-\begin{abstract}\noindent
-% context
-% aims
-% methods
-% results
+\begin{abstract}\noindent % Hogg strikes again
+  The dynamics of the Milky Way---and nearby galaxies---are often
+  understood in an approximation in which the gravitational potential
+  is treated as simple and integrable and the distribution function
+  time-invariant.
+  Under these conditions, the Jeans equations are relevant and Jeans
+  modeling is the standard---though not the only---methodology.
+  Here we present an alternative approach for inference, which makes
+  use of the fact that there are generically gradients, or dependences
+  of element abundnaces and stellar ages (and other invariant stellar
+  tags) on position in the Galaxy.
+  The method exploits the fact that in an integrable, steady-state
+  gravitational system, the distribution of any invariant stellar tags
+  must be invariant with respect to time-variable conjugate angles.
+  As a demonstration of the concepts and methods, we use
+  \apogee\ giant stars to look at vertical orbit structure in Milky
+  Way disk.
+  We show that the disk mass can be constrained na\"ively at the
+  XXX-percent level with \methodname.
+  We write down and discuss both frequentist-statistics and Bayesian
+  forward-modeling approaches to inference.
+  \methodname\ has great advantages:
+  It does not depend on making measurements of second (or higher)
+  moments of the velocity distribution, as Jeans modeling
+  requires.
+  It does not depend on potential separability, although it does require
+  integrability.
+  It can be written in a form that is (to first order) independent
+  of the details of the stellar selection function.
+  It requires, however, element-abundance or age or orthogonal-action
+  gradients with respect to actions in the distribution function.
+  Fortunately, God provides.
 \end{abstract}
 
 % \keywords{\raggedright
@@ -112,6 +147,9 @@ dynamical actions and conjugate angles}.
 HERE WE JUST CONSIDER VERTICAL DYNAMICS.
 This restricts the problem usefully and is good for pedagogical purposes.
 But obviously it is not unlocking the full promise of this family of methods.
+
+BUT WE ARE NOT GOING TO ASSUME SEPARABILITY.
+Jeans models can suck it.
 
 HOGG Aside: Controversy over the massive/dense disk. How we might resolve it.
 But still making the phase-mixed assumption! Note the Antoja results and the \gaia\ results
