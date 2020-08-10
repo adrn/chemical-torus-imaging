@@ -1,54 +1,24 @@
-% This file is part of the ChemicalTangents project.
-% Copyright 2018 the authors.
-
 % To-dos
 % ------
-% - draft introduction
-% - draft generalities section
-% - draft assumptions list / section
-% - draft method & lf
-% - draft data & results
-% - draft discussion
 
-% Style notes
-% - 
+\documentclass[modern]{aastex63}
 
-\documentclass[modern]{aastex62}
-% \usepackage{graphicx, xcolor}
-% \usepackage[sort&compress]{natbib}
+\input{preamble.tex}
 
-% units macros
-\newcommand{\unit}[1]{\mathrm{#1}}
-\newcommand{\km}{\unit{km}}
-\newcommand{\s}{\unit{s}}
-\newcommand{\kms}{\km\,\s^{-1}}
-\newcommand{\pc}{\unit{pc}}
-\newcommand{\kpc}{\unit{kpc}}
+% Project-specific macros - all others go in preamble.tex
+\newcommand{\gaia}{\textsl{Gaia}}
+\newcommand{\dr}[1]{\acronym{DR}#1}
+\newcommand{\apogee}{\acronym{APOGEE}}
+\newcommand{\sdss}{\acronym{SDSS}}
+\newcommand{\sdssiv}{\acronym{SDSS-IV}}
+\newcommand{\sdssv}{\acronym{SDSS-V}}
+\newcommand{\galah}{\acronym{GALAH}}
+\newcommand{\hermes}{\acronym{HERMES}}
 
-% math macros
-\newcommand{\dd}{\mathrm{d}}
-\newcommand{\T}{^{\mathsf{T}}}
-\newcommand{\given}{\,|\,}
-\newcommand{\abundance}[2]{\mathrm{\left[{#1}/{#2}\right]}}
-
-% chemical macros
-\newcommand{\alphafe}{[\alpha/\mathrm{Fe}]}
-
-% text macros
-\newcommand{\documentname}{\textsl{Article}}
-\newcommand{\sectionname}{Section}
-\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
-\newcommand{\acronym}[1]{{\small{#1}}}
-\newcommand{\project}[1]{\textsl{#1}}
-\newcommand{\foreign}[1]{\textsl{#1}}
-\newcommand{\etal}{\foreign{et al.}}
-\newcommand{\galah}{\project{\acronym{GALAH}}}
-\newcommand{\gaia}{\project{Gaia}}
-\newcommand{\hermes}{\project{\acronym{HERMES}}}
 
 \setlength{\parindent}{1.4em} % trust in Hogg
-\shorttitle{chemical-tangents method}
-\shortauthors{hogg, price-whelan, rix}
+\shorttitle{sup}
+\shortauthors{people}
 
 \begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing % trust in Hogg
 \graphicspath{ {figures/} }
@@ -508,51 +478,21 @@ Processing and Analysis Consortium (\acronym{DPAC},
 has been provided by national institutions, in particular the institutions
 participating in the \gaia\ Multilateral Agreement.
 
-\facilities{
-\gaia,
-\galah,
-\hermes
-}
+% \facilities{
+% \gaia,
+% \galah,
+% \hermes
+% }
 
-\software{
-\code{Astropy} \citep{astropy, astropy2},
-\code{corner} \citep{corner},
-\code{emcee} \citep{emcee},
-\code{IPython} \citep{ipython},
-\code{matplotlib} \citep{matplotlib},
-\code{numpy} \citep{numpy},
-\code{pyia} \citep{pyia},
-\code{scipy} \citep{scipy}
-}
-
-\begin{thebibliography}{}
-\bibitem[Astropy Collaboration \etal(2013)]{astropy} Astropy Collaboration, Robitaille, T.~P., Tollerud, E.~J., \etal\ 2013, \aap, 558, A33 
-\bibitem[Astropy Collaboration \etal(2018)]{astropy2} Astropy Collaboration, Price-Whelan, A.~M., Sip{\H o}cz, B.~M., \etal\ 2018, arXiv:1801.02634 
-\bibitem[Barden \etal(2010)]{hermes10} Barden, S.~C., Jones, D.~J., Barnes, S.~I., \etal\ 2010, \procspie, 7735, 773509 
-\bibitem[Bland-Hawthorn \etal(2010)]{jbh} Bland-Hawthorn, J., Krumholz, M.~R., \& Freeman, K.\ 2010, \apj, 713, 166 
-\bibitem[Bovy \etal(2010)]{ss} Bovy, J., Murray, I., \& Hogg, D.~W.\ 2010, \apj, 711, 1157 
-\bibitem[Buder \etal(2018)]{galahdr2} Buder, S., Asplund, M., Duong, L., \etal\ 2018, \mnras, 478, 4513 
-\bibitem[De Silva \etal(2015)]{galah} De Silva, G.~M., Freeman, K.~C., Bland-Hawthorn, J., \etal\ 2015, \mnras, 449, 2604 
-\bibitem[Foreman-Mackey \etal(2013)]{emcee} Foreman-Mackey, D., Hogg, D.~W., Lang, D., \& Goodman, J.\ 2013, \pasp, 125, 306 
-\bibitem[Foreman-Mackey(2016)]{corner} Foreman-Mackey, D.\ 2016, JOSS, 1(2), 24
-\bibitem[Frankel \etal(2018)]{frankel} Frankel, N., Rix, H.-W., Ting, Y.-S., Ness, M.~K., \& Hogg, D.~W.\ 2018, arXiv:1805.09198 
-\bibitem[Freeman \& Bland-Hawthorn(2002)]{freeman} Freeman, K., \& Bland-Hawthorn, J.\ 2002, \araa, 40, 487 
-\bibitem[Gaia Collaboration \etal(2016)]{gaia} Gaia Collaboration, Prusti, T., de Bruijne, J.~H.~J., \etal\ 2016, \aap, 595, A1 
-\bibitem[Gaia Collaboration \etal(2018)]{gaiadr2} Gaia Collaboration, Brown, A.~G.~A., Vallenari, A., \etal\ 2018, arXiv:1804.09365 
-\bibitem[Hogg \etal(2016)]{tagging} Hogg, D.~W., Casey, A.~R., Ness, M., \etal\ 2016, \apj, 833, 262 
-\bibitem[Hunter(2007)]{matplotlib} Hunter, J.~D.\ 2007, CISE, 9(3), 90
-\bibitem[Jones \etal(2001)]{scipy} Jones, E., Oliphant, E., Peterson, P. \etal\ 2001, \url{http://www.scipy.org/}
-\bibitem[Kollmeier \etal(2017)]{sdssv} Kollmeier, J.~A., Zasowski, G., Rix, H.-W., \etal\ 2017, arXiv:1711.03234 
-\bibitem[Lindegren \etal(2018)]{lindegren} Lindegren, L., Hernandez, J., Bombrun, A., \etal\ 2018, arXiv:1804.09366 
-\bibitem[Majewski \etal(2017)]{apogee} Majewski, S.~R., Schiavon, R.~P., Frinchaboy, P.~M., \etal\ 2017, \aj, 154, 94 
-\bibitem[Martell \etal(2017)]{galah2} Martell, S.~L., Sharma, S., Buder, S., \etal\ 2017, \mnras, 465, 3203.
-\bibitem[Mitschang \etal(2014)]{mitschang} Mitschang, A.~W., De Silva, G., Zucker, D.~B., \etal\ 2014, \mnras, 438, 2753 
-\bibitem[Ness \etal(2018)]{doppel} Ness, M., Rix, H.-W., Hogg, D.~W., \etal\ 2018, \apj, 853, 198 
-\bibitem[Oliphant(2006)]{numpy} Oliphant, T.~E.\ 2006, \emph{A guide to NumPy}, Trelgol Publishing
-\bibitem[P\'erez \& Granger(2007)]{ipython} P\'erez, F. \& Granger, B.~E.\ 2007, CISE, 9(3), 29
-\bibitem[Price-Whelan(2018)]{pyia} Price-Whelan, A.\ 2018, zenodo.1228136
-\bibitem[Sheinis \etal(2015)]{hermes15} Sheinis, A., Anguiano, B., Asplund, M., \etal\ 2015, Journal of Astronomical Telescopes, Instruments, and Systems, 1, 035002 
-\bibitem[Ting \etal(2016)]{ting} Ting, Y.-S., Conroy, C., \& Rix, H.-W.\ 2016, \apj, 816, 10 
-\end{thebibliography}
+% \software{
+% \code{Astropy} \citep{astropy, astropy2},
+% \code{corner} \citep{corner},
+% \code{emcee} \citep{emcee},
+% \code{IPython} \citep{ipython},
+% \code{matplotlib} \citep{matplotlib},
+% \code{numpy} \citep{numpy},
+% \code{pyia} \citep{pyia},
+% \code{scipy} \citep{scipy}
+% }
 
 \end{document}
