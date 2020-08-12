@@ -137,6 +137,11 @@ def main(pool, data_filename):
 
     # Execute worker on batches:
     for potential_name, potential in potentials.items():
+        if os.path.exists(all_filenames[potential_name]):
+            print(f"Actions exist for {potential_name} at "
+                  f"{all_filenames[potential_name]}")
+            continue
+
         tasks = batch_tasks(n_batches=max(1, pool.size - 1),
                             arr=t,
                             args=(potential, potential_name, cache_path))
