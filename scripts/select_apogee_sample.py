@@ -87,7 +87,7 @@ def main(overwrite=False):
 
     main_mask = target_mask & thin_disk_mask
     print(f"{main_mask.sum()} stars pass quality and targeting masks")
-    at.Table(stars[main_mask]).write(parent_filename)
+    at.Table(stars[main_mask]).write(parent_filename, overwrite=True)
 
 
 if __name__ == '__main__':
