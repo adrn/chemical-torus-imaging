@@ -146,6 +146,7 @@ def main(pool, data_filename):
             sub_filenames.append(sub_filename)
 
         combine_output(all_filenames[potential_name],
+                       cache_path,
                        potential_name)
 
 
