@@ -41,5 +41,5 @@ for fac in [0.4, 1.6]:
 
 for k, p in potentials.items():
     assert np.isclose(p.circular_velocity([-rsun, 0, 0]*u.kpc)[0],
-                      229 * u.km/u.s,
+                      vcirc * u.km/u.s,
                       rtol=1e-5)
