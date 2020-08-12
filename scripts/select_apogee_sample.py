@@ -39,6 +39,8 @@ def main(overwrite=False):
         ((allstar['ASPCAPFLAG'] & aspcap_bitmask) == 0)
     )
     stars = allstar[qual_mask]
+    _, idx = np.unique(stars['APOGEE_ID'], return_index=True)
+    stars = stars[idx]
 
     # save_cols = ['APOGEE_ID', 'dist', 'dist_error', 'dist_model_error',
     #              'nn_parallax', 'nn_parallax_error', 'nn_parallax_model_error',
