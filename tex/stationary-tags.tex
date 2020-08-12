@@ -74,10 +74,9 @@ of element-abundance distributions}}
   requires.
   It does not depend on potential separability, although it does require
   integrability.
-  It can be written in a form that is (to first order) independent
+  It can be written in a form that is, to first order, independent
   of the details of the stellar selection function.
-  It requires, however, element-abundance or age or orthogonal-action
-  gradients with respect to actions in the distribution function.
+  It requires, however, abundance (or other) gradients with respect to actions.
   Fortunately, God provides.
 \end{abstract}
 
@@ -96,6 +95,8 @@ of element-abundance distributions}}
 %  ---
 %  stars:~kinematics~and~dynamics
 % }
+
+\section*{}\clearpage
 
 \section{Introduction}
 
@@ -157,30 +158,36 @@ that suggest that the disk is not well mixed, even locally.
 
 \section{Methodological generalities}
 
-This project was motivated by the plot of abundances of stars as a
+HOGG ASKS: IS THIS WRITTEN TOO PEDAGOGICALLY?
+
+This project was motivated by plots of abundances of stars as a
 function of vertical height $z$ and vertical velocity $v_z$ in
 Galactocentric cylindrical coordinates, colored by element abundances.
 Examples are shown in \figurename~APW.
-In these scatterplots,
+In these plots,
 the eye is drawn to \emph{abundance gradients}: The stars at small
 heights and small vertical velocities have different abundance ratios,
 on average, than stars at large heights and large vertical velocities.
 But these positional and velocity gradients are related:
-Stars at large vertical velocity $v_z$ will, in the future, at some
-time be at large vertical position $z$.
-And stars don't, to very high precision, change their abundances as
-they orbit in the Galaxy.
+Stars at large absolute vertical velocities $v_z$ will, in the future, at some
+times be at large absolute vertical positions $z$ (far from the plane, that is),
+and stars at large absolute vertical positions will, in the future,
+at some times be at large absolute vertical velocities.
+That is, the stars will orbit in the Galaxy.
+And stars don't---to very high precision---change their abundances as
+they orbit.
 
-The consequence of these observations is a new method for inferring
+One consequence of these observations is a new method for inferring
 the orbit structure of the Milky Way:
 If two small neighborhoods in phase space lie on the same orbit---that
-is, they correspond to the same dynamical actions or common initial
-conditions---they must contain stars with the same distribution of
+is, they correspond to the same dynamical actions or they can be reached
+by common initial conditions---they must contain stars with the same distribution of
 element abundances.
-This consequence depends on many detailed assumptions, such as that
-the Galaxy is phase mixed, and that the potential is time invariant
-and integrable.
-The usefulness depends on the existence of gradients: If there aren't
+This prediction depends on many detailed assumptions, such as that
+the Galaxy is (approximately) phase mixed, and that the potential is
+(approximately) time invariant and integrable.
+The usefulness of this prediction for inference
+depends on the existence of gradients: If there aren't
 element-abundance-ratio gradients, there will be no information to work
 with.
 
@@ -189,29 +196,48 @@ In more mathematical language: The orbits (which are 3-tori in
 galaxy will be level hyper-surfaces in phase space of any moments or
 statistics of the element-abundance distribution... HOGG
 
-DEPRECATED:
-Alternatively, the idea is to figure out what mass-density distribution leads to orbits
-on which statistics of the chemical-abundance distribution do not vary with conjugate
-angle.
-And of course this will all be done probabilistically, inasmuch as that is easy.
-So the idea is to perform probabilistic inference of the mass-density distribution, using
-the distribution of element abundances in phase space as the data.
+This point is illustrated graphically in \figurename~XXX:
+In the fiducial model, the two overlaid orbits more-or-less follow something
+like a mean abundance contour.
+In the model in which the disk is made less massive (and the halo more massive
+to keep the circular velocity constant), the orbits change shape: There is more
+positional extent to an orbit relative to it's velocity extent.
+The orbital frequency $\omega$ is, to order of magnitude, the velocity amplitude
+divided by the spatial amplitude, and it is, to order of magnitude, $\sqrt{G\,\rho}$,
+where $\rho$ is the mean enclosed mass density.
+If stars were traveling on these lower-disk-mass orbits, they would have to
+obtain higher abundances when they are passing through the disk midplane,
+and lower abundances when they are at their greatest absolute vertical heights,
+which is absurd: Stars do not change their abundances as they orbit.
 
-DEPRECATED: 
-The point that this works at one to three dimensions. It requires abundance gradients, but
-not much else. Of course you might not have abundance gradients in all three action directions.
+We make this point clear in a different way in \figurename~YYY, in which
+we have transformed into action--angle coordinates in phase space (CITE)
+and we show scatterplots of the abundances as a function of conjugate
+angles $\theta_z$, conjugate to the vertical actions $J_z$, for stars near
+the orbits plotted in \figurename~XXX.
+Using the fiducial potential to convert to actions and angles,
+the abundance distribution is similar at different
+angles $\theta_z$, or on different parts of the orbit.
+Along the orbits generated by the low-mass-disk and high-mass-disk potentials,
+the abundance distribution shows clear $m=2$ (or $\exp i\,2\,\theta_z$) dependences
+on vertical angle $\theta_z$.
+That is, just by plotting the abundances versus angle, we can make
+inferences about the mass of the disk, or---more generally---the
+gravitational potential of the Milky Way.
 
-DEPRECATED: 
-The point that the method is combinatoric in data.
-The point that this would be more complex in chaotic regions.
-The point that this doesn't depend on selection, provided that stellar properties don't vary
-strongly with abundnaces, and that abundance-measurement biases don't depend strongly on stellar
-parameters. Both assumptions wrong in detail.
+...The point that this works at one to three dimensions. It requires abundance gradients, but not separability!
+Of course you might not have abundance gradients in all three action directions.
 
-DEPRECATED: 
-The point that there will be frequentist statistics or optimizations, and also Bayesian
-approaches.
-The point that Bayes and frequentism look very different here.
+...The point that the method is combinatoric in data.
+
+...The point that this would be more complex in chaotic regions, and maybe effectively
+inapplicable?
+
+...The point that this doesn't depend on selection, provided that stellar properties don't vary strongly with abundnaces, and that abundance-measurement biases don't depend strongly on stellar parameters. Both assumptions wrong in detail.
+
+... The point that there will be frequentist statistics or optimizations, and also Bayesian approaches.
+The point that Bayes and frequentism look very different here. Call out to orbital
+roulette, and to Bovy et al.
 
 In what follows, a very limited project...
 
@@ -327,7 +353,7 @@ parameters describing the smooth variation of the mean with action, and also inc
 the variance parameter $V_{X/Y}$.
 This being a probabilistic model for the data, it is a generative model and a likelihood function.
 
-Visual inspection of the data (\figurename~\ref{fig:data}) and additional tests we performed
+Visual inspection of the data (\figurename~ZZZ) and additional tests we performed
 show that the chosen abundance ratio distributions
 are smooth functions of the vertical action for any potential;
 equivalently, the abundance gradients are smooth with height or velocity.
@@ -376,7 +402,7 @@ HOGG: MCMC results.
 
 HOGG: best-fit answers, including visualizations of orbits.
 \begin{figure}
-\caption{Posterior orbit structure. Same as \figurename~\ref{fig:data} but now with
+\caption{Posterior orbit structure. Same as \figurename~ZZZ but now with
 posterior-sensible orbits shown to indicate that the orbits do come close to describing
 level surfaces in the phase space.\label{fig:orbits}}
 \end{figure}
@@ -392,12 +418,12 @@ dependences of abundance ratio on conjugate angle.\label{fig:density}}
 \end{figure}
 
 \begin{figure}
-\caption{Same as \figurename~\ref{fig:density}, but varying the scale height. Note that
+\caption{Same as \figurename~WWW, but varying the scale height. Note that
 varying the scale height leads to a higher order variation with angle.\label{fig:scaleheight}}
 \end{figure}
 
 \begin{figure}
-\caption{Same as \figurename~\ref{fig:density}, but varying the midplane location. Note
+\caption{Same as \figurename~WWW, but varying the midplane location. Note
 that varying the midplane location leads to a lower order variation with angle.\label{fig:midplane}}
 \end{figure}
 
