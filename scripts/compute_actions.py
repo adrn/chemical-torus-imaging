@@ -22,6 +22,8 @@ def action_worker(task):
     cache_filename = os.path.join(cache_path,
                                   f'tmp-{potential_name}-{i1}-{i2}.fits')
 
+    print(f"Worker {i1} processing {len(t)} stars, saving to {cache_filename}")
+
     # Read APOGEE data
     coord.galactocentric_frame_defaults.set('v4.0')
     c = coord.SkyCoord(ra=t['RA'] * u.deg,
@@ -115,8 +117,8 @@ def main(pool, data_filename):
     from schwimmbad.utils import batch_tasks
 
     # Path to store generated datafiles
-    cache_path = os.path.join(
-        os.path.split(os.path.abspath(__file__))[0], '../cache')
+    cache_path = os.path.abspath(os.path.join(
+        os.path.split(os.path.abspath(__file__))[0], '../cache'))
     os.makedirs(cache_path, exist_ok=True)
 
     # Register exit command for each potential
@@ -126,6 +128,7 @@ def main(pool, data_filename):
             cache_path, f'aaf-{potential_name}.fits')
         atexit.register(combine_output,
                         all_filenames[potential_name],
+                        cache_path,
                         potential_name)
 
     # Load APOGEE data
@@ -134,7 +137,7 @@ def main(pool, data_filename):
 
     # Execute worker on batches:
     for potential_name, potential in potentials.items():
-        tasks = batch_tasks(n_batches=pool.size - 1,
+        tasks = batch_tasks(n_batches=max(1, pool.size - 1),
                             arr=t,
                             args=(potential, potential_name, cache_path))
 
