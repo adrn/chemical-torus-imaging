@@ -1,0 +1,30 @@
+    self._open_filename(fileobj, mode, overwrite)
+# Compiled files
+*.py[co]
+*.a
+*.o
+*.so
+__pycache__
+
+# Packages/installer info
+*.egg
+*.egg-info
+dist
+build
+eggs
+.eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+distribute-*.tar.gz
+pip-wheel-metadata/
+
+# Other generated files
+*/version.py
+
+# This project
+data
+*~
