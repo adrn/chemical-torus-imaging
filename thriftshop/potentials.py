@@ -26,12 +26,13 @@ def get_mw_potential(mdisk):
         return (vcirc - test_v) ** 2
 
     minit = potentials['fiducial']['halo'].parameters['m'].to_value(u.Msun)
-    res = minimize(objfunc, x0=np.log(minit), bounds=[(-3, 28)])
+    res = minimize(objfunc, x0=np.log(minit),
+                   method='powell')
 
     if not res.success:
         return np.nan
 
-    mhalo = np.exp(res.x[0])
+    mhalo = np.exp(res.x)
     return gp.MilkyWayPotential(disk=dict(m=mdisk),
                                 halo=dict(m=mhalo))
 
