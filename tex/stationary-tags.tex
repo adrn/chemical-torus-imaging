@@ -5,7 +5,12 @@
 
 \input{preamble.tex}
 
-% Project-specific macros - all others go in preamble.tex
+% text macros
+% \newcommand{\methodname}{Tag Moment Roulette}
+\newcommand{\methodname}{Action--Tag Modeling}
+\newcommand{\method}{\acronym{TMR}}
+
+% Project macros - all others go in preamble.tex
 \newcommand{\gaia}{\textsl{Gaia}}
 \newcommand{\dr}[1]{\acronym{DR}#1}
 \newcommand{\apogee}{\acronym{APOGEE}}
@@ -15,35 +20,65 @@
 \newcommand{\galah}{\acronym{GALAH}}
 \newcommand{\hermes}{\acronym{HERMES}}
 
-
-\setlength{\parindent}{1.4em} % trust in Hogg
-\shorttitle{sup}
-\shortauthors{people}
+\setlength{\parindent}{1.1\baselineskip} % trust in Hogg
+\shorttitle{tags are separable from angles}
+\shortauthors{apw, dwh, hwr, and more}
 
 \begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing % trust in Hogg
 \graphicspath{ {figures/} }
 \DeclareGraphicsExtensions{.pdf,.eps,.png}
 
 \title{\textbf{%
-Chemical-tangents method:\\
-Identifying orbits in phase space through element-abundance invariances}}
+\methodname:\\
+Identifying orbits in phase space through invariances\\
+of element-abundance distributions}}
 
-% \author[0000-0003-2866-9403]{David W. Hogg}
-% \affil{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
+\author[0000-0003-0872-7098]{Adrian~M.~Price-Whelan}
+\affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
+
+\author[0000-0003-2866-9403]{David W. Hogg}
+\affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
+\affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
+\affil{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
 % \affil{Center for Data Science, New York University, 60 Fifth Ave, New York, NY 10011, USA}
-% \affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
-% \affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
 
-% \author[0000-0003-0872-7098]{Adrian~M.~Price-Whelan}
+\author[0000-0003-4996-9069]{Hans-Walter Rix}
+\affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
 
-% \author[0000-0003-4996-9069]{Hans-Walter Rix}
-% \affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
+\author{Others}
 
-\begin{abstract}\noindent
-% context
-% aims
-% methods
-% results
+\begin{abstract}\noindent % Hogg strikes again
+  The dynamics of the Milky Way---and nearby galaxies---are often
+  understood in an approximation in which the gravitational potential
+  is treated as simple and integrable and the distribution function
+  time-invariant.
+  Under these conditions, the Jeans equations are relevant and Jeans
+  modeling is the standard---though not the only---methodology.
+  Here we present an alternative approach for inference, which makes
+  use of the fact that there are generically gradients, or dependences
+  of element abundnaces and stellar ages (and other invariant stellar
+  tags) on position in the Galaxy.
+  The method exploits the fact that in an integrable, steady-state
+  gravitational system, the distribution of any invariant stellar tags
+  must be invariant with respect to time-variable conjugate angles.
+  As a demonstration of the concepts and methods, we use
+  \apogee\ giant stars to look at vertical orbit structure in Milky
+  Way disk.
+  We show that the disk mass can be constrained na\"ively at the
+  XXX-percent level with \methodname.
+  We write down and discuss both frequentist-statistics and Bayesian
+  forward-modeling approaches to inference.
+  \methodname\ has great advantages:
+  It does not depend on making measurements of second (or higher)
+  moments of the velocity distribution, as Jeans modeling
+  requires.
+  It does not depend on potential separability, although it does require
+  integrability.
+  It can be written in a form that is (to first order) independent
+  of the details of the stellar selection function.
+  It requires, however, element-abundance or age or orthogonal-action
+  gradients with respect to actions in the distribution function.
+  Fortunately, God provides.
 \end{abstract}
 
 % \keywords{\raggedright
@@ -105,13 +140,16 @@ That means that there are a very large set of element-abundance statistics for w
 six-gradient exists or could be constraining for this project.
 Not all of these parameters can be reliably measured in a finite data set,
 let alone reliably seen to vary with phase-space location.
-However,
-we have discovered, in effect, a \emph{combinatorically large set of constraints on the
+However, we choose to see this bug as a feature:
+We have discovered, in effect, a \emph{combinatorically large set of constraints on the
 dynamical actions and conjugate angles}.
 
 HERE WE JUST CONSIDER VERTICAL DYNAMICS.
 This restricts the problem usefully and is good for pedagogical purposes.
 But obviously it is not unlocking the full promise of this family of methods.
+
+BUT WE ARE NOT GOING TO ASSUME SEPARABILITY.
+Jeans models can suck it.
 
 HOGG Aside: Controversy over the massive/dense disk. How we might resolve it.
 But still making the phase-mixed assumption! Note the Antoja results and the \gaia\ results
@@ -119,9 +157,39 @@ that suggest that the disk is not well mixed, even locally.
 
 \section{Methodological generalities}
 
-In general the idea underlying this method is to figure out what mass-density distribution
-in the Galaxy leads to orbits in phase space such that those orbits are level
-hyper-surfaces in phase space of statistics of the chemical-abundance distribution.
+This project was motivated by the plot of abundances of stars as a
+function of vertical height $z$ and vertical velocity $v_z$ in
+Galactocentric cylindrical coordinates, colored by element abundances.
+Examples are shown in \figurename~APW.
+In these scatterplots,
+the eye is drawn to \emph{abundance gradients}: The stars at small
+heights and small vertical velocities have different abundance ratios,
+on average, than stars at large heights and large vertical velocities.
+But these positional and velocity gradients are related:
+Stars at large vertical velocity $v_z$ will, in the future, at some
+time be at large vertical position $z$.
+And stars don't, to very high precision, change their abundances as
+they orbit in the Galaxy.
+
+The consequence of these observations is a new method for inferring
+the orbit structure of the Milky Way:
+If two small neighborhoods in phase space lie on the same orbit---that
+is, they correspond to the same dynamical actions or common initial
+conditions---they must contain stars with the same distribution of
+element abundances.
+This consequence depends on many detailed assumptions, such as that
+the Galaxy is phase mixed, and that the potential is time invariant
+and integrable.
+The usefulness depends on the existence of gradients: If there aren't
+element-abundance-ratio gradients, there will be no information to work
+with.
+
+In more mathematical language: The orbits (which are 3-tori in
+6-dimensional phase space) in a steady-state, integrable, phase-mixed
+galaxy will be level hyper-surfaces in phase space of any moments or
+statistics of the element-abundance distribution... HOGG
+
+DEPRECATED:
 Alternatively, the idea is to figure out what mass-density distribution leads to orbits
 on which statistics of the chemical-abundance distribution do not vary with conjugate
 angle.
@@ -129,20 +197,20 @@ And of course this will all be done probabilistically, inasmuch as that is easy.
 So the idea is to perform probabilistic inference of the mass-density distribution, using
 the distribution of element abundances in phase space as the data.
 
+DEPRECATED: 
 The point that this works at one to three dimensions. It requires abundance gradients, but
 not much else. Of course you might not have abundance gradients in all three action directions.
 
+DEPRECATED: 
 The point that the method is combinatoric in data.
-
 The point that this would be more complex in chaotic regions.
-
 The point that this doesn't depend on selection, provided that stellar properties don't vary
 strongly with abundnaces, and that abundance-measurement biases don't depend strongly on stellar
 parameters. Both assumptions wrong in detail.
 
+DEPRECATED: 
 The point that there will be frequentist statistics or optimizations, and also Bayesian
 approaches.
-
 The point that Bayes and frequentism look very different here.
 
 In what follows, a very limited project...
@@ -343,6 +411,8 @@ HOGG: How is what we did better than what came before or happens by other method
 
 HOGG: What are the limitations of what we did; what did we sacrifice for our benefits?
 
+HOGG: Or we could phrase this as a set of failure modes?
+
 HOGG: Return to the assumptions; do any need more discussion? One that does is the smooth
 gradients assumption: If we choose different invariants to use, we get slightly different
 answers, because (HOGG presumes) that the functional form for the abundance means fits
@@ -358,20 +428,24 @@ statistics of the abundance distribution? How do things change if the abundances
 each other exactly? Is that a problem? Note that we scale much better than chemical tagging
 here.
 
-\acknowledgements
+\acknowledgments
 It is a pleasure to thank
-  Jo Bovy (Toronto),
   Melissa Ness (Columbia),
-  and
-  Eugene Vasiliev (Cambridge)
-for valuable discussions that made this project possible.
+  who started the conversation that started this project, many years ago.
+We also thank
+  Jo Bovy (Toronto),
+  Anna-Christina Eilers (MIT),
+  David Spergel (Flatiron),
+  Eugene Vasiliev (Cambridge),
+  and the Dynamics and Astronomical Data groups at the Flatiron Institute
+for valuable discussions and input.
 DWH was partially supported by HOGG GRANT DETAILS.
 AMPW was partially supported by HOGG GRANT DETAILS.
 HWR was partially supported by HOGG GRANT DETAILS.
 This research was conducted in part at the Aspen Center for Physics,
 which is supported by National Science Foundation grant \acronym{PHY-1607611}.
 
-HOGG: Is there a \galah\ or \hermes\ ack??
+SDSS or whatever SPECTROSCOPY ack?
 
 This work has made use of data from the European Space Agency (\acronym{ESA}) mission
 \gaia\ (\url{https://www.cosmos.esa.int/gaia}), processed by the \gaia\ Data

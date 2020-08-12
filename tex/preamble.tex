@@ -47,9 +47,10 @@
 
 % Astronomy
 \newcommand{\DM}{{\rm DM}}
-\newcommand{\feh}{\ensuremath{{[\mathrm{Fe}/\mathrm{H}]}}}
-\newcommand{\mh}{\ensuremath{{[\mathrm{M}/\mathrm{H}]}}}
-\newcommand{\alphafe}{[\alpha/\mathrm{Fe}]}
+\newcommand{\abundance}[2]{\ensuremath{{[\mathrm{#1}/\mathrm{#2}]}}}
+\newcommand{\feh}{\abundance{Fe}{H}}
+\newcommand{\mh}{\abundance{M}{H}}
+\newcommand{\alphafe}{\abundance{\alpha}{H}}
 \newcommand{\df}{\acronym{DF}}
 \newcommand{\logg}{\ensuremath{\log g}}
 \newcommand{\Teff}{\ensuremath{T_{\textrm{eff}}}}
