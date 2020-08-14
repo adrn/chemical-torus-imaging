@@ -27,4 +27,5 @@ pip-wheel-metadata/
 
 # This project
 data
+cache
 *~
