@@ -6,8 +6,7 @@
 \input{preamble.tex}
 
 % text macros
-% \newcommand{\methodname}{Tag Moment Roulette}
-\newcommand{\methodname}{Action--Tag Modeling}
+\newcommand{\methodname}{Tag Moment Roulette}
 \newcommand{\method}{\acronym{TMR}}
 
 % Project macros - all others go in preamble.tex
@@ -45,7 +44,7 @@ of element-abundance distributions}}
 \author[0000-0003-4996-9069]{Hans-Walter Rix}
 \affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
 
-\author{Others}
+\author{others}
 
 \begin{abstract}\noindent % Hogg strikes again
   The dynamics of the Milky Way---and nearby galaxies---are often
@@ -54,18 +53,20 @@ of element-abundance distributions}}
   time-invariant.
   Under these conditions, the Jeans equations are relevant and Jeans
   modeling is the standard---though not the only---methodology.
-  Here we present an alternative approach for inference, which makes
+  Here we present an alternative approach for
+  inference---\textsl{\methodname}---which makes
   use of the fact that there are generically gradients, or dependences
   of element abundnaces and stellar ages (and other invariant stellar
-  tags) on position in the Galaxy.
+  tags) on position and velocity in the Galaxy.
   The method exploits the fact that in an integrable, steady-state
   gravitational system, the distribution of any invariant stellar tags
   must be invariant with respect to time-variable conjugate angles.
   As a demonstration of the concepts and methods, we use
-  \apogee\ giant stars to look at vertical orbit structure in Milky
-  Way disk.
+  \apogee\ giant stars to look at vertical orbit structure in the Milky
+  Way disk, and constrain the disk mass (holding the well-measured
+  circular velocity fixed).
   We show that the disk mass can be constrained na\"ively at the
-  XXX-percent level with \methodname.
+  XXX-percent level with this new method.
   We write down and discuss both frequentist-statistics and Bayesian
   forward-modeling approaches to inference.
   \methodname\ has great advantages:
@@ -76,7 +77,7 @@ of element-abundance distributions}}
   integrability.
   It can be written in a form that is, to first order, independent
   of the details of the stellar selection function.
-  It requires, however, abundance (or other) gradients with respect to actions.
+  It does, however, require abundance (or other) gradients with respect to actions.
   Fortunately, God provides.
 \end{abstract}
 
@@ -99,6 +100,9 @@ of element-abundance distributions}}
 \section*{}\clearpage
 
 \section{Introduction}
+
+HOGG: OPEN WITH the point that you don't get to see orbits! And yet, Newton. But
+here we are going to make that possible!
 
 In a well-mixed population, stars are in a kinematic steady state:
 As time goes on, stars move along their orbits, but they don't change their dynamical
@@ -225,207 +229,119 @@ That is, just by plotting the abundances versus angle, we can make
 inferences about the mass of the disk, or---more generally---the
 gravitational potential of the Milky Way.
 
-...The point that this works at one to three dimensions. It requires abundance gradients, but not separability!
-Of course you might not have abundance gradients in all three action directions.
+In order to make the abundance--angle plots in \figurename~YYY, we had
+to DO SOME THINGS because we needed to visualize the global dependence
+on angle using all the stars on all different kinds of orbits.
+Because different orbits have different abundance-ratio
+distributions, this is not a trivial transformation of the data.
+In the inferences we do in \sectionname~AAA below, we
+will use regression (frequentist) or forward modeling (Bayes) to
+combine the data from stars on different orbits.
 
-...The point that the method is combinatoric in data.
+...The point that this works at one to three dimensions. It requires
+abundance gradients, but not separability!  Of course you might not
+have abundance gradients in all three action directions.
 
-...The point that this would be more complex in chaotic regions, and maybe effectively
-inapplicable?
+...The point that the method is combinatoric in abundance data.
 
-...The point that this doesn't depend on selection, provided that stellar properties don't vary strongly with abundnaces, and that abundance-measurement biases don't depend strongly on stellar parameters. Both assumptions wrong in detail.
+...The point that this would be more complex in chaotic regions, and
+maybe effectively inapplicable?
 
-... The point that there will be frequentist statistics or optimizations, and also Bayesian approaches.
-The point that Bayes and frequentism look very different here. Call out to orbital
-roulette, and to Bovy et al.
+...The point that this doesn't depend on selection, provided that
+stellar properties don't vary strongly with abundnaces, and that
+abundance-measurement biases don't depend strongly on stellar
+parameters. Both assumptions wrong in detail.
+
+... The point that there will be frequentist statistics or
+optimizations, and also Bayesian approaches.  The point that Bayes and
+frequentism look very different here. Call out to orbital roulette,
+and to Bovy et al.
 
 In what follows, a very limited project...
 
 \section{Data}
 
-% For this project we make use of \galah\ Survey (\citealt{galah, galah2}) data taken
-% with the \hermes\ instrument (\citealt{hermes10, hermes15}).
-% \galah\ has released in its second data release (\citealt{galahdr2})
-% XXX measurements of element abundances for YYY stars.
-% These stars have good representation near the Sun, so the sample is ideally suited for studying
-% the Solar Neighborhood and the nearby disk.
+HOGG SAY: This section is APW's problem (ish).
 
-% In detail, we subsample the \galah\ data to HOGG WHAT REGION of phase space.
-% This leaves HOGG HOW MANY stars.
-% The subsample we use is shown in \figurename~\ref{fig:data}.
-% \begin{figure}
-% \caption{The data used in this \documentname.
-% Each panel shows the stellar points in the plane
-% of vertical position $z$ and vertical velocity $v_z$,
-% colored by a different element abundance ratio.
-% These are phase-space plots, but colored by the abundance ratios.
-% It is clear in these plots that the abundance ratio level surfaces will be
-% constraining on the orbits.\label{fig:data}}
-% \end{figure}
+APW: \apogee\ bread-and-butter and citations.
 
-% There are many different abundance ratios we might use to constrain the vertical of the disk.
-% structure.
-% We choose HOGG WHAT RATIOS because they are well measured in \galah\ and they show strong
-% vertical gradients.
-% These abundance ratios are shown in \figurename~\ref{fig:data}.
-% This choice is relatively arbitrary; there is no sense in which this project is making use
-% of all the element-abundance information latent in the \galah\ data.
+APW: Removal of stellar clusters from the data.
 
-% As we will describe below, the method depends critically on the element abundance
-% measurements being consistent across stellar types.
-% That is, it is critical that the element abundance measurments in luminous
-% stars---which are observed to greater distances in general---are similar in their
-% biases to the measurements in less luminous stars.
-% That is, the abundance measurements don't necessarily have to be accurate, but
-% they do have to be consistent.
-% In \figurename~\ref{fig:testing}, HOGG SOMETHING IS SHOWN.
-% \begin{figure}
-% \caption{HOGG SOME KIND OF TEST that the element abundance measurements
-% are consistent for stars of different surface gravities.\label{fig:testing}}
-% \end{figure}
+APW: Distance estimation.
 
-% In addition to the \galah\ abundance data, we use radial-velocity measurements from \galah,
-% and position and proper-motion measurements from \gaia\ (\citealt{gaia})
-% \acronym{DR2} (\citealt{gaiadr2}).
-% In detail, we matched \galah\ to \gaia\ HOGG HOW?
+APW: Choice of abundances.
 
-% We assemble the \galah\ and \gaia\ information for each star into a Galactic position and
-% velocity assuming HOGG WHAT THINGS about the Solar phase-space position in the Galaxy.
+APW: Final data properties (and possibly figures).
+
+\section{Milky Way mass model and actions}
+
+HOGG SAY: Possible section for APW to put details of the Milky Way model,
+how we parameterize the disk mass, and how we compute actions and angles.
+Or, if there isn't much to say, this can be part of the inferences section
+below.
+
+This section could describe our one mass-model parameter, and show how
+the mass distribution and orbit structure vary as we vary it.
+
+This section could also describe all the computational tips and tricks.
 
 \section{Assumptions}
 
-The method and results in this \documentname\ will flow from a specific set of
-assumptions.
-That is, we are going to make hard (and sometimes controversial) assumptions,
-and although the assumptions will be questionable, the claim will be that the
-method is correct under the assumptions.
+\methodname flows from a specific set of assumptions.
+That is, we are going to make hard (and sometimes controversial) assumptions.
+Our position is not that these assumptions are correct.
+Our position is that our 
+methods are conditionally correct, conditioning on these assumptions.
 \begin{description}
-\item[local disk] HOGG: Dynamics dominated by the disk,
-and the disk has no transverse spatial gradients. In detail, the sech law and purely
-vertical dynamics.
+\item[integrable] HOGG: There are 3 invariants and 3 angles. This could perhaps be
+  relaxed, but we don't know how yet.
 
-\item[well mixed] HOGG: All angles equally likely. There is probably also a regular-orbits
-assumption here, but it won't enter in this \documentname\ because we are only doing
-one-dimensional dynamics. The well-mixed assumption will be violated substantially in the data;
-we will discuss this more below.
+\item[well mixed] HOGG: All angles equally likely.
+  The well-mixed assumption will be violated substantially in the data;
+  we will discuss this more below. But this is the fundamental assumption of
+  the vast majority of inferences of the Milky Way mass distribution.
 
 \item[selection] HOGG: Selection depends on position in the Milky Way, but not
-on element abundances. Really it could even depend on velocity! But it can't depend
-on abundances. That might be very slightly wrong.
+  on element abundances. Really it could even depend on velocity! But it can't depend
+  on abundances. That might be very slightly wrong.
 
 \item[kinematic measurements] HOGG: Very strong assumption that phase space positions
-in 6-d are accurate and precise. So precise we don't have to generate them, we can
-condition on them!
+  in 6-d are accurate and precise. So precise we don't have to generate them, we can
+  condition on them!
 
 \item[abundance measurements] HOGG: Assumption that stars in different parts of phase
-space get the same abundance measurements. Questionable in certain kinds of samples.
-HOGG: Oddly I don't think we need to assume that the chemical measurements have good
-(or any) noise estimates. They could be terrible, I think.
+  space get the same abundance measurements. Questionable in certain kinds of samples.
+  HOGG: Oddly I don't think we need to assume that the chemical measurements have good
+  (or any) noise estimates. They could be terrible, I think.
 
-\item[broad briors] HOGG: Ignoring essentially all prior information about the disk.
-
-\item[smooth gradients] HOGG: Assumption about how the abundances can depend on action.
-Relatedly, the use of action and not log-action or zmax or whatever.
+\item[smooth gradients] HOGG: Assumption about how the abundances can
+  depend on action. Relatedly, the use of action and not log-action
+  or zmax or whatever.
 \end{description}
 
-\section{Method}
+\section{Inferences}
 
-HOGG: Dropping from 3-d to 1-d. In this case, let's start with 1-d. What about that is simpler?
+HOGG: There are two approaches, with very different appearances, but
+embodying the same fundamental assumptions.
 
-HOGG: maximize conjugate-angle diversity at fixed element abundances?
-Or minimize abundance-ratio diversity at fixed orbit? The latter! Why?
+HOGG: discriminative methods: frequentist forms; About finding the mass model in which
+there is no residual dependence of abundance distributions on angles.
+Technically these models are not strictly ``discriminative'' but it is a related
+concept. Oh wait, I could truly make a discriminative model...
 
-The model is, therefore, that the abundances depend only on the vertical actions.
-Briefly, it is that any observed abundance distribution
-$p(\abundance{X}{Y}\given J_z,\beta_{X/Y})$ for abundance
-$\abundance{X}{Y}$ at any action $J_z$ (and given some parameter settings $\beta_{X/Y}$)
-is a normal (Gaussian), with a variance $V$ that
-is independent of $J_z$ and a mean $\mu(J_z;\beta_{X/Y})$ that varies smoothly with $J_z$.
-In symbols:
-\begin{eqnarray}
-p(\abundance{X}{Y}_n\given J_{zn},\beta_{X/Y}) &=& N(\abundance{X}{Y}_n\given \mu(J_{zn};\beta_{X/Y}), V_{X/Y})
-\quad ,
-\end{eqnarray}
-where the $n$ is an index over stars, and $\beta_{X/Y}$ is a collection of parameters
-relevant to abundance $\abundance{X}{Y}$
-that includes
-parameters describing the smooth variation of the mean with action, and also includes
-the variance parameter $V_{X/Y}$.
-This being a probabilistic model for the data, it is a generative model and a likelihood function.
+HOGG: generative methods: frequentist or Bayesian forms; About generating the abundances
+with a model using only Actions.
 
-Visual inspection of the data (\figurename~ZZZ) and additional tests we performed
-show that the chosen abundance ratio distributions
-are smooth functions of the vertical action for any potential;
-equivalently, the abundance gradients are smooth with height or velocity.
-For this reason, we model the dependence of the mean on the action with a cubic polynomial of
-the action.
-In detail we subtract the mean action from the actions before fitting the cubic, so that the
-cubic fit ``pivots'' around the mean action, not zero action.
-This detail is adopted to improve numerical stability but has no other influence on the model
-in the end.
+HOGG: How are these qualitatively different methods related?
 
-HOGG: How we set priors on and marginalize the per-metal LFs...
-In the end we don't care about the abundance-related parameters $\beta_{X/Y}$ so we marginalize
-them out explicitly, to focus on the dynamical side of the problem.
-Since the likelihood is Gaussian and the model is a linear function of polynomials of the actions,
-the marginalization over the cubic parameters in $\beta_{X/Y}$ is analytic if we choose
-Gaussian priors on these parameters.
-We adopt Gaussian priors here, and even take the limit in which they are much wider than
-the likelihood.
-This leads to an analytic marginalization:
-HOGG EQUATION HERE.
-The variance parameter $V_{X/Y}$ doesn't have this simple marginalization trick, so we apply a
-logarithmic prior (flat in $\ln V_{X/Y}$) and marginalize this out numerically.
-HOGG EQUATION HERE WITH LOGSUMEXP.
+HOGG: Get more specific about forms and math.
 
-Now the fully margninalized likelihood for the abundances still depends on the computation
-of the actions $J_z$. This is, indeed, the whole point of this project.
-So while we have fully marginalized out the abundance parameters $\beta_{X/Y}$, we have
-remaining a set of dynamical parameters $\theta$.
-The dynamical parameters set the conversion of observed positions and velocities into actions $J_z$
-and conjugate angles $\phi_z$.
+HOGG: Show results on the data.
 
-HOGG: Disk model and action/angle calculation.
+\section{Relationship to Jeans and other methods}
 
-HOGG: Priors on the disk parameters.
-
-HOGG: MCMC and posterior on the disk parameters. Or something easier than MCMC?
-
-\section{Experiments and results}
-
-HOGG: MCMC description.
-
-HOGG: MCMC results.
-\begin{figure}
-\caption{Posterior samples for the model parameters.\label{fig:samples}}
-\end{figure}
-
-HOGG: best-fit answers, including visualizations of orbits.
-\begin{figure}
-\caption{Posterior orbit structure. Same as \figurename~ZZZ but now with
-posterior-sensible orbits shown to indicate that the orbits do come close to describing
-level surfaces in the phase space.\label{fig:orbits}}
-\end{figure}
-
-HOGG: Residuals can be visualized. Residuals vs conjugate angles for various potential modifications.
-
-\begin{figure}
-n\caption{Abundances versus conjugate angles, for different mass distributions.
-Each panel shows an abundance ratio HOGG vs conjugate angle $\phi_z$, for three different
-choices of the mean mass density at the disk midplane, for fixed scale height and midplane
-location. Note that when the mass distribution gets very wrong, the stars show strong
-dependences of abundance ratio on conjugate angle.\label{fig:density}}
-\end{figure}
-
-\begin{figure}
-\caption{Same as \figurename~WWW, but varying the scale height. Note that
-varying the scale height leads to a higher order variation with angle.\label{fig:scaleheight}}
-\end{figure}
-
-\begin{figure}
-\caption{Same as \figurename~WWW, but varying the midplane location. Note
-that varying the midplane location leads to a lower order variation with angle.\label{fig:midplane}}
-\end{figure}
+HOGG ASKS: What to write here? How detailed should we be? Or should this just
+go to the discussion section?
 
 \section{Discussion}
 
@@ -461,6 +377,7 @@ It is a pleasure to thank
 We also thank
   Jo Bovy (Toronto),
   Anna-Christina Eilers (MIT),
+  Suroor S. Gandhi (NYU),
   David Spergel (Flatiron),
   Eugene Vasiliev (Cambridge),
   and the Dynamics and Astronomical Data groups at the Flatiron Institute
