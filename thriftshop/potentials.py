@@ -68,7 +68,9 @@ def get_equivalent_galpy(potential):
 # Set up Milky Way models
 potentials = dict()
 potentials['fiducial'] = gp.MilkyWayPotential(disk=dict(m=fiducial_mdisk))
-for fac in [0.4, 1.6]:
+facs = np.arange(0.4, 1.6+1e-3, 0.1)
+facs = np.delete(facs, np.isclose(facs, 1))
+for fac in facs:
     potentials[f'{fac:.1f}'] = get_mw_potential(fac * fiducial_mdisk)
 
 # Define equivalent galpy potentials:
