@@ -12,7 +12,7 @@ all: ${NAME}.pdf
 
 ${NAME}.pdf: ${NAME}.tex ${NAME}.bib
 	${LATEX} ${NAME}
-	bibtex ${NAME}
+# 	bibtex ${NAME}
 	${LATEX} ${NAME}
 	( grep "Rerun to get" ${NAME}.log && ${LATEX} ${NAME} ) || echo "Done."
 	( grep "Rerun to get" ${NAME}.log && ${LATEX} ${NAME} ) || echo "Done."
