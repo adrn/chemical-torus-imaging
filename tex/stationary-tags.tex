@@ -6,7 +6,7 @@
 \input{preamble.tex}
 
 % text macros
-\newcommand{\methodname}{Tag Moment Roulette}
+\newcommand{\methodname}{Abundance-moment foliation}
 \newcommand{\method}{\acronym{TMR}}
 
 % Project macros - all others go in preamble.tex
@@ -56,11 +56,12 @@ of element-abundance distributions}}
   Here we present an alternative approach for
   inference---\textsl{\methodname}---which makes
   use of the fact that there are generically gradients, or dependences
-  of element abundnaces and stellar ages (and other invariant stellar
-  tags) on position and velocity in the Galaxy.
-  The method exploits the fact that in an integrable, steady-state
-  gravitational system, the distribution of any invariant stellar tags
+  of \emph{tags} (element abundnaces or stellar ages or other invariant stellar
+  properties) on position and velocity in the Galaxy.
+  The method exploits the fact that in steady state, the distribution of any tags
   must be invariant with respect to time-variable conjugate angles.
+  Thus level sets in moments of the tag distribution must coincide with
+  the orbital foliation of phase space: The tags directly reveal the orbit structure.
   As a demonstration of the concepts and methods, we use
   \apogee\ giant stars to look at vertical orbit structure in the Milky
   Way disk, and constrain the disk mass (holding the well-measured
@@ -101,16 +102,47 @@ of element-abundance distributions}}
 
 \section{Introduction}
 
-HOGG: OPEN WITH the point that you don't get to see orbits! And yet, Newton. But
-here we are going to make that possible!
+Physicists of the 18th century worked out that the gravitational force
+law in the Solar System is proportional to the inverse square of the
+distance from the Sun (CITE Newton).
+That inference was based on the observation that orbits in the Solar
+System are closed ellipses, with the Sun at one focus, plus period
+ratios of orbits at different mean distances (CITE Kepler).
+We physicists of the 21st century are trying to work out the map of
+gravitational accelerations (or, in some parlance, the gravitational
+potential, or, in another, the mass distribution)  the Milky Way.
+We are at a disadvantage, in some sense, because no-one gets to see
+the orbits of stars in the Milky Way: Even in the whole history of
+western science, stars have barely moved in Galactic coordinates.
+The tools we use now generally ask statistical questions about the
+orbit structure (CITE Jeans and Oort and B\&T); we never see the orbits directly.
+The closest we come to seeing orbits directly in the Milky Way is in the
+study of stellar streams (CITE), but these are rare only exist at large
+Galactocentric distances.
+
+Okay fine, really we are at a \emph{huge advantage} with respect to
+our 18th century counterparts, because we have a very accurate theory
+of gravity (CITE) and we have immense observational and computational
+resources.
+With these resources we have measured the element abundances of the
+stellar photospheres of hundreds of thousands of stars (CITE) and
+precise positions and velocities of millions.
+In this \documentname\ we are going to demonstrate that these
+measurements can be used to illuminate the orbit structure in the
+Milky Way, even---or especially---in the dense, nearby parts of the
+disk.
+Our method will work only under strong assumptions, so we are
+still in the business of revealing the orbits indirectly.
+However, our approach is novel and there are many regimes in which it
+will be more precise than any other method.
 
 In a well-mixed population, stars are in a kinematic steady state:
 As time goes on, stars move along their orbits, but they don't change their dynamical
 invariants (by assumption!) and every location in angle (and by ``angle'' we mean the
 coordinate conjugate to action in action--angle coordinates) is equally likely, or
 equally probably populated in any snapshot.
-The chemical-tagging insight is that the stars also don't change their surface element
-abundances as they orbit.
+The chemical-tagging insight (CITE) is that the stars also don't change
+their surface element abundances as they orbit.
 That is, in a well-mixed galaxy, the element abundances and the dynamical actions have
 something in common:
 They don't change with time, while the conjugate angles do.
@@ -137,6 +169,8 @@ of the directions of increase (or decrease) of the dynamical actions.
 The trajectories of stars in the phase space (the dynamical tori) must lie along or
 describe level surfaces in the element-abundance distribution!
 
+HOGG: MOve to later? Or summarize?
+...
 One of the crazy things about all this is that any description of a general distribution in $D$-space
 requires a \emph{lot of parameters}.
 Even a trivial distribution---the Normal distribution---requires $0.5\,D\,(D+3)$ parameters for its
@@ -149,16 +183,8 @@ However, we choose to see this bug as a feature:
 We have discovered, in effect, a \emph{combinatorically large set of constraints on the
 dynamical actions and conjugate angles}.
 
-HERE WE JUST CONSIDER VERTICAL DYNAMICS.
-This restricts the problem usefully and is good for pedagogical purposes.
-But obviously it is not unlocking the full promise of this family of methods.
-
-BUT WE ARE NOT GOING TO ASSUME SEPARABILITY.
-Jeans models can suck it.
-
-HOGG Aside: Controversy over the massive/dense disk. How we might resolve it.
-But still making the phase-mixed assumption! Note the Antoja results and the \gaia\ results
-that suggest that the disk is not well mixed, even locally.
+WE WILL DEMONSTRATE WITH JUST VERTICAL KINEMATICS, BUT WE ARE NOT
+GOING TO ASSUME SEPARABILITY.  Jeans models can suck it.
 
 \section{Methodological generalities}
 
