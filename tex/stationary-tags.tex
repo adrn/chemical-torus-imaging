@@ -6,8 +6,9 @@
 \input{preamble.tex}
 
 % text macros
-\newcommand{\methodname}{Abundance-moment foliation}
-\newcommand{\method}{\acronym{TMR}}
+\newcommand{\methodname}{\textsl{Torus Tomography}}
+% Abundance-moment foliation
+% \newcommand{\method}{\acronym{TMR}}
 
 % Project-specific macros - all others go in preamble.tex
 \newcommand{\gaia}{\textsl{Gaia}}
@@ -54,40 +55,46 @@ of element-abundance distributions}}
 
 \author{others}
 
-\begin{abstract}\noindent % Hogg strikes again
-  The dynamics of the Milky Way---and nearby galaxies---are often
-  understood in an approximation in which the gravitational potential
-  is treated as simple and integrable and the distribution function
-  time-invariant.
-  Under these conditions, the Jeans equations are relevant and Jeans
-  modeling is the standard---though not the only---methodology.
-  Here we present an alternative approach for
-  inference---\textsl{\methodname}---which makes
-  use of the fact that there are generically gradients, or dependences
-  of \emph{tags} (element abundnaces or stellar ages or other invariant stellar
-  properties) on position and velocity in the Galaxy.
-  The method exploits the fact that in steady state, the distribution of any tags
-  must be invariant with respect to time-variable conjugate angles.
-  Thus level sets in moments of the tag distribution must coincide with
-  the orbital foliation of phase space: The tags directly reveal the orbit structure.
-  As a demonstration of the concepts and methods, we use
-  \apogee\ giant stars to look at vertical orbit structure in the Milky
-  Way disk, and constrain the disk mass (holding the well-measured
+\begin{abstract}\noindent % Hogg strikes again. <-- what a guy
+  The dynamics of stars in the Milky Way and nearby galaxies is often
+  interpreted in an approximation where the gravitational potential is treated
+  as simple and integrable and the distribution function time-invariant.
+  Under these conditions, Jeans modeling---which relies on computing and
+  observing moments of the distribution function---is a standard methodology for
+  measuring properties of the underlying mass distribution in galaxies.
+  However, contemporary and near-future spectroscopic surveys measure more than
+  just kinematics for huge samples of individual stars within the Milky Way and
+  local group.
+  Here we present an approach for dynamical
+  inference---\methodname---that makes use of kinematic measurements
+  and \emph{stellar tags} (e.g., element abundances, stellar ages, or other
+  invariant stellar properties).
+  The method exploits the fact that there are generically gradients of stellar
+  tags on position and velocity in the Galaxy:
+  In steady state, the distributions of any tags must be invariant with respect
+  to time-variable conjugate angles.
+  Thus, level sets in moments of the tag distributions must coincide with
+  the orbital foliation of phase space!
+  %The tags directly reveal the orbit structure.
+  We demonstrate the concepts and methods central to this idea using red giant
+  stars from the \apogee\ surveys to look at vertical orbit structure in the
+  Milky Way disk, and constrain the disk mass (holding the well-measured
   circular velocity fixed).
-  We show that the disk mass can be constrained na\"ively at the
-  XXX-percent level with this new method.
-  We write down and discuss both frequentist-statistics and Bayesian
-  forward-modeling approaches to inference.
-  \methodname\ has great advantages:
-  It does not depend on making measurements of second (or higher)
-  moments of the velocity distribution, as Jeans modeling
-  requires.
-  It does not depend on potential separability, although it does require
-  integrability.
-  It can be written in a form that is, to first order, independent
-  of the details of the stellar selection function.
-  It does, however, require abundance (or other) gradients with respect to actions.
-  Fortunately, God provides.
+  We show that the disk mass can be constrained na\"ively at the XXX-percent
+  level with this new method using only a single element abundance, thus
+  demonstrating the promise of using this ...todo.
+  We discuss both classical-statistics and Bayesian forward-modeling approaches
+  to inferences of the Galactic mass distribution using these ideas.
+  % \methodname\ has great advantages:
+  % It does not depend on making measurements of second (or higher)
+  % moments of the velocity distribution, as Jeans modeling
+  % requires.
+  % It does not depend on potential separability, although it does require
+  % integrability.
+  % It can be written in a form that is, to first order, independent
+  % of the details of the stellar selection function.
+  % It does, however, require abundance (or other) gradients with respect to actions.
+  % Fortunately, God provides.
 \end{abstract}
 
 % \keywords{\raggedright
