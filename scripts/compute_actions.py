@@ -133,7 +133,7 @@ def main(pool, data_filename):
 
     # Load APOGEE data
     t = at.Table.read(data_filename)
-    t = t[t['GAIA_PARALLAX'] > 0.5]
+    t = t[(t['GAIA_PARALLAX'] / t['GAIA_PARALLAX_ERROR']) > 5]
 
     # Execute worker on batches:
     for potential_name, potential in potentials.items():
