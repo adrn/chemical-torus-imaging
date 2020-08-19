@@ -20,7 +20,7 @@ def get_mw_potential(mdisk):
             [-rsun.to_value(u.kpc), 0, 0] * u.kpc).to_value(u.km/u.s)[0]
         return (vcirc.to_value(u.km/u.s) - test_v) ** 2
 
-    minit = potentials['fiducial']['halo'].parameters['m'].to_value(u.Msun)
+    minit = potentials['1.0']['halo'].parameters['m'].to_value(u.Msun)
     res = minimize(objfunc, x0=np.log(minit),
                    method='powell')
 
@@ -67,11 +67,13 @@ def get_equivalent_galpy(potential):
 
 # Set up Milky Way models
 potentials = dict()
-potentials['fiducial'] = gp.MilkyWayPotential(disk=dict(m=fiducial_mdisk))
-facs = np.arange(0.4, 2+1e-3, 0.1)
-facs = np.delete(facs, np.isclose(facs, 1))
+potentials['1.0'] = gp.MilkyWayPotential(disk=dict(m=fiducial_mdisk))
+facs = np.arange(0.4, 1.8+1e-3, 0.1)  # limit 1.8 to get vcirc=229
 for fac in facs:
-    potentials[f'{fac:.1f}'] = get_mw_potential(fac * fiducial_mdisk)
+    name = f'{fac:.1f}'
+    if name in potentials:
+        continue
+    potentials[name] = get_mw_potential(fac * fiducial_mdisk)
 
 # Define equivalent galpy potentials:
 galpy_potentials = dict()

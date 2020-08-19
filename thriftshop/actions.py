@@ -4,6 +4,7 @@ from scipy.optimize import minimize
 import gala.integrate as gi
 import gala.dynamics as gd
 
+from .potentials import potentials, galpy_potentials
 from .galpy_helpers import get_staeckel_actions
 from .config import vcirc
 
@@ -35,41 +36,44 @@ def safe_get_actions(potential, w0, N_max=10, dt=1*u.Myr, n_periods=128):
     return aaf
 
 
+def _same_actions_objfunc_staeckel(p, pos, vy, potential_name, match_actions):
+    vx, vz = p
+    w0 = gd.PhaseSpacePosition(pos=pos,
+                               vel=[vx, vy, vz] * u.km/u.s)
+
+    o = potentials[potential_name].integrate_orbit(
+        w0, dt=1.*u.Myr, t1=0, t2=1 * u.Gyr,
+        Integrator=gi.DOPRI853Integrator)
+    actions = get_staeckel_actions(o[::2],
+                                   galpy_potentials[potential_name])
+    actions = actions.mean(axis=-1)
+
+    _unit = (u.km/u.s * u.kpc)**2
+    val = ((actions[0] - match_actions[0])**2 +
+           (actions[2] - match_actions[2])**2).to_value(_unit)
+
+    return val
+
+
+def _same_actions_objfunc_sanders(p, pos, vy, potential_name, match_actions):
+    vx, vz = p
+    w0 = gd.PhaseSpacePosition(pos=pos,
+                               vel=[vx, vy, vz] * u.km/u.s)
+    aaf = safe_get_actions(potentials[potential_name], w0, N_max=8)
+    actions = aaf['actions']
+
+    _unit = (u.km/u.s * u.kpc)**2
+    val = ((actions[0] - match_actions[0])**2 +
+           (actions[2] - match_actions[2])**2).to_value(_unit)
+
+    return val
+
+
 def get_w0s_with_same_actions(fiducial_w0, vy=None, staeckel=False):
-    from thriftshop.potentials import potentials, galpy_potentials
-
     if staeckel:
-        def _same_actions_objfunc(p, pos, vy, potential_name, match_actions):
-            vx, vz = p
-            w0 = gd.PhaseSpacePosition(pos=pos,
-                                       vel=[vx, vy, vz] * u.km/u.s)
-
-            o = potentials[potential_name].integrate_orbit(
-                w0, dt=1.*u.Myr, t1=0, t2=1 * u.Gyr,
-                Integrator=gi.DOPRI853Integrator)
-            actions = get_staeckel_actions(o[::2],
-                                           galpy_potentials[potential_name])
-            actions = actions.mean(axis=-1)
-
-            _unit = (u.km/u.s * u.kpc)**2
-            val = ((actions[0] - match_actions[0])**2 +
-                   (actions[2] - match_actions[2])**2).to_value(_unit)
-
-            return val
-
+        _same_actions_objfunc = _same_actions_objfunc_staeckel
     else:
-        def _same_actions_objfunc(p, pos, vy, potential_name, match_actions):
-            vx, vz = p
-            w0 = gd.PhaseSpacePosition(pos=pos,
-                                       vel=[vx, vy, vz] * u.km/u.s)
-            aaf = safe_get_actions(potentials[potential_name], w0, N_max=8)
-            actions = aaf['actions']
-
-            _unit = (u.km/u.s * u.kpc)**2
-            val = ((actions[0] - match_actions[0])**2 +
-                   (actions[2] - match_actions[2])**2).to_value(_unit)
-
-            return val
+        _same_actions_objfunc = _same_actions_objfunc_sanders
 
     if vy is None:
         # Default: set to circular velocity
