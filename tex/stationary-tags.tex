@@ -9,7 +9,7 @@
 \newcommand{\methodname}{Abundance-moment foliation}
 \newcommand{\method}{\acronym{TMR}}
 
-% Project macros - all others go in preamble.tex
+% Project-specific macros - all others go in preamble.tex
 \newcommand{\gaia}{\textsl{Gaia}}
 \newcommand{\dr}[1]{\acronym{DR}#1}
 \newcommand{\apogee}{\acronym{APOGEE}}
@@ -28,21 +28,29 @@
 \DeclareGraphicsExtensions{.pdf,.eps,.png}
 
 \title{\textbf{%
-\methodname:\\
-Identifying orbits in phase space through invariances\\
+Revealing the orbital structure of the Milky Way through the invariance
 of element-abundance distributions}}
 
+
+\newcommand{\affcca}{Center for Computational Astrophysics, Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
+\newcommand{\affccpp}{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
+\newcommand{\affmpia}{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg, Germany}
+\newcommand{\affcolumbia}{Department of Astronomy, Columbia University, New York, NY 10027, USA}
+
 \author[0000-0003-0872-7098]{Adrian~M.~Price-Whelan}
-\affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
+\affiliation{\affcca}
 
-\author[0000-0003-2866-9403]{David W. Hogg}
-\affil{Flatiron Institute, 162 Fifth Ave, New York, NY 10010, USA}
-\affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
-\affil{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
-% \affil{Center for Data Science, New York University, 60 Fifth Ave, New York, NY 10011, USA}
+\author[0000-0003-2866-9403]{David~W.~Hogg}
+\affiliation{\affcca}
+\affiliation{\affmpia}
+\affiliation{\affccpp}
 
-\author[0000-0003-4996-9069]{Hans-Walter Rix}
-\affil{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg}
+\author{Kathryn~V.~Johnston}
+\affiliation{\affcca}
+\affiliation{\affcolumbia}
+
+\author[0000-0003-4996-9069]{Hans-Walter~Rix}
+\affiliation{\affmpia}
 
 \author{others}
 
@@ -316,7 +324,7 @@ This section could also describe all the computational tips and tricks.
 \methodname flows from a specific set of assumptions.
 That is, we are going to make hard (and sometimes controversial) assumptions.
 Our position is not that these assumptions are correct.
-Our position is that our 
+Our position is that our
 methods are conditionally correct, conditioning on these assumptions.
 \begin{description}
 \item[integrable] HOGG: There are 3 invariants and 3 angles. This could perhaps be
