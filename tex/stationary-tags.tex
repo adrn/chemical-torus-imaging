@@ -1,5 +1,10 @@
 % To-dos
 % ------
+% - is there a word for iso-composition?? isosynth
+% - Figure 2: binned statistics for 3 potentials shown in Figure 1 showing statistics depend on angles
+% - Figure 3: amplitude of cos(2theta) term vs. disk mass - show point and error-bar for zero-crossing
+% - Figure 4: abundances for all abundances that we use here
+% - Figure 5: point and error-bar for different elements. Shaded band that represents the 1-sigma combination (invvar weighted) of the various tracers
 
 \documentclass[modern]{aastex63}
 
@@ -22,7 +27,7 @@
 
 \setlength{\parindent}{1.1\baselineskip} % trust in Hogg
 \shorttitle{tags are separable from angles}
-\shortauthors{apw, dwh, hwr, and more}
+\shortauthors{Price-Whelan et al.}
 
 \begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing % trust in Hogg
 \graphicspath{ {figures/} }
@@ -183,6 +188,17 @@ directions of increase (or decrease) of the conjugate angles, and lie in the sub
 of the directions of increase (or decrease) of the dynamical actions.
 The trajectories of stars in the phase space (the dynamical tori) must lie along or
 describe level surfaces in the element-abundance distribution!
+
+% Notebook: Figure1.ipynb
+\begin{figure}[!t]
+  \begin{center}
+  \includegraphics[width=\textwidth]{orbits-mean-abun-z-vz}
+  \end{center}
+  \caption{%
+  \label{fig:zvz-mgfe}
+  }
+\end{figure}
+
 
 HOGG: MOve to later? Or summarize?
 ...
@@ -424,16 +440,15 @@ We also thank
   and the Dynamics and Astronomical Data groups at the Flatiron Institute
 for valuable discussions and input.
 DWH was partially supported by HOGG GRANT DETAILS.
-AMPW was partially supported by HOGG GRANT DETAILS.
-HWR was partially supported by HOGG GRANT DETAILS.
+HWR was partially supported by GRANT DETAILS.
 This research was conducted in part at the Aspen Center for Physics,
 which is supported by National Science Foundation grant \acronym{PHY-1607611}.
 
 SDSS or whatever SPECTROSCOPY ack?
 
-This work has made use of data from the European Space Agency (\acronym{ESA}) mission
-\gaia\ (\url{https://www.cosmos.esa.int/gaia}), processed by the \gaia\ Data
-Processing and Analysis Consortium (\acronym{DPAC},
+This work has made use of data from the European Space Agency (\acronym{ESA})
+mission \gaia\ (\url{https://www.cosmos.esa.int/gaia}), processed by the \gaia\
+Data Processing and Analysis Consortium (\acronym{DPAC},
 \url{https://www.cosmos.esa.int/web/gaia/dpac/consortium}). Funding for the
 \acronym{DPAC}
 has been provided by national institutions, in particular the institutions
