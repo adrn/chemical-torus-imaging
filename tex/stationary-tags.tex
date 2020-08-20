@@ -11,11 +11,12 @@
 \input{preamble.tex}
 
 % text macros
-\newcommand{\methodname}{\textsl{Toroidal Abundance Blender}}
+\newcommand{\methodname}{\textsl{Stationary Abundance Tori}}
 % Torus tomography
 % Abundance-moment foliation
 %   Abundance-moment laminae
-% Dynamical abundance blender
+% Toroidal abundance blender
+%   Toroidal abundance mixer
 % \newcommand{\method}{\acronym{TMR}}
 
 % Project-specific macros - all others go in preamble.tex
@@ -198,6 +199,23 @@ describe level surfaces in the element-abundance distribution!
   \includegraphics[width=\textwidth]{orbits-mean-abun-z-vz}
   \end{center}
   \caption{%
+    Left panel: The mean \mgfe\ abundance as a function of cylindrical
+    Galactic coordinate height $z$ and vertical velocity $v_z$.
+    Averages are taken in $z, v_z$ boxels.
+    The stars at lower $z$ and lower $v_z$, that is the stars with
+    lower overall $z$ action $J_z$, show lower \mgfe on average.
+    Other panels: Same as the left panel, but with two orbits
+    over-plotted, for three different Milky Way potentials.
+    These potentials have the fiducial Milky Way disk mass (see text
+    for details), or a disk less massive by a factor of 0.4 or more
+    massive by a factor of 1.6, as noted in each panel title.
+    All potentials are constrained to have a circular velocity at the
+    Solar circle of $229\,\kms$.
+    The orbits appear as finite-thickness lines because the orbits are
+    finite-volume 3-tori in 6-space projected onto the $z$--$v_z$
+    plane.
+    APW TODO: Also shown are the locations of a few values of the
+    conjugate angle $\theta_z$ in radians.
   \label{fig:zvz-mgfe}
   }
 \end{figure}
@@ -454,6 +472,10 @@ address all of these):
 \item
   That there is a fully data-driven formulation of this problem; ie, not
   parameterized.
+\item
+  The method does not require that the abundances uniquely define the
+  actions, nor that the actions uniquely define the
+  abundances. Everything can be probabilistically related.
 \item
   What is the source of our scatter in our abundance means: Shot noise
   or wrongness of the assumptions?
