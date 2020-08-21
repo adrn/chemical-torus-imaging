@@ -1,3 +1,4 @@
+import astropy.coordinates as coord
 import astropy.units as u
 import numpy as np
 from .config import rsun, vcirc
@@ -37,4 +38,22 @@ def get_staeckel_actions(w, potential):
 
     o = gala_to_galpy_orbit(w)
     aAS = actionAngleStaeckel(pot=potential, delta=delta)
-    return np.array(aAS(o)).squeeze() * ro * vo
+    return np.squeeze(aAS(o)) * ro * vo
+
+
+def get_staeckel_aaf(w, potential):
+    from galpy.actionAngle import estimateDeltaStaeckel, actionAngleStaeckel
+
+    R = w.cylindrical.rho.to_value(ro)
+    z = w.z.to_value(ro)
+    delta = estimateDeltaStaeckel(potential, R, z)
+
+    o = gala_to_galpy_orbit(w)
+    aAS = actionAngleStaeckel(pot=potential, delta=delta)
+
+    aaf = aAS.actionsFreqsAngles(o)
+    aaf = {'actions': np.squeeze(aaf[:3]) * ro * vo,
+           'freqs': np.squeeze(aaf[3:6]) * vo / ro,
+           'angles': coord.Angle(np.squeeze(aaf[6:]) * u.rad)}
+
+    return aaf
