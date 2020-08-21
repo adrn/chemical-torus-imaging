@@ -9,11 +9,16 @@ def get_elem_names(tbl, min_frac=0.75):
     return elem_names
 
 
-def elem_to_label(elem):
+def elem_to_label(elem, dollar=True):
     num, den = elem.split('_')
 
     if num.lower() == 'alpha' and den.lower() == 'm':
-        return r'$[\alpha / {\rm M}]$'
+        label = r'[\alpha / {\rm M}]'
 
     else:
-        return f'[{num.title()}/{den.title()}]'
+        label = rf"[{{\rm {num.title()} }} / {{\rm {den.title()} }}]"
+
+    if dollar:
+        return '$' + label + '$'
+    else:
+        return label
