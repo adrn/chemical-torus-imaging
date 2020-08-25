@@ -259,31 +259,15 @@ describe level surfaces in the element-abundance distribution!
   }
 \end{figure}
 
-HOGG: MOve to later? Or summarize?
-...
-One of the crazy things about all this is that any description of a general distribution in $D$-space
-requires a \emph{lot of parameters}.
-Even a trivial distribution---the Normal distribution---requires $0.5\,D\,(D+3)$ parameters for its
-complete description, and anything more complex has more.
-That means that there are a very large set of element-abundance statistics for which the
-six-gradient exists or could be constraining for this project.
-Not all of these parameters can be reliably measured in a finite data set,
-let alone reliably seen to vary with phase-space location.
-However, we choose to see this bug as a feature:
-We have discovered, in effect, a \emph{combinatorically large set of constraints on the
-dynamical actions and conjugate angles}.
-
 WE WILL DEMONSTRATE WITH JUST VERTICAL KINEMATICS, BUT WE ARE NOT
 GOING TO ASSUME SEPARABILITY.  Jeans models can suck it.
 
 \section{Methodological generalities}
 
-HOGG ASKS: IS THIS WRITTEN TOO PEDAGOGICALLY?
-
-This project was motivated by plots of abundances of stars as a
+This project---\methodname---was motivated by plots of abundances of stars as a
 function of vertical height $z$ and vertical velocity $v_z$ in
 Galactocentric cylindrical coordinates, colored by element abundances.
-Examples are shown in \figurename~APW.
+Examples are shown in \figurename~\ref{fig:zvz-grid}.
 In these plots,
 the eye is drawn to \emph{abundance gradients}: The stars at small
 heights and small vertical velocities have different abundance ratios,
@@ -306,17 +290,35 @@ element abundances.
 This prediction depends on many detailed assumptions, such as that
 the Galaxy is (approximately) phase mixed, and that the potential is
 (approximately) time invariant and integrable.
-The usefulness of this prediction for inference
+And of course the \emph{usefulness} of this prediction for inference
 depends on the existence of gradients: If there aren't
 element-abundance-ratio gradients, there will be no information to work
 with.
+There are many ways to describe the fundamental prediction that underlies \methodname.
+Here are a few:
+\begin{itemize}
+\item
+  Stars don't change their abundances as they orbit!  Stellar
+  abundance ratios can depend on the three invariant actions, but they
+  can't depend on the conjugate angles. In a good model of the
+  abundances as a function of 6-dimensional phase-space coordinates,
+  the abundances will depend only on the actions.
+\item
+  Abundance gradients taken in 6-dimensional phase space will be
+  perpendicular, everywhere, to the orbital 3-tori in phase space.
+\item
+  At every location in 6-d phase space, there are a set of 6-d
+  gradient vectors, which are the derivatives of all measurable
+  moments of all measurable element-abundance ratios with respect to
+  the 6 phase-space coordinates. These gradient vectors will span a
+  3-d subspace, and this subspace will be orthogonal to the surfaces
+  of the orbital tori.
+\item
+  The orbital tori will be level 3-surfaces in 6-d phase space of any
+  moments or statistics of the element-abundance distribution.
+\end{itemize}
 
-In more mathematical language: The orbits (which are 3-tori in
-6-dimensional phase space) in a steady-state, integrable, phase-mixed
-galaxy will be level hyper-surfaces in phase space of any moments or
-statistics of the element-abundance distribution... HOGG
-
-This point is illustrated graphically in \figurename~XXX:
+This point is illustrated graphically in \figurename~\ref{fig:zvz-mgfe}:
 In the fiducial model, the two overlaid orbits more-or-less follow something
 like a mean abundance contour.
 In the model in which the disk is made less massive (and the halo more massive
@@ -359,6 +361,18 @@ abundance gradients, but not separability!  Of course you might not
 have abundance gradients in all three action directions.
 
 ...The point that the method is combinatoric in abundance data.
+...
+One of the crazy things about all this is that any description of a general distribution in $D$-space
+requires a \emph{lot of parameters}.
+Even a trivial distribution---the Normal distribution---requires $0.5\,D\,(D+3)$ parameters for its
+complete description, and anything more complex has more.
+That means that there are a very large set of element-abundance statistics for which the
+six-gradient exists or could be constraining for this project.
+Not all of these parameters can be reliably measured in a finite data set,
+let alone reliably seen to vary with phase-space location.
+However, we choose to see this bug as a feature:
+We have discovered, in effect, a \emph{combinatorically large set of constraints on the
+dynamical actions and conjugate angles}.
 
 ...The point that this would be more complex in chaotic regions, and
 maybe effectively inapplicable?
