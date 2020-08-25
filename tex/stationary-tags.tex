@@ -194,7 +194,7 @@ The trajectories of stars in the phase space (the dynamical tori) must lie along
 describe level surfaces in the element-abundance distribution!
 
 % Notebook: figures/APOGEE-zvz-orbits.ipynb
-\begin{figure}[!t]
+\begin{figure}[!tp]
   \begin{center}
   \includegraphics[width=\textwidth]{abundance-zvz-grid.pdf}
   \end{center}
@@ -207,39 +207,43 @@ describe level surfaces in the element-abundance distribution!
     on average, but lower alpha-to-iron.
     These plots are somewhat affected by \apogee\ selection effects, in
     that different $z, v_z$ boxels are projections through different extents
-    in Galactocentric radius.
+    in Galactocentric radius. This explains some of the visible asymmetries.
   \label{fig:zvz-grid}
   }
 \end{figure}
 
 % Notebook: figures/zvz-orbit-demo.ipynb
-\begin{figure}[!t]
+\begin{figure}[!tp]
   \begin{center}
   \includegraphics[width=\textwidth]{zvz-orbit-demo.pdf}
   \end{center}
   \caption{%
-    TODO
+    \textsl{Left panel:} Two orbits projected onto $z, v_z$ space, colored by
+    the angle $\theta_z$ that is conjugate to vertical action $J_z$.
+    Because each orbit paints a 3-torus in 6-dimensional phase space, it projects
+    to a finite-width band in $z, v_z$ sspace.
+    \textsl{Right panel:} The same two orbits, but now plotted in vertical-action,
+    vertical-angle space. In this space, the orbits trace a perfect circles.
+    APW: HOGG DOES THINK WE SHOULD KEEP THIS FIGURE, BECAUSE IT HELPS EXPLAIN THE NEXT ONE.
   \label{fig:zvz-demo}
   }
 \end{figure}
 
 % Notebook: figures/APOGEE-zvz-orbits.ipynb
-\begin{figure}[!t]
+\begin{figure}[!tp]
   \begin{center}
   \includegraphics[width=\textwidth]{zvz-mean-MG_FE}
   \end{center}
   \caption{%
     \textsl{Left panel:} Repeat of the $\mgfe$ panel of \figurename~\ref{fig:zvz-grid}.
-    \textsl{Other panels:} Same as the left panel, but with two orbits
+    \textsl{Other panels:} Same as the left panel, but with the two orbits
+    from \figurename~\ref{fig:zvz-demo}
     over-plotted, for three different Milky Way potentials.
-    These potentials have the fiducial Milky Way disk mass (see text
+    These three potentials have the fiducial Milky Way disk mass (see text
     for details), or a disk less massive by a factor of 0.4 or more
     massive by a factor of 1.6, as noted in each panel title.
     All potentials are constrained to have a circular velocity at the
     Solar circle of $229\,\kms$.
-    The orbits appear as finite-thickness bands in these plots because
-    the orbits are finite-volume 3-tori in 6-space projected onto the
-    $z$--$v_z$ plane.
     \emph{Which of the three panels appears most like the orbits are
     coincident with isopleths of the mean abundance?}
     This question is asked for illustrative purposes only: These
@@ -250,7 +254,6 @@ describe level surfaces in the element-abundance distribution!
   \label{fig:zvz-mgfe}
   }
 \end{figure}
-
 
 HOGG: MOve to later? Or summarize?
 ...
