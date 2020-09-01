@@ -33,3 +33,7 @@ plot_config = {
     "Rticks": np.arange(*Rlim, 1),
     "Rminorticks": np.arange(*Rlim, 0.5)
 }
+
+# Subset of elements we plot in panels
+elem_names = ['FE_H', 'C_FE', 'N_FE', 'MG_FE',
+              'SI_FE', 'MN_FE', 'NI_FE', 'CE_FE']
