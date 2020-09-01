@@ -35,5 +35,5 @@ plot_config = {
 }
 
 # Subset of elements we plot in panels
-elem_names = ['FE_H', 'C_FE', 'N_FE', 'MG_FE',
-              'SI_FE', 'MN_FE', 'NI_FE', 'CE_FE']
+elem_names = ['FE_H', 'C_FE', 'N_FE', 'O_FE',
+              'MG_FE', 'SI_FE', 'MN_FE', 'NI_FE']
