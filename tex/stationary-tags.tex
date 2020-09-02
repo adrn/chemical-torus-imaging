@@ -520,8 +520,13 @@ follows.
 
 
 \section{Milky Way mass model and actions}
+\label{sec:mw-model}
 
-APW: shit about galactocentric parameters
+Our methodology and demonstrations below rely on computing actions and angles
+for stars, which depend on the mass distribution of the Milky Way.
+Here we represent the density distribution (or gravitational potential) of the Milky Way using a parametrized, three-component mass model consisting of a spherical Hernquist bulge \citep{Hernquist:1990}, an axisymmetric Miyamoto-Nagai disk \citep{Miyamoto:1975}, and a spherical Navarro-Frenk-White dark matter halo \citep{Navarro:1996}.
+The parameters of these components
+\citep{gala}
 
 HOGG SAY: Possible section for APW to put details of the Milky Way model,
 how we parameterize the disk mass, and how we compute actions and angles.
@@ -532,6 +537,8 @@ This section could describe our one mass-model parameter, and show how
 the mass distribution and orbit structure vary as we vary it.
 
 This section could also describe all the computational tips and tricks.
+
+APW: shit about galactocentric parameters
 
 \section{Assumptions}
 
@@ -731,12 +738,13 @@ participating in the \gaia\ Multilateral Agreement.
 % \gaia
 % }
 
-% \software{
-% \code{Astropy} \citep{astropy, astropy2},
-% \code{IPython} \citep{ipython},
-% \code{matplotlib} \citep{matplotlib},
-% \code{numpy} \citep{numpy},
-% }
+\software{
+  \package{Astropy} \citep{astropy, astropy:2018},
+  \package{IPython} \citep{ipython},
+  \package{matplotlib} \citep{matplotlib},
+  \package{numpy} \citep{numpy},
+  \package{gala} \citep{gala, galav1_1}
+}
 
 \bibliographystyle{aasjournal}
 \bibliography{stationary-tags}
