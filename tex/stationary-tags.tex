@@ -1,14 +1,17 @@
 % To-dos
 % ------
 % - Figure 5: point and error-bar for different elements. Shaded band that represents the 1-sigma combination (invvar weighted) of the various tracers
-% - Mean abundance deviation
 
 \documentclass[modern]{aastex63}
 
 \input{preamble.tex}
 
 % text macros
+<<<<<<< HEAD
 \newcommand{\methodname}{\textsl{Abundance Torus Maschine}}
+=======
+\newcommand{\methodname}{\textsl{Torus--Tangents Topography}}
+>>>>>>> cc45d9d575e01bd9516eb4ec4ea09d0a2ea32c3a
 % Torus Tomography
 %   Torus Topography (see what I did there?)
 % Abundance-Moment foliation (AMF)
@@ -26,6 +29,9 @@
 % Composition Gradient Method (CGM)
 % Abundance Isopleth Method (AIM)
 % The Magical 3-torus of Invariance (MTI)
+% Torus Tangents Topography (TTT)
+%   Torus-Tangent Tags Topography (TTTT)
+% Totoro
 
 % Project-specific macros - all others go in preamble.tex
 \newcommand{\gaia}{\textsl{Gaia}}
@@ -406,33 +412,120 @@ In what follows, a very limited project...
 
 \section{Data}
 
-We use spectroscopic data from data release 16 (\dr{16}) of the \apogee\ surveys
-(\citealt{Majewski:2017, DR16}; J\"onsson et al., in prep.).
-\apogee\ is a component of the Sloan Digital Sky Survey IV (\sdssiv;
-\citealt{Gunn:2006, Blanton:2017}); its main goal is to survey the chemical
-and dynamical properties of stars across much of the Milky Way disk by obtaining
-high-resolution ($R \sim 22,500$; \citealt{Wilson:2019}), infrared ($H$-band)
-spectroscopy of hundreds of thousands of stars.
+In our toy demonstrations below, our main data source is a cross-match between
+spectroscopic data from the \apogee\ surveys \citep{Majewski:2017} and
+astrometric data from the \gaia\ mission \citep{Gaia-Collaboration:2016,
+Gaia-Collaboration:2018}.
+
+\apogee\ is a spectroscopic sub-survey and component of the Sloan Digital Sky
+Survey IV (\sdssiv; \citealt{Blanton:2017}) whose main goal is to map
+the chemical and dynamical properties of stars across the Milky Way disk.
+The survey uses two nearly identical, high-resolution ($R \sim 22,500$;
+\citealt{Wilson:2019}), infrared ($H$-band) spectrographs---one in the Northern
+hemisphere at Apache Point Observatory (APO) using the SDSS 2.5m telescope
+\citep{Gunn:2006}, and one in the Southern hemisphere at Las Campanas
+Observatory (LCO) using the 2.5m du Pont telescope \citep{Bowen:1973}.
 The primary survey targets are selected with simple color and magnitude cuts
-\citep{Zasowski:2013, Zasowski:2017}, but the survey uses fiber-plugged plates
-that cover only a small fraction of the available area, which leads to extremely
-nonuniform coverage of the Galactic stellar distribution (see, e.g., Figure~1 in
-\citealt{DR16}).
+(\citealt{Zasowski:2013, Zasowski:2017}, Santana et al. in prep., Beaton et al.
+in prep.), but the sparse angular sky coverage and limited number of fibers per
+field lead to a ``pencil-beam''-like sampling of the Milky Way stellar density.
+\apogee\ spectra are reduced \citep{Nidever:2015} and then analyzed (i.e., to
+measure stellar parameters and abundances) using the \apogee\ Stellar Parameters
+and Chemical Abundance Pipeline (\acronym{ASPCAP}; \citealt{ASPCAP,
+Holtzman:2018}); here we use abundance measurements from the standard \apogee\
+pipeline.
 
+Here we use a recent internal data product (which includes all data taken
+through March 2020) from the \apogee\ surveys (post-\dr{16}) that includes
+$\approx\%$ more stars than the publicly-available \dr{16} catalogs \citep{DR16,
+Jonsson:2020}, but was reduced and processed using the same pipeline used to
+produce the \dr{16} release.
+This \apogee\ catalog contains calibrated element abundance measurements for 18
+elements, but these have a variety of physical origins and a range of
+reliabilities and measurement precisions.
+For demonstrations below, we therefore focus on a subset of eight, well-measured
+(log) abundance ratios selected to have varied astrophysical origins:
+\abunratio{Fe}{H}, \abunratio{C}{Fe}, \abunratio{N}{Fe}, \abunratio{O}{Fe},
+\abunratio{Mg}{Fe}, \abunratio{Si}{Fe}, \abunratio{Mn}{Fe}, \abunratio{Ni}{Fe}.
+In some cases, we focus on just a single element abundance, \abunratio{Mg}{Fe},
+which is the most precisely and accurately determined element abundance measured
+with the \dr{16} pipeline \citep{Jonsson:2020}.
 
-HOGG SAY: This section is APW's problem (ish).
+\gaia\ is primarily an astrometric mission and survey
+\citep{Gaia-Collaboration:2016} that obtains sky position, proper motion, and
+parallax measurements for $>1$ billion stars limited only by their apparent
+magnitudes (\gaia\ $G \lesssim 20.7$).
+Here we use parallax and proper motion measurements released in \gaia\ \dr{2}
+\citep{Gaia-Collaboration:2018, Gaia-astrometric:2018}.
 
-APW: \apogee\ bread-and-butter and citations.
+% Notebook: figures/APOGEE-sample.ipynb
+\begin{figure}[!tp]
+  \begin{center}
+  \includegraphics[width=\textwidth]{mh-am-xy.pdf}
+  \end{center}
+  \caption{%
+    \textsl{Top panel:}
+    \textsl{Lower left panel:}
+    \textsl{Lower right panel:}
+    $x$, $y$, $z$ binned to 50 pc resolution
+  \label{fig:mh-am-xy}
+  }
+\end{figure}
 
-APW: Removal of stellar clusters from the data.
+We cross-match the \apogee\ sample to \gaia\ \dr{2} using the \apogee-provided
+\acronym{2MASS} \citep{Skrutskie:2006} identifiers, and the \gaia-provided
+cross-match between \gaia\ \dr{2} and the final \acronym{2MASS} point source
+catalog \citep{Gaia-crossmatch:2019}.
+We then apply a number of quality cuts and other selections to limit the catalog
+to chemically thin-disk, red giant branch (RGB) stars with well-measured stellar
+parameters and abundances, excluding stars targeted in stellar clusters and
+dwarf galaxies, and high signal-to-noise parallax measurements.
+In detail, our selections include:
+\begin{itemize}
+  \item \acronym{ASPCAP} quality flag (\texttt{ASPCAPFLAG}) must not contain
+    \texttt{STAR\_BAD} or \texttt{STAR\_WARN},
+  \item $3500~\Kel < \Teff < 6500~\Kel$,
+  \item $1 < \logg < 3.5$,
+  \item combined spectroscopic signal-to-noise ${\rm SNR} > 40$,
+  \item \apogee\ targeting bit flags must not indicate that the source was part
+    of a special program to observe stellar clusters, dwarf galaxies, M31 stars,
+    stellar streams, or moving groups; this \emph{excludes} stars with the
+    following bits enabled:
+    \begin{itemize}
+      \item \texttt{APOGEE\_TARGET1}: (9. 18, 24, 26)
+      \item \texttt{APOGEE\_TARGET2}: (10, 18)
+      \item \texttt{APOGEE2\_TARGET1}: (9, 18, 20, 21, 22, 23, 24, 26)
+      \item \texttt{APOGEE2\_TARGET2}: (10)
+      \item \texttt{APOGEE2\_TARGET3}: (5, 14, 15)
+    \end{itemize}
+  \item stars are part of the ``low-alpha'' (or ``chemical thin disk'')
+    population (see polygonal selection in the top panel of
+    \figurename~\ref{fig:mh-am-xy}),
+  \item \gaia\ parallax $\varpi > 0.4~\mas$,
+  \item \gaia\ parallax signal-to-noise $\varpi / \sigma_\varpi > 5$.
+\end{itemize}
+The \apogee\ catalog contains a small number of duplicates (duplicated source
+identifier \texttt{APOGEE\_ID}); To unique-ify our sample in these cases, we
+keep only the entry with highest signal-to-noise.
+The final parent sample contains 76,559 RGB stars with high-quality \apogee\ and
+\gaia\ data.
 
-APW: Distance estimation.
+For each star in the parent sample, we compute na\"ive distance estimates by
+inverting the parallax, $d = 1/\varpi$.
+While this is generally not a safe way of computing distance from parallaxes
+(see, e.g., \citealt{Bailer-Jones:2015}), our sample stars are (by construction)
+relatively nearby and have high signal-to-noise parallax measurements.
+Using a parallax signal-to-noise selection has its own consequences, especially
+in that it makes the sample selection function complex and non-intuitive.
+However, since the demonstrations that make use of these distance measurements
+below are meant to be illustrative examples, and since our methodology should be
+relatively insensitive to selection effects, we ignore these details in what
+follows.
 
-APW: Choice of abundances.
-
-APW: Final data properties (and possibly figures).
 
 \section{Milky Way mass model and actions}
+
+APW: shit about galactocentric parameters
 
 HOGG SAY: Possible section for APW to put details of the Milky Way model,
 how we parameterize the disk mass, and how we compute actions and angles.
@@ -446,7 +539,7 @@ This section could also describe all the computational tips and tricks.
 
 \section{Assumptions}
 
-\methodname flows from a specific set of assumptions.
+\methodname\ flows from a specific set of assumptions.
 That is, we are going to make hard (and sometimes controversial) assumptions.
 Our position is not that these assumptions are correct.
 Our position is that our
@@ -539,6 +632,17 @@ HOGG: Show results on the data.
     HOGG TODO!
     APW TODO: add point with horizontal error bar showing zero-crossing value
   \label{fig:coeff-mdisk}
+  }
+\end{figure}
+
+% Notebook: figures/Abundance-anomaly-bootstrap.ipynb
+\begin{figure}[!tp]
+  \begin{center}
+  \includegraphics[width=\textwidth]{mdisk-vs-elem.pdf}
+  \end{center}
+  \caption{%
+    HOGG TODO
+  \label{fig:inferred-mdisk-elems}
   }
 \end{figure}
 
@@ -659,5 +763,8 @@ participating in the \gaia\ Multilateral Agreement.
 % \code{matplotlib} \citep{matplotlib},
 % \code{numpy} \citep{numpy},
 % }
+
+\bibliographystyle{aasjournal}
+\bibliography{stationary-tags}
 
 \end{document}
