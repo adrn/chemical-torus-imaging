@@ -8,14 +8,14 @@
 \input{preamble.tex}
 
 % text macros
-\newcommand{\methodname}{\textsl{Abundance Torus Method}}
+\newcommand{\methodname}{\textsl{Abundance Torus Maschine}}
 % Torus Tomography
 %   Torus Topography (see what I did there?)
 % Abundance-Moment foliation (AMF)
 %   Abundance-Moment laminae (AML)
 % Abundance Torus Machinery (ATM)
 %   Abundance Torus Method (ATM)
-%   Abundance Torus
+%   Abundance Torus Maschine (ATM)
 % Toroidal abundance blender (TAB)
 %   Toroidal abundance mixer (or mixmaster) (TAM)
 % Stationary Abundance Tori (SAT)
@@ -486,7 +486,29 @@ methods are conditionally correct, conditioning on these assumptions.
   \includegraphics[width=\textwidth]{sinusoid-fits.pdf}
   \end{center}
   \caption{%
-    HOGG TODO
+    The mean abundance deviation as a function of vertical angle, for three
+    different values of the mass of the disk (all, as you will recall, at fixed
+    circular velocity at the Solar circle).
+    The abundance deviation for each star in the sample
+    is the difference between the abundance measured in
+    each star and a mean of the $K=64$ nearest neighbors to that star in three-
+    dimensional action space (for that mass model).
+    In each panel, the mean abundance deviation is shown three ways. The black
+    histogram shows the mean of the abundance deviation in small bins in vertical
+    angle.
+    The blue lines show continuous fits to the data (the unbinned data on the
+    individual stars, not the binned data) which are continuous linear combinations of
+    sines and cosines (see text). There are 128 blue lines, one for each of
+    128 independent bootstrap trials.
+    The red line shows the mean of the $\cos 2\,\theta_z$ terms across the
+    128 bootstrap trials.
+    Although the black line shows binned means for visualization purposes,
+    these bins are never used in the analysis, as binning is sinning.
+    Comparing the three panels, the red curves
+    shows an amplitude of opposite sign in the highest-disk-mass panel relative to
+    the other panels, suggesting that
+    the best setting of the disk mass is in between the fiducial disk mass model
+    and the higher-disk-mass model (as we find; see text).
   \label{fig:sinusoid-fits}
   }
 \end{figure}
