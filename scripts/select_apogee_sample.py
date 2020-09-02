@@ -72,14 +72,15 @@ def main(overwrite=False):
         target_mask &= (stars[name] & np.sum(2**bits)) == 0
 
     # Select chemical "thin disk"
-    mh_alpham_nodes = np.array([[0, -0.1],
-                                [0.6, -0.03],
-                                [0.5, 0.04],
+    mh_alpham_nodes = np.array([[0.6, -0.05],
+                                [0.6, 0.04],
                                 [0.15, 0.04],
                                 [-0.5, 0.13],
                                 [-0.9, 0.13],
                                 [-1., 0.07],
-                                [0, -0.1]])
+                                [-0.2, -0.08],
+                                [0.2, -0.08],
+                                [0.6, -0.05]])
     mh_alpham_path = mpl.path.Path(mh_alpham_nodes[:-1])
     thin_disk_mask = mh_alpham_path.contains_points(
         np.stack((stars['M_H'],
