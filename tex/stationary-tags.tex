@@ -430,11 +430,22 @@ measure stellar parameters and abundances) using the \apogee\ Stellar Parameters
 and Chemical Abundance Pipeline (\acronym{ASPCAP}; \citealt{ASPCAP,
 Holtzman:2018}); here we use abundance measurements from the standard \apogee\
 pipeline.
+
 Here we use a recent internal data product (which includes all data taken
 through March 2020) from the \apogee\ surveys (post-\dr{16}) that includes
 $\approx\%$ more stars than the publicly-available \dr{16} catalogs \citep{DR16,
 Jonsson:2020}, but was reduced and processed using the same pipeline used to
 produce the \dr{16} release.
+This \apogee\ catalog contains calibrated element abundance measurements for 18
+elements, but these have a variety of physical origins and a range of
+reliabilities and measurement precisions.
+For demonstrations below, we therefore focus on a subset of eight, well-measured
+(log) abundance ratios selected to have varied astrophysical origins:
+\abunratio{Fe}{H}, \abunratio{C}{Fe}, \abunratio{N}{Fe}, \abunratio{O}{Fe},
+\abunratio{Mg}{Fe}, \abunratio{Si}{Fe}, \abunratio{Mn}{Fe}, \abunratio{Ni}{Fe}.
+In some cases, we focus on just a single element abundance, \abunratio{Mg}{Fe},
+which is the most precisely and accurately determined element abundance measured
+with the \dr{16} pipeline \citep{Jonsson:2020}.
 
 \gaia\ is primarily an astrometric mission and survey
 \citep{Gaia-Collaboration:2016} that obtains sky position, proper motion, and
@@ -484,21 +495,33 @@ In detail, our selections include:
       \item \texttt{APOGEE2\_TARGET3}: (5, 14, 15)
     \end{itemize}
   \item stars are part of the ``low-alpha'' (or ``chemical thin disk'')
-    population (see polygonal selection in the left panel of
+    population (see polygonal selection in the top panel of
     \figurename~\ref{fig:mh-am-xy}),
   \item \gaia\ parallax $\varpi > 0.4~\mas$,
-  \item \gaia\ parallax signal-to-noise $\varpi / \sigma_\varpi > 5$,
+  \item \gaia\ parallax signal-to-noise $\varpi / \sigma_\varpi > 5$.
 \end{itemize}
+The \apogee\ catalog contains a small number of duplicates (duplicated source
+identifier \texttt{APOGEE\_ID}); To unique-ify our sample in these cases, we
+keep only the entry with highest signal-to-noise.
+The final parent sample contains 76,559 RGB stars with high-quality \apogee\ and
+\gaia\ data.
 
-We also unique-ify on APOGEE\_ID...
+For each star in the parent sample, we compute na\"ive distance estimates by
+inverting the parallax, $d = 1/\varpi$.
+While this is generally not a safe way of computing distance from parallaxes
+(see, e.g., \citealt{Bailer-Jones:2015}), our sample stars are (by construction)
+relatively nearby and have high signal-to-noise parallax measurements.
+Using a parallax signal-to-noise selection has its own consequences, especially
+in that it makes the sample selection function complex and non-intuitive.
+However, since the demonstrations that make use of these distance measurements
+below are meant to be illustrative examples, and since our methodology should be
+relatively insensitive to selection effects, we ignore these details in what
+follows.
 
-APW: Distance estimation.
-
-APW: Choice of abundances.
-
-APW: Final data properties (and possibly figures).
 
 \section{Milky Way mass model and actions}
+
+APW: shit about galactocentric parameters
 
 HOGG SAY: Possible section for APW to put details of the Milky Way model,
 how we parameterize the disk mass, and how we compute actions and angles.
@@ -512,7 +535,7 @@ This section could also describe all the computational tips and tricks.
 
 \section{Assumptions}
 
-\methodname flows from a specific set of assumptions.
+\methodname\ flows from a specific set of assumptions.
 That is, we are going to make hard (and sometimes controversial) assumptions.
 Our position is not that these assumptions are correct.
 Our position is that our
