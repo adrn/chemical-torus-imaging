@@ -407,6 +407,7 @@ and to Bovy et al.
 In what follows, a very limited project...
 
 \section{Data}
+\label{sec:data}
 
 In our toy demonstrations below, our main data source is a cross-match between
 spectroscopic data from the \apogee\ surveys \citep{Majewski:2017} and
@@ -519,7 +520,7 @@ relatively insensitive to selection effects, we ignore these details in what
 follows.
 
 
-\section{Milky Way mass model and actions}
+\section{Milky Way mass model and computing actions}
 \label{sec:mw-model}
 
 Our methodology and demonstrations below rely on computing actions and angles
@@ -530,21 +531,21 @@ For the solar position, we use the recent precise measurement of the
 Sun--Galactic center distance from the \acronym{GRAVITY} collaboration, $r_\odot
 = 8.122~\kpc$ \citep{Gravity:2018}, and $z_\odot = 20.8~\pc$
 \citep{Bennett:2019} for the Sun's height above the Galactic midplane.
-In Cartesian Galactocentric coordinates, we use a right-handed coordinate system
-such that the Sun is at $\bs{x}_\odot = (-8.1219, 0, 0.0208)~\kpc$.
-For the solar velocity, we use $\bs{v}_\odot = (12.9, 245.6, 7.78)~\kms$
-\citep{Drimmel:2018, Reid:2004, Gravity:2018}.
+In Galactocentric Cartesian coordinates, we use a right-handed coordinate system
+such that the Sun is at $\bs{x}_\odot = (-8.1219, 0, 0.0208)~\kpc$ and the solar
+velocity is $\bs{v}_\odot = (12.9, 245.6, 7.78)~\kms$ \citep{Drimmel:2018,
+Reid:2004, Gravity:2018}.
 
 We represent the density distribution (or gravitational potential) of the
-Milky Way using an idealized, parametrized, four-component mass model
-consisting of a spherical Hernquist bulge \citep{Hernquist:1990}, spherical
-Hernquist nucleus, an axisymmetric Miyamoto-Nagai disk \citep{Miyamoto:1975},
-and a spherical Navarro-Frenk-White dark matter halo \citep{Navarro:1996}.
+Milky Way using an idealized, four-component mass model consisting of a
+spherical Hernquist bulge \citep{Hernquist:1990}, spherical Hernquist nucleus,
+an axisymmetric Miyamoto-Nagai disk \citep{Miyamoto:1975}, and a spherical
+Navarro-Frenk-White dark matter halo \citep{Navarro:1996}.
 Most of the parameters of these components are fixed to their default values
 from the \texttt{MilkyWayPotential} class implemented in the \package{gala}
 Python package \citep[v1.1;][]{gala}:
-The bulge parameters (mass and scale radius) and disk parameters (total mass,
-scale height, and scale radius) are initially set to match the
+Briefly, the bulge parameters (mass and scale radius) and disk parameters (total
+mass, scale height, and scale radius) are initially set to match the
 \texttt{MWPotential2014} implemented in \package{galpy} \citep{Bovy:2015}, and
 the dark matter halo parameters (virial mass and scale radius) are initially set
 by fitting the enclosed mass profile of the mass model to a compilation of
@@ -552,7 +553,7 @@ recent enclosed mass measurements.\footnote{As described in
 \url{https://gala.adrian.pw/en/latest/potential/define-milky-way-model.html}.}
 However, the mass of the disk is then adjusted to match a circular velocity of
 $v_{\rm circ}(R_\odot) = 229~\kms$ at the solar radius \citep{Eilers:2019}.
-Our fiducial mass model therefore has default \texttt{MilkyWayPotential}
+Our fiducial mass model therefore adopts the default \texttt{MilkyWayPotential}
 parameters except for the disk mass, which is set to $M_{\rm disk} = M_{\rm
 disk}^\star = 6.526 \times 10^{10}~\Msun$.
 
@@ -562,19 +563,31 @@ disk}^\star$ (in steps of $0.1\times M_{\rm disk}^\star$).
 For each of these models, we adjust the dark matter halo mass to keep the
 circular velocity at the solar radius, $v_{\rm circ}(R_\odot)$, constant.
 
-TODO: how do we compute actions
+We compute actions, $\bs{J} = (J_R, J_\phi, J_z)$, and angles, $\bs{\theta} =
+(\theta_R, \theta_\phi, \theta_z)$, for a given star by numerically integrating
+its orbit in a given Milky Way model and solving for the generating function to
+transform from actions computed in a toy potential model to the actions in the
+potential model of interest (as defined in \citealt{Sanders:2014}, and
+implemented in \package{gala}).\footnote{This method is referred to as the
+``O2GF method'' in \citet{Sanders:2016}.}
+This method has some tuning parameters related to the total orbital integration
+time and time step, and the number of Fourier components to include in the
+Fourier expansion used to represent the generating function, $N_{\rm max}$.
+Because our parent sample primarily consists of disk stars on loop orbits with
+similar orbital periods, we use an Isochrone potential as our toy potential
+model, set the total integration time for each star to 128 (radial) orbital
+periods, $T=128\,P_r$, and set the time step to $\Delta t = P_r / 256$.
+For all stars, we set $N_{\rm max} = 8$ (following \citealt{Sanders:2016}).
 
-HOGG SAY: Possible section for APW to put details of the Milky Way model,
-how we parameterize the disk mass, and how we compute actions and angles.
-Or, if there isn't much to say, this can be part of the inferences section
-below.
+We use this procedure to estimate the three actions and angles for all stars in
+our parent sample (see \sectionname~\ref{sec:data}) in each of the 15 potential
+models with different disk-mass to halo-mass ratios (see above).
+We parallelize the computation of the actions using the Python package
+\package{schwimmbad} \citep{schwimmbad}.
 
-This section could describe our one mass-model parameter, and show how
-the mass distribution and orbit structure vary as we vary it.
-
-This section could also describe all the computational tips and tricks.
 
 \section{Assumptions}
+\label{sec:assumptions}
 
 \methodname\ flows from a specific set of assumptions.
 That is, we are going to make hard (and sometimes controversial) assumptions.
@@ -799,7 +812,8 @@ participating in the \gaia\ Multilateral Agreement.
   \package{IPython} \citep{ipython},
   \package{matplotlib} \citep{matplotlib},
   \package{numpy} \citep{numpy},
-  \package{gala} \citep{gala, galav1_1}
+  \package{gala} \citep{gala, galav1_1},
+  \package{schwimmbad} \citep{schwimmbad}
 }
 
 \bibliographystyle{aasjournal}
