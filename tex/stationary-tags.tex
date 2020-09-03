@@ -523,10 +523,46 @@ follows.
 \label{sec:mw-model}
 
 Our methodology and demonstrations below rely on computing actions and angles
-for stars, which depend on the mass distribution of the Milky Way.
-Here we represent the density distribution (or gravitational potential) of the Milky Way using a parametrized, three-component mass model consisting of a spherical Hernquist bulge \citep{Hernquist:1990}, an axisymmetric Miyamoto-Nagai disk \citep{Miyamoto:1975}, and a spherical Navarro-Frenk-White dark matter halo \citep{Navarro:1996}.
-The parameters of these components
-\citep{gala}
+for stars, which depend on the mass distribution of the Milky Way and the solar
+position and motion with respect to a Galactocentric reference frame.
+
+For the solar position, we use the recent precise measurement of the
+Sun--Galactic center distance from the \acronym{GRAVITY} collaboration, $r_\odot
+= 8.122~\kpc$ \citep{Gravity:2018}, and $z_\odot = 20.8~\pc$
+\citep{Bennett:2019} for the Sun's height above the Galactic midplane.
+In Cartesian Galactocentric coordinates, we use a right-handed coordinate system
+such that the Sun is at $\bs{x}_\odot = (-8.1219, 0, 0.0208)~\kpc$.
+For the solar velocity, we use $\bs{v}_\odot = (12.9, 245.6, 7.78)~\kms$
+\citep{Drimmel:2018, Reid:2004, Gravity:2018}.
+
+We represent the density distribution (or gravitational potential) of the
+Milky Way using an idealized, parametrized, four-component mass model
+consisting of a spherical Hernquist bulge \citep{Hernquist:1990}, spherical
+Hernquist nucleus, an axisymmetric Miyamoto-Nagai disk \citep{Miyamoto:1975},
+and a spherical Navarro-Frenk-White dark matter halo \citep{Navarro:1996}.
+Most of the parameters of these components are fixed to their default values
+from the \texttt{MilkyWayPotential} class implemented in the \package{gala}
+Python package \citep[v1.1;][]{gala}:
+The bulge parameters (mass and scale radius) and disk parameters (total mass,
+scale height, and scale radius) are initially set to match the
+\texttt{MWPotential2014} implemented in \package{galpy} \citep{Bovy:2015}, and
+the dark matter halo parameters (virial mass and scale radius) are initially set
+by fitting the enclosed mass profile of the mass model to a compilation of
+recent enclosed mass measurements.\footnote{As described in
+\url{https://gala.adrian.pw/en/latest/potential/define-milky-way-model.html}.}
+However, the mass of the disk is then adjusted to match a circular velocity of
+$v_{\rm circ}(R_\odot) = 229~\kms$ at the solar radius \citep{Eilers:2019}.
+Our fiducial mass model therefore has default \texttt{MilkyWayPotential}
+parameters except for the disk mass, which is set to $M_{\rm disk} = M_{\rm
+disk}^\star = 6.526 \times 10^{10}~\Msun$.
+
+In addition to the fiducial mass model, we create a set of potential models by
+varying the disk mass between $M_{\rm disk} = 0.4$ to $1.8 \times M_{\rm
+disk}^\star$ (in steps of $0.1\times M_{\rm disk}^\star$).
+For each of these models, we adjust the dark matter halo mass to keep the
+circular velocity at the solar radius, $v_{\rm circ}(R_\odot)$, constant.
+
+TODO: how do we compute actions
 
 HOGG SAY: Possible section for APW to put details of the Milky Way model,
 how we parameterize the disk mass, and how we compute actions and angles.
@@ -537,8 +573,6 @@ This section could describe our one mass-model parameter, and show how
 the mass distribution and orbit structure vary as we vary it.
 
 This section could also describe all the computational tips and tricks.
-
-APW: shit about galactocentric parameters
 
 \section{Assumptions}
 
