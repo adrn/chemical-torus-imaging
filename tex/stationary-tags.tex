@@ -596,7 +596,7 @@ methods are conditionally correct, conditioning on these assumptions.
   \includegraphics[width=\textwidth]{sinusoid-fits.pdf}
   \end{center}
   \caption{%
-    The mean abundance deviation as a function of vertical angle, for three
+    The mean $\mgfe$ abundance deviation for as a function of vertical angle, for three
     different values of the mass of the disk (all, as you will recall, at fixed
     circular velocity at the Solar circle).
     The abundance deviation for each star in the sample
@@ -646,11 +646,15 @@ HOGG: Show results on the data.
   \includegraphics[width=\textwidth]{coeff-vs-mdisk.pdf}
   \end{center}
   \caption{%
-    Parameters of the smooth sine-and-cosine fit to the dependence of abundance
-    deviation on vertical angle $\theta_z$, as a function of the disk-mass
+    Parameters of the smooth sine-and-cosine fits
+    to the dependence of \mgfe\ abundance deviation on vertical angle $\theta_z$
+    (the blue lines in \figurename~\ref{fig:sinusoid-fits}),
+    as a function of the disk-mass
     parameter $M_\disk / M^\star$. The amplitude of the $\cos 2\theta_z$ term is
     the amplitude that is sensitive to the local density of the disk; it crosses
     zero when the model has the best-fit disk mass.
+    The zero crossing and its measurement uncertainty are shown as a point and
+    a horizontal error bar.
     The other terms shown have different dependences on paramters:
     The $\cos\theta_z$ would vary strongly if we varied the solar motion (the
     vertical component of the local standard of rest).
@@ -673,7 +677,14 @@ HOGG: Show results on the data.
   \includegraphics[width=\textwidth]{mdisk-vs-elem.pdf}
   \end{center}
   \caption{%
-    HOGG TODO
+    The measurements of the disk mass from each of several abundance ratios.
+    The measurement shown in the $\cos 2\theta_z$ panel of
+    \figurename~\ref{fig:coeff-mdisk} is shown here as the $\mgfe$ measurement.
+    The band shows the inverse-variance-weighted mean value for the disk-mass
+    parameter $M_\disk / M^\star$ and its formal uncertainty.
+    This figure shows that the different element abundance ratios deliver somewhat
+    inconsistent estimates for the disk mass; these inconsistencies are discussed
+    in the text.
     APW TODO: The y axis is properly ``estimated $M_\disk / M^\star$''.
   \label{fig:inferred-mdisk-elems}
   }
@@ -718,8 +729,8 @@ non-phase-mixed structure. So there will be generalizations of this
 method that don't depend as strongly on phase mixing. This connects,
 conceptually, to work on streams in the Milky Way halo.
 
-HOGG SAY: The fact that the alpha/m and fe/h type abundances give
-different disk masses, and the fact that the midplane is off might
+HOGG SAY: The fact that different abundances give
+different disk masses, and the fact that the midplane is off, might
 both be related. I think we should check whether the disk-mass results
 become more consistent if we use a better disk midplane.
 
