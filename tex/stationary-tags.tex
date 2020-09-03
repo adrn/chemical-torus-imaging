@@ -39,6 +39,9 @@
 \newcommand{\galah}{\acronym{GALAH}}
 \newcommand{\hermes}{\acronym{HERMES}}
 
+% math shihh -- maybe should go to preamble?
+\newcommand{\disk}{\mathrm{disk}}
+
 \setlength{\parindent}{1.1\baselineskip} % trust in Hogg
 \shorttitle{tags are separable from angles}
 \shortauthors{Price-Whelan et al.}
@@ -211,7 +214,8 @@ describe level surfaces in the element-abundance distribution!
     on average, but lower alpha-to-iron.
     These plots are somewhat affected by \apogee\ selection effects, in
     that different $z, v_z$ boxels are projections through different extents
-    in Galactocentric radius. This explains some of the visible asymmetries.
+    in Galactocentric radius (see \figurename~\ref{fig:mh-am-xy}).
+    This explains some of the visible asymmetries.
   \label{fig:zvz-grid}
   }
 \end{figure}
@@ -460,12 +464,29 @@ Here we use parallax and proper motion measurements released in \gaia\ \dr{2}
   \includegraphics[width=\textwidth]{mh-am-xy.pdf}
   \end{center}
   \caption{%
+    The data sample used in this project.
+    Each panel shows a 2-d histogram of the stars.
     \textsl{Top panel:}
+    A plot of abundance ratios measured by \apogee\ and a selection boundary.
+    This panel shows the bimodality of stars in abundance space.
+    We choose the sample in a polygonal box in this diagram to exclude older
+    stars that are generally more kinematically hot.
     \textsl{Lower left panel:}
+    A plot of the positions of the stars in the sample, showing the
+    spherical (APW: CHECK) spatial cut.
+    Heliocentric distances to the stars are obtained by APW SAY THINGS.
+    This panel shows that the \apogee\ selection function is a mixture of
+    pencil beams.
     \textsl{Lower right panel:}
-    $x$, $y$, $z$ binned to 50 pc resolution
-  \label{fig:mh-am-xy}
-  }
+    A plot of the vertical $z, v_z$ phase space.
+    This panel shows that the sample is less populated at low $z$, which
+    in turn shows that it is less populated at certain values
+    of vertical angle $\theta_z$. This non-uniformity is caused by
+    \apogee\ selection and interstellar extinction; the methods presented
+    in this paper do not require that all angles be equally populated in
+    the sample.
+    \label{fig:mh-am-xy}
+    }
 \end{figure}
 
 We cross-match the \apogee\ sample to \gaia\ \dr{2} using the \apogee-provided
@@ -625,8 +646,23 @@ HOGG: Show results on the data.
   \includegraphics[width=\textwidth]{coeff-vs-mdisk.pdf}
   \end{center}
   \caption{%
-    HOGG TODO!
+    Parameters of the smooth sine-and-cosine fit to the dependence of abundance
+    deviation on vertical angle $\theta_z$, as a function of the disk-mass
+    parameter $M_\disk / M^\star$. The amplitude of the $\cos 2\theta_z$ term is
+    the amplitude that is sensitive to the local density of the disk; it crosses
+    zero when the model has the best-fit disk mass.
+    The other terms shown have different dependences on paramters:
+    The $\cos\theta_z$ would vary strongly if we varied the solar motion (the
+    vertical component of the local standard of rest).
+    The $\sin\theta_z$ term would vary strongly if we varied the location of the
+    midplane of the disk.
+    The $\sin 2\theta_z$ term cannot be non-zero; the fact that we find a non-zero
+    value for this amplitude suggests a weak violation of our model
+    assumptions (see text).
+    These figures show that we can precisely measure the disk mass, and also
+    strongly suggest that the data want a different value for the disk midplane.
     APW TODO: add point with horizontal error bar showing zero-crossing value
+    APW TODO: The x axis is properly ``$M_\disk / M^\star$''.
   \label{fig:coeff-mdisk}
   }
 \end{figure}
@@ -638,6 +674,7 @@ HOGG: Show results on the data.
   \end{center}
   \caption{%
     HOGG TODO
+    APW TODO: The y axis is properly ``estimated $M_\disk / M^\star$''.
   \label{fig:inferred-mdisk-elems}
   }
 \end{figure}
@@ -680,6 +717,11 @@ snail and see its aspect ratio. And that is literally a
 non-phase-mixed structure. So there will be generalizations of this
 method that don't depend as strongly on phase mixing. This connects,
 conceptually, to work on streams in the Milky Way halo.
+
+HOGG SAY: The fact that the alpha/m and fe/h type abundances give
+different disk masses, and the fact that the midplane is off might
+both be related. I think we should check whether the disk-mass results
+become more consistent if we use a better disk midplane.
 
 Points that came up in MPIA Galaxy Coffee (that is, make sure that we
 have addressed all of these above):
