@@ -1,6 +1,5 @@
 % To-dos
-% ------
-% - Figure 5: point and error-bar for different elements. Shaded band that represents the 1-sigma combination (invvar weighted) of the various tracers
+% -
 
 % style guide
 % -----------
@@ -83,7 +82,6 @@
 \author[0000-0003-4996-9069]{Hans-Walter~Rix}
 \affiliation{\affmpia}
 
-\author{others}
 
 \begin{abstract}\noindent
   The dynamics of stars in the Milky Way and nearby galaxies is often
@@ -100,18 +98,18 @@
   and \emph{stellar tags} (e.g., element abundances, stellar ages, or other
   invariant stellar properties).
   The method exploits the fact that there are generically gradients of stellar
-  tags on position and velocity in the Galaxy:
-  In steady state, the distributions of any tags must be invariant with respect
-  to time-variable conjugate angles.
+  tags on orbital actions (or position and velocity) in the Galaxy, and in
+  steady state the distributions of any tags must be invariant with respect to
+  time-variable conjugate angles.
   Thus, level sets in moments of the tag distributions must coincide with
   the orbital foliation of phase space!
   We discuss how both classical-statistics and Bayesian forward-modeling methods
   can be built on this idea, and we perform a demonstration with red giant
   stars from the \apogee\ surveys:
-  We look at vertical orbit structure in the
-  Milky Way disk, using mean abundance to constrain the local disk mass (the disk--halo
-  trade-off at fixed circular velocity).
-  We find that the disk mass can be constrained na\"ively at the $<10$-percent
+  We look at vertical orbit structure in the Milky Way disk, using mean
+  abundances to constrain the local disk mass (the disk--halo trade-off at fixed
+  circular velocity).
+  We find that the disk mass can be constrained (na\"ively) at the $<10$-percent
   level with this new method using only a single moment of a single element
   abundance ratio, demonstrating the promise of combining stellar tags with
   dynamical invariants.
@@ -139,75 +137,109 @@
 
 % \section*{}\clearpage
 \section{Introduction}
+\label{sec:intro}
 
-Physicists of the 18th century worked out that the gravitational force
-law in the Solar System is proportional to the inverse square of the
-distance from the Sun (CITE Newton).
-That inference was based on the observation that orbits in the Solar
-System are closed ellipses (CITE Kepler).
-We physicists of the 21st century are trying to work out the map of
-gravitational acceleration (or gravitational
-potential, or mass distribution) in the Milky Way.
-We are at a disadvantage, in some sense, because no-one gets to see
-the orbits of stars in the Milky Way: Even in the whole history of
-western science, stars have barely moved in Galactic coordinates.
-The tools we use generally ask statistical questions about velocity
-moments (CITE Jeans and Oort and B\&T); we never see the orbits directly.
-The closest we come to seeing orbits directly in the Milky Way is in the
-study of stellar streams (CITE), but these are rare and mainly exist at large
-Galactocentric distances.
+% Start big, emphasize the big-ness of our ideas, but then zoom in and focus on
+% context needed for our specific application / demonstration
 
-Okay fine, really we are at a \emph{huge advantage} with respect to
-our 18th century counterparts, because we have a very accurate theory
-of gravity (CITE), an excellent working model of stars (CITE),
-and immense observational and computational resources.
-With these resources we have measured the element abundances of the
-stellar photospheres of hundreds of thousands of stars (CITE) and
-precise positions and velocities of millions.
-In this \documentname\ we are going to demonstrate that these
-measurements can be used to illuminate the orbit structure in the
-Milky Way, even---or especially---in the dense, nearby parts of the
-disk.
-Our method will work only under strong assumptions, so we are
-still in the business of revealing the orbits indirectly.
-However, our approach is novel and there are many regimes in which it
-will be more precise than any other method.
+A significant goal of modern physics and astronomy is to understand the detailed
+properties of dark matter on astrophysical scales as a way of informing
+constraints on its fundamental nature \citep[see, e.g., recent reviews
+by][]{Buckley, Bullock}.
+Significant effort has therefore gone into developing and applying tools for
+constraining the mass distributions (i.e., dark matter distributions) of Local
+Group galaxies using only kinematic observations of tracers (i.e., stars;
+\citealt{Jeans, Binney:2008, somanythings}).
+This challenge---using observations of tracer objects to constrain the
+underlying force law---is conceptually similar to a much older problem faced by
+physicists of the 18th century, who worked out that the gravitational force law
+in the Solar System is proportional to the inverse square of the distance from
+the Sun \citep{Newton:1687}.
+That inference was based on observations that showed that orbits in the Solar
+System are closed ellipses, with the Sun at one focus \citep{Kepler:1609}---that
+is, they used observations of a few tracers (the planets) at many orbital
+phases.
+
+In our current efforts to map dark matter, we are instead in a regime where we
+observe \emph{many} tracers (stars) but have little or no information about
+orbital phase: We observe only a single snapshot (in time) of the stellar
+orbits!
+The closest we come to seeing orbits directly in the Milky Way is in the study
+of stellar streams \citep[e.g.,][]{peoples}, but these are relatively sparse and
+their orbits have more degrees of freedom than orbits around a point-mass.
+One could argue then that our current task is much harder than Newton and Kepler
+had it: We seek to constrain the global distribution of dark matter around a
+galaxy---a time-evolving mass distribution with nontrivial shape and radial
+distribution---with only a snapshot of the tracer kinematics (and often only a
+subset of phase-space dimensions).
+The tools we use to constrain the force law with a snapshot of the dynamics are
+therefore (necessarily) statistical in nature and do not depend on knowing the
+orbits of individual stars.
+Instead, these methods, such as ``Jeans modeling'' \citep{Binney:2008},
+typically rely instead on assumptions about the stationarity of distributions of
+orbital properties, and make use of theories that relate moments of the tracer
+distribution function to properties of the force field under these conditions.
+\textbf{APW SAYS: say more about Jeans modeling, and maybe quote some examples?
+Like Oort? And be very specific about what assumptions are typically made}.
+Standard methods for estimating XX therefore rely on a list of assumptions about
+the dynamical state and symmetries of the systems, many of which we know are
+violated in the real universe and Galaxy.
+\textbf{Comment about how we need to think beyond this...We don't have standard methodologies when these assumptions are broken...}
+
+One sense in which we are at a \emph{huge advantage} over Kepler and Newton is
+that we have excellent working model of stars and immense observational and
+computational resources.
+With these resources we have measured the element abundances of the stellar
+photospheres of hundreds of thousands of stars (CITE) and precise positions and
+velocities of millions.
+In this \documentname\ we are going to demonstrate that these measurements can
+be used to illuminate the orbit structure in the Milky Way, even---or
+especially---in the dense, nearby parts of the disk.
+Our method, like all other dynamical inferences, will work only under strong
+assumptions, so we are still in the business of revealing the orbits indirectly.
+\textbf{Comments about the hope that our assumptions are less restrictive, and make use of more information (i.e., stellar tags), so has promise}
+However, our approach is novel and there are many regimes in which it will be
+more precise than any other method.
 
 In a well-mixed population, stars are in a kinematic steady state:
-As time goes on, stars move along their orbits, but they don't change their dynamical
-invariants (by assumption!) and every location in angle (and by ``angle'' we mean the
-coordinate conjugate to action in action--angle coordinates) is equally likely, or
-equally probably populated in any snapshot.
-The chemical-tagging insight (CITE) is that the stars also don't change
-their surface element abundances as they orbit.
-That is, in an integrable galaxy---a galaxy whose gravitational orbits
-are associated with three invariant actions---the element abundances and
-the dynamical actions have something in common:
+As time goes on, stars move along their orbits, but they don't change their
+dynamical invariants (by assumption!) and every location in angle (and by
+``angle'' we mean the coordinate conjugate to action in action--angle
+coordinates) is equally likely, or equally probably populated in any snapshot.
+The chemical-tagging insight (CITE) is that the stars also don't change their
+surface element abundances as they orbit.
+That is, in an integrable galaxy---a galaxy whose gravitational orbits are
+associated with three invariant actions---the element abundances and the
+dynamical actions have something in common:
 They don't change with time.
 Only the conjugate angles, conjugate to those actions, do.
-This means that, for a well-mixed population, the detailed element abundances can only
-be a function of actions, and never a function of conjugate angles.
-That's a remarkably informative constraint on the configuration of the Milky Way in
-the space of positions (3), velocities (3), and detailed abundances (10 to 30, depending
-on survey).
+This means that, for a well-mixed population, the detailed element abundances
+can only be a function of actions, and never a function of conjugate angles.
+That's a remarkably informative constraint on the configuration of the Milky Way
+in the space of positions (3), velocities (3), and detailed abundances (10 to
+30, depending on survey).
 
-Consider a collection of stars (localized, say, in phase space) for which we have
-measured $D$ element abundances.
+Consider a collection of stars (localized, say, in phase space) for which we
+have measured $D$ element abundances.
 This collection of stars will in general have a diversity of element abundances.
 That is, their abundances are drawn from some density or distribution or pdf in
 $D$-dimensional element-abundance space.
-Now consider how this abundance distribution varies as we move around in phase space.
-It will vary in general (there are radial and vertical abundance gradients in the
-disk, for example).
+Now consider how this abundance distribution varies as we move around in phase
+space.
+It will vary in general (there are radial and vertical abundance gradients in
+the disk, for example).
 Any gradient we observe in these element-abundance distributions with respect to
-phase-space coordinates (that is, the six-gradient) must not project
-onto the directions of increasing (or decreasing) conjugate angles in phase space.
-That is, all gradients with respect to phase-space coordinates
-of the element-abundance distribution must be orthogonal to the
-directions of increase (or decrease) of the conjugate angles, and lie in the subspace
-of the directions of increase (or decrease) of the dynamical actions.
-The trajectories of stars in the phase space (the dynamical tori) must lie along or
-describe level surfaces in the element-abundance distribution!
+phase-space coordinates (that is, the six-gradient) must not project onto the
+directions of increasing (or decreasing) conjugate angles in phase space.
+That is, all gradients with respect to phase-space coordinates of the
+element-abundance distribution must be orthogonal to the directions of increase
+(or decrease) of the conjugate angles, and lie in the subspace of the directions
+of increase (or decrease) of the dynamical actions.
+The trajectories of stars in the phase space (the dynamical tori) must lie along
+or describe level surfaces in the element-abundance distribution!
+
+WE WILL DEMONSTRATE WITH JUST VERTICAL KINEMATICS, BUT WE ARE NOT
+GOING TO ASSUME SEPARABILITY.  Jeans models can suck it.
 
 % Notebook: figures/APOGEE-zvz-orbits.ipynb
 \begin{figure}[!tp]
@@ -281,8 +313,6 @@ describe level surfaces in the element-abundance distribution!
   }
 \end{figure}
 
-WE WILL DEMONSTRATE WITH JUST VERTICAL KINEMATICS, BUT WE ARE NOT
-GOING TO ASSUME SEPARABILITY.  Jeans models can suck it.
 
 \section{Methodological generalities}
 
@@ -420,6 +450,7 @@ and to Bovy et al.
 In what follows, a very limited project...
 
 \section{Data}
+\label{sec:data}
 
 In our toy demonstrations below, our main data source is a cross-match between
 spectroscopic data from the \apogee\ surveys \citep{Majewski:2017} and
@@ -549,21 +580,74 @@ relatively insensitive to selection effects, we ignore these details in what
 follows.
 
 
-\section{Milky Way mass model and actions}
+\section{Milky Way mass model and computing actions}
+\label{sec:mw-model}
 
-APW: shit about galactocentric parameters
+Our methodology and demonstrations below rely on computing actions and angles
+for stars, which depend on the mass distribution of the Milky Way and the solar
+position and motion with respect to a Galactocentric reference frame.
 
-HOGG SAY: Possible section for APW to put details of the Milky Way model,
-how we parameterize the disk mass, and how we compute actions and angles.
-Or, if there isn't much to say, this can be part of the inferences section
-below.
+For the solar position, we use the recent precise measurement of the
+Sun--Galactic center distance from the \acronym{GRAVITY} collaboration, $r_\odot
+= 8.122~\kpc$ \citep{Gravity:2018}, and $z_\odot = 20.8~\pc$
+\citep{Bennett:2019} for the Sun's height above the Galactic midplane.
+In Galactocentric Cartesian coordinates, we use a right-handed coordinate system
+such that the Sun is at $\bs{x}_\odot = (-8.1219, 0, 0.0208)~\kpc$ and the solar
+velocity is $\bs{v}_\odot = (12.9, 245.6, 7.78)~\kms$ \citep{Drimmel:2018,
+Reid:2004, Gravity:2018}.
 
-This section could describe our one mass-model parameter, and show how
-the mass distribution and orbit structure vary as we vary it.
+We represent the density distribution (or gravitational potential) of the
+Milky Way using an idealized, four-component mass model consisting of a
+spherical Hernquist bulge \citep{Hernquist:1990}, spherical Hernquist nucleus,
+an axisymmetric Miyamoto-Nagai disk \citep{Miyamoto:1975}, and a spherical
+Navarro-Frenk-White dark matter halo \citep{Navarro:1996}.
+Most of the parameters of these components are fixed to their default values
+from the \texttt{MilkyWayPotential} class implemented in the \package{gala}
+Python package \citep[v1.1;][]{gala}:
+Briefly, the bulge parameters (mass and scale radius) and disk parameters (total
+mass, scale height, and scale radius) are initially set to match the
+\texttt{MWPotential2014} implemented in \package{galpy} \citep{Bovy:2015}, and
+the dark matter halo parameters (virial mass and scale radius) are initially set
+by fitting the enclosed mass profile of the mass model to a compilation of
+recent enclosed mass measurements.\footnote{As described in
+\url{https://gala.adrian.pw/en/latest/potential/define-milky-way-model.html}.}
+However, the mass of the disk is then adjusted to match a circular velocity of
+$v_{\rm circ}(R_\odot) = 229~\kms$ at the solar radius \citep{Eilers:2019}.
+Our fiducial mass model therefore adopts the default \texttt{MilkyWayPotential}
+parameters except for the disk mass, which is set to $M_{\rm disk} = M_{\rm
+disk}^\star = 6.526 \times 10^{10}~\Msun$.
 
-This section could also describe all the computational tips and tricks.
+In addition to the fiducial mass model, we create a set of potential models by
+varying the disk mass between $M_{\rm disk} = 0.4$ to $1.8 \times M_{\rm
+disk}^\star$ (in steps of $0.1\times M_{\rm disk}^\star$).
+For each of these models, we adjust the dark matter halo mass to keep the
+circular velocity at the solar radius, $v_{\rm circ}(R_\odot)$, constant.
+
+We compute actions, $\bs{J} = (J_R, J_\phi, J_z)$, and angles, $\bs{\theta} =
+(\theta_R, \theta_\phi, \theta_z)$, for a given star by numerically integrating
+its orbit in a given Milky Way model and solving for the generating function to
+transform from actions computed in a toy potential model to the actions in the
+potential model of interest (as defined in \citealt{Sanders:2014}, and
+implemented in \package{gala}).\footnote{This method is referred to as the
+``O2GF method'' in \citet{Sanders:2016}.}
+This method has some tuning parameters related to the total orbital integration
+time and time step, and the number of Fourier components to include in the
+Fourier expansion used to represent the generating function, $N_{\rm max}$.
+Because our parent sample primarily consists of disk stars on loop orbits with
+similar orbital periods, we use an Isochrone potential as our toy potential
+model, set the total integration time for each star to 128 (radial) orbital
+periods, $T=128\,P_r$, and set the time step to $\Delta t = P_r / 256$.
+For all stars, we set $N_{\rm max} = 8$ (following \citealt{Sanders:2016}).
+
+We use this procedure to estimate the three actions and angles for all stars in
+our parent sample (see \sectionname~\ref{sec:data}) in each of the 15 potential
+models with different disk-mass to halo-mass ratios (see above).
+We parallelize the computation of the actions using the Python package
+\package{schwimmbad} \citep{schwimmbad}.
+
 
 \section{Assumptions}
+\label{sec:assumptions}
 
 \methodname\ flows from a specific set of assumptions.
 That is, we are going to make hard (and sometimes controversial) assumptions.
@@ -835,12 +919,14 @@ participating in the \gaia\ Multilateral Agreement.
 % \gaia
 % }
 
-% \software{
-% \code{Astropy} \citep{astropy, astropy2},
-% \code{IPython} \citep{ipython},
-% \code{matplotlib} \citep{matplotlib},
-% \code{numpy} \citep{numpy},
-% }
+\software{
+  \package{Astropy} \citep{astropy, astropy:2018},
+  \package{IPython} \citep{ipython},
+  \package{matplotlib} \citep{matplotlib},
+  \package{numpy} \citep{numpy},
+  \package{gala} \citep{gala, galav1_1},
+  \package{schwimmbad} \citep{schwimmbad}
+}
 
 \bibliographystyle{aasjournal}
 \bibliography{stationary-tags}
