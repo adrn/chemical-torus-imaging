@@ -1,5 +1,5 @@
 % To-dos
-% -
+% - See comments labeled "TODO" below
 
 % style guide
 % -----------
@@ -157,7 +157,7 @@ in the Solar System is proportional to the inverse square of the distance from
 the Sun \citep{Newton:1687}.
 That inference was based on observations that showed that orbits in the Solar
 System are closed ellipses, with the Sun at one focus \citep{Kepler:1609}---that
-is, they used observations of a few tracers (the planets) at many orbital
+is, they made use of observations of a few tracers (the planets) at many orbital
 phases.
 
 In our current efforts to map dark matter, we are instead in a regime where we
@@ -165,44 +165,93 @@ observe \emph{many} tracers (stars) but have little or no information about
 orbital phase: We observe only a single snapshot (in time) of the stellar
 orbits!
 The closest we come to seeing orbits directly in the Milky Way is in the study
-of stellar streams \citep[e.g.,][]{peoples}, but these are relatively sparse and
-their orbits have more degrees of freedom than orbits around a point-mass.
+of stellar streams \citep[e.g.,][]{peoples}, which almost directly encode
+(differential) phase information about the orbit of their progenitor systems.
+But stellar streams are relatively sparse, and orbits in the Galaxy have more
+degrees of freedom than orbits around a point-mass, meaning that we need many
+more orbits to span the phase-space and obtain precise constraints on the mass
+distribution.
 One could argue then that our current task is much harder than Newton and Kepler
-had it: We seek to constrain the global distribution of dark matter around a
-galaxy---a time-evolving mass distribution with nontrivial shape and radial
+had it:
+We seek to constrain the global distribution of dark matter around a galaxy---a
+time-evolving mass distribution with nontrivial shape and radial
 distribution---with only a snapshot of the tracer kinematics (and often only a
 subset of phase-space dimensions).
-The tools we use to constrain the force law with a snapshot of the dynamics are
-therefore (necessarily) statistical in nature and do not depend on knowing the
-orbits of individual stars.
-Instead, these methods, such as ``Jeans modeling'' \citep{Binney:2008},
-typically rely instead on assumptions about the stationarity of distributions of
-orbital properties, and make use of theories that relate moments of the tracer
-distribution function to properties of the force field under these conditions.
-\textbf{APW SAYS: say more about Jeans modeling, and maybe quote some examples?
-Like Oort? And be very specific about what assumptions are typically made}.
-Standard methods for estimating XX therefore rely on a list of assumptions about
-the dynamical state and symmetries of the systems (in the case of Jeans
-modeling, LIST ASSUMPTIONS THAT GO IN), many of which we know are violated in
-the real universe and Galaxy.
-However, methods that enable dynamical inferences while relaxing these
-assumptions are far more complex and subtle and ... so we think there is still
-value in working under bad assumptions.
 
-One sense in which we are at a \emph{huge advantage} over Kepler and Newton is
-that we have excellent working model of stars and immense observational and
-computational resources.
-With these resources we have measured the element abundances of the stellar
-photospheres of hundreds of thousands of stars (CITE) and precise positions and
-velocities of millions.
-In this \documentname\ we are going to demonstrate that these measurements can
-be used to illuminate the orbit structure in the Milky Way, even (or especially)
-in the dense, nearby parts of the Galactic disk.
-Our method, like all other dynamical inferences, will work only under strong
-assumptions, so we are still in the business of revealing the orbits indirectly.
-\textbf{Comments about the hope that our assumptions are less restrictive, and make use of more information (i.e., stellar tags), so has promise}
+The tools we use to constrain the Galactic force field (i.e., the dark matter
+distribution) given only a snapshot of the dynamics are therefore (necessarily)
+statistical in nature and do not depend on knowing the orbits of individual
+stars.
+Instead, these methods typically rely critically on strong assumptions about the
+stationarity of the distribution of tracer orbital properties (i.e., a
+``steady-state'' or ``equilibrium'' assumption) and the integrability of the
+underlying gravitational potential \citep[see, e.g.,][for a review of such
+methods as applied to the problem of determining the local dark matter
+density]{Read:2014}.
+When applied in real-world contexts on stars in the Milky Way or dwarf
+spheroidal galaxies, these methods often also require further assumptions, such
+as separability of the \acronym{DF}, or require simple parametrizations of the
+\acronym{DF} in order to execute these analyses.
+Generic approaches here typically require parametrized models for the \acronym{DF} and for the gravitational force field (or mass distribution) and are computationally prohibitive for large data sets or flexible model forms \citep[see, e.g.,][]{Magorrian, Binney, Sanders, McMillan, Walker, Penarrubia}.
+
+For simplicity and computational efficiency, one of the most ubiquitous
+approaches used for dynamical inferences is so-called ``Jeans modeling''
+\citep{Binney:2008}, which use the Jeans equations to relate statistical
+moments of the tracer distribution function (\acronym{DF}) to properties of the
+force field.
+While these methods still depend on many of the assumptions laid out above, they
+have the great (computational) advantage of not having to deal with modeling the
+\acronym{DF} directly.
+Jeans modeling (or related analyses) have therefore been used in many
+applications:
+For example, to derive constraints on the local dark matter density using the
+vertical ($z$--$v_z$) kinematics of stars in the solar neighborhood
+\citep[e.g.,][]{Oort, Bahcall, Garbari, Buch, Schutz}, ... other applications.
+
+A contemporary ``challenge'' to applying these methods on modern data
+(especially within the Milky Way) is that stellar kinematic data is now very
+precise, and the phase-space is well sampled.
+For example, data release (\dr{2}) from the \gaia\ mission
+\citep{Gaia-Collaboration:2016, Gaia-Collaboration:2018} has provided full
+phase-space kinematics (for a subset of stellar tracers) over a region several
+kiloparsecs in size around the Sun.
+These data have revealed evidence of dynamical disequilibrium throughout the
+Galactic disk and halo \citep{Antoja, Eilers, halo}.
+Standard methods for estimating dark matter properties using stellar kinematics
+therefore rely on a list of assumptions about dynamical equilibrium, symmetries,
+or separability that we now know are strongly violated in the real universe and
+Galaxy!
+The fact that we still use and apply these methods is a reflection of the fact
+that relaxing these assumptions make dynamical inferences \emph{far} more
+challenging and computationally expensive.
+For example, there are therefore no standard methods (e.g., analogies to Jeans
+modeling) when the assumption of dynamical equilibrium is relaxed.
+
+One reason to remain hopeful in our goal (precisely constraining the dark
+matter) is that, unlike Kepler and Newton, we have excellent working models of
+stars and access to much more information per star than kinematics alone.
+For example, spectroscopic surveys have measured the stellar parameters and
+element abundances of hundreds of thousands, and soon to be millions, of stars
+\citep[e.g.,][]{DR16, Martell:2017, Deng:2012} over large regions of the
+Galactic disk and halo.
+It is therefore promising to think that utilizing stellar ``tags'' (element
+abundances, stellar ages, or other invariant stellar properties) within
+dynamical inferences will provide additional information that may help interpret
+or model the Galaxy \citep[see, e.g.,][for recent methods that begin to move in
+this direction, within the context of equilibrium models]{Sanders:2015,
+Das:2016, Binney:2016, Iorio:2020}.
+
+In this \documentname, we are going to demonstrate that stellar surface
+abundances can be used to illuminate the orbit structure in the Milky Way, and
+are therefore extremely valuable for dynamics!
+In our current methodology, like all other dynamical inferences, we will work
+only under strong assumptions, so we are still in the business of revealing the
+orbits indirectly.
 However, our approach is novel and there are many regimes in which it will be
-more precise than any other method.
+more precise, and require fewer assumptions, than any other method.
+\textbf{APW SAYS: Expand out again, make sure to state how general this idea?}
+
+\section{Methodological Generalities and Motivation}
 
 A principle concept in our approach is that, in a well-mixed population, stars
 are in a kinematic steady state:
@@ -319,8 +368,6 @@ GOING TO ASSUME SEPARABILITY.  Jeans models can suck it.
   }
 \end{figure}
 
-
-\section{Methodological generalities}
 
 This project---\methodname---was motivated by plots of abundances of stars as a
 function of vertical height $z$ and vertical velocity $v_z$ in
