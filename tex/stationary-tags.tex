@@ -252,7 +252,7 @@ Das:2016, Binney:2016, Iorio:2020}.
 
 In this \documentname, we are going to demonstrate that stellar surface
 abundances can be used to illuminate the orbit structure in the Milky Way, and
-are therefore extremely valuable for dynamics!
+are therefore extremely valuable for dynamics.
 In our current methodology, like all other dynamical inferences, we will work
 only under strong assumptions, so we are still in the business of revealing the
 orbits indirectly.
@@ -260,50 +260,58 @@ However, our approach is novel and there are many regimes in which it will be
 more precise, and require fewer assumptions, than any other method.
 \textbf{APW SAYS: Expand out again, make sure to state how general this idea?}
 
+
 \section{Methodological Generalities and Motivation}
 
-A principle concept in our approach is that, in a well-mixed population, stars
-are in a kinematic steady state:
-As time goes on, stars move along their orbits, but they don't change their
-dynamical invariants (by assumption!) and every location in angle (and by
-``angle'' we mean the coordinate conjugate to action in action--angle
-coordinates) is equally likely, or equally probably populated in any snapshot.
-The chemical-tagging insight (CITE) is that the stars also don't change their
-surface element abundances as they orbit.
-That is, in an integrable galaxy---a galaxy whose gravitational orbits are
-associated with three invariant actions---the element abundances and the
-dynamical actions have something in common:
-They don't change with time.
-Only the conjugate angles, conjugate to those actions, do.
+In a well-mixed, equilibrium population, stars are in a kinematic steady state:
+As time goes on, stars move along their orbits, but they do not change their
+dynamical invariants (e.g., actions).
+In such situations, every location in angle (the coordinates conjugate to
+actions) is equally likely, or equally probably populated in any snapshot.
+The ``chemical tagging'' insight \cite{Freeman:2002} is that most stars also
+preserve their surface element abundances (and other stellar tags) as they
+orbit (i.e., over Galactic dynamically-relevant timescales).
+That is, in an integrable galaxy---a galaxy whose stellar orbits are associated
+with three invariant actions---the element abundances and the dynamical actions
+have something in common: They are invariant with time.
+Only the conjugate angle coordinates are time-dependent.
 This means that, for a well-mixed population, the detailed element abundances
 can only be a function of actions, and never a function of conjugate angles.
-That's a remarkably informative constraint on the configuration of the Milky Way
-in the space of positions (3), velocities (3), and detailed abundances (10 to
-30, depending on the spectroscopic survey).
+That is a remarkably informative constraint on the configuration of the Milky
+Way in the space of positions (dimensionality 3), velocities (3), and
+detailed abundances (10--30, depending on the spectroscopic survey).
 
 Consider a collection of stars (localized, say, in phase space) for which we
 have measured $D$ element abundances.
-This collection of stars will in general have a diversity of element abundances.
-That is, their abundances are drawn from some distribution in $D$-dimensional
+This collection of stars will in general have a diversity of element abundances:
+Their abundances are drawn from some distribution in $D$-dimensional
 element-abundance space.
-Now consider how this abundance distribution varies as we move around in phase
+Now consider how this abundance distribution varies as we consider different
+regions in phase space.
+In general, the abundance distribution will vary: For example, there are
+observed radial and vertical abundance gradients in the Galactic disk
+\citep{people}.
+However, any changes we observe in these element-abundance distributions with
+respect to phase-space coordinates (i.e., the six-gradient) must not project
+onto the directions of increasing (or decreasing) conjugate angles in phase
 space.
-It will vary in general (there are radial and vertical abundance gradients in
-the disk, for example).
-Any gradient we observe in these element-abundance distributions with respect to
-phase-space coordinates (that is, the six-gradient) must not project onto the
-directions of increasing (or decreasing) conjugate angles in phase space.
 That is, all gradients with respect to phase-space coordinates of the
 element-abundance distribution must be orthogonal to the directions of increase
 (or decrease) of the conjugate angles, and lie in the subspace of the directions
 of increase (or decrease) of the dynamical actions.
-The trajectories of stars in the phase space (the dynamical tori) must lie along
-or describe level surfaces in the element-abundance distribution!
+The trajectories of stars in the phase space (the dynamical tori) must therefore
+lie along or describe level surfaces in the element-abundance distribution!
 
-In this \documentname, we demonstrate the utility of this
+In this \documentname, we demonstrate the utility of these gradients in the
+context of dynamical inferences in the Milky Way, where we can measure
+six-dimensional kinematics and element-abundances for individual stars.
+For the sake of illustration and simplicity, we only visualize and focus on the
+vertical kinematics of stars, but we \emph{do not} assume that the potential or
+distribution function is separable.
+We emphasize that we could have equivalently focused on radial kinematics (using
+the cylindrical radial velocity and position), or considered gradients in all
+phase-space coordinate simultaneously: This methodology is generic!
 
-WE WILL DEMONSTRATE WITH JUST VERTICAL KINEMATICS, BUT WE ARE NOT
-GOING TO ASSUME SEPARABILITY.  Jeans models can suck it.
 
 % Notebook: figures/APOGEE-zvz-orbits.ipynb
 \begin{figure}[!tp]
@@ -378,12 +386,12 @@ GOING TO ASSUME SEPARABILITY.  Jeans models can suck it.
 \end{figure}
 
 
-This project---\methodname---was motivated by plots of abundances of stars as a
-function of vertical height $z$ and vertical velocity $v_z$ in
-Galactocentric cylindrical coordinates, colored by element abundances.
+This idea was motivated by plots of elemental abundances of stars as a function
+of vertical height $z$ and vertical velocity $v_z$ in Galactocentric Cartesian
+coordinates, colored by element abundances;
 Examples are shown in \figurename~\ref{fig:zvz-grid}.
-In these plots,
-the eye is drawn to \emph{abundance gradients}: The stars at small
+In these plots, the eye is drawn to \emph{abundance gradients}:
+The stars at small
 heights and small vertical velocities have different abundance ratios,
 on average, than stars at large heights and large vertical velocities.
 But these positional and velocity gradients are related:
@@ -394,6 +402,7 @@ at some times be at large absolute vertical velocities.
 That is, the stars will orbit in the Galaxy.
 And stars don't---to very high precision---change their abundances as
 they orbit.
+
 
 One consequence of these observations is a new method for inferring
 the orbit structure of the Milky Way:
