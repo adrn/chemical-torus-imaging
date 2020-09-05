@@ -814,7 +814,10 @@ We fit this model to all the individual abundance-ratio deviations $\Delta$
 without binning, by least-square fitting with uniform weights.
 Binned means and some of these smooth fits are shown in
 \figurename~\ref{fig:sinusoid-fits}.
-Results are shown just for abundance deviations in $\mgfe$, and just for a few
+Although we show binned means, no binning is performed at any time in performing
+these fits.
+Results are shown in \figurename~\ref{fig:sinusoid-fits}
+just for abundance deviations in $\mgfe$, and just for a few
 settings of the mass-model parameter APW-PARAMETER-NAME.
 \begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{center}
@@ -895,6 +898,8 @@ structures.
     strongly suggest that the data want a different value for the disk midplane.
     APW TODO: add point with horizontal error bar showing zero-crossing value
     APW TODO: The x axis is properly ``$M_\disk / M^\star$''.
+    APW TODO: Should we use the $a_1, b_1, a_2, b_2$ notation I use in the text here
+    too?
   \label{fig:coeff-mdisk}
   }
 \end{figure}
