@@ -12,12 +12,17 @@
 \input{preamble.tex}
 
 % text macros
-\newcommand{\methodname}{\textsl{Torus Topography}}
-% Torus Tomography
-%   Torus Topography (see what I did there?)
-%   Torus--Tangents Topography (TTT)
-%   Topographic Torus Mapping (TTM)
-%   Torus--Tangent Tags Topography (TTTT)
+\newcommand{\methodname}{\textsl{Torus Imaging}}
+% Hogg doesn't like these names because they don't refer to the abundance tags
+%   Torus Tomography
+%     Torus Topography (see what I did there?)
+%     Torus--Tangents Topography (TTT)
+%     Topographic Torus Mapping (TTM)
+%     Torus--Tangent Tags Topography (TTTT)
+% Orbit Imaging / Torus Imaging
+%   Abundance Orbit Imaging / Abundance Torus Imaging
+%   Invariant Orbit Imaging / Invariant Torus Imaging
+%   Invariance Imaging
 % Abundance-Moment foliation (AMF)
 %   Abundance-Moment laminae (AML)
 %   Abundance Isopleth Method (AIM)
@@ -29,6 +34,7 @@
 %   Toroidal abundance mixer (or mixmaster) (TAM)
 % Stationary Abundance Tori (SAT)
 %   Stationary Abundance Torus Method (SATM)
+% Chemical Tangent Scanning (CT Scan)
 % Chemical Tangents
 %   Abundance Tangent Method (ATM)
 %   Compositional Tangents
@@ -758,6 +764,33 @@ methods are conditionally correct, conditioning on these assumptions.
 
 \section{Inferences}
 
+There are two families of approaches to \methodname:
+In the first---which we will call \emph{classical}---the fact that the
+conjugate angles are well mixed is made explicit.
+The best-fit or inferred mass-model parameters are those that lead to
+no residual dependence of abundances on angles.
+In the second---which we will call \emph{generative}---a predictive model
+is built, in which the abundances are drawn from a distribution that is
+a funciton of actions alone (and not ever angles).
+The best-fit or inferred mass-model parameters are those that maximize
+the combined probability (density), evaluated at the observed abundances.
+The classical approaches are frequentist; the generative approaches produce
+likelihoods and can be used in Bayesian inferences.
+
+It may surprise some of our readers that, in this \documentname, we consider
+only classical approaches.
+The classical approaches are simpler in implementation, make fewer assumptions,
+and more explicitly embody the orbits-are-isopleths concept that underlies
+the project descriptions we have given above.
+We expect, however, that generative approaches, in the long run, will produce
+at least slightly more precise inferences, since they will be protected by the
+arguments and proofs of Bayesian inference.
+
+APW: Get more specific about forms and math. Call out to figures.
+
+APW: How do we avoid binning; how do we set our uncertainties; how do we
+get an answer with an uncertainty?
+
 % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
 \begin{figure}[!tp]
   \begin{center}
@@ -790,23 +823,6 @@ methods are conditionally correct, conditioning on these assumptions.
   \label{fig:sinusoid-fits}
   }
 \end{figure}
-
-HOGG: There are two approaches, with very different appearances, but
-embodying the same fundamental assumptions.
-
-HOGG: discriminative methods: frequentist forms; About finding the mass model in which
-there is no residual dependence of abundance distributions on angles.
-Technically these models are not strictly ``discriminative'' but it is a related
-concept. Oh wait, I could truly make a discriminative model...
-
-HOGG: generative methods: frequentist or Bayesian forms; About generating the abundances
-with a model using only Actions.
-
-HOGG: How are these qualitatively different methods related?
-
-HOGG: Get more specific about forms and math.
-
-HOGG: Show results on the data.
 
 % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
 \begin{figure}[!tp]
@@ -861,8 +877,15 @@ HOGG: Show results on the data.
   }
 \end{figure}
 
-\section{Relationship to Jeans and other methods}
+\section{Discussion}
 
+HOGG: What did we find? How do our conclusions differ from those before us?
+
+HOGG: In particular, what can we say about the dark disk etc?
+
+HOGG: How is what we did better than what came before or happens by other methods?
+
+How are we related to Jeans modeling?
 HOGG ASKS: What to write here? How detailed should we be? Or should this just
 go to the discussion section? HOGG SAY: Just move to the discussion. It should say that
 we have the huge advantage that we never need to take a second moment (though we could);
@@ -873,14 +896,6 @@ get help from separability; there is no need for it; it doesn't even simplify ou
 math in any way. That's a small but significant advantage. There is
 no sense in which this method is a sub-method of Jeans or vice versa; they make use of
 different aspects of the phase-mixed system.
-
-\section{Discussion}
-
-HOGG: What did we find? How do our conclusions differ from those before us?
-
-HOGG: In particular, what can we say about the dark disk etc?
-
-HOGG: How is what we did better than what came before or happens by other methods?
 
 HOGG: What are the limitations of what we did; what did we sacrifice for our benefits?
 
