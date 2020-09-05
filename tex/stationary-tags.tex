@@ -768,10 +768,11 @@ There are two families of approaches to \methodname:
 In the first---which we will call \emph{classical}---the fact that the
 conjugate angles are well mixed is made explicit.
 The best-fit or inferred mass-model parameters are those that lead to
-no residual dependence of abundances on angles.
+no residual dependence of abundances (or mean abundance ratio, or any moment
+of the abundance-ratio distribution) on angles.
 In the second---which we will call \emph{generative}---a predictive model
-is built, in which the abundances are drawn from a distribution that is
-a funciton of actions alone (and not ever angles).
+is built, in which the high-dimensional abundance distribution is modeled as
+a function of actions alone (and not ever angles).
 The best-fit or inferred mass-model parameters are those that maximize
 the combined probability (density), evaluated at the observed abundances.
 The classical approaches are frequentist; the generative approaches produce
@@ -786,13 +787,36 @@ We expect, however, that generative approaches, in the long run, will produce
 at least slightly more precise inferences, since they will be protected by the
 arguments and proofs of Bayesian inference.
 
-APW: Get more specific about forms and math. Call out to figures.
+In the classical approach, we are asking whether there is a setting of the
+mass model that leads to dynamical actions and conjugate angles such that the
+means of each abundance ratio does not depend on the conjugate angle $\theta_z$.
+Before we ask this, we want to use an abundance-ratio measure that has a compact
+empirical distribution.
+We make this measure by defining an ``abundance-ratio deviation'' for each star
+which is the difference between that star's (logarithmic)
+abundance ratio and the mean of the (logarithmic) abundance ratios of the $K=64$
+nearest-neighbor stars in dynamical-action-space.
+That is, we use the mass model to produce a 3-action vector $\vec{J}$ for each
+star, and choose the closest $K=64$ neighbors in $\vec{J}$-space, with the
+isotropic Euclidean metric distance; the neighbors are a function of the mass-model
+paramters.
+The integer $K=64$ was chosen empirically, but results are extremely insenstive
+to this choice.
 
-APW: How do we avoid binning; how do we set our uncertainties; how do we
-get an answer with an uncertainty?
-
-% Notebook: figures/Abundance-anomaly-bootstrap.ipynb
-\begin{figure}[!tp]
+To measure the dependence of mean abundance-ratio deviation on vertical
+conjugate angle $\theta_z$, we fit a smooth model of the form
+\begin{equation}
+  \Delta = a_0 + a_1\,\cos  \theta_z + b_1\,\sin    \theta_z
+               + a_2\,\cos 2\theta_z + b_2\,\sin 2\,\theta_z \quad,
+\end{equation}
+where the five parameters are the parameters of a Fourier series to $m=2$.
+We fit this model to all the individual abundance-ratio deviations $\Delta$
+without binning, by least-square fitting with uniform weights.
+Binned means and some of these smooth fits are shown in
+\figurename~\ref{fig:sinusoid-fits}.
+Results are shown just for abundance deviations in $\mgfe$, and just for a few
+settings of the mass-model parameter APW-PARAMETER-NAME.
+\begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{center}
   \includegraphics[width=\textwidth]{sinusoid-fits.pdf}
   \end{center}
@@ -824,8 +848,25 @@ get an answer with an uncertainty?
   }
 \end{figure}
 
-% Notebook: figures/Abundance-anomaly-bootstrap.ipynb
-\begin{figure}[!tp]
+To obtain uncertainties on these smooth fits, 
+we perform bootstrap resamplings of the data.
+The data are bootstrapped prior to the construction of the abundance deviations,
+because the abundance-deviation estimates depend on the data set in play, and also
+the mass-model parameters.
+\figurename~\ref{fig:sinusoid-fits} shows the smooth fits for the bootstrap resamplings.
+
+In this smooth model, parameter $a_1$ is sensitive to the vertical component
+($v_z$ component) of the local standard of rest or the Solar motion.
+Parameter $b_1$ is sensitive to the vertical ($z$) location of the disk midplane,
+or the Solar position.
+Parameter $a_2$ is sensitive to the local mass density concentrated in the disk,
+or the disk-mass parameter APW.
+This is shown in \figurename~\ref{fig:coeff-mdisk}, for the fits and bootstraps
+performed for the $\mgfe$ abundance deviations.
+Parameter $b_2$ should vanish; it is included as a test of model assumptions.
+In detail it is sensitive to tilts in the coordinate system, and non-phase-mixed
+structures.
+\begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{center}
   \includegraphics[width=\textwidth]{coeff-vs-mdisk.pdf}
   \end{center}
@@ -858,6 +899,18 @@ get an answer with an uncertainty?
   }
 \end{figure}
 
+Also shown in \figurename~\ref{fig:coeff-mdisk} is an estimate for the disk
+mass parameter APW and an associated uncertainty.
+This estimate and uncertainty were obtained by linearly interpolating the
+measurements and bootstrap error bars onto the $a_2=0$ line.
+
+We have shown results for the $\mgfe$ abundance deviation, but we repeated
+this analysis for several different abundances.
+The full set of disk-mass measurements are shown in
+\figurename{fig:inferred-mdisk-elems}.
+The different abundances tell somewhat different stories, but the combined total
+precision of this measurement is very high, on the order of APW~percent in the
+mass of the Milky Way disk, locally.
 % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
 \begin{figure}[!tp]
   \begin{center}
@@ -928,6 +981,12 @@ worked with this angle we would have made an independent measurement
 of the mass of the disk. We could also have used that angle to measure
 the circular velocity, in the same way that the vertical angle can be
 used to measure the local vertical standard of rest.
+
+HOGG: What other tags could we have used? Other moments of other tags?
+Combinations of tags? What might we gain?
+
+Could we have used the \emph{other} actions as tags? Yes and no: Not if
+their pdfs depend on selection, which they do.
 
 HOGG: Finally, how sensitive are we, really, to the assumption of
 phase mixing? In principle, very. But in practice: You can look at the
