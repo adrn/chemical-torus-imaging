@@ -50,11 +50,16 @@
 % math shihh -- maybe should go to preamble?
 \newcommand{\disk}{\mathrm{disk}}
 
-\setlength{\parindent}{1.1\baselineskip} % trust in Hogg
+% trust in Hogg
+\setlength{\parindent}{1.1\baselineskip}
+\renewcommand{\twocolumngrid}{}
+\sloppy\sloppypar\raggedbottom\frenchspacing
+\renewcommand{\doi}[1]{{\footnotesize\href{https://doi.org/#1}{#1}}}
+
 \shorttitle{geometry of abundances and orbits}
 \shortauthors{price-whelan, hogg, et al.}
 
-\begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing % trust in Hogg
+\begin{document}
 \graphicspath{ {figures/} }
 \DeclareGraphicsExtensions{.pdf,.eps,.png}
 
@@ -859,7 +864,15 @@ HOGG: Show results on the data.
 \section{Relationship to Jeans and other methods}
 
 HOGG ASKS: What to write here? How detailed should we be? Or should this just
-go to the discussion section?
+go to the discussion section? HOGG SAY: Just move to the discussion. It should say that
+we have the huge advantage that we never need to take a second moment (though we could);
+our method applies to any moment. We have the disadvantage that we depend on the
+existence of gradients. Fortunately these are not subtle. We have the huge advantage
+that we don't depend on the selection (to first order). That's really huge. We don't
+get help from separability; there is no need for it; it doesn't even simplify our
+math in any way. That's a small but significant advantage. There is
+no sense in which this method is a sub-method of Jeans or vice versa; they make use of
+different aspects of the phase-mixed system.
 
 \section{Discussion}
 
