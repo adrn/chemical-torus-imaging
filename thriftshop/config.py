@@ -1,4 +1,5 @@
 import pathlib
+import astropy.coordinates as coord
 import astropy.units as u
 import numpy as np
 
@@ -37,3 +38,7 @@ plot_config = {
 # Subset of elements we plot in panels
 elem_names = ['FE_H', 'C_FE', 'N_FE', 'O_FE',
               'MG_FE', 'SI_FE', 'MN_FE', 'NI_FE']
+
+# Galactocentric frame
+coord.galactocentric_frame_defaults.set('v4.0')
+galcen_frame = coord.Galactocentric()

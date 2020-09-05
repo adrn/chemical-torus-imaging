@@ -14,7 +14,7 @@ import gala.integrate as gi
 
 # This project
 from thriftshop.potentials import potentials
-
+from thriftshop.config import galcen_frame
 
 def action_worker(task):
     (i1, i2), t, pot, potential_name, cache_path = task
@@ -32,7 +32,7 @@ def action_worker(task):
                        pm_ra_cosdec=t['GAIA_PMRA'] * u.mas/u.yr,
                        pm_dec=t['GAIA_PMDEC'] * u.mas/u.yr,
                        radial_velocity=t['VHELIO_AVG'] * u.km/u.s)
-    galcen = c.transform_to(coord.Galactocentric)
+    galcen = c.transform_to(galcen_frame)
     w0s = gd.PhaseSpacePosition(galcen.data)
 
     data = {'APOGEE_ID': [], 'actions': [], 'angles': [], 'freqs': []}
