@@ -152,6 +152,10 @@ def get_cos2th_zerocross(coeffs):
         summary[i]['y'] = np.array(summary[i]['y'])
         summary[i]['y_err'] = np.array(summary[i]['y_err'])
 
+        idx = summary[i]['mdisk'].argsort()
+        for key in summary[i].keys():
+            summary[i][key] = summary[i][key][idx]
+
     # cos2theta term:
     s = summary[3]
     zero_cross = interp1d(s['y'], s['mdisk'], fill_value="extrapolate")(0.)
