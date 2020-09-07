@@ -12,12 +12,17 @@
 \input{preamble.tex}
 
 % text macros
-\newcommand{\methodname}{\textsl{Torus Topography}}
-% Torus Tomography
-%   Torus Topography (see what I did there?)
-%   Torus--Tangents Topography (TTT)
-%   Topographic Torus Mapping (TTM)
-%   Torus--Tangent Tags Topography (TTTT)
+\newcommand{\methodname}{\textsl{Torus Imaging}}
+% Hogg doesn't like these names because they don't refer to the abundance tags
+%   Torus Tomography
+%     Torus Topography (see what I did there?)
+%     Torus--Tangents Topography (TTT)
+%     Topographic Torus Mapping (TTM)
+%     Torus--Tangent Tags Topography (TTTT)
+% Orbit Imaging / Torus Imaging
+%   Abundance Orbit Imaging / Abundance Torus Imaging
+%   Invariant Orbit Imaging / Invariant Torus Imaging
+%   Invariance Imaging
 % Abundance-Moment foliation (AMF)
 %   Abundance-Moment laminae (AML)
 %   Abundance Isopleth Method (AIM)
@@ -29,6 +34,7 @@
 %   Toroidal abundance mixer (or mixmaster) (TAM)
 % Stationary Abundance Tori (SAT)
 %   Stationary Abundance Torus Method (SATM)
+% Chemical Tangent Scanning (CT Scan)
 % Chemical Tangents
 %   Abundance Tangent Method (ATM)
 %   Compositional Tangents
@@ -50,11 +56,16 @@
 % math shihh -- maybe should go to preamble?
 \newcommand{\disk}{\mathrm{disk}}
 
-\setlength{\parindent}{1.1\baselineskip} % trust in Hogg
+% trust in Hogg
+\setlength{\parindent}{1.1\baselineskip}
+\renewcommand{\twocolumngrid}{}
+\sloppy\sloppypar\raggedbottom\frenchspacing
+\renewcommand{\doi}[1]{{\footnotesize\href{https://doi.org/#1}{#1}}}
+
 \shorttitle{geometry of abundances and orbits}
 \shortauthors{price-whelan, hogg, et al.}
 
-\begin{document}\sloppy\sloppypar\raggedbottom\frenchspacing % trust in Hogg
+\begin{document}
 \graphicspath{ {figures/} }
 \DeclareGraphicsExtensions{.pdf,.eps,.png}
 
@@ -753,8 +764,62 @@ methods are conditionally correct, conditioning on these assumptions.
 
 \section{Inferences}
 
-% Notebook: figures/Abundance-anomaly-bootstrap.ipynb
-\begin{figure}[!tp]
+There are two families of approaches to \methodname:
+In the first---which we will call \emph{classical}---the fact that the
+conjugate angles are well mixed is made explicit.
+The best-fit or inferred mass-model parameters are those that lead to
+no residual dependence of abundances (or mean abundance ratio, or any moment
+of the abundance-ratio distribution) on angles.
+In the second---which we will call \emph{generative}---a predictive model
+is built, in which the high-dimensional abundance distribution is modeled as
+a function of actions alone (and not ever angles).
+The best-fit or inferred mass-model parameters are those that maximize
+the combined probability (density), evaluated at the observed abundances.
+The classical approaches are frequentist; the generative approaches produce
+likelihoods and can be used in Bayesian inferences.
+
+It may surprise some of our readers that, in this \documentname, we consider
+only classical approaches.
+The classical approaches are simpler in implementation, make fewer assumptions,
+and more explicitly embody the orbits-are-isopleths concept that underlies
+the project descriptions we have given above.
+We expect, however, that generative approaches, in the long run, will produce
+at least slightly more precise inferences, since they will be protected by the
+arguments and proofs of Bayesian inference.
+
+In the classical approach, we are asking whether there is a setting of the
+mass model that leads to dynamical actions and conjugate angles such that the
+means of each abundance ratio does not depend on the conjugate angle $\theta_z$.
+Before we ask this, we want to use an abundance-ratio measure that has a compact
+empirical distribution.
+We make this measure by defining an ``abundance-ratio deviation'' for each star
+which is the difference between that star's (logarithmic)
+abundance ratio and the mean of the (logarithmic) abundance ratios of the $K=64$
+nearest-neighbor stars in dynamical-action-space.
+That is, we use the mass model to produce a 3-action vector $\vec{J}$ for each
+star, and choose the closest $K=64$ neighbors in $\vec{J}$-space, with the
+isotropic Euclidean metric distance; the neighbors are a function of the mass-model
+paramters.
+The integer $K=64$ was chosen empirically, but results are extremely insenstive
+to this choice.
+
+To measure the dependence of mean abundance-ratio deviation on vertical
+conjugate angle $\theta_z$, we fit a smooth model of the form
+\begin{equation}
+  \Delta = a_0 + a_1\,\cos  \theta_z + b_1\,\sin    \theta_z
+               + a_2\,\cos 2\theta_z + b_2\,\sin 2\,\theta_z \quad,
+\end{equation}
+where the five parameters are the parameters of a Fourier series to $m=2$.
+We fit this model to all the individual abundance-ratio deviations $\Delta$
+without binning, by least-square fitting with uniform weights.
+Binned means and some of these smooth fits are shown in
+\figurename~\ref{fig:sinusoid-fits}.
+Although we show binned means, no binning is performed at any time in performing
+these fits.
+Results are shown in \figurename~\ref{fig:sinusoid-fits}
+just for abundance deviations in $\mgfe$, and just for a few
+settings of the mass-model parameter APW-PARAMETER-NAME.
+\begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{center}
   \includegraphics[width=\textwidth]{sinusoid-fits.pdf}
   \end{center}
@@ -786,25 +851,25 @@ methods are conditionally correct, conditioning on these assumptions.
   }
 \end{figure}
 
-HOGG: There are two approaches, with very different appearances, but
-embodying the same fundamental assumptions.
+To obtain uncertainties on these smooth fits, 
+we perform bootstrap resamplings of the data.
+The data are bootstrapped prior to the construction of the abundance deviations,
+because the abundance-deviation estimates depend on the data set in play, and also
+the mass-model parameters.
+\figurename~\ref{fig:sinusoid-fits} shows the smooth fits for the bootstrap resamplings.
 
-HOGG: discriminative methods: frequentist forms; About finding the mass model in which
-there is no residual dependence of abundance distributions on angles.
-Technically these models are not strictly ``discriminative'' but it is a related
-concept. Oh wait, I could truly make a discriminative model...
-
-HOGG: generative methods: frequentist or Bayesian forms; About generating the abundances
-with a model using only Actions.
-
-HOGG: How are these qualitatively different methods related?
-
-HOGG: Get more specific about forms and math.
-
-HOGG: Show results on the data.
-
-% Notebook: figures/Abundance-anomaly-bootstrap.ipynb
-\begin{figure}[!tp]
+In this smooth model, parameter $a_1$ is sensitive to the vertical component
+($v_z$ component) of the local standard of rest or the Solar motion.
+Parameter $b_1$ is sensitive to the vertical ($z$) location of the disk midplane,
+or the Solar position.
+Parameter $a_2$ is sensitive to the local mass density concentrated in the disk,
+or the disk-mass parameter APW.
+This is shown in \figurename~\ref{fig:coeff-mdisk}, for the fits and bootstraps
+performed for the $\mgfe$ abundance deviations.
+Parameter $b_2$ should vanish; it is included as a test of model assumptions.
+In detail it is sensitive to tilts in the coordinate system, and non-phase-mixed
+structures.
+\begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{center}
   \includegraphics[width=\textwidth]{coeff-vs-mdisk.pdf}
   \end{center}
@@ -833,10 +898,24 @@ HOGG: Show results on the data.
     strongly suggest that the data want a different value for the disk midplane.
     APW TODO: add point with horizontal error bar showing zero-crossing value
     APW TODO: The x axis is properly ``$M_\disk / M^\star$''.
+    APW TODO: Should we use the $a_1, b_1, a_2, b_2$ notation I use in the text here
+    too?
   \label{fig:coeff-mdisk}
   }
 \end{figure}
 
+Also shown in \figurename~\ref{fig:coeff-mdisk} is an estimate for the disk
+mass parameter APW and an associated uncertainty.
+This estimate and uncertainty were obtained by linearly interpolating the
+measurements and bootstrap error bars onto the $a_2=0$ line.
+
+We have shown results for the $\mgfe$ abundance deviation, but we repeated
+this analysis for several different abundances.
+The full set of disk-mass measurements are shown in
+\figurename{fig:inferred-mdisk-elems}.
+The different abundances tell somewhat different stories, but the combined total
+precision of this measurement is very high, on the order of APW~percent in the
+mass of the Milky Way disk, locally.
 % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
 \begin{figure}[!tp]
   \begin{center}
@@ -856,11 +935,6 @@ HOGG: Show results on the data.
   }
 \end{figure}
 
-\section{Relationship to Jeans and other methods}
-
-HOGG ASKS: What to write here? How detailed should we be? Or should this just
-go to the discussion section?
-
 \section{Discussion}
 
 HOGG: What did we find? How do our conclusions differ from those before us?
@@ -868,6 +942,18 @@ HOGG: What did we find? How do our conclusions differ from those before us?
 HOGG: In particular, what can we say about the dark disk etc?
 
 HOGG: How is what we did better than what came before or happens by other methods?
+
+How are we related to Jeans modeling?
+HOGG ASKS: What to write here? How detailed should we be? Or should this just
+go to the discussion section? HOGG SAY: Just move to the discussion. It should say that
+we have the huge advantage that we never need to take a second moment (though we could);
+our method applies to any moment. We have the disadvantage that we depend on the
+existence of gradients. Fortunately these are not subtle. We have the huge advantage
+that we don't depend on the selection (to first order). That's really huge. We don't
+get help from separability; there is no need for it; it doesn't even simplify our
+math in any way. That's a small but significant advantage. There is
+no sense in which this method is a sub-method of Jeans or vice versa; they make use of
+different aspects of the phase-mixed system.
 
 HOGG: What are the limitations of what we did; what did we sacrifice for our benefits?
 
@@ -900,6 +986,12 @@ worked with this angle we would have made an independent measurement
 of the mass of the disk. We could also have used that angle to measure
 the circular velocity, in the same way that the vertical angle can be
 used to measure the local vertical standard of rest.
+
+HOGG: What other tags could we have used? Other moments of other tags?
+Combinations of tags? What might we gain?
+
+Could we have used the \emph{other} actions as tags? Yes and no: Not if
+their pdfs depend on selection, which they do.
 
 HOGG: Finally, how sensitive are we, really, to the assumption of
 phase mixing? In principle, very. But in practice: You can look at the
