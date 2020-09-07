@@ -84,13 +84,13 @@ def get_w0s_with_same_actions(fiducial_w0, vy=None, staeckel=False):
     fiducial_actions = []
     for n in range(fiducial_w0.shape[0]):
         if staeckel:
-            o = potentials['fiducial'].integrate_orbit(
+            o = potentials['1.0'].integrate_orbit(
                 fiducial_w0[n], dt=0.5, t1=0, t2=2*u.Gyr)  # MAGIC NUMBERS
             fiducial_actions.append(
-                get_staeckel_actions(o, galpy_potentials['fiducial']))
+                get_staeckel_actions(o, galpy_potentials['1.0']))
         else:
             fiducial_actions.append(
-                safe_get_actions(potentials['fiducial'],
+                safe_get_actions(potentials['1.0'],
                                  fiducial_w0[n], N_max=8)['actions'])
 
     fiducial_actions = u.Quantity(fiducial_actions).to(u.km/u.s * u.kpc)
@@ -100,7 +100,7 @@ def get_w0s_with_same_actions(fiducial_w0, vy=None, staeckel=False):
 
     w0s = {}
     for name in potentials:
-        if name == 'fiducial':
+        if name == '1.0':
             w0s[name] = fiducial_w0
             continue
 
