@@ -53,9 +53,14 @@
 \newcommand{\sdssv}{\acronym{SDSS-V}}
 \newcommand{\galah}{\acronym{GALAH}}
 \newcommand{\hermes}{\acronym{HERMES}}
+\newcommand{\nstars}{76,559}
 
 \newcommand{\mdisk}{\ensuremath{\mathrm{M}_\mathrm{disk}}}
 \newcommand{\mratio}{\ensuremath{\mdisk / \mdisk^\star}}
+
+\newcommand{\TODO}[1]{{\color{tabgreen}\textbf{TODO:} #1}}
+\newcommand{\APWTODO}[1]{{\color{tabpurple}\textbf{APW TODO:} #1}}
+\newcommand{\HOGGTODO}[1]{{\color{tabred}\textbf{HOGG TODO:} #1}}
 
 
 % trust in Hogg
@@ -92,8 +97,14 @@
 \affiliation{\affcca}
 \affiliation{\affcolumbia}
 
+\author{Melssa~Ness}
+\affiliation{\affcolumbia}
+% \affiliation{\affcca}
+
 \author[0000-0003-4996-9069]{Hans-Walter~Rix}
 \affiliation{\affmpia}
+
+\author{APOGEE authors}
 
 
 \begin{abstract}\noindent
@@ -271,7 +282,7 @@ only under strong assumptions, so we are still in the business of revealing the
 orbits indirectly.
 However, our approach is novel and there are many regimes in which it will be
 more precise, and require fewer assumptions, than any other method.
-\textbf{APW SAYS: Expand out again, make sure to emphasize how general this idea is?}
+\TODO{Expand out again, make sure to emphasize how general this idea is?}
 
 
 \section{Methodological Generalities}
@@ -440,7 +451,7 @@ In detail, our selections include:
 The \apogee\ catalog contains a small number of duplicates (duplicated source
 identifier \texttt{APOGEE\_ID}); To unique-ify our sample in these cases, we
 keep only the entry with highest signal-to-noise.
-The final parent sample contains 76,559 RGB stars with high-quality \apogee\ and
+The final parent sample contains \nstars\ RGB stars with high-quality \apogee\ and
 \gaia\ data.
 
 For each star in the parent sample, we compute na\"ive distance estimates by
@@ -663,99 +674,124 @@ In our method below, we utilize this fact to infer the disk mass.
 \end{figure}
 
 
-\section{Assumptions}
-\label{sec:assumptions}
+\section{Method, Assumptions, and Toy Applications}
+\label{sec:inferences}
 
-\methodname\ flows from a specific set of assumptions.
-That is, we are going to make hard (and sometimes controversial) assumptions.
-Our position is not that these assumptions are correct.
-Our position is that our
-methods are conditionally correct, conditioning on these assumptions.
+There are two families of approaches to \methodname:
+In the first---which we will call \emph{classical} (in the sense of classical
+statistics)---we make explicit the fact that the element abundance distribution
+should not depend on the conjugate angles.
+The best-fit or inferred mass-model parameters are those that lead to no
+residual dependence of abundances (or mean abundance ratio, or any moment of the
+abundance-ratio distribution) on angles.
+In the second---which we will call \emph{generative}---we would construct a
+predictive model for the high-dimensional abundance distribution as a function
+of actions alone (and not angles).
+The best-fit or inferred mass-model parameters are those that maximize the
+combined probability (density), evaluated at the observed abundances.
+The classical approaches are frequentist and the generative approaches produce
+likelihoods and can be used in Bayesian inferences.
+
+Both classical and generative implementations of \methodname\ flow from a
+specific set of assumptions, enumerated below.
+We emphasize that these assumptions are not necessarily correct, but that our
+method is conditionally correct, conditioning on these core assumptions:
 \begin{description}
-\item[integrable] HOGG: There are 3 invariants and 3 angles. This could perhaps be
-  relaxed, but we don't know how yet.
+\item[integrable] Each stellar orbit is regular and has three
+  dynamically-invariant actions and three conjugate angles. This assumption
+  could in principle be relaxed in future implementations.
 
-\item[well mixed] HOGG: All angles equally likely.
-  The well-mixed assumption will be violated substantially in the data;
-  we will discuss this more below. But this is the fundamental assumption of
+\item[well mixed] The stars in our sample are inherently uniformly distributed
+  in angle variables; all angles are equally likely. This assumption will be
+  violated substantially in the data (as we discuss below; see
+  \sectionname~\ref{sec:discussion}), but this is the fundamental assumption of
   the vast majority of inferences of the Milky Way mass distribution.
-  Snail!
+  % TODO: make sure to mention the Snail in the discussion
 
-\item[selection] HOGG: Selection depends on position in the Milky Way, but not
-  on element abundances. Really it could even depend on velocity! But it can't depend
-  on abundances. That might be very slightly wrong.
+\item[selection] The selection function depends on position (or velocity) in the
+  Milky Way, but not on element abundances. In detail, the \apogee\ selection
+  function \emph{will} depend on abundances through gradients between stellar
+  parameters and element abundance and implicit selections on stellar
+  parameters. We attempt to mitigate these issues here by selecting only red
+  giant stars near the red clump (see \sectionname~\ref{sec:data}), and we
+  discuss this further in \sectionname~\ref{sec:discussion}.
+  % TODO: Alternatively, we could use a strongly-constrained model for the
+  % dependence of the selection function on element abundances.
 
-\item[kinematic measurements] HOGG: Very strong assumption that phase space positions
-  in 6-d are accurate and precise. So precise we don't have to generate them, we can
-  condition on them!
-
-\item[abundance measurements] HOGG: Assumption that stars in different parts of phase
-  space get the same abundance measurements. Questionable in certain kinds of samples.
-  HOGG: Oddly I don't think we need to assume that the chemical measurements have good
-  (or any) noise estimates. They could be terrible, I think.
-
-\item[smooth gradients] HOGG: Assumption about how the abundances can
-  depend on action. Relatedly, the use of action and not log-action
+\item[smooth gradients] \HOGGTODO{Assumption about how the abundances can
+  depend on action.} Relatedly, the use of action and not log-action
   or zmax or whatever.
 \end{description}
 
-\section{Inferences}
-
-There are two families of approaches to \methodname:
-In the first---which we will call \emph{classical}---the fact that the
-conjugate angles are well mixed is made explicit.
-The best-fit or inferred mass-model parameters are those that lead to
-no residual dependence of abundances (or mean abundance ratio, or any moment
-of the abundance-ratio distribution) on angles.
-In the second---which we will call \emph{generative}---a predictive model
-is built, in which the high-dimensional abundance distribution is modeled as
-a function of actions alone (and not ever angles).
-The best-fit or inferred mass-model parameters are those that maximize
-the combined probability (density), evaluated at the observed abundances.
-The classical approaches are frequentist; the generative approaches produce
-likelihoods and can be used in Bayesian inferences.
-
-It may surprise some of our readers that, in this \documentname, we consider
-only classical approaches.
+In this \documentname, we consider only classical approaches for illustrative
+purposes.\footnote{This may surprise some of our readers, but we are pragmatic
+as much as dogmatic about Bayes!}
 The classical approaches are simpler in implementation, make fewer assumptions,
-and more explicitly embody the orbits-are-isopleths concept that underlies
-the project descriptions we have given above.
-We expect, however, that generative approaches, in the long run, will produce
-at least slightly more precise inferences, since they will be protected by the
-arguments and proofs of Bayesian inference.
+and more explicitly embody the orbits-as-isopleths concept that underlies the
+project descriptions we have given above.
+However, we expect that generative approaches will produce at least slightly
+more precise inferences, since they will be protected by the arguments and
+proofs of Bayesian inference.
+In addition to the core assumptions listed above, we also make additional
+assumptions specific to our implementation and demonstrations here:
+\begin{description}
+\item[kinematic measurements] The 6D phase-space positions are sufficiently
+  accurate and precise such that we condition (or bin) over these quantities.
+  For the parent sample used here, the median distance uncertainty is $\sigma_d
+  \approx 50~\pc$ and the median velocity uncertainty is $\approx 2~\kms$.
 
-In the classical approach, we are asking whether there is a setting of the
-mass model that leads to dynamical actions and conjugate angles such that the
-means of each abundance ratio does not depend on the conjugate angle $\theta_z$.
-Before we ask this, we want to use an abundance-ratio measure that has a compact
-empirical distribution.
-We make this measure by defining an ``abundance-ratio deviation'' for each star
-which is the difference between that star's (logarithmic)
-abundance ratio and the mean of the (logarithmic) abundance ratios of the $K=64$
-nearest-neighbor stars in dynamical-action-space.
-That is, we use the mass model to produce a 3-action vector $\vec{J}$ for each
-star, and choose the closest $K=64$ neighbors in $\vec{J}$-space, with the
-isotropic Euclidean metric distance; the neighbors are a function of the mass-model
-paramters.
-The integer $K=64$ was chosen empirically, but results are extremely insenstive
-to this choice.
+\item[abundance measurements] \HOGGTODO{Assumption that stars in different parts
+  of phase space get the same abundance measurements.} Questionable in certain
+  kinds of samples.
+\end{description}
 
-To measure the dependence of mean abundance-ratio deviation on vertical
+In the classical approach, here specifically focusing on the vertical kinematics
+of stars, we ask whether there is a choice of mass model that leads to dynamical
+actions and conjugate angles such that the means of each abundance ratio do not
+depend on the conjugate angle $\theta_z$.
+To assess the dependence of a particular element abundance ratio
+\abunratio{X}{Y} on the vertical angle, we define an ``mean abundance-ratio
+deviation,'' $\Delta^{\abunratio{X}{Y}}$, for each $n$ star, which is the
+difference between a given star's (logarithmic) abundance ratio and the mean of
+the (logarithmic) abundance ratios of its kinematic neighbors (in action-space),
+\begin{equation}
+  \Delta^{\abunratio{X}{Y}}_n = \abunratio{X}{Y}_n -
+    \left\langle \abunratio{X}{Y} \right\rangle_{\vec{J}}
+    \quad .
+\end{equation}
+That is, we use a given mass model to compute the three actions $\vec{J}$ for
+each star in the parent sample, and choose the closest $K$ neighbors in
+$\vec{J}$-space (with the isotropic Euclidean metric distance) for each star to
+compute the action-local mean abundance.
+For a specific star, its neighbors are a function of the mass-model parameters
+because all actions will change values in different mass models.
+We choose to use $K=64$ based on experimentation, but find that our results are
+extremely insensitive to this choice.
+
+To quantify the dependence of the mean abundance-ratio deviation on the vertical
 conjugate angle $\theta_z$, we fit a smooth model of the form
 \begin{equation}
-  \Delta = a_0 + a_1\,\cos  \theta_z + b_1\,\sin    \theta_z
-               + a_2\,\cos 2\theta_z + b_2\,\sin 2\,\theta_z \quad,
+  \Delta(\theta_z) = c_0 + a_1\,\cos  \theta_z + b_1\,\sin    \theta_z
+                         + a_2\,\cos 2\theta_z + b_2\,\sin 2\theta_z \quad,
+                         \label{eq:fouriermodel}
 \end{equation}
-where the five parameters are the parameters of a Fourier series to $m=2$.
-We fit this model to all the individual abundance-ratio deviations $\Delta$
-without binning, by least-square fitting with uniform weights.
-Binned means and some of these smooth fits are shown in
-\figurename~\ref{fig:sinusoid-fits}.
-Although we show binned means, no binning is performed at any time in performing
-these fits.
-Results are shown in \figurename~\ref{fig:sinusoid-fits}
-just for abundance deviations in $\mgfe$, and just for a few
-settings of the mass-model parameter APW-PARAMETER-NAME.
+where the five parameters $(c_0, a_1, a_2, b_1, b_2)$ are the coefficients of a
+Fourier series expressed out to $m=2$.
+We fit this model to all of the $N=76,559$ individual abundance-ratio deviations
+and their uncertainties $(\Delta_n, \sigma_{\Delta_n})_N$ (without binning) with
+least-squares fitting.
+\figurename~\ref{fig:sinusoid-fits} shows smooth fits of the above model
+computed from bootstrapped resamplings of the data (blue curves) and, for
+visualization, we show binned means of the measured abundance-ratio deviations
+(black histogram).
+We emphasize that no binning is performed at any time in performing these fits.
+The results shown in \figurename~\ref{fig:sinusoid-fits} are for abundance
+deviations in $\mgfe$, and just for three particular settings of the disk mass
+parameters, \mratio.
+The data are bootstrapped prior to the construction of the abundance deviations,
+because the abundance-deviation estimates depend on the data set in play, and
+also the mass-model parameters.
+
 \begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{center}
   \includegraphics[width=\textwidth]{sinusoid-fits.pdf}
@@ -788,24 +824,34 @@ settings of the mass-model parameter APW-PARAMETER-NAME.
   }
 \end{figure}
 
-To obtain uncertainties on these smooth fits,
-we perform bootstrap resamplings of the data.
-The data are bootstrapped prior to the construction of the abundance deviations,
-because the abundance-deviation estimates depend on the data set in play, and also
-the mass-model parameters.
-\figurename~\ref{fig:sinusoid-fits} shows the smooth fits for the bootstrap resamplings.
-
-In this smooth model, parameter $a_1$ is sensitive to the vertical component
-($v_z$ component) of the local standard of rest or the Solar motion.
-Parameter $b_1$ is sensitive to the vertical ($z$) location of the disk midplane,
-or the Solar position.
+In the smooth model for the mean abundance deviations
+(\equationname~\ref{eq:fouriermodel}), the parameter $a_1$ is sensitive to the
+vertical component ($v_z$ component) of the local standard of rest or the Solar
+motion.
+Parameter $b_1$ is sensitive to the vertical ($z$) location of the Sun relative
+to the disk midplane.
 Parameter $a_2$ is sensitive to the local mass density concentrated in the disk,
-or the disk-mass parameter APW.
-This is shown in \figurename~\ref{fig:coeff-mdisk}, for the fits and bootstraps
-performed for the $\mgfe$ abundance deviations.
-Parameter $b_2$ should vanish; it is included as a test of model assumptions.
-In detail it is sensitive to tilts in the coordinate system, and non-phase-mixed
-structures.
+or the disk-mass parameter \mratio.
+Parameter $b_2$ should not exist and is included as a test of model assumptions;
+in detail, it is sensitive to tilts in the coordinate system, and
+non-phase-mixed structures.
+\APWTODO{Comment on how the cos2theta coefficient flips sign between middle and
+right panel - the ``correct'' disk mass parameter must be between these two}
+
+For each mass model (i.e., each setting of \mratio\ that we consider), we
+estimate the Fourier coefficient parameters and uncertainties on the
+coefficients using 128 bootstrap trials.
+\figurename~\ref{fig:coeff-mdisk} shows these inferred coefficients as a
+function of disk mass, \mratio, for the abundance ratio \mgfe; conceptually, we
+are looking for the value of \mratio\ that minimizes the (absolute) value of
+$a_2$.
+We obtain an estimate for the disk mass parameter \mratio\ and an associated
+uncertainty by linearly interpolating the measurements and bootstrap error bars
+onto the $a_2=0$ intercept.
+This value, and its uncertainty, are shown in the lower-left panel of
+\figurename~\ref{fig:coeff-mdisk} as the square marker with a horizontal
+error-bar.
+
 \begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{center}
   \includegraphics[width=\textwidth]{coeff-vs-mdisk.pdf}
@@ -823,7 +869,7 @@ structures.
     zero when the model has the best-fit disk mass.
     The zero crossing and its measurement uncertainty are shown as a point and
     a horizontal error bar.
-    The other terms shown have different dependences on paramters:
+    The other terms shown have different dependences on parameters:
     The $\cos\theta_z$ would vary strongly if we varied the solar motion (the
     vertical component of the local standard of rest).
     The $\sin\theta_z$ term would vary strongly if we varied the location of the
@@ -833,26 +879,19 @@ structures.
     assumptions (see text).
     These figures show that we can precisely measure the disk mass, and also
     strongly suggest that the data want a different value for the disk midplane.
-    APW TODO: add point with horizontal error bar showing zero-crossing value
-    APW TODO: The x axis is properly ``$\mratio$''.
-    APW TODO: Should we use the $a_1, b_1, a_2, b_2$ notation I use in the text here
-    too?
   \label{fig:coeff-mdisk}
   }
 \end{figure}
 
-Also shown in \figurename~\ref{fig:coeff-mdisk} is an estimate for the disk
-mass parameter APW and an associated uncertainty.
-This estimate and uncertainty were obtained by linearly interpolating the
-measurements and bootstrap error bars onto the $a_2=0$ line.
-
-We have shown results for the $\mgfe$ abundance deviation, but we repeated
-this analysis for several different abundances.
+We have shown results for the $\mgfe$ abundance deviation, but we repeat this
+analysis for several different abundances (the same abundances as shown in
+\figurename~\ref{fig:zvz-grid}).
 The full set of disk-mass measurements are shown in
-\figurename{fig:inferred-mdisk-elems}.
+\figurename~\ref{fig:inferred-mdisk-elems}.
 The different abundances tell somewhat different stories, but the combined total
-precision of this measurement is very high, on the order of APW~percent in the
-mass of the Milky Way disk, locally.
+precision of this measurement is very high, on the order of $\sim 4$ per cent in
+the mass of the Milky Way disk, locally.
+
 % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
 \begin{figure}[!tp]
   \begin{center}
@@ -864,15 +903,17 @@ mass of the Milky Way disk, locally.
     \figurename~\ref{fig:coeff-mdisk} is shown here as the $\mgfe$ measurement.
     The band shows the inverse-variance-weighted mean value for the disk-mass
     parameter $\mratio$ and its formal uncertainty.
-    This figure shows that the different element abundance ratios deliver somewhat
-    inconsistent estimates for the disk mass; these inconsistencies are discussed
-    in the text.
-    APW TODO: The y axis is properly ``estimated $\mratio$''.
+    This figure shows that the different element abundance ratios deliver
+    somewhat inconsistent estimates for the disk mass; these inconsistencies are
+    discussed in the text.
   \label{fig:inferred-mdisk-elems}
   }
 \end{figure}
 
 \section{Discussion}
+\label{sec:discussion}
+
+\APWTODO{So many things to write here...!}
 
 HOGG: What did we find? How do our conclusions differ from those before us?
 
@@ -1076,9 +1117,6 @@ and to Bovy et al.
 
 \acknowledgments
 It is a pleasure to thank
-  Melissa Ness (Columbia),
-  who started the conversation that started this project, many years ago.
-We also thank
   Jo Bovy (Toronto),
   Anna-Christina Eilers (MIT),
   Suroor S. Gandhi (NYU),
