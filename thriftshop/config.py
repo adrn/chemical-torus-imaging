@@ -41,4 +41,5 @@ elem_names = ['FE_H', 'C_FE', 'N_FE', 'O_FE',
 
 # Galactocentric frame
 coord.galactocentric_frame_defaults.set('v4.0')
-galcen_frame = coord.Galactocentric()
+galcen_frame = coord.Galactocentric(z_sun=-16.6*u.pc)
+
