@@ -670,11 +670,13 @@ position and motion with respect to a Galactocentric reference frame.
 
 For the solar position, we use the recent precise measurement of the
 Sun--Galactic center distance from the \acronym{GRAVITY} collaboration, $r_\odot
-= 8.122~\kpc$ \citep{Gravity:2018}, and $z_\odot = 20.8~\pc$
-\citep{Bennett:2019} for the Sun's height above the Galactic midplane.
+= 8.122~\kpc$ \citep{Gravity:2018}.
+We set the Sun's height above the Galactic midplane to $z_\odot = -16.6~\pc$
+based on experiments done below (note that this is discrepant with the recent
+measurement \citealt{Bennett:2019}).
 In Galactocentric Cartesian coordinates, we use a right-handed coordinate system
-such that the Sun is at $\bs{x}_\odot = (-8.1219, 0, 0.0208)~\kpc$ and the solar
-velocity is $\bs{v}_\odot = (12.9, 245.6, 7.78)~\kms$ \citep{Drimmel:2018,
+such that the Sun is at $\bs{x}_\odot = (-8.1219, 0, -0.0166)~\kpc$ and the
+solar velocity is $\bs{v}_\odot = (12.9, 245.6, 7.78)~\kms$ \citep{Drimmel:2018,
 Reid:2004, Gravity:2018}.
 
 We represent the density distribution (or gravitational potential) of the
@@ -851,7 +853,7 @@ settings of the mass-model parameter APW-PARAMETER-NAME.
   }
 \end{figure}
 
-To obtain uncertainties on these smooth fits, 
+To obtain uncertainties on these smooth fits,
 we perform bootstrap resamplings of the data.
 The data are bootstrapped prior to the construction of the abundance deviations,
 because the abundance-deviation estimates depend on the data set in play, and also
