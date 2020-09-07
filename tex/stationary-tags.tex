@@ -54,8 +54,9 @@
 \newcommand{\galah}{\acronym{GALAH}}
 \newcommand{\hermes}{\acronym{HERMES}}
 
-% math shihh -- maybe should go to preamble?
-\newcommand{\disk}{\mathrm{disk}}
+\newcommand{\mdisk}{\ensuremath{\mathrm{M}_\mathrm{disk}}}
+\newcommand{\mratio}{\ensuremath{\mdisk / \mdisk^\star}}
+
 
 % trust in Hogg
 \setlength{\parindent}{1.1\baselineskip}
@@ -273,16 +274,17 @@ more precise, and require fewer assumptions, than any other method.
 \textbf{APW SAYS: Expand out again, make sure to state how general this idea?}
 
 
-\section{Methodological Generalities and Motivation}
+\section{Methodological Generalities}
+\label{sec:generalities}
 
 In a well-mixed, equilibrium population, stars are in a kinematic steady state:
 As time goes on, stars move along their orbits, but they do not change their
 dynamical invariants (e.g., actions).
 In such situations, every location in angle (the coordinates conjugate to
 actions) is equally likely, or equally probably populated in any snapshot.
-The ``chemical tagging'' insight \cite{Freeman:2002} is that most stars also
+The ``chemical tagging'' insight \citep{Freeman:2002} is that most stars also
 preserve their surface element abundances (and other stellar tags) as they
-orbit (i.e., over Galactic dynamically-relevant timescales).
+orbit, over many Galactic orbital timescales.
 That is, in an integrable galaxy---a galaxy whose stellar orbits are associated
 with three invariant actions---the element abundances and the dynamical actions
 have something in common: They are invariant with time.
@@ -298,241 +300,64 @@ have measured $D$ element abundances.
 This collection of stars will in general have a diversity of element abundances:
 Their abundances are drawn from some distribution in $D$-dimensional
 element-abundance space.
-Now consider how this abundance distribution varies as we consider different
-regions in phase space.
-In general, the abundance distribution will vary: For example, there are
-observed radial and vertical abundance gradients in the Galactic disk
-\citep{people}.
+In general, the abundance distribution will depend on position in phase-space:
+For example, there are observed radial and vertical abundance gradients in the
+Galactic disk \citep{people}.
 However, any changes we observe in these element-abundance distributions with
 respect to phase-space coordinates (i.e., the six-gradient) must not project
 onto the directions of increasing (or decreasing) conjugate angles in phase
 space.
-That is, all gradients with respect to phase-space coordinates of the
-element-abundance distribution must be orthogonal to the directions of increase
-(or decrease) of the conjugate angles, and lie in the subspace of the directions
-of increase (or decrease) of the dynamical actions.
+All gradients with respect to phase-space coordinates of the element-abundance
+distribution must be orthogonal to the directions of increase (or decrease) of
+the conjugate angles, and lie in the subspace of the directions of increase (or
+decrease) of the dynamical actions.
 The trajectories of stars in the phase space (the dynamical tori) must therefore
 lie along or describe level surfaces in the element-abundance distribution!
 
-In this \documentname, we demonstrate the utility of these gradients in the
-context of dynamical inferences in the Milky Way, where we can measure
-six-dimensional kinematics and element-abundances for individual stars.
-For the sake of illustration and simplicity, we only visualize and focus on the
-vertical kinematics of stars, but we \emph{do not} assume that the potential or
-distribution function is separable.
-We emphasize that we could have equivalently focused on radial kinematics (using
-the cylindrical radial velocity and position), or considered gradients in all
-phase-space coordinate simultaneously: This methodology is generic!
+In this \documentname, we demonstrate the utility of these gradients and
+relations between element abundances and dynamical invariants in the context of
+dynamical inferences in the Milky Way.
+We consider stars in our Galaxy because here we can measure six-dimensional
+kinematics and element-abundances for individual stars, enabling relatively
+simple demonstrations of the concepts here.
+However, we note that a generative model built on these concepts would, in
+principle, be applicable in more general scenarios, such as for stars in Local
+Group satellite galaxies where only a subset of phase-space coordinates are
+measured.
 
-
-% Notebook: figures/APOGEE-zvz-orbits.ipynb
-\begin{figure}[!tp]
-  \begin{center}
-  \includegraphics[width=\textwidth]{abundance-zvz-grid.pdf}
-  \end{center}
-  \caption{%
-    The means of various (logarithmic) abundance ratios as a function of
-    Galactic vertical height $z$ and vertical velocity $v_z$.
-    Averages are taken in $z, v_z$ boxels.
-    The stars at lower $|z|$ and lower $|v_z|$ (that is, the stars with
-    lower overall vertical action $J_z$) show higher overall metallicity
-    on average, but lower alpha-to-iron.
-    These plots are somewhat affected by \apogee\ selection effects, in
-    that different $z, v_z$ boxels are projections through different extents
-    in Galactocentric radius (see \figurename~\ref{fig:mh-am-xy}).
-    This explains some of the visible asymmetries.
-  \label{fig:zvz-grid}
-  }
-\end{figure}
-
-% Notebook: figures/zvz-orbit-demo.ipynb
-\begin{figure}[!tp]
-  \begin{center}
-  \includegraphics[width=\textwidth]{zvz-orbit-demo.pdf}
-  \end{center}
-  \caption{%
-    \textsl{Left panel:} Two orbits projected onto the plane of
-    Galactic vertical height $z$ and Galactocentric cylindrical radius
-    $R$. The orbits fill the surfaces of 3-tori in 6-d phase space.
-    \textsl{Middle panel:} The same two orbits, but projected onto the plane
-    of vertical height $z$ and vertical velocity $v_z$. In this projection,
-    it becomes clearer that the orbital lines are
-    colored by the angle $\theta_z$ that is conjugate to vertical action $J_z$.
-    The inset shows that conjugate angle wraps non-trivially, because the action
-    (by construction) wraps at constant angular velocity, whereas the vertical period
-    is a (weak) function of the other orbital phases.
-    Note that although this projection is close to ``face on'' for these two
-    orbits, the fact that they fills the surfaces of 3-tori means that they
-    project to finite-width bands in $z, v_z$ space.
-    \textsl{Right panel:} The same two orbits, but now plotted in vertical-action,
-    vertical-angle space. In this space, the two orbits trace perfect circles.
-  \label{fig:zvz-demo}
-  }
-\end{figure}
-
-% Notebook: figures/APOGEE-zvz-orbits.ipynb
-\begin{figure}[!tp]
-  \begin{center}
-  \includegraphics[width=\textwidth]{zvz-mean-MG_FE}
-  \end{center}
-  \caption{%
-    \textsl{Left panel:} Repeat of the $\mgfe$ panel of \figurename~\ref{fig:zvz-grid}.
-    \textsl{Other panels:} Same as the left panel, but with the two orbits
-    from \figurename~\ref{fig:zvz-demo}
-    over-plotted, for three different Milky Way potentials.
-    These three potentials have the fiducial Milky Way disk mass (see text
-    for details), or a disk less massive by a factor of 0.4 or more
-    massive by a factor of 1.6, as noted in each panel title.
-    All potentials are constrained to have a circular velocity at the
-    Solar circle of $229\,\kms$.
-    \emph{Which of the three panels appears most like the orbits are
-    coincident with isopleths of the mean abundance?}
-    This question is asked for illustrative purposes only: These
-    plots distort the data by projection in phase space.
-    In the methods used for the inferences we perform in
-    \sectionname~XXX, all averages are performed in tiny
-    three-dimensional action neighborhoods; we don't project the data in this way.
-  \label{fig:zvz-mgfe}
-  }
-\end{figure}
-
-
-This idea was motivated by plots of elemental abundances of stars as a function
-of vertical height $z$ and vertical velocity $v_z$ in Galactocentric Cartesian
-coordinates, colored by element abundances;
-Examples are shown in \figurename~\ref{fig:zvz-grid}.
-In these plots, the eye is drawn to \emph{abundance gradients}:
-The stars at small
-heights and small vertical velocities have different abundance ratios,
-on average, than stars at large heights and large vertical velocities.
-But these positional and velocity gradients are related:
-Stars at large absolute vertical velocities $v_z$ will, in the future, at some
-times be at large absolute vertical positions $z$ (far from the plane, that is),
-and stars at large absolute vertical positions will, in the future,
-at some times be at large absolute vertical velocities.
-That is, the stars will orbit in the Galaxy.
-And stars don't---to very high precision---change their abundances as
-they orbit.
-
-
-One consequence of these observations is a new method for inferring
-the orbit structure of the Milky Way:
-If two small neighborhoods in phase space lie on the same orbit---that
-is, they correspond to the same dynamical actions or they can be reached
-by common initial conditions---they must contain stars with the same distribution of
-element abundances.
-This prediction depends on many detailed assumptions, such as that
-the Galaxy is (approximately) phase mixed, and that the potential is
-(approximately) time invariant and integrable.
-And of course the \emph{usefulness} of this prediction for inference
-depends on the existence of gradients: If there aren't
-element-abundance-ratio gradients, there will be no information to work
-with.
-There are many ways to describe the fundamental prediction that underlies \methodname.
-Here are a few:
-\begin{itemize}
-\item
-  Stars don't change their abundances as they orbit!  Stellar
-  abundance ratios can depend on the three invariant actions, but they
-  can't depend on the conjugate angles, which wind up arbitrarily with time.
-  This can be seen as a kinematic description of the concept underlying this \documentname.
-\item
-  Or, equivalently, abundance gradients taken in 6-dimensional phase space will be
-  locally perpendicular, everywhere, to the orbital 3-tori in phase space.
-  This is a local-geometry description of the concept.
-\item
-  Or, equivalently, at every location in 6-d phase space, there are a set of 6-d
-  gradient vectors, which are the derivatives of all measurable
-  moments of all measurable element-abundance ratios with respect to
-  the 6 phase-space coordinates. These gradient vectors will span a
-  local 3-d subspace, and this subspace will be orthogonal to the surfaces
-  of the orbital tori at that location.
-  This is a mathematics-of-gradients description.
-\item
-  Or, equivalently, the orbital tori will be level 3-surfaces in 6-d phase space of any
-  moments or statistics of the element-abundance distribution.
-  This is a global-geometry description.
-\item
-  Or, equivalently, a predictive model for the element abundances of stars
-  that is given the freedom to depend on both actions and angles will do no
-  better at predicting stellar element abundances than a model that is only
-  given the freedom to depend on actions alone.
-  This is an information-theory description.
-\end{itemize}
-
-The points are illustrated graphically in \figurename~\ref{fig:zvz-mgfe}:
-In the fiducial model, the two overlaid orbits more-or-less follow something
-like a mean abundance contour.
-In the model in which the disk is made less massive (and the halo more massive
-to keep the circular velocity constant), the orbits change shape: There is more
-positional extent to an orbit relative to it's velocity extent.
-The orbital frequency $\omega$ is, to order of magnitude, the velocity amplitude
-divided by the spatial amplitude, and it is, to order of magnitude, $\sqrt{G\,\rho}$,
-where $\rho$ is the mean enclosed mass density.
-If stars were traveling on these lower-disk-mass orbits, they would have to
-obtain higher abundances when they are passing through the disk midplane,
-and lower abundances when they are at their greatest absolute vertical heights,
-which is absurd: Stars do not change their abundances as they orbit.
-
-We make this point clear in a different way in \figurename~YYY, in which
-we have transformed into action--angle coordinates in phase space (CITE)
-and we show scatterplots of the abundances as a function of conjugate
-angles $\theta_z$, conjugate to the vertical actions $J_z$, for stars near
-the orbits plotted in \figurename~XXX.
-Using the fiducial potential to convert to actions and angles,
-the abundance distribution is similar at different
-angles $\theta_z$, or on different parts of the orbit.
-Along the orbits generated by the low-mass-disk and high-mass-disk potentials,
-the abundance distribution shows clear $m=2$ (or $\exp i\,2\,\theta_z$) dependences
-on vertical angle $\theta_z$.
-That is, just by plotting the abundances versus angle, we can make
-inferences about the mass of the disk, or---more generally---the
-gravitational potential of the Milky Way.
-
-In order to make the abundance--angle plots in \figurename~YYY, we had
-to DO SOME THINGS because we needed to visualize the global dependence
-on angle using all the stars on all different kinds of orbits.
-Because different orbits have different abundance-ratio
-distributions, this is not a trivial transformation of the data.
-In the inferences we do in \sectionname~AAA below, we
-will use regression (frequentist) or forward modeling (Bayes) to
-combine the data from stars on different orbits.
-
-...The point that this works at one to three dimensions. It requires
-abundance gradients, but not separability!  Of course you might not
-have abundance gradients in all three action directions.
-
-...The point that the method is combinatoric in abundance data.
-...
-One of the crazy things about all this is that any description of a general distribution in $D$-space
-requires a \emph{lot of parameters}.
-Even a trivial distribution---the Normal distribution---requires $0.5\,D\,(D+3)$ parameters for its
-complete description, and anything more complex has more.
-That means that there are a very large set of element-abundance statistics for which the
-six-gradient exists or could be constraining for this project.
-Not all of these parameters can be reliably measured in a finite data set,
-let alone reliably seen to vary with phase-space location.
-However, we choose to see this bug as a feature:
-We have discovered, in effect, a \emph{combinatorically large set of constraints on the
-dynamical actions and conjugate angles}.
-
-...The point that this would be more complex in chaotic regions, and
-maybe effectively inapplicable?
-
-...The point that this doesn't depend on selection, provided that
-stellar properties don't vary strongly with abundnaces, and that
-abundance-measurement biases don't depend strongly on stellar
-parameters. Both assumptions wrong in detail.
-
-... The point that there will be frequentist statistics or
-optimizations, and also Bayesian approaches.  The point that Bayes and
-frequentism look very different here. Call out to orbital roulette,
-and to Bovy et al.
-
-In what follows, a very limited project...
 
 \section{Data}
 \label{sec:data}
+
+% Notebook: figures/APOGEE-sample.ipynb
+\begin{figure}[!tp]
+  \begin{center}
+  \includegraphics[width=\textwidth]{mh-am-xy.pdf}
+  \end{center}
+  \caption{%
+    The data sample used in this project.
+    Each panel shows a 2D histogram of the stars.
+    \textsl{Top panel:}
+    Bulk abundance ratios measured by \apogee\ and a selection boundary (dashed
+    line) used to exclude the ``high-alpha'' stars that are generally older and
+    kinematically hotter.
+    \textsl{Lower left panel:}
+    Positions of the stars in the parent sample projected onto the Galactic
+    plane, showing the spherical spatial cut and highly non-uniform (\apogee)
+    spatial selection.
+    Heliocentric distances to the stars are obtained by na\"ively inverting
+    their \gaia\ parallax measurements.
+    \textsl{Lower right panel:}
+    The distributions of stars in the parent sample in vertical $z, v_z$ phase
+    space.
+    This panel shows that the sample is less populated at low $z$ (mainly
+    because of the \apogee\ selection function), which in turn shows that the
+    sample is less populated at certain values of vertical angle, $\theta_z$.
+    The methods presented in this paper do not require that all angles are
+    equally populated in the sample.
+    \label{fig:mh-am-xy}
+    }
+\end{figure}
 
 In our toy demonstrations below, our main data source is a cross-match between
 spectroscopic data from the \apogee\ surveys \citep{Majewski:2017} and
@@ -579,37 +404,6 @@ parallax measurements for $>1$ billion stars limited only by their apparent
 magnitudes (\gaia\ $G \lesssim 20.7$).
 Here we use parallax and proper motion measurements released in \gaia\ \dr{2}
 \citep{Gaia-Collaboration:2018, Gaia-astrometric:2018}.
-
-% Notebook: figures/APOGEE-sample.ipynb
-\begin{figure}[!tp]
-  \begin{center}
-  \includegraphics[width=\textwidth]{mh-am-xy.pdf}
-  \end{center}
-  \caption{%
-    The data sample used in this project.
-    Each panel shows a 2-d histogram of the stars.
-    \textsl{Top panel:}
-    A plot of abundance ratios measured by \apogee\ and a selection boundary.
-    This panel shows the bimodality of stars in abundance space.
-    We choose the sample in a polygonal box in this diagram to exclude older
-    stars that are generally more kinematically hot.
-    \textsl{Lower left panel:}
-    A plot of the positions of the stars in the sample, showing the
-    spherical (APW: CHECK) spatial cut.
-    Heliocentric distances to the stars are obtained by APW SAY THINGS.
-    This panel shows that the \apogee\ selection function is a mixture of
-    pencil beams.
-    \textsl{Lower right panel:}
-    A plot of the vertical $z, v_z$ phase space.
-    This panel shows that the sample is less populated at low $z$, which
-    in turn shows that it is less populated at certain values
-    of vertical angle $\theta_z$. This non-uniformity is caused by
-    \apogee\ selection and interstellar extinction; the methods presented
-    in this paper do not require that all angles be equally populated in
-    the sample.
-    \label{fig:mh-am-xy}
-    }
-\end{figure}
 
 We cross-match the \apogee\ sample to \gaia\ \dr{2} using the \apogee-provided
 \acronym{2MASS} \citep{Skrutskie:2006} identifiers, and the \gaia-provided
@@ -660,6 +454,8 @@ However, since the demonstrations that make use of these distance measurements
 below are meant to be illustrative examples, and since our methodology should be
 relatively insensitive to selection effects, we ignore these details in what
 follows.
+This sample is visualized in bulk element abundance ratios and Galactocentric
+positions in \figurename~\ref{fig:mh-am-xy}.
 
 
 \section{Milky Way mass model and computing actions}
@@ -698,12 +494,11 @@ recent enclosed mass measurements.\footnote{As described in
 However, the mass of the disk is then adjusted to match a circular velocity of
 $v_{\rm circ}(R_\odot) = 229~\kms$ at the solar radius \citep{Eilers:2019}.
 Our fiducial mass model therefore adopts the default \texttt{MilkyWayPotential}
-parameters except for the disk mass, which is set to $M_{\rm disk} = M_{\rm
-disk}^\star = 6.526 \times 10^{10}~\Msun$.
+parameters except for the disk mass, which is set to $\mdisk^\star = 6.526
+\times 10^{10}~\Msun$.
 
 In addition to the fiducial mass model, we create a set of potential models by
-varying the disk mass between $M_{\rm disk} = 0.4$ to $1.8 \times M_{\rm
-disk}^\star$ (in steps of $0.1\times M_{\rm disk}^\star$).
+varying the disk mass between $\mratio = 0.4$--1.8 (in steps of 0.1).
 For each of these models, we adjust the dark matter halo mass to keep the
 circular velocity at the solar radius, $v_{\rm circ}(R_\odot)$, constant.
 
@@ -728,6 +523,144 @@ our parent sample (see \sectionname~\ref{sec:data}) in each of the 15 potential
 models with different disk-mass to halo-mass ratios (see above).
 We parallelize the computation of the actions using the Python package
 \package{schwimmbad} \citep{schwimmbad}.
+
+
+\section{Motivation from Observed Element Abundance Gradients}
+\label{sec:motivation}
+
+% Notebook: figures/APOGEE-zvz-orbits.ipynb
+\begin{figure}[!tp]
+  \begin{center}
+  \includegraphics[width=\textwidth]{abundance-zvz-grid.pdf}
+  \end{center}
+  \caption{%
+    The means of various (logarithmic) abundance ratios as a function of
+    Galactic vertical height $z$ and vertical velocity $v_z$.
+    Averages are taken in $z, v_z$ boxels.
+    The stars at lower $|z|$ and lower $|v_z|$ (that is, the stars with
+    lower overall vertical action $J_z$) show higher overall metallicity
+    on average, but lower alpha-to-iron.
+    These plots are somewhat affected by \apogee\ selection effects, in
+    that different $z, v_z$ boxels are projections through different extents
+    in Galactocentric radius (see \figurename~\ref{fig:mh-am-xy}).
+    This explains some of the visible asymmetries.
+  \label{fig:zvz-grid}
+  }
+\end{figure}
+
+A significant motivation for his work came from plots of elemental abundance
+ratios of stars as a function of vertical height $z$ and vertical velocity $v_z$
+in Galactocentric Cartesian coordinates.
+Examples are shown in \figurename~\ref{fig:zvz-grid}, which show the mean
+abundance ratios of stars in bins of their vertical phase-space coordinates,
+using data from the \apogee\ and \gaia\ surveys (see
+\sectionname~\ref{sec:data}).
+In these plots, the eye is drawn to \emph{abundance gradients}:
+The stars at small heights and small vertical velocities have different
+abundance ratios, on average, than stars at large heights and large vertical
+velocities.
+But these positional and velocity gradients are related:
+Stars at large absolute vertical velocities $v_z$ will, as they orbit, reach
+large absolute vertical positions $z$ (far from the Galactic plane, that is),
+and stars at large absolute vertical positions will, in the future, reach large
+absolute vertical velocities.
+That is, the stars will orbit in the Galaxy, which projects onto this $z$--$v_z$
+plane as (to zeroth order) roughly elliptical trajectories.
+For example, \figurename~\ref{fig:zvz-demo} shows two Galactic orbits computed
+in a 3D model for the Milky Way (see \sectionname~\ref{sec:mw-model}) in
+different projections of phase-space coordinates:
+In the space of $z$--$v_z$ (center panel), a Galactic orbit will form a
+close-to-elliptical band whose enclosed area scales with the vertical action,
+$J_z$, whose thickness depends on the eccentricity of the orbit, and a given
+position on its ``ellipse'' can nearly be mapped to a vertical angle,
+$\theta_z$.
+
+% Notebook: figures/zvz-orbit-demo.ipynb
+\begin{figure}[!tp]
+  \begin{center}
+  \includegraphics[width=\textwidth]{zvz-orbit-demo.pdf}
+  \end{center}
+  \caption{%
+    \textsl{Left panel:} Two orbits projected onto the plane of
+    Galactic vertical height $z$ and Galactocentric cylindrical radius
+    $R$. The orbits fill the surfaces of 3-tori in 6-d phase space.
+    \textsl{Middle panel:} The same two orbits, but projected onto the plane
+    of vertical height $z$ and vertical velocity $v_z$. In this projection,
+    it becomes clearer that the orbital lines are
+    colored by the angle $\theta_z$ that is conjugate to vertical action $J_z$.
+    The inset shows that conjugate angle wraps non-trivially, because the action
+    (by construction) wraps at constant angular velocity, whereas the vertical period
+    is a (weak) function of the other orbital phases.
+    Note that although this projection is close to ``face on'' for these two
+    orbits, the fact that they fills the surfaces of 3-tori means that they
+    project to finite-width bands in $z, v_z$ space.
+    \textsl{Right panel:} The same two orbits, but now plotted in vertical-action,
+    vertical-angle space. In this space, the two orbits trace perfect circles.
+  \label{fig:zvz-demo}
+  }
+\end{figure}
+
+To very high precision, stars do not change their abundances as they orbit.
+One consequence of this is a new method for inferring the orbit structure of the
+Milky Way:
+If two small neighborhoods in phase space lie on the same orbit---that is, they
+correspond to the same dynamical actions but with different conjugate
+angles---they must contain stars with the same distribution of element
+abundances.
+This prediction depends on many detailed assumptions, such as that the Galaxy is
+(approximately) phase mixed, and that the potential is (approximately) time
+invariant and integrable.
+And of course the \emph{usefulness} of this prediction for inference depends on
+the existence of gradients: If there are no element-abundance-ratio gradients,
+there will be no information to work with.
+
+For the sake of illustration and simplicity, we visualize and demonstrate these
+concepts using the vertical kinematics of stars in our parent sample.
+\figurename~\ref{fig:zvz-mgfe} again shows the mean \abunratio{Mg}{Fe} abundance
+ratios (in all panels), but now with two overlaid orbits (white overlaid bands)
+computed in three different Milky Way models (with varied disk mass, as
+indicated; see \sectionname{sec:mw-model}).
+The two orbits were chosen for illustrative purposes (one with low $J_z$, one
+with higher $J_z$), and are defined such that they have the same values of their
+three actions $(J_R, J_\phi, J_z)$ in all mass models.
+In the fiducial mass model ($\mratio = 1.0$), the two overlaid orbits nearly
+follow mean abundance contours.
+In the model in which the disk is made less massive (and the halo more massive
+to keep the circular velocity constant; $\mratio = 0.4$), the orbits change
+shape:
+There is more positional extent to an orbit relative to its velocity extent.
+If stars were traveling on these lower-disk-mass orbits, they would have to
+obtain higher abundances when they are passing through the disk midplane,
+and lower abundances when they are at their greatest absolute vertical heights,
+which is absurd: Stars do not change their abundances as they orbit.
+In our method below, we utilize this fact to infer the disk mass.
+
+
+% Notebook: figures/APOGEE-zvz-orbits.ipynb
+\begin{figure}[!tp]
+  \begin{center}
+  \includegraphics[width=\textwidth]{zvz-mean-MG_FE}
+  \end{center}
+  \caption{%
+    \textsl{Left panel:} Repeat of the $\mgfe$ panel of \figurename~\ref{fig:zvz-grid}.
+    \textsl{Other panels:} Same as the left panel, but with the two orbits
+    from \figurename~\ref{fig:zvz-demo}
+    over-plotted, for three different Milky Way potentials.
+    These three potentials have the fiducial Milky Way disk mass (see text
+    for details), or a disk less massive by a factor of 0.4 or more
+    massive by a factor of 1.6, as noted in each panel title.
+    All potentials are constrained to have a circular velocity at the
+    Solar circle of $229\,\kms$.
+    \emph{Which of the three panels appears most like the orbits are
+    coincident with isopleths of the mean abundance?}
+    This question is asked for illustrative purposes only: These
+    plots distort the data by projection in phase space.
+    In the methods used for the inferences we perform in
+    \sectionname~XXX, all averages are performed in tiny
+    three-dimensional action neighborhoods; we don't project the data in this way.
+  \label{fig:zvz-mgfe}
+  }
+\end{figure}
 
 
 \section{Assumptions}
@@ -881,7 +814,7 @@ structures.
     to the dependence of \mgfe\ abundance deviation on vertical angle $\theta_z$
     (the blue lines in \figurename~\ref{fig:sinusoid-fits}),
     as a function of the disk-mass
-    parameter $M_\disk / M^\star$. The data points show the values of the disk-mass
+    parameter \mratio. The data points show the values of the disk-mass
     parameter at which we performed the sine-and-cosine fits; the vertical error bars
     show the bootstrap uncertainties.
     The amplitude of the $\cos 2\theta_z$ term is
@@ -900,7 +833,7 @@ structures.
     These figures show that we can precisely measure the disk mass, and also
     strongly suggest that the data want a different value for the disk midplane.
     APW TODO: add point with horizontal error bar showing zero-crossing value
-    APW TODO: The x axis is properly ``$M_\disk / M^\star$''.
+    APW TODO: The x axis is properly ``$\mratio$''.
     APW TODO: Should we use the $a_1, b_1, a_2, b_2$ notation I use in the text here
     too?
   \label{fig:coeff-mdisk}
@@ -929,11 +862,11 @@ mass of the Milky Way disk, locally.
     The measurement shown in the $\cos 2\theta_z$ panel of
     \figurename~\ref{fig:coeff-mdisk} is shown here as the $\mgfe$ measurement.
     The band shows the inverse-variance-weighted mean value for the disk-mass
-    parameter $M_\disk / M^\star$ and its formal uncertainty.
+    parameter $\mratio$ and its formal uncertainty.
     This figure shows that the different element abundance ratios deliver somewhat
     inconsistent estimates for the disk mass; these inconsistencies are discussed
     in the text.
-    APW TODO: The y axis is properly ``estimated $M_\disk / M^\star$''.
+    APW TODO: The y axis is properly ``estimated $\mratio$''.
   \label{fig:inferred-mdisk-elems}
   }
 \end{figure}
@@ -1049,6 +982,96 @@ have addressed all of these above):
   action, and the sensitivity of that action and angle to the potential
   parameters.
 \end{itemize}
+
+\textbf{APW SAYS: Hogg text moved down here from earlier}
+
+There are many ways to describe the fundamental prediction that underlies \methodname.
+Here are a few:
+\begin{itemize}
+\item
+  Stars don't change their abundances as they orbit!  Stellar
+  abundance ratios can depend on the three invariant actions, but they
+  can't depend on the conjugate angles, which wind up arbitrarily with time.
+  This can be seen as a kinematic description of the concept underlying this \documentname.
+\item
+  Or, equivalently, abundance gradients taken in 6-dimensional phase space will be
+  locally perpendicular, everywhere, to the orbital 3-tori in phase space.
+  This is a local-geometry description of the concept.
+\item
+  Or, equivalently, at every location in 6-d phase space, there are a set of 6-d
+  gradient vectors, which are the derivatives of all measurable
+  moments of all measurable element-abundance ratios with respect to
+  the 6 phase-space coordinates. These gradient vectors will span a
+  local 3-d subspace, and this subspace will be orthogonal to the surfaces
+  of the orbital tori at that location.
+  This is a mathematics-of-gradients description.
+\item
+  Or, equivalently, the orbital tori will be level 3-surfaces in 6-d phase space of any
+  moments or statistics of the element-abundance distribution.
+  This is a global-geometry description.
+\item
+  Or, equivalently, a predictive model for the element abundances of stars
+  that is given the freedom to depend on both actions and angles will do no
+  better at predicting stellar element abundances than a model that is only
+  given the freedom to depend on actions alone.
+  This is an information-theory description.
+\end{itemize}
+
+
+We make this point clear in a different way in \figurename~YYY, in which
+we have transformed into action--angle coordinates in phase space (CITE)
+and we show scatterplots of the abundances as a function of conjugate
+angles $\theta_z$, conjugate to the vertical actions $J_z$, for stars near
+the orbits plotted in \figurename~XXX.
+Using the fiducial potential to convert to actions and angles,
+the abundance distribution is similar at different
+angles $\theta_z$, or on different parts of the orbit.
+Along the orbits generated by the low-mass-disk and high-mass-disk potentials,
+the abundance distribution shows clear $m=2$ (or $\exp i\,2\,\theta_z$) dependences
+on vertical angle $\theta_z$.
+That is, just by plotting the abundances versus angle, we can make
+inferences about the mass of the disk, or---more generally---the
+gravitational potential of the Milky Way.
+
+In order to make the abundance--angle plots in \figurename~YYY, we had
+to DO SOME THINGS because we needed to visualize the global dependence
+on angle using all the stars on all different kinds of orbits.
+Because different orbits have different abundance-ratio
+distributions, this is not a trivial transformation of the data.
+In the inferences we do in \sectionname~AAA below, we
+will use regression (frequentist) or forward modeling (Bayes) to
+combine the data from stars on different orbits.
+
+...The point that this works at one to three dimensions. It requires
+abundance gradients, but not separability!  Of course you might not
+have abundance gradients in all three action directions.
+
+...The point that the method is combinatoric in abundance data.
+...
+One of the crazy things about all this is that any description of a general distribution in $D$-space
+requires a \emph{lot of parameters}.
+Even a trivial distribution---the Normal distribution---requires $0.5\,D\,(D+3)$ parameters for its
+complete description, and anything more complex has more.
+That means that there are a very large set of element-abundance statistics for which the
+six-gradient exists or could be constraining for this project.
+Not all of these parameters can be reliably measured in a finite data set,
+let alone reliably seen to vary with phase-space location.
+However, we choose to see this bug as a feature:
+We have discovered, in effect, a \emph{combinatorically large set of constraints on the
+dynamical actions and conjugate angles}.
+
+...The point that this would be more complex in chaotic regions, and
+maybe effectively inapplicable?
+
+...The point that this doesn't depend on selection, provided that
+stellar properties don't vary strongly with abundnaces, and that
+abundance-measurement biases don't depend strongly on stellar
+parameters. Both assumptions wrong in detail.
+
+... The point that there will be frequentist statistics or
+optimizations, and also Bayesian approaches.  The point that Bayes and
+frequentism look very different here. Call out to orbital roulette,
+and to Bovy et al.
 
 \acknowledgments
 It is a pleasure to thank
