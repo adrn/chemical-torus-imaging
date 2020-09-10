@@ -16,6 +16,7 @@ import gala.integrate as gi
 from thriftshop.potentials import potentials
 from thriftshop.config import galcen_frame
 
+
 def action_worker(task):
     (i1, i2), t, pot, potential_name, cache_path = task
 
