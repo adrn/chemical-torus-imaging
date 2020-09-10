@@ -26,7 +26,6 @@ def action_worker(task):
     print(f"Worker {i1} processing {len(t)} stars, saving to {cache_filename}")
 
     # Read APOGEE data
-    coord.galactocentric_frame_defaults.set('v4.0')
     c = coord.SkyCoord(ra=t['RA'] * u.deg,
                        dec=t['DEC'] * u.deg,
                        distance=1000 / t['GAIA_PARALLAX'] * u.pc,
