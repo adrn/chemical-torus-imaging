@@ -5,74 +5,22 @@ import os
 # Third-party
 from astropy.utils import iers
 iers.conf.auto_download = False
-import astropy.coordinates as coord
 import astropy.table as at
-import astropy.units as u
-import numpy as np
-import gala.dynamics as gd
-import gala.integrate as gi
 
 # This project
 from thriftshop.potentials import potentials
-from thriftshop.config import galcen_frame
+from thriftshop.actions_multiproc import action_worker
 
 
-def action_worker(task):
-    (i1, i2), t, pot, potential_name, cache_path = task
+def this_action_worker(task):
+    (i1, i2), t, potential_name, cache_path = task
 
     cache_filename = os.path.join(cache_path,
                                   f'tmp-{potential_name}-{i1}-{i2}.fits')
 
     print(f"Worker {i1} processing {len(t)} stars, saving to {cache_filename}")
 
-    # Read APOGEE data
-    c = coord.SkyCoord(ra=t['RA'] * u.deg,
-                       dec=t['DEC'] * u.deg,
-                       distance=1000 / t['GAIA_PARALLAX'] * u.pc,
-                       pm_ra_cosdec=t['GAIA_PMRA'] * u.mas/u.yr,
-                       pm_dec=t['GAIA_PMDEC'] * u.mas/u.yr,
-                       radial_velocity=t['VHELIO_AVG'] * u.km/u.s)
-    galcen = c.transform_to(galcen_frame)
-    w0s = gd.PhaseSpacePosition(galcen.data)
-
-    data = {'APOGEE_ID': [], 'actions': [], 'angles': [], 'freqs': []}
-    aaf_units = {'actions': u.km/u.s*u.kpc, 'angles': u.rad, 'freqs': 1/u.Gyr}
-    for n in range(w0s.shape[0]):
-        apid = t['APOGEE_ID'][n]
-        data['APOGEE_ID'].append(apid)
-
-        # First integrate a little bit of the orbit with Leapfrog to estimate
-        # the orbital period
-        test_orbit = pot.integrate_orbit(w0s[n], dt=2*u.Myr, t1=0, t2=1*u.Gyr)
-        P_guess = test_orbit.estimate_period()
-
-        if np.isnan(P_guess):
-            print(f'failed to estimate period for {apid}')
-
-            # Failed to estimate period - usually this means the data were very
-            # noisy and the orbit was unbound or wacky
-            for k in aaf_units.keys():
-                data[k].append([np.nan] * 3 * aaf_units[k])
-            continue
-
-        # Integrate the orbit with a high-order integrator for many periods
-        orbit = pot.integrate_orbit(w0s[n], dt=1*u.Myr, t1=0, t2=100 * P_guess,
-                                    Integrator=gi.DOPRI853Integrator)
-
-        # Use the Sanders & Binney action solver:
-        try:
-            aaf = gd.find_actions(orbit, N_max=8)  # N_max is a MAGIC NUMBER
-        except Exception as e:
-            print(f'failed to solve actions for {apid}:\n\t{str(e)}')
-            for k in aaf_units.keys():
-                data[k].append([np.nan] * 3 * aaf_units[k])
-            continue
-
-        for k in aaf_units.keys():
-            data[k].append(aaf[k].to(aaf_units[k]))
-
-    for k in aaf_units.keys():
-        data[k] = u.Quantity(data[k])
+    data = action_worker([(i1, i2), t, potential_name])
 
     # Write results from this worker to tmp file
     tbl = at.Table(data)
@@ -142,12 +90,12 @@ def main(pool, data_filename):
                   f"{all_filenames[potential_name]}")
             continue
 
-        tasks = batch_tasks(n_batches=max(1, pool.size - 1),
+        tasks = batch_tasks(n_batches=max(1, pool.size),
                             arr=t,
-                            args=(potential, potential_name, cache_path))
+                            args=(potential_name, cache_path))
 
         sub_filenames = []
-        for sub_filename in pool.map(action_worker, tasks):
+        for sub_filename in pool.map(this_action_worker, tasks):
             sub_filenames.append(sub_filename)
 
         combine_output(all_filenames[potential_name],
