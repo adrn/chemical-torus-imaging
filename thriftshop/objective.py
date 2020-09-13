@@ -39,7 +39,8 @@ class TorusImagingObjective:
             mhalos = []
             for mdisk_f in tqdm(pot_grid):
                 pot = get_mw_potential(mdisk_f * fiducial_mdisk)
-                mhalos.append(pot['halo'].parameters['m'][0] / fiducial_mdisk)
+                mhalos.append(pot['halo'].parameters['m'] / fiducial_mdisk)
+            mhalos = np.squeeze(mhalos)
 
             with open(path, 'wb') as f:
                 pickle.dump((pot_grid, mhalos), f)
