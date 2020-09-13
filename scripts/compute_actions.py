@@ -8,6 +8,8 @@ iers.conf.auto_download = False
 import astropy.table as at
 
 # This project
+from thriftshop.config import cache_path
+from thriftshop.data import load_apogee_sample
 from thriftshop.potentials import potentials
 from thriftshop.actions_multiproc import action_worker
 
@@ -64,11 +66,6 @@ def combine_output(all_filename, cache_path, potential_name):
 def main(pool, data_filename):
     from schwimmbad.utils import batch_tasks
 
-    # Path to store generated datafiles
-    cache_path = os.path.abspath(os.path.join(
-        os.path.split(os.path.abspath(__file__))[0], '../cache'))
-    os.makedirs(cache_path, exist_ok=True)
-
     # Register exit command for each potential
     all_filenames = {}
     for potential_name in potentials:
@@ -79,9 +76,7 @@ def main(pool, data_filename):
                         cache_path,
                         potential_name)
 
-    # Load APOGEE data
-    t = at.Table.read(data_filename)
-    t = t[(t['GAIA_PARALLAX'] / t['GAIA_PARALLAX_ERROR']) > 5]
+    t, c = load_apogee_sample(data_filename)
 
     # Execute worker on batches:
     for potential_name, potential in potentials.items():
