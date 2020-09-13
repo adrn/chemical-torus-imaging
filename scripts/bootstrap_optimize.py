@@ -40,11 +40,14 @@ def main(pool, overwrite=False):
     # TODO: loop over all elements
     # for elem_name in elem_names:
     for elem_name in ['MG_FE']:
+        print(f"Running element: {elem_name}")
+
         this_cache_filename = cache_path / f'optimize-results-{elem_name}.csv'
         if this_cache_filename.exists() and not overwrite:
             print(f"Cache file exists for {elem_name}: {this_cache_filename}")
             continue
 
+        print("Optimizing with full sample to initialize bootstraps...")
         obj = TorusImagingObjective(t, c, elem_name, tree_K=tree_K)
         full_sample_res = obj.minimize()
         if not full_sample_res.success:
@@ -52,12 +55,16 @@ def main(pool, overwrite=False):
                   f"{elem_name}")
             continue
 
+        print(f"Finished optimizing full sample: {full_sample_res.x}")
+
         tasks = []
         for k in range(bootstrap_K):
             idx = rnd.choice(len(t), len(t), replace=True)
             obj = TorusImagingObjective(t[idx], c[idx], elem_name,
                                         tree_K=tree_K)
             tasks.append((k, obj, full_sample_res.x))
+
+        print("Done setting up bootstrap samples - running pool.map() ...")
 
         results = []
         for res in pool.map(worker, tasks):
