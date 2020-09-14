@@ -16,10 +16,13 @@ from thriftshop.objective import TorusImagingObjective
 def worker(task):
     i, obj, x0 = task
     try:
-        res = obj.minimize(x0=x0)
+        res = obj.minimize(x0=x0, method="nelder-mead",
+                           options=dict(maxiter=1024))
     except Exception as e:
         print(f"{i} failed: {str(e)}")
         return None
+
+    print(f"{i} finished optimizing: {res}")
 
     if not res.success:
         return np.nan * res.x
@@ -49,7 +52,8 @@ def main(pool, overwrite=False):
 
         print("Optimizing with full sample to initialize bootstraps...")
         obj = TorusImagingObjective(t, c, elem_name, tree_K=tree_K)
-        full_sample_res = obj.minimize()
+        full_sample_res = obj.minimize(method="nelder-mead",
+                                       options=dict(maxiter=1024))
         if not full_sample_res.success:
             print(f"FAILED TO CONVERGE: optimize for full sample failed for "
                   f"{elem_name}")
