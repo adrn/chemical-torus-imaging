@@ -40,9 +40,8 @@ def main(pool, overwrite=False):
     # TODO: make seed configurable?
     rnd = np.random.default_rng(seed=42)
 
-    # TODO: loop over all elements
-    # for elem_name in elem_names:
-    for elem_name in ['MG_FE']:
+    # loop over all elements
+    for elem_name in elem_names:
         print(f"Running element: {elem_name}")
 
         this_cache_filename = cache_path / f'optimize-results-{elem_name}.csv'
