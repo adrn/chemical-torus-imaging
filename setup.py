@@ -2,19 +2,19 @@ import os
 from setuptools import find_packages, setup
 
 setup(
-    name="thriftshop",
+    name="totoro",
     use_scm_version={
-        "write_to": os.path.join("thriftshop", "version.py"),
+        "write_to": os.path.join("totoro", "version.py"),
         "write_to_template": '__version__ = "{version}"\n',
     },
-    description="Check yo tags",
+    description="Chemical Torus Imaging",
     author="adrn",
     author_email="adrianmpw@gmail.com",
-    url="https://github.com/adrn/thriftshop",
+    url="https://github.com/adrn/chemical-torus-imaging",
     license="MIT",
     packages=find_packages(),
     python_requires=">=3.6",
-    # package_data={"thriftshop": ["data/filename"]},
+    # package_data={"totoro": ["data/filename"]},
     # include_package_data=True,
     zip_safe=False,
     install_requires=[
@@ -22,6 +22,7 @@ setup(
         "scipy",
         "astropy",
         "matplotlib",
-        "astro-gala"
+        "astro-gala",
+        "galpy
     ]
 )

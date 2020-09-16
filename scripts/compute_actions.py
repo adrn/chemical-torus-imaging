@@ -4,10 +4,10 @@ iers.conf.auto_download = False
 import gala.dynamics as gd
 
 # This project
-from thriftshop.config import cache_path, galcen_frame
-from thriftshop.data import load_apogee_sample
-from thriftshop.potentials import potentials, galpy_potentials
-from thriftshop.galpy_helpers import StaeckelFudgeGrid
+from totoro.config import cache_path, galcen_frame
+from totoro.data import load_apogee_sample
+from totoro.potentials import potentials, galpy_potentials
+from totoro.galpy_helpers import StaeckelFudgeGrid
 
 
 def worker(task):

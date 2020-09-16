@@ -8,9 +8,9 @@ import astropy.table as at
 import numpy as np
 
 # This project
-from thriftshop.config import cache_path, elem_names
-from thriftshop.data import load_apogee_sample
-from thriftshop.objective import TorusImagingObjective
+from totoro.config import cache_path, elem_names
+from totoro.data import load_apogee_sample
+from totoro.objective import TorusImagingObjective
 
 
 def worker(task):
