@@ -53,10 +53,15 @@ def get_staeckel_aaf(w, potential, delta=None):
     return aaf
 
 
-def get_delta_Rz_interp(galpy_potential, grid_step=0.05):
+def get_delta_Rz_interp(galpy_potential,
+                        grid_step=0.05*u.kpc, grid_size=2.5*u.kpc):
+
+    grid_size = grid_size.to_value(u.kpc)
+    grid_step = grid_step.to_value(u.kpc)
+
     # HACK: magic numbers
-    Rz_grids = (np.arange(8-2.5, 8+2.5 + 1e-5, grid_step),
-                np.arange(-2.5, 2.5 + 1e-5, grid_step))
+    Rz_grids = (np.arange(8-grid_size, 8+grid_size + 1e-5, grid_step),
+                np.arange(-grid_size, grid_size + 1e-5, grid_step))
     Rz_grid = np.stack(list(map(np.ravel, np.meshgrid(*Rz_grids)))).T
 
     delta_staeckels = []
