@@ -80,19 +80,20 @@ class TorusImagingObjective:
 
     def __call__(self, p):
         mdisk_f, zsun, vzsun = p
+
+        if not 0.4 < mdisk_f < 1.8:
+            return np.inf
+
         coeff = self.get_coeffs(mdisk_f, zsun, vzsun)
         val = coeff[1]**2 + coeff[2]**2 + coeff[3]**2
         return val
 
-    def minimize(self, x0=None, bounds=None, **kwargs):
-        kwargs.setdefault('method', 'powell')
-
-        if bounds is None:
-            bounds = [(0.4, 1.8), (-50, 50), (-20, 20)]
+    def minimize(self, x0=None, **kwargs):
+        kwargs.setdefault('method', 'nelder-mead')
 
         if x0 is None:
             x0 = [1.0, 20.8, 7.78]  # Fiducial values
 
-        res = minimize(self, x0=x0, bounds=bounds, **kwargs)
+        res = minimize(self, x0=x0, **kwargs)
 
         return res
