@@ -7,33 +7,7 @@ import gala.dynamics as gd
 from .potentials import potentials, galpy_potentials
 from .galpy_helpers import get_staeckel_aaf
 from .config import vcirc
-
-aaf_units = {'actions': u.km/u.s*u.kpc, 'angles': u.degree, 'freqs': 1/u.Gyr}
-
-
-def safe_get_actions(potential, w0, N_max=10, dt=1*u.Myr, n_periods=128):
-    # First integrate a little bit of the orbit with Leapfrog to estimate
-    # the orbital period
-    test_orbit = potential.integrate_orbit(w0, dt=2*u.Myr, t1=0, t2=1*u.Gyr)
-    P_guess = test_orbit.estimate_period()
-
-    if np.isnan(P_guess):
-        return {k: np.full(3, np.nan) * aaf_units[k] for k in aaf_units}
-
-    # Integrate the orbit with a high-order integrator for many periods
-    orbit = potential.integrate_orbit(
-        w0, dt=dt,
-        t1=0, t2=n_periods * P_guess,
-        Integrator=gi.DOPRI853Integrator)
-
-    # Use the Sanders & Binney action solver:
-    try:
-        aaf = gd.find_actions(orbit, N_max=N_max)
-    except Exception:
-        aaf = {k: np.full(3, np.nan) * aaf_units[k] for k in aaf_units}
-
-    aaf = {k: aaf[k].to(aaf_units[k]) for k in aaf_units.keys()}
-    return aaf
+from .actions_o2gf import safe_get_actions
 
 
 def _same_actions_objfunc_staeckel(p, pos, vy, potential_name, match_actions):
@@ -112,7 +86,7 @@ def get_w0s_with_same_actions(fiducial_w0, vy=None, staeckel=False):
                                  vy.to_value(u.km/u.s),
                                  name,
                                  fiducial_actions[n]),
-                           method='powell',
+                           method='nelder-mead',
                            options=dict(maxfev=64))
 
             if res.fun > 1e-3:

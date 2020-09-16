@@ -12,14 +12,14 @@ from tqdm import tqdm
 
 from .config import galcen_frame, cache_path
 from .potentials import fiducial_mdisk, get_mw_potential, get_equivalent_galpy
-from .galpy_helpers import StaeckelAAFComputer
+from .actions_staeckel import StaeckelFudgeGrid
 from .atm import AbundanceTorusMaschine
 
 
 class TorusImagingObjective:
 
     def __init__(self, t, c, elem_name, tree_K=64):
-        self.aaf_comp = StaeckelAAFComputer()
+        self.aaf_comp = StaeckelFudgeGrid()
         self.c = c
         self.t = t['APOGEE_ID', elem_name, f'{elem_name}_ERR']
         self.elem_name = elem_name
