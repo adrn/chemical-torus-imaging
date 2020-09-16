@@ -7,7 +7,7 @@ import gala.dynamics as gd
 from thriftshop.config import cache_path, galcen_frame
 from thriftshop.data import load_apogee_sample
 from thriftshop.potentials import potentials, galpy_potentials
-from thriftshop.galpy_helpers import StaeckelAAFComputer
+from thriftshop.galpy_helpers import StaeckelFudgeGrid
 
 
 def worker(task):
@@ -30,7 +30,7 @@ def worker(task):
 def main(pool, data_filename):
 
     # Set up action solver:
-    aaf_computer = StaeckelAAFComputer()
+    aaf_computer = StaeckelFudgeGrid()
 
     tasks = []
     for potential_name in potentials:
