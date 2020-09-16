@@ -5,7 +5,7 @@ import gala.integrate as gi
 import gala.dynamics as gd
 
 from .potentials import potentials, galpy_potentials
-from .galpy_helpers import get_staeckel_actions
+from .galpy_helpers import get_staeckel_aaf
 from .config import vcirc
 
 aaf_units = {'actions': u.km/u.s*u.kpc, 'angles': u.degree, 'freqs': 1/u.Gyr}
@@ -44,9 +44,9 @@ def _same_actions_objfunc_staeckel(p, pos, vy, potential_name, match_actions):
     o = potentials[potential_name].integrate_orbit(
         w0, dt=1.*u.Myr, t1=0, t2=1 * u.Gyr,
         Integrator=gi.DOPRI853Integrator)
-    actions = get_staeckel_actions(o[::2],
-                                   galpy_potentials[potential_name])
-    actions = actions.mean(axis=-1)
+    aaf = get_staeckel_aaf(o[::2],
+                           galpy_potentials[potential_name])
+    actions = aaf['actions'].mean(axis=-1)
 
     _unit = (u.km/u.s * u.kpc)**2
     val = ((actions[0] - match_actions[0])**2 +
@@ -87,7 +87,7 @@ def get_w0s_with_same_actions(fiducial_w0, vy=None, staeckel=False):
             o = potentials['1.0'].integrate_orbit(
                 fiducial_w0[n], dt=0.5, t1=0, t2=2*u.Gyr)  # MAGIC NUMBERS
             fiducial_actions.append(
-                get_staeckel_actions(o, galpy_potentials['1.0']))
+                get_staeckel_aaf(o, galpy_potentials['1.0'])['actions'])
         else:
             fiducial_actions.append(
                 safe_get_actions(potentials['1.0'],
