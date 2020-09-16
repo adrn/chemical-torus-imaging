@@ -17,15 +17,16 @@ def main(overwrite=False):
     os.makedirs(data_path, exist_ok=True)
 
     parent_filename = os.path.join(data_path, 'apogee-parent-sample.fits')
+    parent_filename_higha = os.path.join(data_path,
+                                         'apogee-parent-sample-highalpha.fits')
     if os.path.exists(parent_filename) and not overwrite:
         print(f"Parent sample file already exists at {parent_filename}")
         return
 
     allstar = fits.getdata(allstar_filename)
-    # astronn = fits.getdata('/Users/apricewhelan/data/APOGEE_beta/apogee_astroNN-r13-l33-58932beta.fits')
 
     aspcap_bitmask = np.sum(2**np.array([
-        7,  # STAR_WARN
+        # 7,  # STAR_WARN
         23  # STAR_BAD
     ]))
     qual_mask = (
@@ -33,7 +34,7 @@ def main(overwrite=False):
         (allstar['LOGG'] > 1) &
         (allstar['TEFF'] < 6500) &
         (allstar['TEFF'] > 3500) &
-        (allstar['SNR'] > 40) &
+        (allstar['SNR'] > 20) &
         (allstar['FE_H'] > -3) &
         (allstar['MG_FE'] > -1) &
         ((allstar['ASPCAPFLAG'] & aspcap_bitmask) == 0)
@@ -87,8 +88,13 @@ def main(overwrite=False):
                   stars['ALPHA_M'])).T)
 
     main_mask = target_mask & thin_disk_mask
-    print(f"{main_mask.sum()} stars pass quality and targeting masks")
+    print(f"{main_mask.sum()} stars pass low-alpha quality and targeting masks")
     at.Table(stars[main_mask]).write(parent_filename, overwrite=True)
+
+    high_mask = target_mask & np.logical_not(thin_disk_mask)
+    print(f"{high_mask.sum()} stars pass high-alpha quality and targeting "
+          "masks")
+    at.Table(stars[high_mask]).write(parent_filename_higha, overwrite=True)
 
 
 if __name__ == '__main__':
