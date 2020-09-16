@@ -5,7 +5,7 @@ import astropy.units as u
 
 def load_apogee_sample(filename):
     t = at.Table.read(filename)
-    t = t[(t['GAIA_PARALLAX'] > 0.4) &
+    t = t[(t['GAIA_PARALLAX'] > 0.666) &
           ((t['GAIA_PARALLAX'] / t['GAIA_PARALLAX_ERROR']) > 5)]
 
     c = coord.SkyCoord(ra=t['RA'] * u.deg,
