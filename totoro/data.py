@@ -5,7 +5,8 @@ import matplotlib as mpl
 import numpy as np
 from pyia import GaiaData
 
-from .config import apogee_parent_filename, galah_parent_filename
+from .config import (apogee_parent_filename, galah_parent_filename,
+                     cache_path, plot_path)
 
 
 class Dataset:
@@ -234,3 +235,8 @@ datasets = {
                                       'FE_H': (-3, 1)},
                                      low_alpha=True)
 }
+
+for name in datasets:
+    for path in [plot_path, cache_path]:
+        this_path = path / name
+        this_path.mkdir(exist_ok=True)
