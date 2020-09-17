@@ -1,6 +1,7 @@
 import pathlib
 import astropy.table as at
 import astropy.units as u
+import matplotlib as mpl
 import numpy as np
 from pyia import GaiaData
 
@@ -41,6 +42,9 @@ class Dataset:
         # TODO: implement on subclasses
         return self.t
 
+    def __len__(self):
+        return len(self.t)
+
     @property
     def elem_ratios(self):
         if not hasattr(self, '_elem_ratios'):
@@ -68,6 +72,10 @@ class Dataset:
                                    "it must have the form ELEM_ELEM, not "
                                    f"{elem1}")
 
+        # Passed in an elem ratio provided by the table, e.g., FE_H
+        if elem2 is None and elem1 in self.elem_ratios:
+            return self.t[self.elem1]
+
         elem1 = str(elem1).upper()
         elem2 = str(elem2).upper()
 
@@ -83,7 +91,11 @@ class Dataset:
             return (self.t[self.elem_ratios[i1]] -
                     self.t[self.elem_ratios[i2]])
 
-    def filter(self, filters):
+    def get_mh_am_mask(self):
+        # TODO: implement on subclasses
+        return np.ones(len(self.t), dtype=bool)
+
+    def filter(self, filters, low_alpha=True):
         mask = np.ones(len(self.t), dtype=bool)
         for k, (x1, x2) in filters.items():
             if x1 is None and x2 is None:
@@ -100,7 +112,10 @@ class Dataset:
             else:
                 mask &= (arr >= x1) & (arr < x2)
 
-        return self[mask]
+        if low_alpha is not None:
+            alpha_mask = self.get_mh_am_mask(low_alpha)
+
+        return self[mask & alpha_mask]
 
     def __getitem__(self, slc):
         if isinstance(slc, int):
@@ -135,6 +150,30 @@ class APOGEEDataset(Dataset):
 
         return self.t[quality_mask & target_mask]
 
+    def get_mh_am_mask(self, low_alpha=True):
+        # See: 2-High-alpha-Low-alpha.ipynb
+        apogee_mh_alpham_nodes = np.array([
+            [0.6, -0.05],
+            [0.6, 0.04],
+            [0.15, 0.04],
+            [-0.5, 0.13],
+            [-0.9, 0.13],
+            [-1., 0.07],
+            [-0.2, -0.1],
+            [0.2, -0.1],
+            [0.6, -0.05]]
+        )
+
+        mh_alpham_path = mpl.path.Path(apogee_mh_alpham_nodes[:-1])
+        low_alpha_mask = mh_alpham_path.contains_points(
+            np.stack((self.t['M_H'], self.t['ALPHA_M']).T))
+
+        if low_alpha:
+            return low_alpha_mask
+
+        else:
+            return (~low_alpha) & (self.t['M_H'] > -1)
+
 
 class GALAHDataset(Dataset):
     _radial_velocity_name = 'rv_synt'
@@ -147,20 +186,53 @@ class GALAHDataset(Dataset):
 
         return self.t[quality_mask]
 
+    def get_mh_am_mask(self, low_alpha=True):
+        # See: 2-High-alpha-Low-alpha.ipynb
+        galah_mh_alpham_nodes = np.array([
+            [0.6, -0.05],
+            [0.6, 0.04],
+            [0.15, 0.04],
+            [-0.5, 0.13],
+            [-0.9, 0.13],
+            [-1., 0.07],
+            [-0.2, -0.15],
+            [0.2, -0.15],
+            [0.6, -0.07]]
+        )
+        galah_mh_alpham_nodes[:, 1] += 0.04
+
+        mh_alpham_path = mpl.path.Path(galah_mh_alpham_nodes[:-1])
+        low_alpha_mask = mh_alpham_path.contains_points(
+            np.stack((self.t['FE_H'], self.t['ALPHA_FE']).T))
+
+        if low_alpha:
+            return low_alpha_mask
+
+        else:
+            return (~low_alpha) & (self.t['FE_H'] > -1)
+
 
 apogee = APOGEEDataset(apogee_parent_filename)
 galah = GALAHDataset(galah_parent_filename)
 
-# datasets = {
-#     'apogee-rgb-loalpha': apogee.filter({'LOGG': (1, 3.5),
-#                                          'TEFF': (3500, 6500),
-#                                          'FE_H': (-3, 1)},
-#                                         low_alpha=True),
-#     'apogee-rgb-hialpha': apogee.filter({'LOGG': (1, 3.5),
-#                                          'TEFF': (3500, 6500),
-#                                          'FE_H': (-3, 1)},
-#                                         low_alpha=False)
-# }
+datasets = {
+    'apogee-rgb-loalpha': apogee.filter({'LOGG': (1, 3.),
+                                         'TEFF': (3500, 6500),
+                                         'FE_H': (-3, 1)},
+                                        low_alpha=True),
+    'apogee-ms-loalpha': apogee.filter({'LOGG': (3.75, 5),
+                                        'TEFF': (3500, 6500),
+                                        'FE_H': (-3, 1)},
+                                       low_alpha=True),
+    'galah-rgb-loalpha': galah.filter({'logg': (1, 3.3),
+                                       'teff': (3500, 6500),
+                                       'fe_h': (-3, 1)},
+                                      low_alpha=True),
+    'galah-ms-loalpha': galah.filter({'LOGG': (3.5, 5),
+                                      'TEFF': (3500, 6500),
+                                      'FE_H': (-3, 1)},
+                                     low_alpha=True)
+}
 
 # datasets = {
 #     'apogee-rgb-loalpha': APOGEEDataset(filter={'logg': (1, 3.5),
