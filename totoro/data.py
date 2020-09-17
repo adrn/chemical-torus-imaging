@@ -215,6 +215,7 @@ class GALAHDataset(Dataset):
 apogee = APOGEEDataset(apogee_parent_filename)
 galah = GALAHDataset(galah_parent_filename)
 
+# TODO: do we want high-alpha versions of these as well?
 datasets = {
     'apogee-rgb-loalpha': apogee.filter({'LOGG': (1, 3.),
                                          'TEFF': (3500, 6500),
@@ -233,15 +234,3 @@ datasets = {
                                       'FE_H': (-3, 1)},
                                      low_alpha=True)
 }
-
-# datasets = {
-#     'apogee-rgb-loalpha': APOGEEDataset(filter={'logg': (1, 3.5),
-#                                                 'teff': (3500, 6500)),
-#     'apogee-rgb-hialpha': APOGEEDataset(),
-#     'apogee-ms-loalpha': APOGEEDataset(),
-#     'apogee-ms-hialpha': APOGEEDataset(),
-#     'galah-rgb-loalpha': GALAHDataset(),
-#     'galah-rgb-hialpha': GALAHDataset(),
-#     'galah-ms-loalpha': GALAHDataset(),
-#     'galah-ms-hialpha': GALAHDataset(),
-# }
