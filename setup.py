@@ -23,6 +23,7 @@ setup(
         "astropy",
         "matplotlib",
         "astro-gala",
-        "galpy"
+        "galpy",
+        "pyia"
     ]
 )

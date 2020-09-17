@@ -12,9 +12,14 @@ fiducial_mdisk = 6.52551e10 * u.Msun
 pkg_path = pathlib.Path(__file__).resolve().parent.parent
 cache_path = pkg_path / 'cache'
 plot_path = pkg_path / 'plots'
+data_path = pkg_path / 'data'
 fig_path = pkg_path / 'tex/figures'
-for p in [plot_path, fig_path, cache_path]:
+for p in [plot_path, fig_path, cache_path, data_path]:
     p.mkdir(exist_ok=True)
+
+# Parent data samples:
+apogee_parent_filename = data_path / 'apogee-parent.fits'
+galah_parent_filename = data_path / 'galah-parent.fits'
 
 # Plotting config stuff (limits, units, etc.)
 zlim = 1.5  # kpc
@@ -38,6 +43,7 @@ plot_config = {
 # Subset of elements we plot in panels
 elem_names = ['FE_H', 'C_FE', 'N_FE', 'O_FE',
               'MG_FE', 'SI_FE', 'MN_FE', 'NI_FE']
+# TODO: drop SI_FE and replace with C/N. For Galah, li_fe?
 
 # Galactocentric frame
 coord.galactocentric_frame_defaults.set('v4.0')
