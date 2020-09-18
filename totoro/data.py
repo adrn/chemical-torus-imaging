@@ -127,6 +127,7 @@ class Dataset:
 
 
 class APOGEEDataset(Dataset):
+    _id_column = 'APOGEE_ID'
     _radial_velocity_name = 'VHELIO_AVG'
 
     # See: 2-High-alpha-Low-alpha.ipynb
@@ -179,6 +180,7 @@ class APOGEEDataset(Dataset):
 
 
 class GALAHDataset(Dataset):
+    _id_column = 'star_id'
     _radial_velocity_name = 'rv_synt'
 
     # See: 2-High-alpha-Low-alpha.ipynb

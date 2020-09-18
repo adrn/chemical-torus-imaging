@@ -18,17 +18,13 @@ def worker(task):
     galcen = d.c.transform_to(galcen_frame)
     w0 = gd.PhaseSpacePosition(galcen.data)
 
-    if aaf_filename.exists():
-        print(f"Actions exist for {data_name}, {potential_name} "
-              f"at {aaf_filename}")
-        return
-
     aaf = aaf_computer.get_aaf(w0, float(potential_name),
                                galpy_potentials[potential_name])
-    aaf.write(aaf_filename)
+    aaf[d._id_column] = d.t[d._id_column]
+    aaf.write(aaf_filename, overwrite=True)
 
 
-def main(pool):
+def main(pool, overwrite=False):
 
     # Set up action solver:
     aaf_computer = StaeckelFudgeGrid()
@@ -36,11 +32,15 @@ def main(pool):
     tasks = []
     for data_name in datasets.keys():
         for potential_name in potentials:
+            filename = cache_path / data_name / f'aaf-{potential_name}.fits'
+            if filename.exists() and not overwrite:
+                continue
+
             tasks.append((
                 data_name,
                 aaf_computer,
                 potential_name,
-                cache_path / data_name / f'aaf-{potential_name}.fits'
+                filename
             ))
 
     for _ in pool.map(worker, tasks):
@@ -53,6 +53,9 @@ if __name__ == '__main__':
 
     # Define parser object
     parser = ArgumentParser()
+
+    parser.add_argument("-o", "--overwrite", dest="overwrite", default=False,
+                        action="store_true")
 
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--procs", dest="n_procs", default=1,
@@ -79,6 +82,6 @@ if __name__ == '__main__':
     Pool_kwargs = kw
 
     with Pool(**Pool_kwargs) as pool:
-        main(pool=pool)
+        main(pool=pool, overwrite=parsed.overwrite)
 
     sys.exit(0)

@@ -105,5 +105,5 @@ class StaeckelFudgeGrid:
         deltas = delta_interp(w0.cylindrical.rho.to_value(u.kpc),
                               w0.z.to_value(u.kpc))
 
-        aaf = get_staeckel_aaf(w0, galpy_potential, delta=deltas)
+        aaf = get_staeckel_aaf(galpy_potential, w0, delta=deltas)
         return at.Table({k: v.T for k, v in aaf.items()})
