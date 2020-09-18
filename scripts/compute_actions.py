@@ -5,21 +5,22 @@ import gala.dynamics as gd
 
 # This project
 from totoro.config import cache_path, galcen_frame
-from totoro.data import load_apogee_sample
+from totoro.data import datasets
 from totoro.potentials import potentials, galpy_potentials
 from totoro.galpy_helpers import StaeckelFudgeGrid
 
 
 def worker(task):
-    data_filename, aaf_computer, potential_name, aaf_filename = task
+    data_name, aaf_computer, potential_name, aaf_filename = task
 
     # Read APOGEE sample and do parallax & plx s/n cut:
-    t, c = load_apogee_sample(data_filename)
-    galcen = c.transform_to(galcen_frame)
+    d = datasets[data_name]
+    galcen = d.c.transform_to(galcen_frame)
     w0 = gd.PhaseSpacePosition(galcen.data)
 
     if aaf_filename.exists():
-        print(f"Actions exist for {potential_name} at {aaf_filename}")
+        print(f"Actions exist for {data_name}, {potential_name} "
+              f"at {aaf_filename}")
         return
 
     aaf = aaf_computer.get_aaf(w0, float(potential_name),
@@ -27,17 +28,20 @@ def worker(task):
     aaf.write(aaf_filename)
 
 
-def main(pool, data_filename):
+def main(pool):
 
     # Set up action solver:
     aaf_computer = StaeckelFudgeGrid()
 
     tasks = []
-    for potential_name in potentials:
-        tasks.append((data_filename,
-                      aaf_computer,
-                      potential_name,
-                      cache_path / f'aaf-{potential_name}.fits'))
+    for data_name in datasets.keys():
+        for potential_name in potentials:
+            tasks.append((
+                data_name,
+                aaf_computer,
+                potential_name,
+                cache_path / data_name / f'aaf-{potential_name}.fits'
+            ))
 
     for _ in pool.map(worker, tasks):
         pass
@@ -49,9 +53,6 @@ if __name__ == '__main__':
 
     # Define parser object
     parser = ArgumentParser()
-
-    parser.add_argument("--data", dest="data_filename", required=True,
-                        type=str, help="the source data file")
 
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--procs", dest="n_procs", default=1,
@@ -78,6 +79,6 @@ if __name__ == '__main__':
     Pool_kwargs = kw
 
     with Pool(**Pool_kwargs) as pool:
-        main(pool=pool, data_filename=parsed.data_filename)
+        main(pool=pool)
 
     sys.exit(0)
