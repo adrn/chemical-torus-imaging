@@ -1,7 +1,7 @@
 import pathlib
 import astropy.table as at
 import astropy.units as u
-import matplotlib as mpl
+from matplotlib.path import Path
 import numpy as np
 from pyia import GaiaData
 
@@ -167,7 +167,7 @@ class APOGEEDataset(Dataset):
         return self.t[quality_mask & target_mask]
 
     def get_mh_am_mask(self, low_alpha=True):
-        mh_alpham_path = mpl.path.Path(self._mh_alpham_nodes[:-1])
+        mh_alpham_path = Path(self._mh_alpham_nodes[:-1])
         low_alpha_mask = mh_alpham_path.contains_points(
             np.stack((self.t['M_H'], self.t['ALPHA_M'])).T)
 
@@ -202,7 +202,7 @@ class GALAHDataset(Dataset):
         return self.t[quality_mask]
 
     def get_mh_am_mask(self, low_alpha=True):
-        mh_alpham_path = mpl.path.Path(self._mh_alpham_nodes)
+        mh_alpham_path = Path(self._mh_alpham_nodes)
         low_alpha_mask = mh_alpham_path.contains_points(
             np.stack((np.array(self.t['FE_H']),
                       np.array(self.t['ALPHA_FE']))).T)
