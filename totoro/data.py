@@ -65,6 +65,10 @@ class Dataset:
         return self._elem_names
 
     def get_elem_ratio(self, elem1, elem2=None):
+        # Passed in an elem ratio provided by the table, e.g., FE_H
+        if elem2 is None and elem1 in self.t.colnames:
+            return self.t[elem1]
+
         if elem2 is None:
             try:
                 elem1, elem2 = elem1.split('_')
@@ -72,10 +76,6 @@ class Dataset:
                 raise RuntimeError("If passing a single elem ratio string, "
                                    "it must have the form ELEM_ELEM, not "
                                    f"{elem1}")
-
-        # Passed in an elem ratio provided by the table, e.g., FE_H
-        if elem2 is None and elem1 in self.elem_ratios:
-            return self.t[self.elem1]
 
         elem1 = str(elem1).upper()
         elem2 = str(elem2).upper()
@@ -129,7 +129,7 @@ class APOGEEDataset(Dataset):
 
     def _init_mask(self):
         aspcap_bitmask = np.sum(2 ** np.array([
-            # 7,  # STAR_WARN
+            7,  # STAR_WARN
             23  # STAR_BAD
         ]))
         quality_mask = (
@@ -167,7 +167,7 @@ class APOGEEDataset(Dataset):
 
         mh_alpham_path = mpl.path.Path(apogee_mh_alpham_nodes[:-1])
         low_alpha_mask = mh_alpham_path.contains_points(
-            np.stack((self.t['M_H'], self.t['ALPHA_M']).T))
+            np.stack((self.t['M_H'], self.t['ALPHA_M'])).T)
 
         if low_alpha:
             return low_alpha_mask
@@ -204,7 +204,8 @@ class GALAHDataset(Dataset):
 
         mh_alpham_path = mpl.path.Path(galah_mh_alpham_nodes[:-1])
         low_alpha_mask = mh_alpham_path.contains_points(
-            np.stack((self.t['FE_H'], self.t['ALPHA_FE']).T))
+            np.stack((np.array(self.t['FE_H']),
+                      np.array(self.t['ALPHA_FE']))).T)
 
         if low_alpha:
             return low_alpha_mask
@@ -218,7 +219,7 @@ galah = GALAHDataset(galah_parent_filename)
 
 # TODO: do we want high-alpha versions of these as well?
 datasets = {
-    'apogee-rgb-loalpha': apogee.filter({'LOGG': (1, 3.),
+    'apogee-rgb-loalpha': apogee.filter({'LOGG': (1, 3.4),
                                          'TEFF': (3500, 6500),
                                          'FE_H': (-3, 1)},
                                         low_alpha=True),
@@ -226,12 +227,12 @@ datasets = {
                                         'TEFF': (3500, 6500),
                                         'FE_H': (-3, 1)},
                                        low_alpha=True),
-    'galah-rgb-loalpha': galah.filter({'logg': (1, 3.3),
-                                       'teff': (3500, 6500),
-                                       'fe_h': (-3, 1)},
+    'galah-rgb-loalpha': galah.filter({'logg': (1, 3.5),
+                                       'teff': (3500, 5500),
+                                       'FE_H': (-3, 1)},
                                       low_alpha=True),
-    'galah-ms-loalpha': galah.filter({'LOGG': (3.5, 5),
-                                      'TEFF': (3500, 6500),
+    'galah-ms-loalpha': galah.filter({'logg': (3.5, 5),
+                                      'teff': (3500, 6500),
                                       'FE_H': (-3, 1)},
                                      low_alpha=True)
 }

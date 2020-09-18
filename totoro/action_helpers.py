@@ -5,9 +5,9 @@ import gala.integrate as gi
 import gala.dynamics as gd
 
 from .potentials import potentials, galpy_potentials
-from .galpy_helpers import get_staeckel_aaf
 from .config import vcirc
-from .actions_o2gf import safe_get_actions
+from .actions_o2gf import get_o2gf_aaf
+from .actions_staeckel import get_staeckel_aaf
 
 
 def _same_actions_objfunc_staeckel(p, pos, vy, potential_name, match_actions):
@@ -33,7 +33,7 @@ def _same_actions_objfunc_sanders(p, pos, vy, potential_name, match_actions):
     vx, vz = p
     w0 = gd.PhaseSpacePosition(pos=pos,
                                vel=[vx, vy, vz] * u.km/u.s)
-    aaf = safe_get_actions(potentials[potential_name], w0, N_max=8)
+    aaf = get_o2gf_aaf(potentials[potential_name], w0, N_max=8)
     actions = aaf['actions']
 
     _unit = (u.km/u.s * u.kpc)**2
@@ -64,8 +64,8 @@ def get_w0s_with_same_actions(fiducial_w0, vy=None, staeckel=False):
                 get_staeckel_aaf(o, galpy_potentials['1.0'])['actions'])
         else:
             fiducial_actions.append(
-                safe_get_actions(potentials['1.0'],
-                                 fiducial_w0[n], N_max=8)['actions'])
+                get_o2gf_aaf(potentials['1.0'],
+                             fiducial_w0[n], N_max=8)['actions'])
 
     fiducial_actions = u.Quantity(fiducial_actions).to(u.km/u.s * u.kpc)
 
