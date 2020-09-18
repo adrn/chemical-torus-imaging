@@ -35,7 +35,7 @@ def main(pool, overwrite=False):
     tree_K = 20  # MAGIC NUMBER: set heuristically in Objective-function.ipynb
     bootstrap_K = 128  # MAGIC NUMBER
 
-    for data_name, d in datasets:
+    for data_name, d in datasets.items():
         # TODO: make seed configurable?
         rnd = np.random.default_rng(seed=42)
 
