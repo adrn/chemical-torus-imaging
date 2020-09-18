@@ -7,8 +7,6 @@ from scipy.interpolate import interp1d
 from scipy.spatial import cKDTree
 from scipy.stats import binned_statistic
 
-from .config import cache_path
-
 __all__ = ['AbundanceTorusMaschine', 'run_bootstrap_coeffs',
            'get_cos2th_zerocross']
 
@@ -111,31 +109,35 @@ class AbundanceTorusMaschine:
 
 
 def run_bootstrap_coeffs(aafs, elem_name, bootstrap_K=128, seed=42,
-                         overwrite=False):
-    coeffs_cache = cache_path / f'coeffs-bootstrap{bootstrap_K}-{elem_name}.pkl'
+                         overwrite=False, cache_path=None):
+    if cache_path is not None:
+        cache_filename = f'coeffs-bootstrap{bootstrap_K}-{elem_name}.pkl'
+        coeffs_cache = cache_path / cache_filename
 
-    if not coeffs_cache.exists() or overwrite:
-        all_bs_coeffs = {}
-        for name in aafs:
-            aaf = aafs[name]
+        if coeffs_cache.exists() and not overwrite:
+            with open(coeffs_cache, 'rb') as f:
+                all_bs_coeffs = pickle.load(f)
+            return all_bs_coeffs
 
-            if seed is not None:
-                np.random.seed(seed)
+    all_bs_coeffs = {}
+    for name in aafs:
+        aaf = aafs[name]
 
-            bs_coeffs = []
-            for k in range(bootstrap_K):
-                bootstrap_idx = np.random.choice(len(aaf), size=len(aaf))
-                atm = AbundanceTorusMaschine(aaf[bootstrap_idx])
-                coeffs, _ = atm.get_coeffs_for_elem(elem_name)
-                bs_coeffs.append(coeffs)
+        if seed is not None:
+            np.random.seed(seed)
 
-            all_bs_coeffs[name] = np.array(bs_coeffs)
+        bs_coeffs = []
+        for k in range(bootstrap_K):
+            bootstrap_idx = np.random.choice(len(aaf), size=len(aaf))
+            atm = AbundanceTorusMaschine(aaf[bootstrap_idx])
+            coeffs, _ = atm.get_coeffs_for_elem(elem_name)
+            bs_coeffs.append(coeffs)
 
+        all_bs_coeffs[name] = np.array(bs_coeffs)
+
+    if cache_path is not None:
         with open(coeffs_cache, 'wb') as f:
             pickle.dump(all_bs_coeffs, f)
-
-    with open(coeffs_cache, 'rb') as f:
-        all_bs_coeffs = pickle.load(f)
 
     return all_bs_coeffs
 
@@ -169,13 +171,20 @@ def get_cos2th_zerocross(coeffs):
     return summary, zero_cross, zero_cross_err
 
 
-def zerocross_worker(p):
-    aafs, elem_name = p
+class ZeroCrossWorker:
 
-    clean_aafs = {}
-    for k in aafs:
-        clean_aafs[k] = aafs[k][aafs[k][elem_name] > -3]
+    def __init__(self, aafs, cache_path=None, bootstrap_K=128):
+        self.aafs = aafs
+        self.cache_path = cache_path
+        self.bootstrap_K = int(bootstrap_K)
 
-    bs_coeffs = run_bootstrap_coeffs(clean_aafs, elem_name)
-    s, zc, zc_err = get_cos2th_zerocross(bs_coeffs)
-    return elem_name, [zc, zc_err]
+    def __call__(self, elem_name):
+        clean_aafs = {}
+        for k in self.aafs:
+            clean_aafs[k] = self.aafs[k][self.aafs[k][elem_name] > -3]
+
+        bs_coeffs = run_bootstrap_coeffs(clean_aafs, elem_name,
+                                         bootstrap_K=self.bootstrap_K,
+                                         cache_path=self.cache_path)
+        s, zc, zc_err = get_cos2th_zerocross(bs_coeffs)
+        return elem_name, [zc, zc_err]
