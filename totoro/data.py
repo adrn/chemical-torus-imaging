@@ -115,6 +115,8 @@ class Dataset:
 
         if low_alpha is not None:
             alpha_mask = self.get_mh_am_mask(low_alpha)
+        else:
+            alpha_mask = np.ones(len(self.t), dtype=bool)
 
         return self[mask & alpha_mask]
 
@@ -126,6 +128,19 @@ class Dataset:
 
 class APOGEEDataset(Dataset):
     _radial_velocity_name = 'VHELIO_AVG'
+
+    # See: 2-High-alpha-Low-alpha.ipynb
+    _mh_alpham_nodes = np.array([
+        [0.6, -0.05],
+        [0.6, 0.04],
+        [0.15, 0.04],
+        [-0.5, 0.13],
+        [-0.9, 0.13],
+        [-1., 0.07],
+        [-0.2, -0.1],
+        [0.2, -0.1],
+        [0.6, -0.05]]
+    )
 
     def _init_mask(self):
         aspcap_bitmask = np.sum(2 ** np.array([
@@ -152,20 +167,7 @@ class APOGEEDataset(Dataset):
         return self.t[quality_mask & target_mask]
 
     def get_mh_am_mask(self, low_alpha=True):
-        # See: 2-High-alpha-Low-alpha.ipynb
-        apogee_mh_alpham_nodes = np.array([
-            [0.6, -0.05],
-            [0.6, 0.04],
-            [0.15, 0.04],
-            [-0.5, 0.13],
-            [-0.9, 0.13],
-            [-1., 0.07],
-            [-0.2, -0.1],
-            [0.2, -0.1],
-            [0.6, -0.05]]
-        )
-
-        mh_alpham_path = mpl.path.Path(apogee_mh_alpham_nodes[:-1])
+        mh_alpham_path = mpl.path.Path(self._mh_alpham_nodes[:-1])
         low_alpha_mask = mh_alpham_path.contains_points(
             np.stack((self.t['M_H'], self.t['ALPHA_M'])).T)
 
@@ -179,6 +181,18 @@ class APOGEEDataset(Dataset):
 class GALAHDataset(Dataset):
     _radial_velocity_name = 'rv_synt'
 
+    # See: 2-High-alpha-Low-alpha.ipynb
+    _mh_alpham_nodes = np.array([
+        [0.6, -0.01],
+        [0.6, 0.08],
+        [0.15, 0.08],
+        [-0.5, 0.17],
+        [-0.9, 0.17],
+        [-1., 0.11],
+        [-0.2, -0.11],
+        [0.2, -0.11],
+        [0.6, -0.03]])
+
     def _init_mask(self):
         quality_mask = (self.t['flag_cannon'] == 0)
 
@@ -188,21 +202,7 @@ class GALAHDataset(Dataset):
         return self.t[quality_mask]
 
     def get_mh_am_mask(self, low_alpha=True):
-        # See: 2-High-alpha-Low-alpha.ipynb
-        galah_mh_alpham_nodes = np.array([
-            [0.6, -0.05],
-            [0.6, 0.04],
-            [0.15, 0.04],
-            [-0.5, 0.13],
-            [-0.9, 0.13],
-            [-1., 0.07],
-            [-0.2, -0.15],
-            [0.2, -0.15],
-            [0.6, -0.07]]
-        )
-        galah_mh_alpham_nodes[:, 1] += 0.04
-
-        mh_alpham_path = mpl.path.Path(galah_mh_alpham_nodes[:-1])
+        mh_alpham_path = mpl.path.Path(self._mh_alpham_nodes)
         low_alpha_mask = mh_alpham_path.contains_points(
             np.stack((np.array(self.t['FE_H']),
                       np.array(self.t['ALPHA_FE']))).T)
