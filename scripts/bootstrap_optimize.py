@@ -8,8 +8,8 @@ import astropy.table as at
 import numpy as np
 
 # This project
-from totoro.config import cache_path, elem_names
-from totoro.data import load_apogee_sample
+from totoro.config import cache_path
+from totoro.data import datasets, elem_names
 from totoro.objective import TorusImagingObjective
 
 
@@ -35,52 +35,54 @@ def main(pool, overwrite=False):
     tree_K = 20  # MAGIC NUMBER: set heuristically in Objective-function.ipynb
     bootstrap_K = 128  # MAGIC NUMBER
 
-    t, c = load_apogee_sample('../data/apogee-parent-sample.fits')
+    for data_name, d in datasets:
+        # TODO: make seed configurable?
+        rnd = np.random.default_rng(seed=42)
 
-    # TODO: make seed configurable?
-    rnd = np.random.default_rng(seed=42)
+        # loop over all elements
+        for elem_name in elem_names[data_name]:
+            print(f"Running element: {elem_name}")
 
-    # loop over all elements
-    for elem_name in elem_names:
-        print(f"Running element: {elem_name}")
+            this_cache_filename = (cache_path /
+                                   data_name /
+                                   f'optimize-results-{elem_name}.csv')
+            if this_cache_filename.exists() and not overwrite:
+                print(f"Cache file exists for {elem_name}: "
+                      f"{this_cache_filename}")
+                continue
 
-        this_cache_filename = cache_path / f'optimize-results-{elem_name}.csv'
-        if this_cache_filename.exists() and not overwrite:
-            print(f"Cache file exists for {elem_name}: {this_cache_filename}")
-            continue
+            print("Optimizing with full sample to initialize bootstraps...")
+            obj = TorusImagingObjective(d.t, d.c, elem_name, tree_K=tree_K)
+            full_sample_res = obj.minimize(method="nelder-mead",
+                                           options=dict(maxiter=1024))
+            if not full_sample_res.success:
+                print(f"FAILED TO CONVERGE: optimize for full sample failed "
+                      f"for {elem_name}")
+                continue
 
-        print("Optimizing with full sample to initialize bootstraps...")
-        obj = TorusImagingObjective(t, c, elem_name, tree_K=tree_K)
-        full_sample_res = obj.minimize(method="nelder-mead",
-                                       options=dict(maxiter=1024))
-        if not full_sample_res.success:
-            print(f"FAILED TO CONVERGE: optimize for full sample failed for "
-                  f"{elem_name}")
-            continue
+            print(f"Finished optimizing full sample: {full_sample_res.x}")
 
-        print(f"Finished optimizing full sample: {full_sample_res.x}")
+            tasks = []
+            for k in range(bootstrap_K):
+                idx = rnd.choice(len(d.t), len(d.t), replace=True)
+                obj = TorusImagingObjective(d.t[idx], d.c[idx], elem_name,
+                                            tree_K=tree_K)
+                tasks.append((k, obj, full_sample_res.x))
 
-        tasks = []
-        for k in range(bootstrap_K):
-            idx = rnd.choice(len(t), len(t), replace=True)
-            obj = TorusImagingObjective(t[idx], c[idx], elem_name,
-                                        tree_K=tree_K)
-            tasks.append((k, obj, full_sample_res.x))
+            print("Done setting up bootstrap samples - running pool.map() ...")
 
-        print("Done setting up bootstrap samples - running pool.map() ...")
+            results = []
+            for res in pool.map(worker, tasks):
+                results.append(res)
+            results = np.array([x for x in results if x is not None])
+            results = at.Table({
+                'mdisk_f': results[:, 0],
+                'zsun': results[:, 1],
+                'vzsun': results[:, 2]
+            })
+            results.write(this_cache_filename, overwrite=True)
 
-        results = []
-        for res in pool.map(worker, tasks):
-            results.append(res)
-        results = np.array([x for x in results if x is not None])
-        results = at.Table({
-            'mdisk_f': results[:, 0],
-            'zsun': results[:, 1],
-            'vzsun': results[:, 2]
-        })
-        results.write(this_cache_filename, overwrite=True)
-
-    sys.exit(0)
+        sys.exit(0)
 
 
 if __name__ == '__main__':

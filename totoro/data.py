@@ -239,6 +239,18 @@ datasets = {
                                      low_alpha=True)
 }
 
+# From visual inspection of the z-vz grid plots!
+elem_names = {
+    'apogee-rgb-loalpha': ['FE_H', 'AL_FE', 'C_FE', 'MG_FE, MN_FE, NI_FE, N_FE',
+                           'O_FE', 'P_FE', 'SI_FE'],
+    'apogee-ms-loalpha': ['FE_H', 'AL_FE', 'C_FE', 'MG_FE, MN_FE, NI_FE, N_FE',
+                          'O_FE', 'P_FE', 'SI_FE'. 'TI_FE'],
+    'galah-rgb-loalpha': ['FE_H', 'CR_FE', 'MG_FE', 'NA_FE', 'O_FE', 'SC_FE',
+                          'TI_FE', 'Y_FE'],
+    'galah-ms-loalpha': ['FE_H', 'AL_FE', 'CA_FE', 'K_FE', 'MG_FE', 'MN_FE',
+                         'NA_FE', 'SC_FE', 'TI_FE', 'Y_FE']
+}
+
 for name in datasets:
     for path in [plot_path, cache_path]:
         this_path = path / name
