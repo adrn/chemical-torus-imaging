@@ -7,7 +7,7 @@ import gala.dynamics as gd
 from totoro.config import cache_path, galcen_frame
 from totoro.data import datasets
 from totoro.potentials import potentials, galpy_potentials
-from totoro.galpy_helpers import StaeckelFudgeGrid
+from totoro.actions_staeckel import StaeckelFudgeGrid
 
 
 def worker(task):
