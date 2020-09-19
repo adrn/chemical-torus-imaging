@@ -225,8 +225,12 @@ datasets = {
                                          'TEFF': (3500, 6500),
                                          'FE_H': (-3, 1)},
                                         low_alpha=True),
+    'apogee-rgb-hialpha': apogee.filter({'LOGG': (1, 3.4),
+                                         'TEFF': (3500, 6500),
+                                         'FE_H': (-3, 1)},
+                                        low_alpha=False),
     'apogee-ms-loalpha': apogee.filter({'LOGG': (3.75, 5),
-                                        'TEFF': (3500, 6500),
+                                        'TEFF': (5000, 6000),
                                         'FE_H': (-3, 1)},
                                        low_alpha=True),
     'galah-rgb-loalpha': galah.filter({'logg': (1, 3.5),
@@ -234,7 +238,7 @@ datasets = {
                                        'FE_H': (-3, 1)},
                                       low_alpha=True),
     'galah-ms-loalpha': galah.filter({'logg': (3.5, 5),
-                                      'teff': (3500, 6500),
+                                      'teff': (5000, 6000),
                                       'FE_H': (-3, 1)},
                                      low_alpha=True)
 }
@@ -242,7 +246,7 @@ datasets = {
 # From visual inspection of the z-vz grid plots!
 elem_names = {
     'apogee-rgb-loalpha': ['FE_H', 'AL_FE', 'C_FE', 'MG_FE', 'MN_FE', 'NI_FE',
-                           'N_FE','O_FE', 'P_FE', 'SI_FE'],
+                           'N_FE', 'O_FE', 'P_FE', 'SI_FE'],
     'apogee-ms-loalpha': ['FE_H', 'AL_FE', 'C_FE', 'MG_FE', 'MN_FE', 'NI_FE',
                           'N_FE', 'O_FE', 'P_FE', 'SI_FE', 'TI_FE'],
     'galah-rgb-loalpha': ['FE_H', 'CR_FE', 'MG_FE', 'NA_FE', 'O_FE', 'SC_FE',
@@ -250,6 +254,7 @@ elem_names = {
     'galah-ms-loalpha': ['FE_H', 'AL_FE', 'CA_FE', 'K_FE', 'MG_FE', 'MN_FE',
                          'NA_FE', 'SC_FE', 'TI_FE', 'Y_FE']
 }
+elem_names['apogee-rgb-hialpha'] = elem_names['apogee-rgb-loalpha']
 
 for name in datasets:
     for path in [plot_path, cache_path]:
