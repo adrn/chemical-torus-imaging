@@ -176,7 +176,9 @@ class APOGEEDataset(Dataset):
             return low_alpha_mask
 
         else:
-            return (~low_alpha) & (self.t['M_H'] > -1)
+            return ((~low_alpha_mask) &
+                    (self.t['M_H'] > -1) &
+                    (self.t['ALPHA_M'] > 0))
 
 
 class GALAHDataset(Dataset):
