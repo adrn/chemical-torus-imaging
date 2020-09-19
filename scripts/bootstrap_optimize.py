@@ -43,10 +43,10 @@ def worker(task):
     return tmp_filename
 
 
-def combine_output(all_filename, this_cache_path):
+def combine_output(all_filename, this_cache_path, elem_name):
     import glob
 
-    cache_glob_pattr = str(this_cache_path / 'tmp-*.csv')
+    cache_glob_pattr = str(this_cache_path / f'tmp-*{elem_name}*.csv')
 
     if os.path.exists(all_filename):
         prev_table = at.Table.read(all_filename)
@@ -99,7 +99,8 @@ def main(pool, overwrite=False):
 
             atexit.register(combine_output,
                             this_cache_filename,
-                            this_cache_path)
+                            this_cache_path,
+                            elem_name)
             cache_paths.append(this_cache_path)
             cache_filenames.append(this_cache_filename)
 
@@ -130,9 +131,11 @@ def main(pool, overwrite=False):
         for _ in pool.map(worker, tasks):
             pass
 
-        for this_cache_filename, this_cache_path in zip(cache_filenames,
-                                                        cache_paths):
-            combine_output(this_cache_filename, this_cache_path)
+        for this_cache_filename, this_cache_path, elem_name in zip(
+                cache_filenames,
+                cache_paths,
+                elem_names[data_name]):
+            combine_output(this_cache_filename, this_cache_path, elem_name)
 
     sys.exit(0)
 
