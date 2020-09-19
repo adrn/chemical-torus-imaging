@@ -46,7 +46,7 @@ def worker(task):
 def combine_output(all_filename, this_cache_path):
     import glob
 
-    cache_glob_pattr = this_cache_path / 'tmp-*.csv'
+    cache_glob_pattr = str(this_cache_path / 'tmp-*.csv')
 
     if os.path.exists(all_filename):
         prev_table = at.Table.read(all_filename)
