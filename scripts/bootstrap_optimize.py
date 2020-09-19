@@ -1,4 +1,6 @@
 # Standard library
+import atexit
+import os
 import sys
 
 # Third-party
@@ -14,21 +16,62 @@ from totoro.objective import TorusImagingObjective
 
 
 def worker(task):
-    i, obj, x0 = task
+    i, obj, x0, tmp_filename = task
+
+    res = None
     try:
         res = obj.minimize(x0=x0, method="nelder-mead",
                            options=dict(maxiter=1024))
+        print(f"{i} finished optimizing: {res}")
     except Exception as e:
         print(f"{i} failed: {str(e)}")
-        return None
+        xopt = np.nan * res.x
 
-    print(f"{i} finished optimizing: {res}")
-
-    if not res.success:
-        return np.nan * res.x
-
+    if res is None or not res.success:
+        xopt = np.nan * res.x
     else:
-        return res.x
+        xopt = res.x
+
+    xopt = {
+        'mdisk_f': [xopt[0]],
+        'zsun': [xopt[1]],
+        'vzsun': [xopt[2]]
+    }
+
+    at.Table(xopt).write(tmp_filename, overwrite=True)
+
+    return tmp_filename
+
+
+def combine_output(all_filename, this_cache_path):
+    import glob
+
+    cache_glob_pattr = this_cache_path / 'tmp-*.csv'
+
+    if os.path.exists(all_filename):
+        prev_table = at.Table.read(all_filename)
+    else:
+        prev_table = None
+
+    # combine the individual worker cache files
+    all_tables = []
+    remove_filenames = []
+    for filename in glob.glob(cache_glob_pattr):
+        all_tables.append(at.Table.read(filename))
+        remove_filenames.append(filename)
+
+    if all_tables:
+        all_table = at.vstack(all_tables)
+    else:
+        return
+
+    if prev_table:
+        all_table = at.vstack((prev_table, all_table))
+
+    all_table.write(all_filename, overwrite=True)
+
+    for filename in remove_filenames:
+        os.unlink(filename)
 
 
 def main(pool, overwrite=False):
@@ -40,47 +83,56 @@ def main(pool, overwrite=False):
         rnd = np.random.default_rng(seed=42)
 
         # loop over all elements
+        tasks = []
+        cache_paths = []
+        cache_filenames = []
         for elem_name in elem_names[data_name]:
             print(f"Running element: {elem_name}")
 
-            this_cache_filename = (cache_path /
-                                   data_name /
+            this_cache_path = cache_path / data_name
+            this_cache_filename = (this_cache_path /
                                    f'optimize-results-{elem_name}.csv')
             if this_cache_filename.exists() and not overwrite:
                 print(f"Cache file exists for {elem_name}: "
                       f"{this_cache_filename}")
                 continue
 
-            print("Optimizing with full sample to initialize bootstraps...")
-            obj = TorusImagingObjective(d.t, d.c, elem_name, tree_K=tree_K)
-            full_sample_res = obj.minimize(method="nelder-mead",
-                                           options=dict(maxiter=1024))
-            if not full_sample_res.success:
-                print(f"FAILED TO CONVERGE: optimize for full sample failed "
-                      f"for {elem_name}")
-                continue
+            atexit.register(combine_output,
+                            this_cache_filename,
+                            this_cache_path)
+            cache_paths.append(this_cache_path)
+            cache_filenames.append(this_cache_filename)
 
-            print(f"Finished optimizing full sample: {full_sample_res.x}")
+            # print("Optimizing with full sample to initialize bootstraps...")
+            # obj = TorusImagingObjective(d.t, d.c, elem_name, tree_K=tree_K)
+            # full_sample_res = obj.minimize(method="nelder-mead",
+            #                                options=dict(maxiter=1024))
+            # if not full_sample_res.success:
+            #     print(f"FAILED TO CONVERGE: optimize for full sample failed "
+            #           f"for {elem_name}")
+            #     continue
 
-            tasks = []
+            # print(f"Finished optimizing full sample: {full_sample_res.x}")
+            # x0 = full_sample_res.x
+            x0 = np.array([1.1, 20.8, 7.78])  # HACK: init from fiducial
+
             for k in range(bootstrap_K):
                 idx = rnd.choice(len(d.t), len(d.t), replace=True)
                 obj = TorusImagingObjective(d.t[idx], d.c[idx], elem_name,
                                             tree_K=tree_K)
-                tasks.append((k, obj, full_sample_res.x))
+                tmp_filename = (this_cache_path /
+                                f'tmp-optimize-results-{elem_name}-{k}.csv')
+                tasks.append((k, obj, x0, tmp_filename))
 
-            print("Done setting up bootstrap samples - running pool.map() ...")
+        print("Done setting up bootstrap samples - running pool.map() on "
+              f"{len(tasks)} tasks")
 
-            results = []
-            for res in pool.map(worker, tasks):
-                results.append(res)
-            results = np.array([x for x in results if x is not None])
-            results = at.Table({
-                'mdisk_f': results[:, 0],
-                'zsun': results[:, 1],
-                'vzsun': results[:, 2]
-            })
-            results.write(this_cache_filename, overwrite=True)
+        for _ in pool.map(worker, tasks):
+            pass
+
+        for this_cache_filename, this_cache_path in zip(cache_filenames,
+                                                        cache_paths):
+            combine_output(this_cache_filename, this_cache_path)
 
     sys.exit(0)
 
