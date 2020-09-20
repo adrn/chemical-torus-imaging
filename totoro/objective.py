@@ -21,7 +21,11 @@ class TorusImagingObjective:
     def __init__(self, dataset, elem_name, tree_K=64):
         self.aaf_comp = StaeckelFudgeGrid()
         self.c = dataset.c
-        self.t = dataset.t[dataset._id_column, elem_name, f'{elem_name}_ERR']
+
+        # Select out the bare minimum columns:
+        err_name = dataset._elem_err_fmt.format(elem_name=elem_name)
+        self.t = dataset.t[dataset._id_column, elem_name, err_name]
+
         self.elem_name = elem_name
 
         self._vsun = galcen_frame.galcen_v_sun.d_xyz

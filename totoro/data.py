@@ -129,6 +129,7 @@ class Dataset:
 class APOGEEDataset(Dataset):
     _id_column = 'APOGEE_ID'
     _radial_velocity_name = 'VHELIO_AVG'
+    _elem_err_fmt = '{elem_name}_ERR'
 
     # See: 2-High-alpha-Low-alpha.ipynb
     _mh_alpham_nodes = np.array([
@@ -184,6 +185,7 @@ class APOGEEDataset(Dataset):
 class GALAHDataset(Dataset):
     _id_column = 'star_id'
     _radial_velocity_name = 'rv_synt'
+    _elem_err_fmt = 'E_{elem_name}'
 
     # See: 2-High-alpha-Low-alpha.ipynb
     _mh_alpham_nodes = np.array([
