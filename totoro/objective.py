@@ -18,10 +18,10 @@ from .atm import AbundanceTorusMaschine
 
 class TorusImagingObjective:
 
-    def __init__(self, t, c, elem_name, tree_K=64):
+    def __init__(self, dataset, elem_name, tree_K=64):
         self.aaf_comp = StaeckelFudgeGrid()
-        self.c = c
-        self.t = t['APOGEE_ID', elem_name, f'{elem_name}_ERR']
+        self.c = dataset.c
+        self.t = dataset.t[dataset._id_column, elem_name, f'{elem_name}_ERR']
         self.elem_name = elem_name
 
         self._vsun = galcen_frame.galcen_v_sun.d_xyz

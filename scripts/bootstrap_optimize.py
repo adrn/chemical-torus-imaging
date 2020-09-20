@@ -118,8 +118,8 @@ def main(pool, overwrite=False):
             x0 = np.array([1.1, 20.8, 7.78])  # HACK: init from fiducial
 
             for k in range(bootstrap_K):
-                idx = rnd.choice(len(d.t), len(d.t), replace=True)
-                obj = TorusImagingObjective(d.t[idx], d.c[idx], elem_name,
+                idx = rnd.choice(len(d), len(d), replace=True)
+                obj = TorusImagingObjective(d[idx], elem_name,
                                             tree_K=tree_K)
                 tmp_filename = (this_cache_path /
                                 f'tmp-optimize-results-{elem_name}-{k}.csv')
