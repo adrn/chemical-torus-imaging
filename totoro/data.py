@@ -42,8 +42,8 @@ class Dataset:
 
         # Abundance error columns should be _ERR like APOGEE:
         for elem in self.elem_ratios:
-            col1 = self._elem_err_fmt.format(elem)
-            col2 = APOGEEDataset._elem_err_fmt.format(elem)
+            col1 = self._elem_err_fmt.format(elem_name=elem)
+            col2 = APOGEEDataset._elem_err_fmt.format(elem_name=elem)
             self.t.rename_column(col1, col2)
 
         self.g = GaiaData(self.t)
