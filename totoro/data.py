@@ -26,7 +26,9 @@ class Dataset:
 
         # Abundance ratios should be all caps:
         for col in self.t.colnames:
-            if col.upper().endswith('_FE') or col.upper().startswith('FE_'):
+            if (col.upper().endswith('_FE') or
+                    col.upper().startswith('FE_') or
+                    col.upper().endswith('_H')):
                 self.t.rename_column(col, col.upper())
 
         self.g = GaiaData(self.t)
