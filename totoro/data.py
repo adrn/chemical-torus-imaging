@@ -44,7 +44,8 @@ class Dataset:
         for elem in self.elem_ratios:
             col1 = self._elem_err_fmt.format(elem_name=elem)
             col2 = APOGEEDataset._elem_err_fmt.format(elem_name=elem)
-            self.t.rename_column(col1, col2)
+            if col1 in self.t.colnames:
+                self.t.rename_column(col1, col2)
 
         self.g = GaiaData(self.t)
 
