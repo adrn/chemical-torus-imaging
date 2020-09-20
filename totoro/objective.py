@@ -10,6 +10,7 @@ from scipy.interpolate import interp1d
 from scipy.optimize import minimize
 from tqdm import tqdm
 
+from .data import APOGEEDataset
 from .config import galcen_frame, cache_path
 from .potentials import fiducial_mdisk, get_mw_potential, get_equivalent_galpy
 from .actions_staeckel import StaeckelFudgeGrid
@@ -23,7 +24,9 @@ class TorusImagingObjective:
         self.c = dataset.c
 
         # Select out the bare minimum columns:
-        err_name = dataset._elem_err_fmt.format(elem_name=elem_name)
+        # err_name = dataset._elem_err_fmt.format(elem_name=elem_name)
+        # HACK:
+        err_name = APOGEEDataset._elem_err_fmt.format(elem_name=elem_name)
         self.t = dataset.t[dataset._id_column, elem_name, err_name]
 
         self.elem_name = elem_name
