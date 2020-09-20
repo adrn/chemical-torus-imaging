@@ -11,9 +11,18 @@ from .config import (apogee_parent_filename, galah_parent_filename,
 
 class Dataset:
 
+    _id_column = None
+    _radial_velocity_name = None
+    _elem_err_fmt = None
+
     def __init_subclass__(cls, **kwargs):
         if not hasattr(cls, '_radial_velocity_name'):
             cls._radial_velocity_name = 'radial_velocity'
+
+        for name in ['_id_column', '_elem_err_fmt']:
+            if getattr(cls, name) is None:
+                raise ValueError(f'You must specify class param: {name}')
+
         super().__init_subclass__(**kwargs)
 
     def __init__(self, filename_or_tbl):
@@ -30,6 +39,12 @@ class Dataset:
                     col.upper().startswith('FE_') or
                     col.upper().endswith('_H')):
                 self.t.rename_column(col, col.upper())
+
+        # Abundance error columns should be _ERR like APOGEE:
+        for elem in self.elem_ratios:
+            col1 = self._elem_err_fmt.format(elem)
+            col2 = APOGEEDataset._elem_err_fmt.format(elem)
+            self.t.rename_column(col1, col2)
 
         self.g = GaiaData(self.t)
 
