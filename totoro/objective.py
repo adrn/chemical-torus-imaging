@@ -65,7 +65,7 @@ class TorusImagingObjective:
         return gp.MilkyWayPotential(disk=dict(m=mdisk),
                                     halo=dict(m=mhalo))
 
-    def get_coeffs(self, mdisk_f, zsun, vzsun):
+    def get_atm(self, mdisk_f, zsun, vzsun):
         # get galcen frame for zsun, vzsun
         vsun = self._vsun.copy()
         vsun[2] = vzsun * u.km/u.s
@@ -81,6 +81,10 @@ class TorusImagingObjective:
         aaf = at.QTable(at.hstack((aaf, self.t)))
 
         atm = AbundanceTorusMaschine(aaf, tree_K=self.tree_K)
+        return atm
+
+    def get_coeffs(self, mdisk_f, zsun, vzsun):
+        atm = self.get_atm(mdisk_f, zsun, vzsun)
         coeff, coeff_cov = atm.get_coeffs_for_elem(self.elem_name)
 
         return coeff
