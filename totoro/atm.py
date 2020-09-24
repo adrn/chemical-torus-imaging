@@ -33,6 +33,31 @@ class AbundanceTorusMaschine:
         self.tree_K = int(tree_K)
         self.sinusoid_K = int(sinusoid_K)
 
+#     def get_theta_z_anomaly(self, elem_name, action_unit=30*u.km/u.s*u.kpc):
+#         action_unit = u.Quantity(action_unit)
+
+#         # Actions without units:
+#         X = self.aaf['actions'].to_value(action_unit)
+#         angz = coord.Angle(self.aaf['angles'][:, 2]).wrap_at(360*u.deg).radian
+
+#         # element abundance
+#         elem = self.aaf[elem_name]
+#         elem_errs = self.aaf[f"{elem_name}_ERR"]
+#         ivar = 1 / elem_errs**2
+
+#         tree = cKDTree(X)
+#         dists, idx = tree.query(X, k=self.tree_K+1)
+
+#         # compute action-local abundance anomaly
+#         errs = np.sqrt(1 / np.sum(ivar[idx[:, 1:]], axis=1))
+#         means = np.sum(elem[idx[:, 1:]] * ivar[idx[:, 1:]], axis=1) * errs**2
+
+#         d_elem = elem - means
+#         d_elem_errs = np.sqrt(elem_errs**2 + errs**2)
+# #         d_elem_errs = np.full_like(d_elem, 0.04)  # MAGIC NUMBER
+
+#         return angz, d_elem, d_elem_errs
+
     def get_theta_z_anomaly(self, elem_name, action_unit=30*u.km/u.s*u.kpc):
         action_unit = u.Quantity(action_unit)
 
@@ -43,18 +68,20 @@ class AbundanceTorusMaschine:
         # element abundance
         elem = self.aaf[elem_name]
         elem_errs = self.aaf[f"{elem_name}_ERR"]
-        ivar = 1 / elem_errs**2
 
         tree = cKDTree(X)
         dists, idx = tree.query(X, k=self.tree_K+1)
 
-        # compute action-local abundance anomaly
-        errs = np.sqrt(1 / np.sum(ivar[idx[:, 1:]], axis=1))
-        means = np.sum(elem[idx[:, 1:]] * ivar[idx[:, 1:]], axis=1) * errs**2
+        xhat = np.mean(X[idx[:, 1:]], axis=1) - X
+        dx = X[idx[:, 1:]] - X[:, None]
+        x = np.einsum('nij,nj->ni', dx, xhat)
+        y = elem[idx[:, 1:]]
+
+        w = np.sum(x**2, axis=1)[:, None] - x * np.sum(x, axis=1)[:, None]
+        means = np.sum(y * w, axis=1) / np.sum(w, axis=1)
 
         d_elem = elem - means
-        d_elem_errs = np.sqrt(elem_errs**2 + errs**2)
-#         d_elem_errs = np.full_like(d_elem, 0.04)  # MAGIC NUMBER
+        d_elem_errs = elem_errs
 
         return angz, d_elem, d_elem_errs
 
