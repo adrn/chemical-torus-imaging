@@ -11,3 +11,10 @@ jobs:
         with:
           working_directory: tex
           root_file: stationary-tags.tex
+      - name: Deploy PDF
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./tex
+          force_orphan: true
+
