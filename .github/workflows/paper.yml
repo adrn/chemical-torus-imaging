@@ -11,8 +11,8 @@ jobs:
         with:
           working_directory: tex
           root_file: stationary-tags.tex
-      - name: Move PDF to tex dir
-        run: ls -lr *
+      - name: HACK - remove gitignore so PDF is added and deployed
+        run: rm tex/.gitignore
       - name: Deploy PDF
         uses: peaceiris/actions-gh-pages@v3
         with:
