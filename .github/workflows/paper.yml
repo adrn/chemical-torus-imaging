@@ -12,7 +12,7 @@ jobs:
           working_directory: tex
           root_file: stationary-tags.tex
       - name: Move PDF to tex dir
-        run: mv stationary-tags.pdf tex/
+        run: ls -lr *
       - name: Deploy PDF
         uses: peaceiris/actions-gh-pages@v3
         with:
