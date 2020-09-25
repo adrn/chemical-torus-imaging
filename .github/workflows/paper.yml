@@ -9,4 +9,5 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: tex/stationary-tags.tex
+          working_directory: tex
+          root_file: stationary-tags.tex
