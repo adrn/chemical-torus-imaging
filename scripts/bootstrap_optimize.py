@@ -25,10 +25,9 @@ def worker(task):
         print(f"{i} finished optimizing: {res}")
     except Exception as e:
         print(f"{i} failed: {str(e)}")
-        xopt = np.nan * res.x
 
     if res is None or not res.success:
-        xopt = np.nan * res.x
+        xopt = np.nan * np.array(x0)
     else:
         xopt = res.x
 
