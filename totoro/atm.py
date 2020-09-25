@@ -80,8 +80,8 @@ class AbundanceTorusMaschine:
         w = np.sum(x**2, axis=1)[:, None] - x * np.sum(x, axis=1)[:, None]
         means = np.sum(y * w, axis=1) / np.sum(w, axis=1)
 
-        d_elem = elem - means
-        d_elem_errs = elem_errs
+        d_elem = np.array(elem - means)
+        d_elem_errs = np.array(elem_errs)
 
         return angz, d_elem, d_elem_errs
 
