@@ -241,12 +241,18 @@ class GALAHDataset(Dataset):
 apogee = APOGEEDataset(apogee_parent_filename)
 galah = GALAHDataset(galah_parent_filename)
 
-# TODO: do we want high-alpha versions of these as well?
+teff_ref = -382.5 * apogee.t['FE_H'] + 4607
+rc_logg_max = 0.0018 * (apogee.t['TEFF'] - teff_ref) + 2.4
+
 datasets = {
     'apogee-rgb-loalpha': apogee.filter({'LOGG': (1, 3.4),
                                          'TEFF': (3500, 6500),
                                          'FE_H': (-3, 1)},
                                         low_alpha=True),
+    'apogee-rc-loalpha': apogee.filter({'LOGG': (1.9, rc_logg_max),
+                                        'TEFF': (4200, 5400),
+                                        'FE_H': (-3, 1)},
+                                       low_alpha=True),
     'apogee-rgb-hialpha': apogee.filter({'LOGG': (1, 3.4),
                                          'TEFF': (3500, 6500),
                                          'FE_H': (-3, 1)},
@@ -277,6 +283,7 @@ elem_names = {
                          'NA_FE', 'SC_FE', 'TI_FE', 'Y_FE']
 }
 elem_names['apogee-rgb-hialpha'] = elem_names['apogee-rgb-loalpha']
+elem_names['apogee-rc-loalpha'] = elem_names['apogee-rgb-loalpha']
 
 for name in datasets:
     for path in [plot_path, cache_path]:
