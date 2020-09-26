@@ -74,7 +74,7 @@ def combine_output(all_filename, this_cache_path, elem_name):
 
 
 def main(pool, overwrite=False):
-    tree_K = 64  # MAGIC NUMBER: set heuristically in Objective-function.ipynb
+    tree_K = 32  # MAGIC NUMBER: set heuristically in Objective-function.ipynb
     bootstrap_K = 128  # MAGIC NUMBER
 
     for data_name, d in datasets.items():
