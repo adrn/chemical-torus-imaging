@@ -21,7 +21,7 @@ def worker(task):
     res = None
     try:
         res = obj.minimize(x0=x0, method="nelder-mead",
-                           options=dict(maxiter=1024))
+                           options=dict(maxiter=150))
         print(f"{i} finished optimizing: {res}")
     except Exception as e:
         print(f"{i} failed: {str(e)}")
