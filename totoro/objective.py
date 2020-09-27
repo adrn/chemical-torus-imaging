@@ -25,9 +25,13 @@ class TorusImagingObjective:
 
         # Select out the bare minimum columns:
         # err_name = dataset._elem_err_fmt.format(elem_name=elem_name)
-        # HACK:
+        # HACK: all datasets have elem names and errors like APOGEE
         err_name = APOGEEDataset._elem_err_fmt.format(elem_name=elem_name)
         self.t = dataset.t[dataset._id_column, elem_name, err_name]
+
+        mask = np.isfinite(self.t[elem_name])
+        self.t = self.t[mask]
+        self.c = self.c[mask]
 
         self.elem_name = elem_name
 
