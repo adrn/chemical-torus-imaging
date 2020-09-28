@@ -1,8 +1,5 @@
 % To-dos
 % - See comments labeled "TODO" below
-% - Move "Bayesian" formulation to discussion
-%   - In this context, we also measure the gradients themselves, which are
-%     interesting too!
 % - Say why we use the low-alpha sequence
 %   - Very old stars are bad because gradients flatten, very young stars are bad
 %     because they are clumpy
@@ -11,10 +8,6 @@
 %   - Separability
 % - Audit abstract for discussion of phase-mixing and time invariance
 %   - Equilibrium assumption is Hard
-% - Das/Sanders stuff: assumes that abundances depend on actions or vice versa
-%   - Us: there are properties of abundance distribution that ...
-
-% - Make plots for a red clump-only dataset to compare to RGB
 
 % Send it to:
 % - Glenn Van de Ven -- Schwarzschild models of external galaxies
@@ -76,7 +69,7 @@
 \newcommand{\sdssv}{\acronym{SDSS-V}}
 \newcommand{\galah}{\acronym{GALAH}}
 \newcommand{\hermes}{\acronym{HERMES}}
-\newcommand{\nstars}{76,559}
+\newcommand{\nstars}{56,324}
 
 \newcommand{\mdisk}{\ensuremath{\mathrm{M}_\mathrm{disk}}}
 \newcommand{\mratio}{\ensuremath{\mdisk / \mdisk^\star}}
@@ -145,8 +138,8 @@
   Local Group.
   Here we present an approach for dynamical
   inference---\methodname---that makes use of kinematic measurements
-  and stellar tags (e.g., element abundances, stellar ages, or other invariant
-  stellar properties).
+  and stellar tags (e.g., element abundance ratios, stellar ages, or other
+  invariant stellar properties).
   The method exploits the fact that there are generically gradients of stellar
   tags on orbital actions (or position and velocity) in the Galaxy, and in
   steady state the distributions of any tags must be invariant with respect to
@@ -156,13 +149,13 @@
   We discuss how both classical-statistics and Bayesian forward-modeling methods
   can be built on this idea, and we perform a demonstration with red giant
   stars from the \apogee\ surveys:
-  We look at vertical orbit structure in the Milky Way disk, using mean
+  We look at the vertical orbit structure in the Milky Way disk, using mean
   abundances to constrain the local disk mass (the disk--halo trade-off at fixed
   circular velocity).
-  We find that the disk mass can be constrained (na\"ively) at the $<10$-percent
-  level with this new method using only a single moment of a single element
-  abundance ratio, demonstrating the promise of combining stellar tags with
-  dynamical invariants.
+  % TODO: audit this statement
+  We find that the disk mass can be constrained (na\"ively) at the $<3$-percent
+  level with this new method using only six element abundance ratios,
+  demonstrating the promise of combining stellar tags with dynamical invariants.
 \end{abstract}
 
 \keywords{\raggedright % now from the UAT, not the AAS keyword system
@@ -189,8 +182,7 @@
 \section{Introduction}
 \label{sec:intro}
 
-% Start big, emphasize the big-ness of our ideas, but then zoom in and focus on
-% context needed for our specific application / demonstration
+% TODO: work in comments about Sanders/Das EDF stuff
 
 A significant goal of modern physics and astronomy is to understand the detailed
 properties of dark matter on astrophysical scales as a way of informing
@@ -448,15 +440,15 @@ cross-match between \gaia\ \dr{2} and the final \acronym{2MASS} point source
 catalog \citep{Gaia-crossmatch:2019}.
 We then apply a number of quality cuts and other selections to limit the catalog
 to chemically thin-disk, red giant branch (RGB) stars with well-measured stellar
-parameters and abundances, excluding stars targeted in stellar clusters and
-dwarf galaxies, and high signal-to-noise parallax measurements.
+parameters and abundances, high signal-to-noise parallax measurements, but
+excluding stars targeted in stellar clusters and dwarf galaxies.
 In detail, our selections include:
 \begin{itemize}
   \item \acronym{ASPCAP} quality flag (\texttt{ASPCAPFLAG}) must not contain
     \texttt{STAR\_BAD} or \texttt{STAR\_WARN},
   \item $3500~\Kel < \Teff < 6500~\Kel$,
-  \item $1 < \logg < 3.5$,
-  \item combined spectroscopic signal-to-noise ${\rm SNR} > 40$,
+  \item $1.5 < \logg < 3.4$,
+  \item combined spectroscopic signal-to-noise ${\rm SNR} > 20$,
   \item \apogee\ targeting bit flags must not indicate that the source was part
     of a special program to observe stellar clusters, dwarf galaxies, M31 stars,
     stellar streams, or moving groups; this \emph{excludes} stars with the
@@ -471,14 +463,14 @@ In detail, our selections include:
   \item stars are part of the ``low-alpha'' (or ``chemical thin disk'')
     population (see polygonal selection in the top panel of
     \figurename~\ref{fig:mh-am-xy}),
-  \item \gaia\ parallax $\varpi > 0.4~\mas$,
-  \item \gaia\ parallax signal-to-noise $\varpi / \sigma_\varpi > 5$.
+  \item \gaia\ parallax $\varpi > 0.5~\mas$,
+  \item \gaia\ parallax signal-to-noise $\varpi / \sigma_\varpi > 8$.
 \end{itemize}
 The \apogee\ catalog contains a small number of duplicates (duplicated source
 identifier \texttt{APOGEE\_ID}); To unique-ify our sample in these cases, we
 keep only the entry with highest signal-to-noise.
-The final parent sample contains \nstars\ RGB stars with high-quality \apogee\ and
-\gaia\ data.
+The final parent sample contains \nstars\ RGB stars with high-quality \apogee\
+and \gaia\ data.
 
 For each star in the parent sample, we compute na\"ive distance estimates by
 inverting the parallax, $d = 1/\varpi$.
@@ -487,10 +479,9 @@ While this is generally not a safe way of computing distance from parallaxes
 relatively nearby and have high signal-to-noise parallax measurements.
 Using a parallax signal-to-noise selection has its own consequences, especially
 in that it makes the sample selection function complex and non-intuitive.
-However, since the demonstrations that make use of these distance measurements
-below are meant to be illustrative examples, and since our methodology should be
-relatively insensitive to selection effects, we ignore these details in what
-follows.
+However, our methodology should be relatively insensitive to selection effects,
+and since the demonstrations that make use of these distance measurements below
+are meant to be illustrative examples, we ignore these details in what follows.
 This sample is visualized in bulk element abundance ratios and Galactocentric
 positions in \figurename~\ref{fig:mh-am-xy}.
 
@@ -520,7 +511,7 @@ an axisymmetric Miyamoto-Nagai disk \citep{Miyamoto:1975}, and a spherical
 Navarro-Frenk-White dark matter halo \citep{Navarro:1996}.
 Most of the parameters of these components are fixed to their default values
 from the \texttt{MilkyWayPotential} class implemented in the \package{gala}
-Python package \citep[v1.1;][]{gala}:
+Python package \citep[v1.2;][]{gala}:
 Briefly, the bulge parameters (mass and scale radius) and disk parameters (total
 mass, scale height, and scale radius) are initially set to match the
 \texttt{MWPotential2014} implemented in \package{galpy} \citep{Bovy:2015}, and
@@ -533,32 +524,52 @@ $v_{\rm circ}(R_\odot) = 229~\kms$ at the solar radius \citep{Eilers:2019}.
 Our fiducial mass model therefore adopts the default \texttt{MilkyWayPotential}
 parameters except for the disk mass, which is set to $\mdisk^\star = 6.526
 \times 10^{10}~\Msun$.
+Later in this \documentname, we vary the disk mass \mratio, but we adjust the
+dark matter halo mass to keep the circular velocity at the solar radius, $v_{\rm
+circ}(R_\odot)$, constant.
 
-In addition to the fiducial mass model, we create a set of potential models by
-varying the disk mass between $\mratio = 0.4$--1.8 (in steps of 0.1).
-For each of these models, we adjust the dark matter halo mass to keep the
-circular velocity at the solar radius, $v_{\rm circ}(R_\odot)$, constant.
+In a given potential model, we compute actions, $\bs{J} = (J_R, J_\phi, J_z)$,
+and angles, $\bs{\theta} = (\theta_R, \theta_\phi, \theta_z)$, for a star using
+the ``St\"ackel Fudge'' \citep{Binney:2012, Sanders:2012} as implemented in
+\package{galpy} \citep{Bovy:2015}.
+We solve for the focal length, $\Delta$, of the locally-approximating St\"ackel
+potential for each star's orbit by numerically computing the orbit of each star
+for four orbital periods.
+In practice, for computational efficiency, we do this initially for a range of
+potential models (i.e., different $\mratio$ values) and use linear interpolation
+to predict the value of $\Delta$ for each orbit given a value of $\mratio$.
 
-We compute actions, $\bs{J} = (J_R, J_\phi, J_z)$, and angles, $\bs{\theta} =
-(\theta_R, \theta_\phi, \theta_z)$, for a given star by numerically integrating
-its orbit in a given Milky Way model and solving for the generating function to
-transform from actions computed in a toy potential model to the actions in the
-potential model of interest (as defined in \citealt{Sanders:2014}, and
-implemented in \package{gala}).\footnote{This method is referred to as the
-``O2GF method'' in \citet{Sanders:2016}.}
+We assess the accuracy of using the St\"ackel Fudge for orbits with large
+vertical excursions from the Galactic disk by comparing actions computed with
+the St\"ackel Fudge to actions computed with a more accurate action solver.
+For a set of trial orbits (meant to span the range of vertical actions we see in
+our sample of \apogee\ stars) over a range of disk masses (from
+$\mratio=0.5$--$1.5$), we compute actions both with the St\"ackel Fudge and with
+the ``O2GF'' method defined in \citet{Sanders:2014}.
+The O2GF method works by numerically integrating an orbit for a given star and
+solving for the generating function to transform from actions computed in a toy
+potential model to the actions in the potential model of interest (as defined in
+\citealt{Sanders:2014}, and implemented in \package{gala}).\footnote{This method
+is referred to as the ``O2GF method'' in \citet{Sanders:2016}.}
 This method has some tuning parameters related to the total orbital integration
 time and time step, and the number of Fourier components to include in the
 Fourier expansion used to represent the generating function, $N_{\rm max}$.
-Because our parent sample primarily consists of disk stars on loop orbits with
-similar orbital periods, we use an Isochrone potential as our toy potential
-model, set the total integration time for each star to 128 (radial) orbital
-periods, $T=128\,P_r$, and set the time step to $\Delta t = P_r / 256$.
-For all stars, we set $N_{\rm max} = 8$ (following \citealt{Sanders:2016}).
+We use an Isochrone potential as our toy potential model, set the total
+integration time for each star to 128 (radial) orbital periods, $T=128\,P_r$,
+and set the time step to $\Delta t = P_r / 256$. For all stars, we set $N_{\rm
+max} = 8$ (following \citealt{Sanders:2016}).
+We find that in all cases, the values of the actions agree to within $<10\%,
+<0.1\%, <0.5\%$ for $J_R, J_\phi, J_z$, respectively, with the largest
+disagreements only affecting a small fraction of the stars in our sample with
+the largest excursions from the Galactic plane.
 
-We use this procedure to estimate the three actions and angles for all stars in
-our parent sample (see \sectionname~\ref{sec:data}) in each of the 15 potential
-models with different disk-mass to halo-mass ratios (see above).
-We parallelize the computation of the actions using the Python package
+For computational efficiency, we therefore use the St\"ackel Fudge as our
+primary method for computing actions in what follows.
+% the three actions and angles for all stars in
+% our parent sample (see \sectionname~\ref{sec:data}) in each of the 15 potential
+% models with different disk-mass to halo-mass ratios (see above).
+To additionally speed up computation, we typically also parallelize the
+computation of the actions (over stars) using the Python package
 \package{schwimmbad} \citep{schwimmbad}.
 
 
@@ -649,7 +660,7 @@ This prediction depends on many detailed assumptions, such as that the Galaxy is
 invariant and integrable.
 And of course the \emph{usefulness} of this prediction for inference depends on
 the existence of gradients: If there are no element-abundance-ratio gradients,
-there will be no information to work with.
+there will be no information to exploit.
 
 For the sake of illustration and simplicity, we visualize and demonstrate these
 concepts using the vertical kinematics of stars in our parent sample.
@@ -718,7 +729,7 @@ combined probability (density), evaluated at the observed abundances.
 The classical approaches are frequentist and the generative approaches produce
 likelihoods and can be used in Bayesian inferences.
 
-Both classical and generative implementations of \methodname\ flow from a
+Both classical and generative implementations of \methodname\ depend on a
 specific set of assumptions, enumerated below.
 We emphasize that these assumptions are not necessarily correct, but that our
 method is conditionally correct, conditioning on these core assumptions:
@@ -771,12 +782,14 @@ assumptions specific to our implementation and demonstrations here:
   kinds of samples.
 \end{description}
 
-In the classical approach, here specifically focusing on the vertical kinematics
-of stars, we ask whether there is a choice of mass model that leads to dynamical
-actions and conjugate angles such that the means of each abundance ratio do not
-depend on the conjugate angle $\theta_z$.
+For simplicity, we focus here on the vertical kinematics of stars and we ask
+whether there is a choice of mass model that leads to dynamical actions and
+conjugate angles such that the abundance ratio distributions do not depend on
+the conjugate angle $\theta_z$.
+We fix all aspects of our mass model except for the ratio of the disk mass to
+the halo mass at fixed circular velocity (see \sectionname~\ref{sec:mw-model}).
 To assess the dependence of a particular element abundance ratio
-\abunratio{X}{Y} on the vertical angle, we define an ``mean abundance-ratio
+\abunratio{X}{Y} on the vertical angle, we define a ``mean abundance-ratio
 deviation,'' $\Delta^{\abunratio{X}{Y}}$, for each $n$ star, which is the
 difference between a given star's (logarithmic) abundance ratio and the mean of
 the (logarithmic) abundance ratios of its kinematic neighbors (in action-space),
@@ -786,16 +799,18 @@ the (logarithmic) abundance ratios of its kinematic neighbors (in action-space),
     \quad .
 \end{equation}
 That is, we use a given mass model to compute the three actions $\vec{J}$ for
-each star in the parent sample, and choose the closest $K$ neighbors in
+each star in the parent sample and choose the closest $K$ neighbors in
 $\vec{J}$-space (with the isotropic Euclidean metric distance) for each star to
 compute the action-local mean abundance.
 For a specific star, its neighbors are a function of the mass-model parameters
 because all actions will change values in different mass models.
 We choose to use $K=64$ based on experimentation, but find that our results are
-extremely insensitive to this choice.
+insensitive to this choice.
+\todo{Actually, we do a crazy weighted mean!}
 
-To quantify the dependence of the mean abundance-ratio deviation on the vertical
-conjugate angle $\theta_z$, we fit a smooth model of the form
+Our goal then is to minimize (over mass model parameters) the dependence of the
+mean abundance-ratio deviation distribution on the vertical angle $\theta_z$.
+To quantify this dependence, we fit a smooth model of the form
 \begin{equation}
   \Delta(\theta_z) = c_0 + a_1\,\cos  \theta_z + b_1\,\sin    \theta_z
                          + a_2\,\cos 2\theta_z + b_2\,\sin 2\theta_z \quad,
@@ -803,13 +818,22 @@ conjugate angle $\theta_z$, we fit a smooth model of the form
 \end{equation}
 where the five parameters $(c_0, a_1, a_2, b_1, b_2)$ are the coefficients of a
 Fourier series expressed out to $m=2$.
-We fit this model to all of the $N=76,559$ individual abundance-ratio deviations
-and their uncertainties $(\Delta_n, \sigma_{\Delta_n})_N$ (without binning) with
-least-squares fitting.
+We fit this model to all of the $N=\nstars$ individual abundance-ratio
+deviations and their uncertainties $(\Delta_n, \sigma_{\Delta_n})_N$ (without
+binning) using least-squares fitting.
+This functional form captures our expectations for how the mean abundance-ratio
+deviations will depend on vertical angle when our model is wrong:
+If the orbit contours at a given action have the wrong shape, we expect there to
+be an $m=2$ variation to the abundance-ratio deviations (e.g.,
+\figurename~\ref{fig:zvz-mgfe}).
+If our assumed solar position relative to the midplane or solar velocity
+relative to the local standard of rest are wrong, we expect there to be $\sin$
+and $\cos$ (i.e., $m=1$) variations.
+
 \figurename~\ref{fig:sinusoid-fits} shows smooth fits of the above model
 computed from bootstrapped resamplings of the data (blue curves) and, for
-visualization, we show binned means of the measured abundance-ratio deviations
-(black histogram).
+visualization only, we show binned means of the measured abundance-ratio
+deviations (black histogram).
 We emphasize that no binning is performed at any time in performing these fits.
 The results shown in \figurename~\ref{fig:sinusoid-fits} are for abundance
 deviations in $\mgfe$, and just for three particular settings of the disk mass
@@ -861,22 +885,24 @@ or the disk-mass parameter \mratio.
 Parameter $b_2$ should not exist and is included as a test of model assumptions;
 in detail, it is sensitive to tilts in the coordinate system, and
 non-phase-mixed structures.
-\APWTODO{Comment on how the cos2theta coefficient flips sign between middle and
-right panel - the ``correct'' disk mass parameter must be between these two}
+Note that the sign of the $m=2$ term flips between the left and right panels of
+\figurename~\ref{fig:sinusoid-fits}, indicating that the ``best-fit'' mass model
+must be at an intermediate value of $\mratio$, close to but slightly larger than
+the fiducial value.
 
 For each mass model (i.e., each setting of \mratio\ that we consider), we
 estimate the Fourier coefficient parameters and uncertainties on the
 coefficients using 128 bootstrap trials.
-\figurename~\ref{fig:coeff-mdisk} shows these inferred coefficients as a
-function of disk mass, \mratio, for the abundance ratio \mgfe; conceptually, we
-are looking for the value of \mratio\ that minimizes the (absolute) value of
-$a_2$.
+\figurename~\ref{fig:coeff-mdisk} shows the inferred coefficients for the
+abundance ratio \mgfe\ as a function of disk mass \mratio.
+Conceptually, we are looking for the value of \mratio\ that minimizes the
+(absolute) value of $a_2$.
 We obtain an estimate for the disk mass parameter \mratio\ and an associated
 uncertainty by linearly interpolating the measurements and bootstrap error bars
 onto the $a_2=0$ intercept.
-This value, and its uncertainty, are shown in the lower-left panel of
-\figurename~\ref{fig:coeff-mdisk} as the square marker with a horizontal
-error-bar.
+% This value, and its uncertainty, are shown in the lower-left panel of
+% \figurename~\ref{fig:coeff-mdisk} as the square marker with a horizontal
+% error-bar.
 
 \begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{center}
@@ -908,14 +934,18 @@ error-bar.
   }
 \end{figure}
 
-We have shown results for the $\mgfe$ abundance deviation, but we repeat this
-analysis for several different abundances (the same abundances as shown in
-\figurename~\ref{fig:zvz-grid}).
-The full set of disk-mass measurements are shown in
-\figurename~\ref{fig:inferred-mdisk-elems}.
-The different abundances tell somewhat different stories, but the combined total
-precision of this measurement is very high, on the order of $\sim 4$ per cent in
-the mass of the Milky Way disk, locally.
+\APWTODO{optimize over all 3 params shit}
+
+
+
+% We have shown results for the $\mgfe$ abundance deviation, but we repeat this
+% analysis for several different abundances (the same abundances as shown in
+% \figurename~\ref{fig:zvz-grid}).
+% The full set of disk-mass measurements are shown in
+% \figurename~\ref{fig:inferred-mdisk-elems}.
+% The different abundances tell somewhat different stories, but the combined total
+% precision of this measurement is very high, on the order of $\sim 4$ per cent in
+% the mass of the Milky Way disk, locally.
 
 % % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
 % \begin{figure}[!tp]
@@ -934,8 +964,6 @@ the mass of the Milky Way disk, locally.
 %   \label{fig:inferred-mdisk-elems}
 %   }
 % \end{figure}
-
-\APWTODO{optimize over all 3 params}
 
 % Notebook: figures/Optimize-results.ipynb
 \begin{figure}[!tp]
