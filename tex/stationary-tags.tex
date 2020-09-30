@@ -977,6 +977,63 @@ from all of these elements combined (dark, black ellipse).
 Here we show one- and two-sigma error ellipses (darker and lighter ellipses for
 each color), with means and covariance matrices estimated from the optimization
 results for the bootstrap resamplings of the data for each abundance ratio.
+Individually, we find $\mratio = 1.21 \pm 0.03$, $z_\odot = 15.5 \pm 1.0~\pc$,
+and $v_{z, \odot} = 8.6 \pm 0.2~\kms$ for our joint constraints.
+Our results here imply a disk-to-halo mass ratio within the solar circle ${\rm
+M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc) = 2.06 \pm 0.05$, which is
+slightly larger than our fiducial model where this mass ratio is $\approx 1.3$
+\citep{gala} and the implied value for the \texttt{MWPotential2014}
+\citep{Bovy:2015} of $\approx 1.7$.
+
+\figurename~\ref{fig:elem-ellipses-2} is similar to
+\figurename~\ref{fig:elem-ellipses-1}, but shows our joint constraints on the
+other projections of our parameter space:
+In this figure, it is apparent that a few of the element abundance ratios prefer
+a significantly different solar position relative to the midplane.
+In particular, while most elements are consistent with past measurements of the
+solar height of $z_\odot \sim 20~\pc$ (\citealt{Bennett:2019} and
+\citealt{Bland-Hawthorn:2016} and references therin), both \abunratio{Mg}{Fe}
+and \abunratio{Si}{Fe} suggest that the sun is on the opposite side of the
+midplane!
+While we do not have a simple explanation for this discrepancy, our constraints
+from different element abundance ratios will effectively ``weight'' stars in
+different parts of action space in ways that may amplify issues with our
+assumptions.
+For example, if ...
+
+
+% Notebook: figures/5-Optimize-results.ipynb
+\begin{figure}[!tp]
+  \begin{center}
+  \includegraphics[width=0.6\textwidth]{M-vz-error-ellipses.pdf}
+  \end{center}
+  \caption{%
+    TODO
+  \label{fig:elem-ellipses-1}
+  }
+\end{figure}
+
+% Notebook: figures/5-Optimize-results.ipynb
+\begin{figure}[!tp]
+  \begin{center}
+  \includegraphics[width=0.8\textwidth]{M-z-vz-z-error-ellipses.pdf}
+  \end{center}
+  \caption{%
+    TODO
+  \label{fig:elem-ellipses-2}
+  }
+\end{figure}
+
+% Notebook: figures/6-APOGEE-elem-Jz-gradients.ipynb
+\begin{figure}[!tp]
+  \begin{center}
+  \includegraphics[width=\textwidth]{elem-Jz-gradients.pdf}
+  \end{center}
+  \caption{%
+    TODO
+  \label{fig:elem-Jz-gradients}
+  }
+\end{figure}
 
 % \begin{table}[ht]
 %   \footnotesize
@@ -1023,28 +1080,6 @@ results for the bootstrap resamplings of the data for each abundance ratio.
 %   \label{fig:inferred-mdisk-elems}
 %   }
 % \end{figure}
-
-% Notebook: figures/5-Optimize-results.ipynb
-\begin{figure}[!tp]
-  \begin{center}
-  \includegraphics[width=0.6\textwidth]{M-vz-error-ellipses.pdf}
-  \end{center}
-  \caption{%
-    TODO
-  \label{fig:elem-ellipses-1}
-  }
-\end{figure}
-
-% Notebook: figures/5-Optimize-results.ipynb
-\begin{figure}[!tp]
-  \begin{center}
-  \includegraphics[width=0.8\textwidth]{M-z-vz-z-error-ellipses.pdf}
-  \end{center}
-  \caption{%
-    TODO
-  \label{fig:elem-ellipses2}
-  }
-\end{figure}
 
 
 \section{Discussion}
