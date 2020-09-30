@@ -9,6 +9,7 @@
 % - Audit abstract for discussion of phase-mixing and time invariance
 %   - Equilibrium assumption is Hard
 % - Note that we compare to RC-only sample and don't see any major differences
+% - Cite Bland-Hawthorn to note that all solar z positions are ~20–30 pc
 
 % Send it to:
 % - Glenn Van de Ven -- Schwarzschild models of external galaxies
@@ -497,12 +498,10 @@ position and motion with respect to a Galactocentric reference frame.
 
 For the solar position, we use the recent precise measurement of the
 Sun--Galactic center distance from the \acronym{GRAVITY} collaboration, $r_\odot
-= 8.122~\kpc$ \citep{Gravity:2018}.
-We set the Sun's height above the Galactic midplane to $z_\odot = -16.6~\pc$
-based on experiments done below (note that this is discrepant with the recent
-measurement \citealt{Bennett:2019}).
+= 8.122~\kpc$ \citep{Gravity:2018}, and adopt $z_\odot = 20.8~\pc$ as the solar
+height above the Galactic midplane \citep{Bennett:2019}.
 In Galactocentric Cartesian coordinates, we use a right-handed coordinate system
-such that the Sun is at $\bs{x}_\odot = (-8.1219, 0, -0.0166)~\kpc$ and the
+such that the Sun is at $\bs{x}_\odot = (-8.1219, 0, 0.0208)~\kpc$ and the
 solar velocity is $\bs{v}_\odot = (12.9, 245.6, 7.78)~\kms$ \citep{Drimmel:2018,
 Reid:2004, Gravity:2018}.
 
@@ -946,12 +945,12 @@ context of our assumptions below (\sectionname~\ref{sec:discussion}).
   }
 \end{figure}
 
-Another thing we can glean from \figurename~\ref{fig:coeff-mdisk} is that these
-data seem to favor a different value of the solar position relative to the
-midplane and a different solar $z$ velocity.
-The top left and top right panels of \figurename~\ref{fig:coeff-mdisk} show
-that, at all values of the disk mass parameter \mratio, there is a finite $m=1$
-amplitude for both the $\cos$ and $\sin$ terms.
+% Another thing we can glean from \figurename~\ref{fig:coeff-mdisk} is that these
+% data seem to favor a different value of the solar position relative to the
+% midplane $z_\odot$ and a different solar velocity $v_{z, \odot}$.
+The upper panels of \figurename~\ref{fig:coeff-mdisk} show that, at all values
+of the disk mass parameter \mratio, there is a finite $m=1$ amplitude for both
+the $\cos$ and $\sin$ terms.
 As noted before, these coefficients are sensitive to the solar motion and solar
 position (in $z$), respectively.
 We therefore simultaneously optimize over the disk mass parameter \mratio, the
@@ -961,17 +960,42 @@ For each value of our parameters $mratio, z_\odot, v_{z, \odot}$, we compute the
 Fourier coefficients and minimize the objective function
 \begin{equation}
   f(a_1, b_1, a_2 \,;\, \mratio, z_\odot, v_{z, \odot}) =
-    a_1^2 + b_1^2 + a_2^2
+    a_1^2 + b_1^2 + a_2^2 \quad . \label{eq:objective}
 \end{equation}
-where we ignore the constant term $c_0$ and the amplitude of the $\sin
+Note that here we ignore the constant term $c_0$ and the amplitude of the $\sin
 2\theta_z$ term $b_2$.
 We again perform 128 bootstrap trials per element, and we perform the bootstrap
 resampling outside of the entire procedure (so that each optimization is
-performed with a bootstrap sample).
+performed independently with a bootstrap sample).
 We use Nelder-Mead optimization \citep{Gao:2012} to minimize our objective
 function, as implemented in the \package{scipy} package \citep{scipy}.
 
-\figurename~\ref{fig:elem-ellipses=1} shows
+\figurename~\ref{fig:elem-ellipses-1} shows a summary of our constraints on the
+disk mass parameter and solar velocity for all of the elements shown in
+\figurename~\ref{fig:zvz-grid} (colorful ellipses), and the joint constraint
+from all of these elements combined (dark, black ellipse).
+Here we show one- and two-sigma error ellipses (darker and lighter ellipses for
+each color), with means and covariance matrices estimated from the optimization
+results for the bootstrap resamplings of the data for each abundance ratio.
+
+% \begin{table}[ht]
+%   \footnotesize
+%   \centering
+%   \begin{tabular}{c | c}
+%       % \multicolumn{3}{c}{\textbf{Summary of Results}} \\
+%       \hline
+%       Parameter & Inferred Value\\
+%       \hline
+%       ${\rm M}_{\rm disk}$ (total) & $7.88 \pm 0.19 \times 10^{10}~\Msun$ \\
+%       ${\rm M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc)$  & $2.06 \pm 0.05$\\
+%       $z_{\odot}$ & $15.5 \pm 1.0~\pc$\\
+%       $v_{z, \odot}$ & $8.6 \pm 0.2~\kms$\\
+%       \hline
+%   \end{tabular}
+%   \caption{For your consideration: Some numbers that have no relevance.
+%   }
+%   \label{tbl:results}
+% \end{table}
 
 % We have shown results for the $\mgfe$ abundance deviation, but we repeat this
 % analysis for several different abundances (the same abundances as shown in
