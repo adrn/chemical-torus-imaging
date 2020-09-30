@@ -738,14 +738,12 @@ method is conditionally correct, conditioning on these core assumptions:
 \item[integrable] Each stellar orbit is regular and has three
   dynamically-invariant actions and three conjugate angles. This assumption
   could in principle be relaxed in future implementations.
-
 \item[well mixed] The stars in our sample are inherently uniformly distributed
   in angle variables; all angles are equally likely. This assumption will be
   violated substantially in the data (as we discuss below; see
   \sectionname~\ref{sec:discussion}), but this is the fundamental assumption of
   the vast majority of inferences of the Milky Way mass distribution.
   % TODO: make sure to mention the Snail in the discussion
-
 \item[selection] The selection function depends on position (or velocity) in the
   Milky Way, but not on element abundances. In detail, the \apogee\ selection
   function \emph{will} depend on abundances through gradients between stellar
@@ -755,7 +753,6 @@ method is conditionally correct, conditioning on these core assumptions:
   discuss this further in \sectionname~\ref{sec:discussion}.
   % TODO: Alternatively, we could use a strongly-constrained model for the
   % dependence of the selection function on element abundances.
-
 \item[smooth gradients] \HOGGTODO{Assumption about how the abundances can
   depend on action.} Relatedly, the use of action and not log-action
   or zmax or whatever.
@@ -777,7 +774,6 @@ assumptions specific to our implementation and demonstrations here:
   accurate and precise such that we condition (or bin) over these quantities.
   For the parent sample used here, the median distance uncertainty is $\sigma_d
   \approx 50~\pc$ and the median velocity uncertainty is $\approx 2~\kms$.
-
 \item[abundance measurements] \HOGGTODO{Assumption that stars in different parts
   of phase space get the same abundance measurements.} Questionable in certain
   kinds of samples.
@@ -1056,89 +1052,141 @@ results for the bootstrap resamplings of the data for each abundance ratio.
 
 \subsection{What have we created?}
 
-There are many ways to describe the fundamental prediction that underlies \methodname.
-Here are a few:
-\begin{itemize}
-\item
+In this \documentname, we have presented a novel method---\methodname---for inferring
+the mass model (or force law or gravitational potential) of an
+integrable, angle-mixed stellar distribution.
+This method does not involve second moments of velocity (like the
+virial theorem and the Jeans equations do), and it does not depend on
+separability or any other mathematical properties other than
+integrability and angle mixing.
+That is, we have a method that is more statistically stable and less
+restricted than Jeans modeling.
+It does, however, depend on the existence of element-abundance
+gradients; the stars on different orbits (with different actions) must
+have---on average or statistically---different compositions.
+Fortunately these gradients are ubiquitous and strong in the Milky Way
+(and most galaxies; CITE).
+
+There are many ways to describe the fundamental prediction or structure
+of \methodname. Here are a few:
+\begin{description}
+\item[Kinematic picture]
   Stars don't change their abundances as they orbit!  Stellar
   abundance ratios can depend on the three invariant actions, but they
   can't depend on the conjugate angles, which wind up arbitrarily with time.
-  This can be seen as a kinematic description of the concept underlying this \documentname.
-\item
-  Or, equivalently, abundance gradients taken in 6-dimensional phase space will be
+\item[Local geometric picture]
+  Abundance gradients taken in 6-dimensional phase space will be
   locally perpendicular, everywhere, to the orbital 3-tori in phase space.
-  This is a local-geometry description of the concept.
-\item
-  Or, equivalently, at every location in 6-d phase space, there are a set of 6-d
-  gradient vectors, which are the derivatives of all measurable
-  moments of all measurable element-abundance ratios with respect to
-  the 6 phase-space coordinates. These gradient vectors will span a
-  local 3-d subspace, and this subspace will be orthogonal to the surfaces
-  of the orbital tori at that location.
-  This is a mathematics-of-gradients description.
-\item
-  Or, equivalently, the orbital tori will be level 3-surfaces in 6-d phase space of any
+  That is, all 6-vector gradients of all possible statistics of all possible
+  element-abundance ratios must be locally perpendicular to the 3-dimensional
+  hyperplane locally kissing the orbital torus at that position in phase space.
+  Equivalently, at every location in 6-d phase space, there full set of 6-d
+  abundance-moment gradient vectors will span a
+  local 3-dimensional subspace.
+  This local subspace will be orthogonal to the surface of the orbital torus
+  at that location.
+\item[Global geometric picture]
+  The 6-dimensional phase space is foliated by a complete set of 3-tori,
+  each of which is specified by the three actions.
+  The orbital tori will be level 3-surfaces (in the 6-dimensional phase space) of any
   moments or statistics of the element-abundance distribution.
-  This is a global-geometry description.
-\item
-  Or, equivalently, a predictive model for the element abundances of stars
+\item[Information-theory picture]
+  Any predictive model for the element abundances of stars
   that is given the freedom to depend on both actions and angles will do no
   better at predicting stellar element abundances than a model that is only
   given the freedom to depend on actions alone.
-  This is an information-theory description.
-\end{itemize}
+  That is, in the 6-dimensional phase space, only the action coordinates provide
+  information about the element abundances.
+\end{description}
 
-Where is the information coming from? It is a combination of the
-density of stars in our sample, the amplitude of the gradient wrt
-action, and the sensitivity of that action and angle to the potential
-parameters.
+Because \methodname\ depends on measuring changes in moments of the
+abundance-ratio distribution (means, in this \documentname), we
+conjecture that the precision with which the mass model can be
+constrained increases (the uncertainties decrease) as the
+abundance-moment gradients get stronger.
+By the same token, the precision will increase as the width or
+dispersion of the local (in phase space) abundance distribution gets
+smaller.
+This dispersion will have contributions from the true distribution of
+abundances and also observational uncertainties.
+And of course the precision will increase as the number of stars increases,
+and their coverage of the conjugate angles increases.
+
+In this \documentname, we focused on means of (logarithmic) abundance
+ratios.
+But we are not restricted to these element-abundance moments; any moments
+are fair game. The method also does not assume that the element abundances
+are uniquely or even relatively specifically predicted by the actions:
+The method only requires that there be some gradients in some moments of
+the abundance distribution. There can be---and there is---a wide range of
+abundance ratios at every point in action space.
+In this project, all distributions are expected to have (and are observed
+to have) substantial dispersion.
 
 \subsection{How is this better than everything before?}
 
-How are we related to Jeans modeling?
-we have the huge advantage that we never need to take a second moment (though we could);
-our method applies to any moment. We have the disadvantage that we depend on the
-existence of gradients. Fortunately these are not subtle. We have the huge advantage
-that we don't depend on the selection (to first order). That's really huge. We don't
-get help from separability; there is no need for it; it doesn't even simplify our
-math in any way. That's a small but significant advantage. There is
-no sense in which this method is a sub-method of Jeans or vice versa; they make use of
-different aspects of the phase-mixed system.
+We assert that \methodname\ is unlike Jeans modeling, and (in
+particular) that it is more stable and less mathematically constrained.
+The stability claim flows from the observation that, given a sample of
+stars, it is harder to precisely measure second moments than first
+moments.
+Any method that requires measurements of spatial derivatives of second
+moments will be limited in precision.
+The mathematical constraint claim flows from the point that most Jeans
+models involve assumptions of separability that do not enter here.
+We require gradients, but not separability.
+We choose in this \documentname\ to focus on vertical kinematics, but
+we nowhere assume that these vertical kinematics are separated from the
+radial kinematics.
+Indeed the orbits plotted in \figurename~XXXX
+show finite-width projections onto the vertical phase space because we
+have not performed any kind of separation or separability approximation.
 
-...The point that this works at one to three dimensions. It requires
-abundance gradients, but not separability!  Of course you might not
-have abundance gradients in all three action directions.
+Another advantage over Jeans modeling is that
+we do not require knowledge of the survey selection
+function, provided that the selection is made in position space (or phase
+space) and does not act at all in the element-abundance ratios that
+enter into the inference.
+This condition is satisfied for the \apogee\ data used here, and will be for
+most other surveys like it.
 
-...The point that the method is combinatoric in abundance data.
-...
-One of the crazy things about all this is that any description of a general distribution in $D$-space
+In some ways, \methodname\ is related to the concept of ``extended
+distribution functions'' (CITE and CITE), in which the dynamical
+distribution function in action space $p(\vec{J})$ is extended into a distribution
+function in actions $\vec{J}$, abundances $\vec{X}$, and (perhaps)
+other (near-) invariants to make a larger distribution function $p(\vec{J},\vec{X})$.
+So far, extended distribution functions have not been used as tools
+for inferring the mass model for the Galaxy. But they could be, in principle.
+The most natural projects in this direction would require knowledge of the
+selection function, however, and would therefore be harder to implement in
+current surveys.
+
+\methodname\ is also closely related to the concept of ``mono-abundance
+populations'' (CITE and CITE), which have been used to look at the structure
+of the galaxy, divided by element abundances.
+These projects can be seen as factorizing out of the extended distribution
+function $p(\vec{J},\vec{X})$ a conditional distribution
+$p(\vec{J}\given\vec{X})$, although that is not precisely how they were
+formulated.
+In contrast, this project can be seen as factorizing out the other conditional
+distribution $p(\vec{X}\given\vec{J})$, although in what's above, we don't do
+so explicitly.
+The great advantage of the latter factorization is that it doesn't require
+knowledge of the survey selection function, provided that the selection acts
+compltely in position or action space (and not ever abundance space).
+
+One of the crazy things about a fully general statement of \methodname\ is
+that any description of a general distribution in $D$-space
 requires a \emph{lot of parameters}.
-Even a trivial distribution---the Normal distribution---requires $0.5\,D\,(D+3)$ parameters for its
+Even the normal distribution requires $0.5\,D\,(D+3)$ parameters for its
 complete description, and anything more complex has more.
 That means that there are a very large set of element-abundance statistics for which the
-six-gradient exists or could be constraining for this project.
+6-vector gradient exists or could be constraining for this project.
 Not all of these parameters can be reliably measured in a finite data set,
 let alone reliably seen to vary with phase-space location.
-However, we choose to see this bug as a feature:
+But many can.
 We have discovered, in effect, a \emph{combinatorically large set of constraints on the
-dynamical actions and conjugate angles}.
-
-...The point that this doesn't depend on selection, provided that
-stellar properties don't vary strongly with abundnaces, and that
-abundance-measurement biases don't depend strongly on stellar
-parameters. Both assumptions wrong in detail.
-
-The method does not require that the abundances uniquely define the
-actions, nor that the actions uniquely define the
-abundances. Everything can be probabilistically related.
-
-We don't require separability at all. We are working in 3-action
-space at all times. It is just that we are \emph{showing} the angles
-$\theta_z$ associated with the $z$-action $J_z$.
-
-The orbits in Figure 1 look like bands not lines because they are
-projections of braided tori, not because it shows ``orbit families''
-or anything like that.
+dynamical actions} and thus the mass model.
 
 \subsection{What are the problems with our assumptions?}
 
