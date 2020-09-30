@@ -8,6 +8,7 @@
 %   - Separability
 % - Audit abstract for discussion of phase-mixing and time invariance
 %   - Equilibrium assumption is Hard
+% - Note that we compare to RC-only sample and don't see any major differences
 
 % Send it to:
 % - Glenn Van de Ven -- Schwarzschild models of external galaxies
@@ -890,19 +891,33 @@ Note that the sign of the $m=2$ term flips between the left and right panels of
 must be at an intermediate value of $\mratio$, close to but slightly larger than
 the fiducial value.
 
-For each mass model (i.e., each setting of \mratio\ that we consider), we
-estimate the Fourier coefficient parameters and uncertainties on the
-coefficients using 128 bootstrap trials.
+We repeat this fitting procedure for a grid of disk mass parameter values
+$\mratio = 0.4$--$1.8$:
+For each mass model (i.e., each setting of \mratio), we estimate the Fourier
+coefficient parameters and uncertainties on the coefficients using 128 bootstrap
+trials.
 \figurename~\ref{fig:coeff-mdisk} shows the inferred coefficients for the
 abundance ratio \mgfe\ as a function of disk mass \mratio.
-Conceptually, we are looking for the value of \mratio\ that minimizes the
-(absolute) value of $a_2$.
+Conceptually, to turn this into a constraint on the disk mass, we then look for
+the value of \mratio\ that minimizes the (absolute) value of $a_2$.
 We obtain an estimate for the disk mass parameter \mratio\ and an associated
 uncertainty by linearly interpolating the measurements and bootstrap error bars
 onto the $a_2=0$ intercept.
+Our ``best-fit'' disk mass and its uncertainty is shown as the square (blue)
+marker in \figurename~\ref{fig:coeff-mdisk} to emphasize that, though this is a
+simple model and we only vary one parameter in this demonstration, the
+measurement is encouragingly precise with a formal error bar of $\approx$7\% for
+just a single element abundance.
 % This value, and its uncertainty, are shown in the lower-left panel of
 % \figurename~\ref{fig:coeff-mdisk} as the square marker with a horizontal
 % error-bar.
+We note that here we also apparently measure a finite value for the $\sin
+2\theta_z$ term, which should not exist in the universe defined by our
+assumptions (and is therefore labeled ``verboten'').
+This implies that our assumptions seem to be lightly violated (the inferred
+amplitude is only marginally significant), and we discuss this further in the
+context of our assumptions below (\sectionname~\ref{sec:discussion}).
+
 
 \begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{center}
@@ -934,9 +949,32 @@ onto the $a_2=0$ intercept.
   }
 \end{figure}
 
-\APWTODO{optimize over all 3 params shit}
+Another thing we can glean from \figurename~\ref{fig:coeff-mdisk} is that these
+data seem to favor a different value of the solar position relative to the
+midplane and a different solar $z$ velocity.
+The top left and top right panels of \figurename~\ref{fig:coeff-mdisk} show
+that, at all values of the disk mass parameter \mratio, there is a finite $m=1$
+amplitude for both the $\cos$ and $\sin$ terms.
+As noted before, these coefficients are sensitive to the solar motion and solar
+position (in $z$), respectively.
+We therefore simultaneously optimize over the disk mass parameter \mratio, the
+solar position relative to the midplane $z_\odot$, and the solar $z$ velocity
+relative to the local standard of rest $v_{z, \odot}$.
+For each value of our parameters $mratio, z_\odot, v_{z, \odot}$, we compute the
+Fourier coefficients and minimize the objective function
+\begin{equation}
+  f(a_1, b_1, a_2 \,;\, \mratio, z_\odot, v_{z, \odot}) =
+    a_1^2 + b_1^2 + a_2^2
+\end{equation}
+where we ignore the constant term $c_0$ and the amplitude of the $\sin
+2\theta_z$ term $b_2$.
+We again perform 128 bootstrap trials per element, and we perform the bootstrap
+resampling outside of the entire procedure (so that each optimization is
+performed with a bootstrap sample).
+We use Nelder-Mead optimization \citep{Gao:2012} to minimize our objective
+function, as implemented in the \package{scipy} package \citep{scipy}.
 
-
+\figurename~\ref{fig:elem-ellipses} shows
 
 % We have shown results for the $\mgfe$ abundance deviation, but we repeat this
 % analysis for several different abundances (the same abundances as shown in
