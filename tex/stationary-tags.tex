@@ -12,6 +12,7 @@
 
 % Send it to:
 % - Glenn Van de Ven -- Schwarzschild models of external galaxies
+% - Bovy, Sanders, Das, Binney, Tremaine -- extended DF types
 %
 
 % style guide
@@ -1029,119 +1030,7 @@ function, as implemented in the \package{scipy} package \citep{scipy}.
 \section{Discussion}
 \label{sec:discussion}
 
-\APWTODO{So many things to write here...!}
-
-HOGG: What did we find? How do our conclusions differ from those before us?
-
-HOGG: In particular, what can we say about the dark disk etc?
-
-HOGG: How is what we did better than what came before or happens by other methods?
-
-How are we related to Jeans modeling?
-HOGG ASKS: What to write here? How detailed should we be? Or should this just
-go to the discussion section? HOGG SAY: Just move to the discussion. It should say that
-we have the huge advantage that we never need to take a second moment (though we could);
-our method applies to any moment. We have the disadvantage that we depend on the
-existence of gradients. Fortunately these are not subtle. We have the huge advantage
-that we don't depend on the selection (to first order). That's really huge. We don't
-get help from separability; there is no need for it; it doesn't even simplify our
-math in any way. That's a small but significant advantage. There is
-no sense in which this method is a sub-method of Jeans or vice versa; they make use of
-different aspects of the phase-mixed system.
-
-HOGG: What are the limitations of what we did; what did we sacrifice for our benefits?
-
-HOGG: Or we could phrase this as a set of failure modes?
-
-HOGG: Return to the assumptions; do any need more discussion? One that does is the smooth
-gradients assumption: If we choose different invariants to use, we get slightly different
-answers, because (HOGG presumes) that the functional form for the abundance means fits
-better or worse. So these results aren't definitive; we should probably use a more flexible
-model for the abundance gradients, like a GP or etc.
-
-HOGG: Another is the good abundances and selection assumptions: Do the abundances affect
-the selection, and are the abundance measurements a function of stellar type? Either way,
-we will inherit biases.
-
-Does the existence of a non-zero ``verboten'' term imply a violation of our
-assumptions?
-Or is it just bad luck?
-
-HOGG: What is the limit of this method as we go forward: Many abundance ratios? Many other
-statistics of the abundance distribution? How do things change if the abundances track
-each other exactly? Is that a problem? Note that we scale much better than chemical tagging
-here.
-
-HOGG: For example, we worked with the vertical angle $\theta_z$. It
-would not have been a good idea to work with the azimuthal angle
-$\theta_\phi$. Why not? Because the sample doesn't cover a large range
-in $\theta_\phi$. But what about the angle $\theta_R$? If we had
-worked with this angle we would have made an independent measurement
-of the mass of the disk. We could also have used that angle to measure
-the circular velocity, in the same way that the vertical angle can be
-used to measure the local vertical standard of rest.
-
-HOGG: What other tags could we have used? Other moments of other tags?
-Combinations of tags? What might we gain?
-
-Could we have used the \emph{other} actions as tags? Yes and no: Not if
-their pdfs depend on selection, which they do.
-
-HOGG: Finally, how sensitive are we, really, to the assumption of
-phase mixing? In principle, very. But in practice: You can look at the
-snail and see its aspect ratio. And that is literally a
-non-phase-mixed structure. So there will be generalizations of this
-method that don't depend as strongly on phase mixing. This connects,
-conceptually, to work on streams in the Milky Way halo.
-
-The flip side of that is that there are places in phase space where
-mixing is maybe incredibly slow, like at low $J_z$. Maybe our disk
-midplane issues come from this?
-
-HOGG SAY: The fact that different abundances give
-different disk masses, and the fact that the midplane is off, might
-both be related. I think we should check whether the disk-mass results
-become more consistent if we use a better disk midplane.
-
-Points that came up in MPIA Galaxy Coffee (that is, make sure that we
-have addressed all of these above):
-\begin{itemize}
-\item
-  We don't require separability at all. We are working in 3-action
-  space at all times. It is just that we are \emph{showing} the angles
-  $\theta_z$ associated with the $z$-action $J_z$.
-\item
-  The orbits in Figure 1 look like bands not lines because they are
-  projections of braided tori, not because it shows ``orbit families''
-  or anything like that.
-\item
-  Why are we doing z, vz, and not R, vR, etc?
-\item
-  We don't depend on selection. Why not?
-\item
-  The point that we are assuming that stellar abundances don't vary as
-  stars orbit (that is another way to describe this project).
-\item
-  That this could be used to calibrate or improve abundances, in
-  principle!
-\item
-  That there is a fully data-driven formulation of this problem; ie, not
-  parameterized.
-\item
-  The method does not require that the abundances uniquely define the
-  actions, nor that the actions uniquely define the
-  abundances. Everything can be probabilistically related.
-\item
-  What is the source of our scatter in our abundance means: Shot noise
-  or wrongness of the assumptions?
-\item
-  Where is the information coming from? It is a combination of the
-  density of stars in our sample, the amplitude of the gradient wrt
-  action, and the sensitivity of that action and angle to the potential
-  parameters.
-\end{itemize}
-
-\textbf{APW SAYS: Hogg text moved down here from earlier}
+\subsection{What have we created?}
 
 There are many ways to describe the fundamental prediction that underlies \methodname.
 Here are a few:
@@ -1175,30 +1064,22 @@ Here are a few:
   This is an information-theory description.
 \end{itemize}
 
+Where is the information coming from? It is a combination of the
+density of stars in our sample, the amplitude of the gradient wrt
+action, and the sensitivity of that action and angle to the potential
+parameters.
 
-We make this point clear in a different way in \figurename~YYY, in which
-we have transformed into action--angle coordinates in phase space (CITE)
-and we show scatterplots of the abundances as a function of conjugate
-angles $\theta_z$, conjugate to the vertical actions $J_z$, for stars near
-the orbits plotted in \figurename~XXX.
-Using the fiducial potential to convert to actions and angles,
-the abundance distribution is similar at different
-angles $\theta_z$, or on different parts of the orbit.
-Along the orbits generated by the low-mass-disk and high-mass-disk potentials,
-the abundance distribution shows clear $m=2$ (or $\exp i\,2\,\theta_z$) dependences
-on vertical angle $\theta_z$.
-That is, just by plotting the abundances versus angle, we can make
-inferences about the mass of the disk, or---more generally---the
-gravitational potential of the Milky Way.
+\subsection{How is this better than everything before?}
 
-In order to make the abundance--angle plots in \figurename~YYY, we had
-to DO SOME THINGS because we needed to visualize the global dependence
-on angle using all the stars on all different kinds of orbits.
-Because different orbits have different abundance-ratio
-distributions, this is not a trivial transformation of the data.
-In the inferences we do in \sectionname~AAA below, we
-will use regression (frequentist) or forward modeling (Bayes) to
-combine the data from stars on different orbits.
+How are we related to Jeans modeling?
+we have the huge advantage that we never need to take a second moment (though we could);
+our method applies to any moment. We have the disadvantage that we depend on the
+existence of gradients. Fortunately these are not subtle. We have the huge advantage
+that we don't depend on the selection (to first order). That's really huge. We don't
+get help from separability; there is no need for it; it doesn't even simplify our
+math in any way. That's a small but significant advantage. There is
+no sense in which this method is a sub-method of Jeans or vice versa; they make use of
+different aspects of the phase-mixed system.
 
 ...The point that this works at one to three dimensions. It requires
 abundance gradients, but not separability!  Of course you might not
@@ -1218,18 +1099,98 @@ However, we choose to see this bug as a feature:
 We have discovered, in effect, a \emph{combinatorically large set of constraints on the
 dynamical actions and conjugate angles}.
 
-...The point that this would be more complex in chaotic regions, and
-maybe effectively inapplicable?
-
 ...The point that this doesn't depend on selection, provided that
 stellar properties don't vary strongly with abundnaces, and that
 abundance-measurement biases don't depend strongly on stellar
 parameters. Both assumptions wrong in detail.
 
+The method does not require that the abundances uniquely define the
+actions, nor that the actions uniquely define the
+abundances. Everything can be probabilistically related.
+
+We don't require separability at all. We are working in 3-action
+space at all times. It is just that we are \emph{showing} the angles
+$\theta_z$ associated with the $z$-action $J_z$.
+
+The orbits in Figure 1 look like bands not lines because they are
+projections of braided tori, not because it shows ``orbit families''
+or anything like that.
+
+\subsection{What are the problems with our assumptions?}
+
+HOGG: Return to the assumptions; do any need more discussion?
+
+HOGG: Another is the good abundances and selection assumptions: Do the abundances affect
+the selection, and are the abundance measurements a function of stellar type? Either way,
+we will inherit biases.
+
+Does the existence of a non-zero ``verboten'' term imply a violation of our
+assumptions?
+Or is it just bad luck?
+
+HOGG: Finally, how sensitive are we, really, to the assumption of
+phase mixing? In principle, very. But in practice: You can look at the
+snail and see its aspect ratio. And that is literally a
+non-phase-mixed structure. So there will be generalizations of this
+method that don't depend as strongly on phase mixing. This connects,
+conceptually, to work on streams in the Milky Way halo.
+
+The flip side of that is that there are places in phase space where
+mixing is maybe incredibly slow, like at low $J_z$. Maybe our disk
+midplane issues come from this?
+
+HOGG SAY: The fact that different abundances give
+different disk masses, and the fact that the midplane is off, might
+both be related. I think we should check whether the disk-mass results
+become more consistent if we use a better disk midplane.
+
+What is the source of our scatter in our abundance means: Shot noise
+or wrongness of the assumptions?
+
+\subsection{How can this be extended?}
+
 ... The point that there will be frequentist statistics or
 optimizations, and also Bayesian approaches.  The point that Bayes and
 frequentism look very different here. Call out to orbital roulette,
 and to Bovy et al.
+
+We should probably use a flexible
+model for the abundance means, like a GP or etc.
+
+That there is a fully data-driven formulation of this problem; ie, not
+parameterized.
+
+HOGG: What is the limit of this method as we go forward: Many abundance ratios? Many other
+statistics of the abundance distribution? How do things change if the abundances track
+each other exactly? Is that a problem? Note that we scale much better than chemical tagging
+here.
+
+HOGG: For example, we worked with the vertical angle $\theta_z$. It
+would not have been a good idea to work with the azimuthal angle
+$\theta_\phi$. Why not? Because the sample doesn't cover a large range
+in $\theta_\phi$. But what about the angle $\theta_R$? If we had
+worked with this angle we would have made an independent measurement
+of the mass of the disk. We could also have used that angle to measure
+the circular velocity, in the same way that the vertical angle can be
+used to measure the local vertical standard of rest.
+
+HOGG: What other tags could we have used? Other moments of other tags?
+Combinations of tags? What might we gain?
+
+Could we have used the \emph{other} actions as tags? Yes and no: Not if
+their pdfs depend on selection, which they do.
+
+...The point that this would be more complex in chaotic regions, and
+maybe effectively inapplicable? Or maybe?
+
+That this could be used to calibrate or improve abundances, in
+principle!
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+Adrian, apparently, thinks that an abstract isn't enough.
+
 
 \acknowledgments
 It is a pleasure to thank
