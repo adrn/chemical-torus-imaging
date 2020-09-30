@@ -1032,42 +1032,65 @@ function, as implemented in the \package{scipy} package \citep{scipy}.
 
 \subsection{What have we created?}
 
-There are many ways to describe the fundamental prediction that underlies \methodname.
-Here are a few:
-\begin{itemize}
-\item
+In this \documentname, we have presented a novel method---\methodname---for inferring
+the mass model (or force law or gravitational potential) of an
+integrable, angle-mixed stellar distribution.
+This method does not involve second moments of velocity (like the
+virial theorem and the Jeans equations do), and it does not depend on
+separability or any other mathematical properties other than
+integrability and angle mixing.
+That is, we have a method that is more statistically stable and less
+restricted than Jeans modeling.
+It does, however, depend on the existence of element-abundance
+gradients; the stars on different orbits (with different actions) must
+have---on average or statistically---different compositions.
+Fortunately these gradients are ubiquitous and strong in the Milky Way
+(and most galaxies; CITE).
+
+There are many ways to describe the fundamental prediction or structure
+of \methodname. Here are a few:
+\begin{description}
+\item[Kinematic picture]
   Stars don't change their abundances as they orbit!  Stellar
   abundance ratios can depend on the three invariant actions, but they
   can't depend on the conjugate angles, which wind up arbitrarily with time.
-  This can be seen as a kinematic description of the concept underlying this \documentname.
-\item
-  Or, equivalently, abundance gradients taken in 6-dimensional phase space will be
+\item[Local geometric picture]
+  Abundance gradients taken in 6-dimensional phase space will be
   locally perpendicular, everywhere, to the orbital 3-tori in phase space.
-  This is a local-geometry description of the concept.
-\item
-  Or, equivalently, at every location in 6-d phase space, there are a set of 6-d
-  gradient vectors, which are the derivatives of all measurable
-  moments of all measurable element-abundance ratios with respect to
-  the 6 phase-space coordinates. These gradient vectors will span a
-  local 3-d subspace, and this subspace will be orthogonal to the surfaces
-  of the orbital tori at that location.
-  This is a mathematics-of-gradients description.
-\item
-  Or, equivalently, the orbital tori will be level 3-surfaces in 6-d phase space of any
+  That is, all 6-vector gradients of all possible statistics of all possible
+  element-abundance ratios must be locally perpendicular to the 3-dimensional
+  hyperplane locally kissing the orbital torus at that position in phase space.
+  Equivalently, at every location in 6-d phase space, there full set of 6-d
+  abundance-moment gradient vectors will span a
+  local 3-dimensional subspace.
+  This local subspace will be orthogonal to the surface of the orbital torus
+  at that location.
+\item[Global geometric picture]
+  The 6-dimensional phase space is foliated by a complete set of 3-tori,
+  each of which is specified by the three actions.
+  The orbital tori will be level 3-surfaces (in the 6-dimensional phase space) of any
   moments or statistics of the element-abundance distribution.
-  This is a global-geometry description.
-\item
-  Or, equivalently, a predictive model for the element abundances of stars
+\item[Information-theory picture]
+  Any predictive model for the element abundances of stars
   that is given the freedom to depend on both actions and angles will do no
   better at predicting stellar element abundances than a model that is only
   given the freedom to depend on actions alone.
-  This is an information-theory description.
+  That is, in the 6-dimensional phase space, only the action coordinates provide
+  information about the element abundances.
 \end{itemize}
 
-Where is the information coming from? It is a combination of the
-density of stars in our sample, the amplitude of the gradient wrt
-action, and the sensitivity of that action and angle to the potential
-parameters.
+Because \methodname\ depends on measuring changes in moments of the
+abundance-ratio distribution (means, in this \documentname), we
+conjecture that the precision with which the mass model can be
+constrained increases (the uncertainties decrease) as the
+abundance-moment gradients get stronger.
+By the same token, the precision will increase as the width or
+dispersion of the local (in phase space) abundance distribution gets
+smaller.
+This dispersion will have contributions from the true distribution of
+abundances and also observational uncertainties.
+And of course the precision will increase as the number of stars increases,
+and their coverage of the conjugate angles increases.
 
 \subsection{How is this better than everything before?}
 
