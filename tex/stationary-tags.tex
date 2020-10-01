@@ -1128,9 +1128,10 @@ of \methodname. Here are a few:
   This local subspace will be orthogonal to the surface of the orbital torus
   at that location.
 \item[Global geometric picture]
-  The 6-dimensional phase space is foliated by a complete set of 3-tori,
+  The 6-dimensional phase space is foliated by a complete set of orbital 3-tori,
   each of which is specified by the three actions.
-  The orbital tori will be level 3-surfaces (in the 6-dimensional phase space) of any
+  Each of these orbital tori will be a level 3-surface
+  (in the 6-dimensional phase space) of all
   moments or statistics of the element-abundance distribution.
 \item[Information-theory picture]
   Any predictive model for the element abundances of stars
@@ -1141,8 +1142,9 @@ of \methodname. Here are a few:
   information about the element abundances.
 \end{description}
 
-Because \methodname\ depends on measuring changes in moments of the
-abundance-ratio distribution (means, in this \documentname), we
+Because \methodname\ depends on measuring changes in moments
+(means, in this \documentname) of the
+abundance-ratio distribution, we
 conjecture that the precision with which the mass model can be
 constrained increases (the uncertainties decrease) as the
 abundance-moment gradients get stronger.
@@ -1151,12 +1153,13 @@ dispersion of the local (in phase space) abundance distribution gets
 smaller.
 This dispersion will have contributions from the true distribution of
 abundances and also observational uncertainties.
-And of course the precision will increase as the number of stars increases,
-and their coverage of the conjugate angles increases.
+And the precision will increase as the number of stars increases,
+and as their coverage of the full range of conjugate angles increases.
 
 In this \documentname, we focused on means of (logarithmic) abundance
 ratios.
-But we are not restricted to these element-abundance moments; any moments
+But we are not restricted to these element-abundance moments---or even
+element abundances! Any moments of any statistics of any invariant tags
 are fair game. The method also does not assume that the element abundances
 are uniquely or even relatively specifically predicted by the actions:
 The method only requires that there be some gradients in some moments of
@@ -1263,23 +1266,42 @@ or wrongness of the assumptions?
 
 \subsection{How can this be extended?}
 
-... The point that there will be frequentist statistics or
-optimizations, and also Bayesian approaches.  The point that Bayes and
-frequentism look very different here. Call out to orbital roulette,
-and to Bovy et al.
+The implementation of \methodname\ in this \documentname\ falls into the
+category of classical (frequentist) statistics.
+There are also probabilistic generative model (Bayesian) versions of \methodname.
+The Bayesian implementations look very different, because instead of trying
+to zero out residual angle dependences (as we do here), they try to put
+high probability on the data.
+This looks like building a flexible forward model for the element-abundance distribution,
+controlled by actions.
+When the assumptions of the method are satisfied,
+the best action-controlled model of the abundances or tags will arise in the
+best mass models.
+It might be \textsl{Inside Baseball} to point out that the difference between
+the classical-statistics and Bayesian approaches to \methodname\ map onto the
+differences between classical-statistics orbital roulette (CITE) and forward
+models of the distribution function (CITE Bovy and also the one person who cited us).
+Indeed, the classical-statistics version of \methodname\ presented here is
+very closely related to orbital roulette.
 
-We should probably use a flexible
+... We should probably use a flexible
 model for the abundance means, like a GP or etc.
 
-That there is a fully data-driven formulation of this problem; ie, not
-parameterized.
+... That there is a fully data-driven formulation of this problem; ie, not
+parameterized. And I mean just learn the torus foliation directly.
 
-HOGG: What is the limit of this method as we go forward: Many abundance ratios? Many other
+... HOGG: What is the limit of this method as we go forward: Many abundance ratios? Many other
 statistics of the abundance distribution? How do things change if the abundances track
 each other exactly? Is that a problem? Note that we scale much better than chemical tagging
 here.
+... What other tags could we have used? Other moments of other tags?
+Combinations of tags? What might we gain?
 
-HOGG: For example, we worked with the vertical angle $\theta_z$. It
+... Could we have used the \emph{other} actions as tags? Yes and no: Not if
+their pdfs depend on selection, which they do.
+
+... HOGG: What about going fully 3-d?
+For example, we worked with the vertical angle $\theta_z$. It
 would not have been a good idea to work with the azimuthal angle
 $\theta_\phi$. Why not? Because the sample doesn't cover a large range
 in $\theta_\phi$. But what about the angle $\theta_R$? If we had
@@ -1288,16 +1310,10 @@ of the mass of the disk. We could also have used that angle to measure
 the circular velocity, in the same way that the vertical angle can be
 used to measure the local vertical standard of rest.
 
-HOGG: What other tags could we have used? Other moments of other tags?
-Combinations of tags? What might we gain?
-
-Could we have used the \emph{other} actions as tags? Yes and no: Not if
-their pdfs depend on selection, which they do.
-
 ...The point that this would be more complex in chaotic regions, and
 maybe effectively inapplicable? Or maybe?
 
-That this could be used to calibrate or improve abundances, in
+... AND That this could be used to calibrate or improve abundances, in
 principle!
 
 \section{Conclusions}
