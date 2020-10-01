@@ -819,11 +819,14 @@ That is, we use a given mass model to compute the three actions $\vec{J}$ for
 each star in the parent sample and choose the closest $K$ neighbors in
 $\vec{J}$-space (with the isotropic Euclidean metric distance) for each star to
 compute the action-local mean abundance.
+We actually perform a weighted mean in order to account for the fact that there
+could be strong number-density gradients in action-space that could bias our
+estimates of the mean abundance values (we discuss this in more detail in
+Appendix~\ref{app:knn-weights}).
 For a specific star, its neighbors are a function of the mass-model parameters
 because all actions will change values in different mass models.
 We choose to use $K=64$ based on experimentation, but find that our results are
 insensitive to this choice.
-\TODO{Actually, we do a crazy weighted mean!}
 
 Our goal then is to minimize (over mass model parameters) the dependence of the
 mean abundance-ratio deviation distribution on the vertical angle $\theta_z$.
@@ -1399,6 +1402,15 @@ participating in the \gaia\ Multilateral Agreement.
   \package{gala} \citep{gala, galav1_1},
   \package{schwimmbad} \citep{schwimmbad}
 }
+
+\appendix
+
+\section{Re-weighting the $k$ nearest neighbors to account for steep number
+density gradients}
+\label{app:knn-weights}
+
+\TODO{Oo boy, here we go...}
+
 
 \bibliographystyle{aasjournal}
 \bibliography{stationary-tags}
