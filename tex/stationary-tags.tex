@@ -77,10 +77,6 @@
 \newcommand{\mdisk}{\ensuremath{\mathrm{M}_\mathrm{disk}}}
 \newcommand{\mratio}{\ensuremath{\mdisk / \mdisk^\star}}
 
-\newcommand{\TODO}[1]{{\color{tabgreen}\textbf{TODO:} #1}}
-\newcommand{\APWTODO}[1]{{\color{tabpurple}\textbf{APW TODO:} #1}}
-\newcommand{\HOGGTODO}[1]{{\color{tabred}\textbf{HOGG TODO:} #1}}
-
 
 % trust in Hogg
 \setlength{\parindent}{1.1\baselineskip}
@@ -303,7 +299,7 @@ only under strong assumptions, so we are still in the business of revealing the
 orbits indirectly.
 However, our approach is novel and there are many regimes in which it will be
 more precise, and require fewer assumptions, than any other method.
-\TODO{Expand out again, make sure to emphasize how general this idea is?}
+% \TODO{Expand out again, make sure to emphasize how general this idea is?}
 
 
 \section{Methodological Generalities}
@@ -546,12 +542,13 @@ the St\"ackel Fudge to actions computed with a more accurate action solver.
 For a set of trial orbits (meant to span the range of vertical actions we see in
 our sample of \apogee\ stars) over a range of disk masses (from
 $\mratio=0.5$--$1.5$), we compute actions both with the St\"ackel Fudge and with
-the ``O2GF'' method defined in \citet{Sanders:2014}.
+the ``O2GF'' method defined in \citet{Sanders:2014, Sanders:2016}.
 The O2GF method works by numerically integrating an orbit for a given star and
 solving for the generating function to transform from actions computed in a toy
 potential model to the actions in the potential model of interest (as defined in
-\citealt{Sanders:2014}, and implemented in \package{gala}).\footnote{This method
-is referred to as the ``O2GF method'' in \citet{Sanders:2016}.}
+\citealt{Sanders:2014}, and implemented in \package{gala}).
+% \footnote{This method is referred to as the ``O2GF method'' in
+% \citet{Sanders:2016}.}
 This method has some tuning parameters related to the total orbital integration
 time and time step, and the number of Fourier components to include in the
 Fourier expansion used to represent the generating function, $N_{\rm max}$.
@@ -803,7 +800,7 @@ For a specific star, its neighbors are a function of the mass-model parameters
 because all actions will change values in different mass models.
 We choose to use $K=64$ based on experimentation, but find that our results are
 insensitive to this choice.
-\todo{Actually, we do a crazy weighted mean!}
+\TODO{Actually, we do a crazy weighted mean!}
 
 Our goal then is to minimize (over mass model parameters) the dependence of the
 mean abundance-ratio deviation distribution on the vertical angle $\theta_z$.
