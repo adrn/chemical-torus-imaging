@@ -24,7 +24,7 @@
 %   "Fourier expansion model"?
 
 \documentclass[modern]{aastex63}
-
+\usepackage{mdframed}
 \input{preamble.tex}
 
 % text macros
@@ -360,6 +360,7 @@ measured.
 
 % Notebook: figures/APOGEE-sample.ipynb
 \begin{figure}[!tp]
+  \begin{mdframed}
   \begin{center}
   \includegraphics[width=\textwidth]{apogee-rgb-loalpha-mh-am-xy.pdf}
   \end{center}
@@ -384,8 +385,8 @@ measured.
     sample is less populated at certain values of vertical angle, $\theta_z$.
     The methods presented in this paper do not require that all angles are
     equally populated in the sample.
-    \label{fig:mh-am-xy}
-    }
+    \label{fig:mh-am-xy}}
+  \end{mdframed}
 \end{figure}
 
 In our toy demonstrations below, our main data source is a cross-match between
@@ -577,6 +578,7 @@ computation of the actions (over stars) using the Python package
 
 % Notebook: figures/APOGEE-zvz-orbits.ipynb
 \begin{figure}[!tp]
+  \begin{mdframed}
   \begin{center}
   \includegraphics[width=\textwidth]{abundance-zvz-grid.pdf}
   \end{center}
@@ -593,6 +595,7 @@ computation of the actions (over stars) using the Python package
     This explains some of the visible asymmetries.
   \label{fig:zvz-grid}
   }
+  \end{mdframed}
 \end{figure}
 
 A significant motivation for his work came from plots of elemental abundance
@@ -624,6 +627,7 @@ $\theta_z$.
 
 % Notebook: figures/zvz-orbit-demo.ipynb
 \begin{figure}[!tp]
+  \begin{mdframed}
   \begin{center}
   \includegraphics[width=\textwidth]{zvz-orbit-demo.pdf}
   \end{center}
@@ -645,6 +649,7 @@ $\theta_z$.
     vertical-angle space. In this space, the two orbits trace perfect circles.
   \label{fig:zvz-demo}
   }
+  \end{mdframed}
 \end{figure}
 
 To very high precision, stars do not change their abundances as they orbit.
@@ -685,6 +690,7 @@ In our method below, we utilize this fact to infer the disk mass.
 
 % Notebook: figures/APOGEE-zvz-orbits.ipynb
 \begin{figure}[!tp]
+  \begin{mdframed}
   \begin{center}
   \includegraphics[width=\textwidth]{zvz-mean-MG_FE}
   \end{center}
@@ -707,6 +713,7 @@ In our method below, we utilize this fact to infer the disk mass.
     on projections.
   \label{fig:zvz-mgfe}
   }
+  \end{mdframed}
 \end{figure}
 
 
@@ -838,6 +845,7 @@ because the abundance-deviation estimates depend on the data set in play, and
 also the mass-model parameters.
 
 \begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
+  \begin{mdframed}
   \begin{center}
   \includegraphics[width=\textwidth]{sinusoid-fits.pdf}
   \end{center}
@@ -867,6 +875,7 @@ also the mass-model parameters.
     \sectionname~\ref{sec:inferences}).
   \label{fig:sinusoid-fits}
   }
+  \end{mdframed}
 \end{figure}
 
 In the smooth model for the mean abundance deviations
@@ -912,8 +921,8 @@ This implies that our assumptions seem to be lightly violated (the inferred
 amplitude is only marginally significant), and we discuss this further in the
 context of our assumptions below (\sectionname~\ref{sec:discussion}).
 
-
 \begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
+  \begin{mdframed}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{coeff-vs-mdisk.pdf}
   \end{center}
@@ -941,6 +950,7 @@ context of our assumptions below (\sectionname~\ref{sec:discussion}).
     These figures show that we can precisely measure the disk mass.
   \label{fig:coeff-mdisk}
   }
+  \end{mdframed}
 \end{figure}
 
 % Another thing we can glean from \figurename~\ref{fig:coeff-mdisk} is that these
@@ -1002,6 +1012,7 @@ For example, if ...
 
 % Notebook: figures/5-Optimize-results.ipynb
 \begin{figure}[!tp]
+  \begin{mdframed}
   \begin{center}
   \includegraphics[width=0.6\textwidth]{M-vz-error-ellipses.pdf}
   \end{center}
@@ -1019,10 +1030,12 @@ For example, if ...
     parameters.
   \label{fig:elem-ellipses-1}
   }
+  \end{mdframed}
 \end{figure}
 
 % Notebook: figures/5-Optimize-results.ipynb
 \begin{figure}[!tp]
+  \begin{mdframed}
   \begin{center}
   \includegraphics[width=0.8\textwidth]{M-z-vz-z-error-ellipses.pdf}
   \end{center}
@@ -1031,10 +1044,12 @@ For example, if ...
   projections of our parameter space.
   \label{fig:elem-ellipses-2}
   }
+  \end{mdframed}
 \end{figure}
 
 % Notebook: figures/6-APOGEE-elem-Jz-gradients.ipynb
 \begin{figure}[!tp]
+  \begin{mdframed}
   \begin{center}
   \includegraphics[width=\textwidth]{elem-Jz-gradients.pdf}
   \end{center}
@@ -1042,6 +1057,7 @@ For example, if ...
     TODO
   \label{fig:elem-Jz-gradients}
   }
+  \end{mdframed}
 \end{figure}
 
 % \begin{table}[ht]
