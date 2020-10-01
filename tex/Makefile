@@ -10,7 +10,7 @@ NAME = stationary-tags
 
 all: ${NAME}.pdf
 
-${NAME}.pdf: ${NAME}.tex ${NAME}.bib
+${NAME}.pdf: ${NAME}.tex ${NAME}.bib preamble.tex
 	${LATEX} ${NAME}
 	bibtex ${NAME}
 	${LATEX} ${NAME}
