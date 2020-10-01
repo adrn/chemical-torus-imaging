@@ -766,7 +766,10 @@ method is conditionally correct, conditioning on these core assumptions:
   we discuss this further in \sectionname~\ref{sec:discussion}.
   % TODO: Alternatively, we could use a strongly-constrained model for the
   % dependence of the selection function on element abundances.
-\item[measurable gradients] There exist gradients in the abundances with respect to the between the kinematics (position) and those are measurable at the precision of our spectroscopic survey.
+\item[measurable gradients] There exist gradients in the abundances with respect
+  to the kinematics (position, velocities, actions, etc.) and those gradients
+  are measurable at the precision of the abundance measurements in our
+  spectroscopic dataset.
 \end{description}
 
 In this \documentname, we consider only classical-statistics approaches for
@@ -779,16 +782,22 @@ However, we expect that generative approaches will produce at least slightly
 more precise inferences, since they will be protected by the arguments and
 proofs of Bayesian inference.
 In addition to the core assumptions listed above, we also make additional
-assumptions specific to our implementation and demonstrations here:
-\begin{description}
-\item[kinematic measurements] The 6D phase-space positions are sufficiently
-  accurate and precise such that we condition (or bin) over these quantities.
-  For the parent sample used here, the median distance uncertainty is $\sigma_d
-  \approx 50~\pc$ and the median velocity uncertainty is $\approx 2~\kms$.
-\item[abundance measurements] At largest distances or z heights, we only see the brightest / lowest logg stars. And stars at different logg's, temperatures have different ... \HOGGTODO{Assumption that stars in different parts
-  of phase space get the same abundance measurements.} Questionable in certain
-  kinds of samples.
-\end{description}
+assumptions specific to our implementation and demonstrations.
+In particular, her we assume that the 6D phase-space positions are sufficiently
+accurate and precise such that we condition over these quantities directly (and
+ignore their reported uncertainties).
+For the parent sample used here, the median distance uncertainty (from inverting
+the \gaia\ parallaxes) is $\sigma_d \approx 50~\pc$ and the median velocity
+uncertainty is $\approx 2~\kms$.
+We also here assume that stars in different parts of phase-space receive the
+same quality of abundance measurements, an assumption that we know is weakly
+violated because of known temperature \citep{Wheeler) and \logg\ (Eilers et al.,
+in prep.) dependences on the \apogee\ abundance measurements, and stars with
+different temperatures or surface gravities or luminosities can be seen at
+different distances and $z$ heights.
+However, our parent sample is selected to contain a relatively small range of
+surface gravities along the red giant branch and is predominantly dominated by
+red clump stars, so we expect these issues to be negligible.
 
 For simplicity, we focus here on the vertical kinematics of stars and we ask
 whether there is a choice of mass model that leads to dynamical actions and
