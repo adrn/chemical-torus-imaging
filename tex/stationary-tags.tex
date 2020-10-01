@@ -25,7 +25,13 @@
 %   "Fourier expansion model"?
 
 \documentclass[modern]{aastex63}
-\usepackage{mdframed}
+\usepackage[framemethod=tikz]{mdframed}
+\usetikzlibrary{shadows}
+\mdfsetup{%
+   linecolor=lightgray,
+   linewidth=0.5pt,
+   roundcorner=4pt}
+
 \input{preamble.tex}
 
 % text macros
