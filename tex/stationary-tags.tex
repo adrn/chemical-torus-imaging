@@ -153,7 +153,7 @@
   circular velocity).
   % TODO: audit this statement
   We find that the disk mass can be constrained (na\"ively) at the $<3$-percent
-  level with this new method using only six element abundance ratios,
+  level with this new method using only eight element abundance ratios,
   demonstrating the promise of combining stellar tags with dynamical invariants.
 \end{abstract}
 
@@ -993,7 +993,7 @@ solar height of $z_\odot \sim 20~\pc$ (\citealt{Bennett:2019} and
 and \abunratio{Si}{Fe} suggest that the sun is on the opposite side of the
 midplane!
 While we do not have a simple explanation for this discrepancy, our constraints
-from different element abundance ratios will effectively ``weight'' stars in
+from different element abundance ratios will effectively weight stars in
 different parts of action space in ways that may amplify issues with our
 assumptions.
 For example, if ...
@@ -1005,7 +1005,17 @@ For example, if ...
   \includegraphics[width=0.6\textwidth]{M-vz-error-ellipses.pdf}
   \end{center}
   \caption{%
-    TODO
+    A summary of our joint constraints on the disk mass parameter \mratio\ and
+    the solar velocity $v_{z, \odot}$ for each element individually (colored
+    ellipses) and the joint constraint (black).
+    Each color shows one- and two-sigma error ellipses.
+    The means and covariance matrices of each error ellipse are computed from
+    optimizing the objective function (\equationname~\ref{eq:objective}) for 128
+    bootstrap resamplings of the parent sample.
+    Each individual element abundance ratio already provides fairly precise
+    ($\lesssim10\%$) constraints on these parameters, but the joint constraint
+    for these eight elements has a precision of $\approx$2.5\% for both of these
+    parameters.
   \label{fig:elem-ellipses-1}
   }
 \end{figure}
