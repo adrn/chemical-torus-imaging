@@ -709,7 +709,7 @@ In our method below, we utilize this fact to infer the disk mass.
     coincident with isopleths of the mean abundance?}
     This question is asked for illustrative purposes only: these plots distort
     the data by projection in phase space, and the methods we use for the
-    inferences we perform (see \sectionname~\ref{sec:inferences})does not rely
+    inferences we perform (see \sectionname~\ref{sec:inferences}) does not rely
     on projections.
   \label{fig:zvz-mgfe}
   }
@@ -752,15 +752,14 @@ method is conditionally correct, conditioning on these core assumptions:
 \item[selection] The selection function depends on position (or velocity) in the
   Milky Way, but not on element abundances. In detail, the \apogee\ selection
   function \emph{will} depend on abundances through gradients between stellar
-  parameters and element abundance and implicit selections on stellar
-  parameters. We attempt to mitigate these issues here by selecting only red
-  giant stars near the red clump (see \sectionname~\ref{sec:data}), and we
-  discuss this further in \sectionname~\ref{sec:discussion}.
+  parameters and element abundance ratios, and implicit selections on stellar
+  parameters (through, e.g., color and magnitude cuts). We attempt to mitigate
+  these issues here by selecting a limited (in \logg) subset of red giant stars
+  that are dominated by red clump stars (see \sectionname~\ref{sec:data}), and
+  we discuss this further in \sectionname~\ref{sec:discussion}.
   % TODO: Alternatively, we could use a strongly-constrained model for the
   % dependence of the selection function on element abundances.
-\item[smooth gradients] \HOGGTODO{Assumption about how the abundances can
-  depend on action.} Relatedly, the use of action and not log-action
-  or zmax or whatever.
+\item[measurable gradients] There exist gradients in the abundances with respect to the between the kinematics (position) and those are measurable at the precision of our spectroscopic survey.
 \end{description}
 
 In this \documentname, we consider only classical-statistics approaches for
@@ -779,7 +778,7 @@ assumptions specific to our implementation and demonstrations here:
   accurate and precise such that we condition (or bin) over these quantities.
   For the parent sample used here, the median distance uncertainty is $\sigma_d
   \approx 50~\pc$ and the median velocity uncertainty is $\approx 2~\kms$.
-\item[abundance measurements] \HOGGTODO{Assumption that stars in different parts
+\item[abundance measurements] At largest distances or z heights, we only see the brightest / lowest logg stars. And stars at different logg's, temperatures have different ... \HOGGTODO{Assumption that stars in different parts
   of phase space get the same abundance measurements.} Questionable in certain
   kinds of samples.
 \end{description}
