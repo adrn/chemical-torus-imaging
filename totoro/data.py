@@ -99,7 +99,7 @@ class Dataset:
         elem2 = str(elem2).upper()
 
         if elem2 == 'H':
-            i1 = self.elem_ratios.index(elem1 + 'FE')
+            i1 = self.elem_ratios.index(elem1 + '_FE')
             i2 = self.elem_ratios.index('FE_H')
             return (self.t[self.elem_ratios[i1]] -
                     self.t[self.elem_ratios[i2]])
