@@ -28,10 +28,11 @@
 \documentclass[modern]{aastex63}
 \usepackage[framemethod=tikz]{mdframed}
 \usetikzlibrary{shadows}
+\definecolor{captiongray}{HTML}{555555}
 \mdfsetup{%
   innertopmargin=2ex,
   innerbottommargin=1.8ex,
-  linecolor=gray,
+  linecolor=captiongray,
   linewidth=0.5pt,
   roundcorner=4pt}
 \input{preamble.tex}
@@ -370,6 +371,7 @@ measured.
 % Notebook: figures/APOGEE-sample.ipynb
 \begin{figure}[!tp]
   \begin{mdframed}
+  \color{captiongray}
   \begin{center}
   \includegraphics[width=\textwidth]{apogee-rgb-loalpha-mh-am-xy.pdf}
   \end{center}
@@ -588,6 +590,7 @@ computation of the actions (over stars) using the Python package
 % Notebook: figures/APOGEE-zvz-orbits.ipynb
 \begin{figure}[!tp]
   \begin{mdframed}
+  \color{captiongray}
   \begin{center}
   \includegraphics[width=\textwidth]{abundance-zvz-grid.pdf}
   \end{center}
@@ -637,6 +640,7 @@ $\theta_z$.
 % Notebook: figures/zvz-orbit-demo.ipynb
 \begin{figure}[!tp]
   \begin{mdframed}
+  \color{captiongray}
   \begin{center}
   \includegraphics[width=\textwidth]{zvz-orbit-demo.pdf}
   \end{center}
@@ -700,6 +704,7 @@ In our method below, we utilize this fact to infer the disk mass.
 % Notebook: figures/APOGEE-zvz-orbits.ipynb
 \begin{figure}[!tp]
   \begin{mdframed}
+    \color{captiongray}
   \begin{center}
   \includegraphics[width=\textwidth]{zvz-mean-MG_FE}
   \end{center}
@@ -866,6 +871,7 @@ also the mass-model parameters.
 
 \begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{mdframed}
+    \color{captiongray}
   \begin{center}
   \includegraphics[width=\textwidth]{sinusoid-fits.pdf}
   \end{center}
@@ -943,6 +949,7 @@ context of our assumptions below (\sectionname~\ref{sec:discussion}).
 
 \begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{mdframed}
+    \color{captiongray}
   \begin{center}
   \includegraphics[width=0.9\textwidth]{coeff-vs-mdisk.pdf}
   \end{center}
@@ -1040,6 +1047,7 @@ between the results for different abundance ratios.
 % Notebook: figures/5-Optimize-results.ipynb
 \begin{figure}[!tp]
   \begin{mdframed}
+    \color{captiongray}
   \begin{center}
   \includegraphics[width=0.6\textwidth]{M-vz-error-ellipses.pdf}
   \end{center}
@@ -1063,6 +1071,7 @@ between the results for different abundance ratios.
 % Notebook: figures/5-Optimize-results.ipynb
 \begin{figure}[!tp]
   \begin{mdframed}
+    \color{captiongray}
   \begin{center}
   \includegraphics[width=0.8\textwidth]{M-z-vz-z-error-ellipses.pdf}
   \end{center}
@@ -1080,6 +1089,7 @@ between the results for different abundance ratios.
 % Notebook: figures/6-APOGEE-elem-Jz-gradients.ipynb
 % \begin{figure}[!tp]
 %   \begin{mdframed}
+  % \color{captiongray}
 %   \begin{center}
 %   \includegraphics[width=\textwidth]{elem-Jz-gradients.pdf}
 %   \end{center}
