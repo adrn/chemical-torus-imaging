@@ -27,14 +27,18 @@
 
 \documentclass[modern]{aastex63}
 \usepackage[framemethod=tikz]{mdframed}
-\usetikzlibrary{shadows}
+\usetikzlibrary{shadows.blur}
 \definecolor{captiongray}{HTML}{555555}
 \mdfsetup{%
   innertopmargin=2ex,
   innerbottommargin=1.8ex,
   linecolor=captiongray,
   linewidth=0.5pt,
-  roundcorner=4pt}
+  roundcorner=5pt,
+  shadow=true,
+  shadowcolor=black!05,
+  shadowsize=4pt
+}
 \input{preamble.tex}
 
 % text macros
