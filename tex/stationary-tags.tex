@@ -1005,6 +1005,30 @@ performed independently with a bootstrap sample).
 We use Nelder-Mead optimization \citep{Gao:2012} to minimize our objective
 function, as implemented in the \package{scipy} package \citep{scipy}.
 
+% Notebook: figures/5-Optimize-results.ipynb
+\begin{figure}[!tp]
+  \begin{mdframed}
+    \color{captiongray}
+  \begin{center}
+  \includegraphics[width=0.6\textwidth]{M-vz-error-ellipses.pdf}
+  \end{center}
+  \caption{%
+    A summary of our joint constraints on the disk mass parameter \mratio\ and
+    the solar velocity $v_{z, \odot}$ for each element individually (colored
+    ellipses) and the joint constraint (black).
+    Each color shows one- and two-sigma error ellipses.
+    The means and covariance matrices of each error ellipse are computed from
+    optimizing the objective function (\equationname~\ref{eq:objective}) for 128
+    bootstrap resamplings of the parent sample.
+    Each individual element abundance ratio already provides fairly precise
+    ($\lesssim10\%$) constraints on these parameters, but the joint constraint
+    for these eight elements has a precision of $\approx$2.5\% for both of these
+    parameters.
+  \label{fig:elem-ellipses-1}
+  }
+  \end{mdframed}
+\end{figure}
+
 \figurename~\ref{fig:elem-ellipses-1} shows a summary of our constraints on the
 disk mass parameter and solar velocity for all of the elements shown in
 \figurename~\ref{fig:zvz-grid} (colorful ellipses), and the joint constraint
@@ -1042,31 +1066,6 @@ stars with different vertical actions, we will in general find disagreements
 between the results for different abundance ratios.
 
 
-
-
-% Notebook: figures/5-Optimize-results.ipynb
-\begin{figure}[!tp]
-  \begin{mdframed}
-    \color{captiongray}
-  \begin{center}
-  \includegraphics[width=0.6\textwidth]{M-vz-error-ellipses.pdf}
-  \end{center}
-  \caption{%
-    A summary of our joint constraints on the disk mass parameter \mratio\ and
-    the solar velocity $v_{z, \odot}$ for each element individually (colored
-    ellipses) and the joint constraint (black).
-    Each color shows one- and two-sigma error ellipses.
-    The means and covariance matrices of each error ellipse are computed from
-    optimizing the objective function (\equationname~\ref{eq:objective}) for 128
-    bootstrap resamplings of the parent sample.
-    Each individual element abundance ratio already provides fairly precise
-    ($\lesssim10\%$) constraints on these parameters, but the joint constraint
-    for these eight elements has a precision of $\approx$2.5\% for both of these
-    parameters.
-  \label{fig:elem-ellipses-1}
-  }
-  \end{mdframed}
-\end{figure}
 
 % Notebook: figures/5-Optimize-results.ipynb
 \begin{figure}[!tp]
@@ -1150,83 +1149,119 @@ between the results for different abundance ratios.
 \section{Discussion}
 \label{sec:discussion}
 
-% \subsection{What is \methodname?}
-
 In this \documentname, we have presented a new method---\methodname---for
 inferring the mass model (or acceleration field) traced by a phase-mixed
 stellar distribution.
-This method is more statistically stable than Jeans modeling in that it does not
-require measuring second moments of the stellar velocity distribution.
-It is also less restrictive in that the key assumption is that the stars are
-phase-mixed, one of many requirements of other methods as well, such as Jeans
-modeling, Schwarzschild modeling, or virial methods.
+\methodname\ is novel in that it provides a way of using measurements of element
+abundance ratios and other stellar tags to improve the precision of dynamical
+inferences.
+This method is also more statistically stable than Jeans modeling in that it
+does not require measuring second moments of the stellar velocity distribution.
 This method does, however, depend on the existence of element-abundance
 gradients with respect to kinematics: The stars on different orbits (i.e., with
 different actions) must have---on average or statistically---different
 compositions.
-Fortunately these gradients are ubiquitous and strong in the Milky Way
-(and most galaxies; CITE).
+Fortunately these gradients are ubiquitous and measurable in the Milky Way (and
+most galaxies; \citealt{TODO}).
 
-There are many ways to describe the fundamental prediction or structure
-of \methodname. Here are a few:
-\begin{description}
-\item[Kinematic picture]
-  Stars don't change their abundances as they orbit!  Stellar
-  abundance ratios can depend on the three invariant actions, but they
-  can't depend on the conjugate angles, which wind up arbitrarily with time.
-\item[Local geometric picture]
-  Abundance gradients taken in 6-dimensional phase space will be
-  locally perpendicular, everywhere, to the orbital 3-tori in phase space.
-  That is, all 6-vector gradients of all possible statistics of all possible
-  element-abundance ratios must be locally perpendicular to the 3-dimensional
-  hyperplane locally kissing the orbital torus at that position in phase space.
-  Equivalently, at every location in 6-d phase space, there full set of 6-d
-  abundance-moment gradient vectors will span a
-  local 3-dimensional subspace.
-  This local subspace will be orthogonal to the surface of the orbital torus
-  at that location.
-\item[Global geometric picture]
-  The 6-dimensional phase space is foliated by a complete set of orbital 3-tori,
-  each of which is specified by the three actions.
-  Each of these orbital tori will be a level 3-surface
-  (in the 6-dimensional phase space) of all
-  moments or statistics of the element-abundance distribution.
-\item[Information-theory picture]
-  Any predictive model for the element abundances of stars
-  that is given the freedom to depend on both actions and angles will do no
-  better at predicting stellar element abundances than a model that is only
-  given the freedom to depend on actions alone.
-  That is, in the 6-dimensional phase space, only the action coordinates provide
-  information about the element abundances.
-\end{description}
 
-Because \methodname\ depends on measuring changes in moments
-(means, in this \documentname) of the
-abundance-ratio distribution, we
-conjecture that the precision with which the mass model can be
-constrained increases (the uncertainties decrease) as the
-abundance-moment gradients get stronger.
-By the same token, the precision will increase as the width or
-dispersion of the local (in phase space) abundance distribution gets
-smaller.
-This dispersion will have contributions from the true distribution of
-abundances and also observational uncertainties.
-And the precision will increase as the number of stars increases,
-and as their coverage of the full range of conjugate angles increases.
+\subsection{Fundamentals of \methodname}
 
-In this \documentname, we focused on means of (logarithmic) abundance
-ratios.
-But we are not restricted to these element-abundance moments---or even
-element abundances! Any moments of any statistics of any invariant tags
-are fair game. The method also does not assume that the element abundances
-are uniquely or even relatively specifically predicted by the actions:
-The method only requires that there be some gradients in some moments of
-the abundance distribution. There can be---and there is---a wide range of
-abundance ratios at every point in action space.
-In this project, all distributions are expected to have (and are observed
-to have) substantial dispersion.
+The existence of element-abundance gradients in the Milky Way combined with the
+assumption that stars do not (appreciably) change their surface abundances as
+they orbit leads to the core concept of \methodname:
+Stellar abundance ratios can depend on the three invariant actions, but they
+cannot depend on the conjugate angles (or phases).
+An implication of this is that gradients of stellar abundances with respect to
+any 6-dimensional phase space coordinates will be locally tangent to the 3-tori
+defined by the surfaces of constant actions at any position in phase space.
+% Equivalently, at every location in 6-d phase space, there full set of 6-d
+% abundance-moment gradient vectors will span a local 3-dimensional subspace.
+% This local subspace will be orthogonal to the surface of the orbital torus at
+%   that location.
+The 6-dimensional phase space is foliated by a complete set of orbital
+3-tori, each of which is specified by the three actions.
+Therefore, globally, each of these orbital tori will be a level 3-surface (in
+the 6-dimensional phase space) of all moments or statistics of the
+element-abundance distribution.
 
-\subsection{How is \methodname\ better than everything that's come before?}
+From an information theory perspective, this implies that any predictive model
+for the element abundances of stars that depends on both actions and angles will
+not predict the stellar abundances more precisely than a model that only depends
+on the actions.
+That is, in the 6-dimensional phase space, only the action coordinates provide
+information about the element abundances.
+In this context, we expect that the precision with which a mass model can be
+constrained is better (i.e., the uncertainties on parameters are smaller) when
+the abundance gradients are stronger.
+We also expect that the precision will increase as the width or dispersion of
+the local (in phase space) abundance distribution gets smaller.
+This dispersion will have contributions from the intrinsic distribution of
+abundances, which is related to both star formation and dynamical mixing, and
+also from observational uncertainties.
+An important consideration here is that inferences using \methodname\ will not
+always continue to improve as the individual abundance measurements improve:
+At some point, the finite scatter of the (kinematically-local) abundance
+distribution will cause the improvements to saturate.
+However, the precision will increase as the number of stars increases,
+especially as the stars cover more of the range of possible conjugate angles.
+
+In this \documentname, in our toy implementation, we have focused primarily on
+fitting a model of the means of (logarithmic) abundance ratios of stars.
+But \methodname\ is much more general:
+Any statistical moments of any statistics of any invariant stellar tags would
+also be allowed.
+The method also does not assume that the element abundances are uniquely or even
+relatively specifically predicted by the actions:
+The method only requires that there are gradients in some moments of the
+abundance distribution.
+There can be---and there is---a wide range of abundance ratios at every point in
+action space.
+In this project, all distributions are expected to have (and are observed to
+have) substantial dispersion.
+
+
+% There are many ways to describe the fundamental prediction or structure
+% of \methodname. Here are a few:
+% \begin{description}
+% \item[Kinematic picture]
+%   Stars don't change their abundances as they orbit!  Stellar
+%   abundance ratios can depend on the three invariant actions, but they
+%   can't depend on the conjugate angles, which wind up arbitrarily with time.
+% \item[Local geometric picture]
+%   Abundance gradients taken in 6-dimensional phase space will be
+%   locally perpendicular, everywhere, to the orbital 3-tori in phase space.
+%   That is, all 6-vector gradients of all possible statistics of all possible
+%   element-abundance ratios must be locally perpendicular to the 3-dimensional
+%   hyperplane locally kissing the orbital torus at that position in phase space.
+%   Equivalently, at every location in 6-d phase space, there full set of 6-d
+%   abundance-moment gradient vectors will span a
+%   local 3-dimensional subspace.
+%   This local subspace will be orthogonal to the surface of the orbital torus
+%   at that location.
+% \item[Global geometric picture]
+%   The 6-dimensional phase space is foliated by a complete set of orbital 3-tori,
+%   each of which is specified by the three actions.
+%   Each of these orbital tori will be a level 3-surface
+%   (in the 6-dimensional phase space) of all
+%   moments or statistics of the element-abundance distribution.
+% \item[Information-theory picture]
+%   Any predictive model for the element abundances of stars
+%   that is given the freedom to depend on both actions and angles will do no
+%   better at predicting stellar element abundances than a model that is only
+%   given the freedom to depend on actions alone.
+%   That is, in the 6-dimensional phase space, only the action coordinates provide
+%   information about the element abundances.
+% \end{description}
+
+
+\subsection{Connection to Other Methods}
+
+% It is also less restrictive in that the key assumption is that the stars are
+% phase-mixed, one of many requirements of other methods as well, such as Jeans
+% modeling, Schwarzschild modeling, or virial methods.
+
+Like Jeans modeling, Schwarzschild modeling, or distribution function modeling, \methodname\ provides a way to infer the underlying acceleration field traced by [...], for which we only have access to instantaneous measurements of phase-space coordinates.
 
 We assert that \methodname\ is unlike Jeans modeling, and (in
 particular) that it is more stable and less mathematically constrained.
@@ -1241,7 +1276,7 @@ We require gradients, but not separability.
 We choose in this \documentname\ to focus on vertical kinematics, but
 we nowhere assume that these vertical kinematics are separated from the
 radial kinematics.
-Indeed the orbits plotted in \figurename~XXXX
+Indeed the orbits plotted in \figurename~\ref{fig:zvz-mgfe}
 show finite-width projections onto the vertical phase space because we
 have not performed any kind of separation or separability approximation.
 
@@ -1291,7 +1326,7 @@ But many can.
 We have discovered, in effect, a \emph{combinatorically large set of constraints on the
 dynamical actions} and thus the mass model.
 
-\subsection{What are the problems with our assumptions?}
+\subsection{Returning to our Assumptions}
 
 .... HOGG: Return to the assumptions; do any need more discussion? Yes.
 
@@ -1326,7 +1361,7 @@ much longer than the orbital time, we are fine.
 ... What is the source of our scatter in our abundance means: Shot noise
 or wrongness of the assumptions?
 
-\subsection{How can this be extended?}
+\subsection{Extensions of \methodname}
 
 The implementation of \methodname\ in this \documentname\ falls into the
 category of classical (frequentist) statistics.
