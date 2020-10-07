@@ -1406,21 +1406,39 @@ prep.).
 update the calibration?}
 
 
-% TODO: Integrable - Discuss in the context of our application, and of other applications in the MW
-% Technically we require non-resonant - not just integrable, but we need
-%   globally integrable so that the actions are continuous. But at the precision
-%   we are working, we don't think this is the showstopper
+% Integrable
+In our current implementation we have made use of transformations to
+action-angle coordinates, which places implicit constraints on the mass models
+we can consider.
+In particular, any mass models must be integrable and not dominated by
+resonances or chaotic regions, as we assume that the actions provide a
+continuous foliation of the phase space.
+At the precision with which we are operating, we do not think that this will be
+a dominant issue in our analyses.
+However, we are interested in the prospect of moving away from parametrizing the
+mass model directly, as with a large enough sample of stars the abundance
+gradients should be enough to image the orbital tori directly.
 
 
-% TODO: Invariant abundances - Discuss in the context of our application, and of other applications in the MW
+% Invariant abundances
+Much of the core methodology described here relies on the assumption that
+stellar surface element abundances are invariants.
+As mentioned above in our original list of assumptions, this is known to be
+violated in detail due to gravitational settling, stellar evolution, or
+planetary engulfment.
+However, as long as the timescales over which surface abundances can change are
+much shorter or much longer than the Galactic orbital timescales, the
+distributions of element abundances at any orbital phase should not be affected
+by these subtleties.
+We therefore expect this to be inconsequential.
 
-... It's bad if the abundances change with time! But not that bad: As
-long as the abundances change on timescales that are much shorter or
-much longer than the orbital time, we are fine.
-
-
-% TODO: Measurable gradients - Discuss in the context of our application, and of other applications in the MW
-
+% Measurable gradients
+Finally, we have assumed all along that there are measurable gradients in
+stellar abundances with respect to kinematics in the Galaxy or stellar
+population of interest.
+In the Milky Way, these are readily observed with existing spectroscopic
+surveys, and our measurements of individual element abundances will only become
+more numerous and precise in the coming years.
 
 
 \subsection{Extensions of \methodname}
