@@ -1220,13 +1220,11 @@ But \methodname\ is much more general:
 Any statistical moments of any statistics of any invariant stellar tags would
 also be allowed.
 The method also does not assume that the element abundances are uniquely or even
-relatively specifically predicted by the actions:
+specifically predicted by the actions:
 The method only requires that there are gradients in some moments of the
 abundance distribution.
-There can be---and there is---a wide range of abundance ratios at every point in
-action space.
-In this project, all distributions are expected to have (and are observed to
-have) substantial dispersion.
+Generically, the abundance ratio distributions at any point in action space are
+expected to have (and are observed to have) substantial dispersion.
 
 
 % There are many ways to describe the fundamental prediction or structure
@@ -1269,74 +1267,115 @@ have) substantial dispersion.
 % phase-mixed, one of many requirements of other methods as well, such as Jeans
 % modeling, Schwarzschild modeling, or virial methods.
 
-Like Jeans modeling, Schwarzschild modeling, or distribution function modeling, \methodname\ provides a way to infer the underlying acceleration field traced by [...], for which we only have access to instantaneous measurements of phase-space coordinates.
+Like Jeans modeling, Schwarzschild modeling, or distribution function modeling,
+\methodname\ provides a method for measuring the underlying acceleration field
+traced by stars for which we only have access to instantaneous measurements of
+phase-space coordinates.
+However, unlike Jeans modeling, \methodname\ \emph{does not} require
+separability or assumptions about symmetries of the acceleration field, nor does
+it require accurately measuring second moments (or spatial derivatives of second
+moments) of the velocity distribution.
+We choose in this \documentname\ to focus on the vertical kinematics of stars,
+but we do not assume that motion in $z$ is decoupled from the radial kinematics
+(i.e., the orbits plotted in \figurename~\ref{fig:zvz-mgfe} show finite-width
+projections onto the vertical phase space).
+We therefore expect \methodname\ to be more stable and less restrictive than
+Jeans methods.
 
-We assert that \methodname\ is unlike Jeans modeling, and (in
-particular) that it is more stable and less mathematically constrained.
-The stability claim flows from the observation that, given a sample of
-stars, it is harder to precisely measure second moments than first
-moments.
-Any method that requires measurements of spatial derivatives of second
-moments will be limited in precision.
-The mathematical constraint claim flows from the point that most Jeans
-models involve assumptions of separability that do not enter here.
-We require gradients, but not separability.
-We choose in this \documentname\ to focus on vertical kinematics, but
-we nowhere assume that these vertical kinematics are separated from the
-radial kinematics.
-Indeed the orbits plotted in \figurename~\ref{fig:zvz-mgfe}
-show finite-width projections onto the vertical phase space because we
-have not performed any kind of separation or separability approximation.
+Another significant advantage of \methodname\ over other standard dynamical
+inference methods is that it does not require knowledge of the survey selection
+function, provided that the selection is made in position space (or phase space)
+and does not act strongly on the element-abundance ratios that enter into the
+inference.
+This condition is sufficiently satisfied for the \apogee\ data used here, and
+will generally be satisfied for other spectroscopic surveys of stars in the
+Galaxy \citep[e.g., \acronym{GALAH};][]{Martell:2017, Buder:2018}.
 
-Another advantage over Jeans modeling is that
-we do not require knowledge of the survey selection
-function, provided that the selection is made in position space (or phase
-space) and does not act at all in the element-abundance ratios that
-enter into the inference.
-This condition is satisfied for the \apogee\ data used here, and will be for
-most other surveys like it.
-
-In some ways, \methodname\ is related to the concept of ``extended
-distribution functions'' (CITE and CITE), in which the dynamical
-distribution function in action space $p(\vec{J})$ is extended into a distribution
-function in actions $\vec{J}$, abundances $\vec{X}$, and (perhaps)
-other (near-) invariants to make a larger distribution function $p(\vec{J},\vec{X})$.
-So far, extended distribution functions have not been used as tools
-for inferring the mass model for the Galaxy. But they could be, in principle.
-The most natural projects in this direction would require knowledge of the
-selection function, however, and would therefore be harder to implement in
-current surveys.
+In some ways, \methodname\ is related to the concept of ``extended distribution
+functions'' \citep[EDFs; e.g.,][]{Sanders:2015,Das:2016}, in which the dynamical
+distribution function in action space $p(\vec{J})$ (sometimes written as
+$f(\vec{J})$) is extended into a distribution function in actions $\vec{J}$,
+abundances $\vec{X}$, and (perhaps) other (near-) invariants to make a joint
+distribution function $p(\vec{J},\vec{X})$.
+So far, EDFs have been primarily used as tools to study the intrinsic properties
+of the stellar tracer density distributions and to constrain models of diffusive
+dynamical phenomena (e.g., radial migration).
+That is, EDFs have been used in a mode where the Galactic mass model is fixed
+and the tracer kinematics are used to constrain the intrinsic chemical and
+kinematic structure of the tracer populations, but they have not yet been used
+to infer the mass model for the Galaxy.
+While is is possible, in principle, to use EDFs to simultaneously constrain the
+mass model, most applications would require precise knowledge of the survey
+selection functions (for any data used) and would therefore be challenging to
+implement with existing survey data.
 
 \methodname\ is also closely related to the concept of ``mono-abundance
-populations'' (CITE and CITE), which have been used to look at the structure
-of the galaxy, divided by element abundances.
-These projects can be seen as factorizing out of the extended distribution
-function $p(\vec{J},\vec{X})$ a conditional distribution
-$p(\vec{J}\given\vec{X})$, although that is not precisely how they were
-formulated.
-In contrast, this project can be seen as factorizing out the other conditional
-distribution $p(\vec{X}\given\vec{J})$, although in what's above, we don't do
-so explicitly.
-The great advantage of the latter factorization is that it doesn't require
-knowledge of the survey selection function, provided that the selection acts
-compltely in position or action space (and not ever abundance space).
+populations'' \citep[MAPs; e.g.,][]{Bovy:2012, Bovy:2016, Mackereth:2020}, which
+have been used to study the structure of the galaxy divided into sub-populations
+that each have similar element abundances.
+In these applications, analyses are typically carried out independently for each
+MAP and therefore do not make use of any gradients in the element abundances
+with respect to the kinematics.
+Studies that make use of MAPs can therefore be seen as factorizing a conditional
+distribution $p(\vec{J}\given\vec{X})$ out of the extended distribution function
+$p(\vec{J},\vec{X})$ (although this is not precisely how they were formulated or
+described).
 
-One of the crazy things about a fully general statement of \methodname\ is
-that any description of a general distribution in $D$-space
-requires a \emph{lot of parameters}.
-Even the normal distribution requires $0.5\,D\,(D+3)$ parameters for its
-complete description, and anything more complex has more.
-That means that there are a very large set of element-abundance statistics for which the
-6-vector gradient exists or could be constraining for this project.
-Not all of these parameters can be reliably measured in a finite data set,
-let alone reliably seen to vary with phase-space location.
-But many can.
-We have discovered, in effect, a \emph{combinatorically large set of constraints on the
-dynamical actions} and thus the mass model.
+In contrast EDFs or MAPs, \methodname\ can be seen as factorizing out (and
+inferring) the conditional distribution $p(\vec{X}\given\vec{J})$ from the joint
+distribution function $p(\vec{J}, \vec{X})$.
+The great advantage of this factorization is that it does not require knowledge
+of the survey selection function---it is \emph{conditioned} on the actions
+$\vec{J}$, which are functions of the positions and velocities of
+stars---provided that the selection acts in position- or action-space alone (and
+not abundance-space).
+
+% One of the crazy things about a fully general statement of \methodname\ is
+% that any description of a general distribution in $D$-space
+% requires a \emph{lot of parameters}.
+% Even the normal distribution requires $0.5\,D\,(D+3)$ parameters for its
+% complete description, and anything more complex has more.
+% That means that there are a very large set of element-abundance statistics for which the
+% 6-vector gradient exists or could be constraining for this project.
+% Not all of these parameters can be reliably measured in a finite data set,
+% let alone reliably seen to vary with phase-space location.
+% But many can.
+% We have discovered, in effect, a \emph{combinatorically large set of constraints on the
+% dynamical actions} and thus the mass model.
+
 
 \subsection{Returning to our Assumptions}
 
-.... HOGG: Return to the assumptions; do any need more discussion? Yes.
+Like any dynamical inference method that seeks to measure properties of a mass
+distribution from instantaneous measurements of tracer positions and velocities,
+we have relied on a set of strong assumptions to formulate \methodname\
+(\sectionname~\ref{sec:inferences}).
+
+% \begin{description}
+%   \item[integrable] Each stellar orbit is regular and has three
+%     dynamically-invariant actions and three conjugate angles. This assumption
+%     could in principle be relaxed in future implementations.
+%   \item[well mixed] The stars in our sample are inherently uniformly distributed
+%     in angle variables; all angles are equally likely. This assumption will be
+%     violated substantially in the data (as we discuss below; see
+%     \sectionname~\ref{sec:discussion}), but this is the fundamental assumption of
+%     the vast majority of inferences of the Milky Way mass distribution.
+%     % TODO: make sure to mention the Snail in the discussion
+%   \item[selection] The selection function depends on position (or velocity) in the
+%     Milky Way, but not on element abundances. In detail, the \apogee\ selection
+%     function \emph{will} depend on abundances through gradients between stellar
+%     parameters and element abundance ratios, and implicit selections on stellar
+%     parameters (through, e.g., color and magnitude cuts). We attempt to mitigate
+%     these issues here by selecting a limited (in \logg) subset of red giant stars
+%     that are dominated by red clump stars (see \sectionname~\ref{sec:data}), and
+%     we discuss this further in \sectionname~\ref{sec:discussion}.
+%     % TODO: Alternatively, we could use a strongly-constrained model for the
+%     % dependence of the selection function on element abundances.
+%   \item[measurable gradients] There exist gradients in the abundances with respect
+%     to the kinematics (position, velocities, actions, etc.) and those gradients
+%     are measurable at the precision of the abundance measurements in our
+%     spectroscopic dataset.
+% \end{description}
 
 ... HOGG: the good abundances and selection assumptions: Do the abundances affect
 the selection, and are the abundance measurements a function of stellar type? Either way,
