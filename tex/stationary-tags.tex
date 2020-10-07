@@ -3,23 +3,15 @@
 % - Say why we use the low-alpha sequence
 %   - Very old stars are bad because gradients flatten, very young stars are bad
 %     because they are clumpy
-% - Good ages could be used as a tag
-% - What assumptions do we *not* have to make
-%   - Separability
-% - Audit abstract for discussion of phase-mixing and time invariance
-%   - Equilibrium assumption is Hard
 % - Note that we compare to RC-only sample and don't see any major differences
 % - Cite Bland-Hawthorn to note that all solar z positions are ~20–30 pc
-% - If a figure takes up >=2/3 of a page, make it a [p] figure!
-% - Technically we require non-resonant - not just integrable, but we need
-%   globally integrable so that the actions are continuous. But at the precision
-%   we are working, we don't think this is the showstopper
 
 % send it to
 % ----------
 % - Glenn Van de Ven -- Schwarzschild models of external galaxies
 % - Loebman -- we discussed in Aspen
 % - Bovy, Sanders, Das, Binney, McMillan, Tremaine -- extended DF torus types
+% - Sigh: Bland-Hawthorn
 
 % style guide
 % -----------
@@ -785,6 +777,14 @@ method is conditionally correct, conditioning on these core assumptions:
   to the kinematics (position, velocities, actions, etc.) and those gradients
   are measurable at the precision of the abundance measurements in our
   spectroscopic dataset.
+\item[invariant abundances] Stellar surface element abundances are
+  time-invariant. In detail, this assumption is violated by stellar and
+  planetary evolution, as surface abundances can change slightly over main
+  sequence lifetimes \citep{TODO} and during the red giant branch evolution
+  \citep{TODO}. However, we expect the magnitude of this to be unimportant and
+  should not dominate our systematics as long as the timescales over which the
+  abundances change are sufficiently different from the orbital timescales
+  (hundreds of millions of years).
 \end{description}
 
 In this \documentname, we consider only classical-statistics approaches for
@@ -1066,7 +1066,7 @@ from different element abundance ratios will effectively weight stars in
 different parts of action space in ways that may amplify issues with our
 assumptions.
 In particular, there are known asymmetries in the vertical density and
-kinematics of stars in the local disk (i.e., the ``phase-space spiral''
+kinematics of stars in the local disk (i.e., the ``phase-space spiral'';
 \citealt{Antoja:2018}), which affect stars with different vertical actions with
 a different phase and amplitude.
 If the abundance ratio gradients (with respect to vertical action) emphasize
@@ -1350,63 +1350,63 @@ Like any dynamical inference method that seeks to measure properties of a mass
 distribution from instantaneous measurements of tracer positions and velocities,
 we have relied on a set of strong assumptions to formulate \methodname\
 (\sectionname~\ref{sec:inferences}).
+Already in our demonstrations above we see suggestions that these assumptions
+are violated by the data in hand: For example, some elements prefer a finite
+$\sin\,2\theta_z$ amplitude (as shown in the lower-right panel of
+\figurename~\ref{fig:coeff-mdisk}), and the inferred solar position relative to
+the Galactic midplane is significantly different for \abunratio{Mg}{Fe} and
+\abunratio{Si}{Fe} as compared to the other elements (as shown in
+\figurename~\ref{fig:elem-ellipses-2}).
 
-% \begin{description}
-%   \item[integrable] Each stellar orbit is regular and has three
-%     dynamically-invariant actions and three conjugate angles. This assumption
-%     could in principle be relaxed in future implementations.
-%   \item[well mixed] The stars in our sample are inherently uniformly distributed
-%     in angle variables; all angles are equally likely. This assumption will be
-%     violated substantially in the data (as we discuss below; see
-%     \sectionname~\ref{sec:discussion}), but this is the fundamental assumption of
-%     the vast majority of inferences of the Milky Way mass distribution.
-%     % TODO: make sure to mention the Snail in the discussion
-%   \item[selection] The selection function depends on position (or velocity) in the
-%     Milky Way, but not on element abundances. In detail, the \apogee\ selection
-%     function \emph{will} depend on abundances through gradients between stellar
-%     parameters and element abundance ratios, and implicit selections on stellar
-%     parameters (through, e.g., color and magnitude cuts). We attempt to mitigate
-%     these issues here by selecting a limited (in \logg) subset of red giant stars
-%     that are dominated by red clump stars (see \sectionname~\ref{sec:data}), and
-%     we discuss this further in \sectionname~\ref{sec:discussion}.
-%     % TODO: Alternatively, we could use a strongly-constrained model for the
-%     % dependence of the selection function on element abundances.
-%   \item[measurable gradients] There exist gradients in the abundances with respect
-%     to the kinematics (position, velocities, actions, etc.) and those gradients
-%     are measurable at the precision of the abundance measurements in our
-%     spectroscopic dataset.
-% \end{description}
+For our particular toy application of \methodname\ to the \apogee\ sample
+defined in this \documentname, and for more general applications using stars in
+the Milky Way disk or halo, the ``well-mixed'' assumption is likely the most
+strongly violated of our list of assumptions.
+The Galactic disk is now known to show clear signatures of external
+perturbations, intrinsic time-dependent phenomena, and significant phase-space
+substructure \citep[e.g.,][]{Antoja:2018, Schonrich:2018, Hunt:2018,
+Kamdar:2019, Monari:2019, Khanna:2019, Poggio:2020, Laporte:2020}, all of which
+reflect the extent to which the stars in the disk are not phase mixed.
+In the case of vertical kinematics, the most striking illustration of this is
+the recently-discovered phase-space spiral \citep{Antoja:2018}.
+The spiral itself is only a $\approx$10\% perturbation to the local distribution
+function \citep{Laporte:2019}, providing some limit to the amount with which
+this will impact inferences with \methodname.
+In principle, future implementations could make use of the spiral by explicitly
+modeling the perturbation and its dependence on stellar kinematics and position
+and stellar tags.
+\HOGGTODO{do you want to say more about using the spiral as a PROBE?}
+Beyond the Galactic disk in the stellar halo, like Jeans modeling, \methodname\
+will be biased by the existence of unmixed substructures (streams, shells, and
+merger remnants; e.g., \citealt{TODO}).
+% TODO: comment on phase-mixing timescale as a function of JR, Jphi, Jz?
+% ... The flip side of that is that there are places in phase space where
+% mixing is maybe incredibly slow, like at low $J_z$. Maybe our disk
+% midplane issues come from this?
+
+% TODO: Selection - Discuss in the context of our application, and of other applications in the MW
 
 ... HOGG: the good abundances and selection assumptions: Do the abundances affect
 the selection, and are the abundance measurements a function of stellar type? Either way,
 we will inherit biases. These things exist (CITE Wheeler, Eilers in prep).
 
-... Does the existence of a non-zero ``verboten'' term imply a violation of our
-assumptions?
-Or is it just bad luck?
 
-... HOGG: how sensitive are we, really, to the assumption of
-phase mixing? In principle, very. But in practice: You can look at the
-snail and see its aspect ratio. And that is literally a
-non-phase-mixed structure. So there will be generalizations of this
-method that don't depend as strongly on phase mixing. This connects,
-conceptually, to work on streams in the Milky Way halo.
+% TODO: Integrable - Discuss in the context of our application, and of other applications in the MW
+% Technically we require non-resonant - not just integrable, but we need
+%   globally integrable so that the actions are continuous. But at the precision
+%   we are working, we don't think this is the showstopper
 
-... The flip side of that is that there are places in phase space where
-mixing is maybe incredibly slow, like at low $J_z$. Maybe our disk
-midplane issues come from this?
 
-... HOGG SAY: The fact that different abundances give
-different disk masses, and the fact that the midplane is off, might
-both be related. I think we should check whether the disk-mass results
-become more consistent if we use a better disk midplane.
+% TODO: Invariant abundances - Discuss in the context of our application, and of other applications in the MW
 
 ... It's bad if the abundances change with time! But not that bad: As
 long as the abundances change on timescales that are much shorter or
 much longer than the orbital time, we are fine.
 
-... What is the source of our scatter in our abundance means: Shot noise
-or wrongness of the assumptions?
+
+% TODO: Measurable gradients - Discuss in the context of our application, and of other applications in the MW
+
+
 
 \subsection{Extensions of \methodname}
 
