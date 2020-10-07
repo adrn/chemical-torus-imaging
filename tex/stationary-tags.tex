@@ -1358,6 +1358,7 @@ the Galactic midplane is significantly different for \abunratio{Mg}{Fe} and
 \abunratio{Si}{Fe} as compared to the other elements (as shown in
 \figurename~\ref{fig:elem-ellipses-2}).
 
+% Well mixed
 For our particular toy application of \methodname\ to the \apogee\ sample
 defined in this \documentname, and for more general applications using stars in
 the Milky Way disk or halo, the ``well-mixed'' assumption is likely the most
@@ -1384,11 +1385,25 @@ merger remnants; e.g., \citealt{TODO}).
 % mixing is maybe incredibly slow, like at low $J_z$. Maybe our disk
 % midplane issues come from this?
 
-% TODO: Selection - Discuss in the context of our application, and of other applications in the MW
-
-... HOGG: the good abundances and selection assumptions: Do the abundances affect
-the selection, and are the abundance measurements a function of stellar type? Either way,
-we will inherit biases. These things exist (CITE Wheeler, Eilers in prep).
+% Selection
+Another key assumption that could lead to significant biases for certain stellar
+samples is our assumption that the selection function only depends on
+phase-space coordinates and not element abundances.
+A different way of stating this assumption is that we require element abundances
+to be measured and calibrated equivalently (in a statistical sense) at all
+orbital phases.
+In general, this assumption can be violated through a combination of subtle
+effects: If a survey selection function implicitly depends on luminosity or
+temperature, and there are systematic trends in the measured abundances with
+surface gravity or temperature, the abundance distributions in any location of
+phase-space will appear to be different from these effects alone.
+For the \apogee\ sample used here, we have attempted to mitigate these issues by
+selecting a small range of surface gravities (and therefore temperatures) along
+the giant branch, but there are known systematic trends in \apogee\ between
+abundances and stellar parameters (\citealt{Wheeler:2020}, Eilers et al., in
+prep.).
+\HOGGTODO{Want to say anything about extensions of this that simultaneously
+update the calibration?}
 
 
 % TODO: Integrable - Discuss in the context of our application, and of other applications in the MW
