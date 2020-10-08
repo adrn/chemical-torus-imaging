@@ -1330,6 +1330,10 @@ $\vec{J}$, which are functions of the positions and velocities of
 stars---provided that the selection acts in position- or action-space alone (and
 not abundance-space).
 
+The closest related dynamical methodology we are aware of is ``Orbital
+Roulette'' \citep{TODO}.
+\TODO{describe roulette here...}
+
 % One of the crazy things about a fully general statement of \methodname\ is
 % that any description of a general distribution in $D$-space
 % requires a \emph{lot of parameters}.
@@ -1441,23 +1445,22 @@ more numerous and precise in the coming years.
 
 \subsection{Extensions of \methodname}
 
-The implementation of \methodname\ in this \documentname\ falls into the
+The implementation of \methodname\ used in this \documentname\ falls into the
 category of classical (frequentist) statistics.
-There are also probabilistic generative model (Bayesian) versions of \methodname.
-The Bayesian implementations look very different, because instead of trying
-to zero out residual angle dependences (as we do here), they try to put
-high probability on the data.
-This looks like building a flexible forward model for the element-abundance distribution,
-controlled by actions.
-When the assumptions of the method are satisfied,
-the best action-controlled model of the abundances or tags will arise in the
-best mass models.
-It might be \textsl{Inside Baseball} to point out that the difference between
-the classical-statistics and Bayesian approaches to \methodname\ map onto the
-differences between classical-statistics orbital roulette (CITE) and forward
-models of the distribution function (CITE Bovy and also the one person who cited us).
-Indeed, the classical-statistics version of \methodname\ presented here is
-very closely related to orbital roulette.
+However, the concepts introduced here also lead naturally to probabilistic
+generative model (Bayesian) versions of \methodname.
+Bayesian implementations of this method at first look very different:
+Instead of trying to minimize the dependence of abundance ratio statistics on
+the conjugate angles (as we do here), Bayesian formulations would instead
+involve building a flexible, forward model for the element-abundance
+distribution as a function of the actions alone.
+A non-intuitive aspect of this is that the angles would never explicitly appear
+in the probabilistic model.
+The Bayesian implementations would therefore look conceptually like extended
+distribution functions \citep{Sanders:2015}, but while also varying the mass
+models, or forward models of the distribution function
+\citep[e.g.,][]{Magorrian:2014}, where element abundances or stellar tags are
+treated as additional invariants.
 
 ... We should probably use a flexible
 model for the abundance means, like a GP or etc.
@@ -1471,9 +1474,6 @@ each other exactly? Is that a problem? Note that we scale much better than chemi
 here.
 ... What other tags could we have used? Other moments of other tags?
 Combinations of tags? What might we gain?
-
-... Could we have used the \emph{other} actions as tags? Yes and no: Not if
-their pdfs depend on selection, which they do.
 
 ... HOGG: What about going fully 3-d?
 For example, we worked with the vertical angle $\theta_z$. It
@@ -1494,7 +1494,7 @@ principle!
 \section{Conclusions}
 \label{sec:conclusions}
 
-Adrian, apparently, thinks that an abstract isn't enough.
+\todo{Words.}
 
 
 \acknowledgments
