@@ -1565,56 +1565,56 @@ participating in the \gaia\ Multilateral Agreement.
 
 \appendix
 
-\section{Re-weighting the $k$ nearest neighbors to account for steep gradients}
+\section{Re-weighting the $K$ nearest neighbors to account for steep gradients}
 \label{app:knn-weights}
 
-In standard $k$-nearest-neighbor regression, the estimate of the
+In standard $K$-nearest-neighbor regression, the estimate of the
 (let's say scalar) label $y_\ast$ for a vector test point
-$\vec{x}_\ast$ is the na\"ive mean $\mean{y}$ of the training labels $y_i$ for the $k$
-nearest training-set neighbors $i$ in the vector space $\vec{x}$:
+$\vec{x}_\ast$ is the na\"ive mean $\mean{y}$ of the training labels $y_k$ for the $K$
+nearest training-set neighbors $k$ in the vector space $\vec{x}$:
 \begin{equation}
-  y_\ast \leftarrow \mean{y} \equiv \frac{1}{k}\,\sum_{i=1}^k y_i
+  y_\ast \leftarrow \mean{y} \equiv \frac{1}{K}\,\sum_{i=1}^K y_k
   \quad .
 \end{equation}
 Issues arise when the test point $\vec{x}_\ast$ is near the edge of
 the training set or at a location of strong gradients in the density
 in the training set.
-In these cases, the na\"ive mean position $\mean{k}$ of the $k$ neighbors
+In these cases, the na\"ive mean position $\mean{K}$ of the $K$ neighbors
 \begin{equation}
-  \mean{\vec{x}} \equiv \frac{1}{k}\,\sum_{i=1}^k \vec{x}_i
+  \mean{\vec{x}} \equiv \frac{1}{K}\,\sum_{i=1}^K \vec{x}_k
 \end{equation}
 will be substantially displaced from the test point $\vec{x}_\ast$, and
-the na\"ive mean of the labels $y_i$ will not be appropriate for the
+the na\"ive mean of the labels $y_k$ will not be appropriate for the
 test position.
 
 We can correct for this problem by replacing the na\"ive mean of the labels
 with a more sophisticated weighted mean.
-We begin by defining scalar displacements $\xi_i$ of the neighbors away
+We begin by defining scalar displacements $\xi_k$ of the neighbors away
 from the test point
 \begin{equation}
-  \xi_i \equiv (\vec{x}_i - \vec{x}_\ast)\cdot(\mean{\vec{x}} - \vec{x}_\ast)
+  \xi_k \equiv (\vec{x}_k - \vec{x}_\ast)\cdot(\mean{\vec{x}} - \vec{x}_\ast)
   \quad ,
 \end{equation}
 which are the vector displacements are projected onto the separation between
 the mean position and the test position.
 Then we linear-least-square fit a linear model of the form
 \begin{equation}
-  y_i = a + b\,\xi_i + \mbox{noise}
+  y_k = a + b\,\xi_k + \mbox{noise}
   \quad ,
 \end{equation}
 where $a$ is an intercept and $b$ is a slope.
 The intercept $a$ is the linear
 fit interpolated to the position $\vec{x}_\ast$ of the test point.
 In detail because this linear fit is just a two-parameter least-square fit,
-it can be worked out in closed form:
+it has a simple closed form:
 \begin{align}
-  y_\ast & \leftarrow \hat{a} = \frac{\sum_{i=1}^k w_i\,y_i}{\sum_{i=1}^k w_i}
+  y_\ast & \leftarrow \hat{a} = \frac{\sum_{i=1}^K w_k\,y_k}{\sum_{i=1}^K w_k}
   \\
-  w_i & = \xi_i\,\sum_{j=1}^k \xi_j - \sum_{j=1}^k \xi_j^2
+  w_k & = \xi_k\,\sum_{j=1}^K \xi_j - \sum_{j=1}^K \xi_j^2
   \quad ,
 \end{align}
 where $\hat{a}$ is the least-squares estimate of the intercept $a$, and that
-estimate is itself a non-trivial weighted sum of the data with weights $w_i$.
+estimate is itself a non-trivial weighted sum of the data with weights $w_k$.
 
 \bibliographystyle{aasjournal}
 \bibliography{stationary-tags}
