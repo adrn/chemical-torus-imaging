@@ -1383,12 +1383,12 @@ this will impact inferences with \methodname.
 In principle, future implementations could make use of the spiral by explicitly
 modeling the perturbation and its dependence on stellar kinematics and position
 and stellar tags.
-That's out of scope for this \documentname, but suggests possible generalizations
-of \methodname\ that account for stellar populations that are incompletely
-angle-mixed.
+That is out of scope for this \documentname, but suggests possible
+generalizations of \methodname\ that account for stellar populations that are
+incompletely angle-mixed.
 Beyond the Galactic disk in the stellar halo, as with Jeans modeling,
-\methodname\ will be biased by the existence of unmixed substructures (streams, shells, and
-merger remnants; e.g., \citealt{TODO}).
+\methodname\ will be biased by the existence of unmixed substructures (streams,
+shells, and merger remnants; e.g., \citealt{TODO}).
 % TODO: comment on phase-mixing timescale as a function of JR, Jphi, Jz?
 % ... The flip side of that is that there are places in phase space where
 % mixing is maybe incredibly slow, like at low $J_z$. Maybe our disk
@@ -1470,48 +1470,51 @@ models, or forward models of the distribution function
 treated as additional invariants.
 
 In the implementation presented here, we use an abundance deviation that is
-based on a nearest-neighbor interpolation in action space
-(see \sectionname~FOO and \appendixname~BAR).
-That is a blunt tool; in principle results could improve if we model the abundance
-distribution moments as a function of actions.
-One kind of option for this modeling would be to use a generative, physical model
-for star-formation history, nucleosynthesis, chemical enrichment, and stellar
-migration.
-Another would be to use a machine-learning method such as a Gaussian process.
+based on a nearest-neighbor interpolation in action space (see
+\sectionname~\ref{sec:inferences} and \appendixname~\ref{app:knn-weights}).
+That is a blunt tool; In principle, our results would improve if we instead
+explicitly modeled the abundance distribution moments as functions of the
+actions.
+One option for this modeling would be to use a generative, physical model for
+the star-formation history of the Galaxy (or sample), including the products of
+nucleosynthesis and effects of chemical enrichment and stellar migration
+\citep[similar to what is done in][]{Sanders:2015}.
+Another option would be to use a flexible machine-learning method, such as a
+Gaussian process.
 
-In what we present here, we have parameterized the Milky Way mass model with a
-very simple, few-component mass model.
-Another option would be not to parameterize the mass model, but instead
-parameterize the torus foliation of phase space directly.
-This foliation could be very general; any foliation of phase space with closed
-3-tori is in principle possible, dynamically.
-Then the foliation could be interpreted in terms of the force law, and hence the
-potential or mass model.
-That would be more data-driven approach---and with far fewer assumptions---than what's
-been executed here.
+In what we present here we have also parameterized the Milky Way mass model with
+a very simple, few-component mass model.
+Another option would be to instead parameterize the torus foliation of phase
+space directly.
+The representation of this foliation could be very general: Any foliation of
+phase space with closed 3-tori is, in principle, allowed by dynamics.
+A direct reconstruction of the foliation could then be interpreted in terms of
+the force law, and hence the potential or mass model.
+That would be a more data-driven approach---with far fewer assumptions---than
+what has been executed here.
 
-... HOGG: What is the limit of this method as we go forward: Many abundance ratios? Many other
-statistics of the abundance distribution? How do things change if the abundances track
-each other exactly? Is that a problem? Note that we scale much better than chemical tagging
-here.
-... What other tags could we have used? Other moments of other tags?
-Combinations of tags? What might we gain?
+Lastly, here we have focused on the vertical kinematics of stars through the
+vertical action $J_z$ and angle $\theta_z$, but in principle this
+methodology---and any Bayesian extensions---would also work in all three actions
+and angles.
+In practice, the classical statistics approach would not work with the azimuthal
+angle $\theta_\phi$ or action $J_\phi$ because our sample spans a small range of
+$\theta_\phi$ (local to $\approx 2~\kpc$ around the Sun).
+However, we could have equally used the radial action $J_R$ and angle $\theta_R$
+here for demonstrations.
 
-... HOGG: What about going fully 3-d?
-For example, we worked with the vertical angle $\theta_z$. It
-would not have been a good idea to work with the azimuthal angle
-$\theta_\phi$. Why not? Because the sample doesn't cover a large range
-in $\theta_\phi$. But what about the angle $\theta_R$? If we had
-worked with this angle we would have made an independent measurement
-of the mass of the disk. We could also have used that angle to measure
-the circular velocity, in the same way that the vertical angle can be
-used to measure the local vertical standard of rest.
+% ... HOGG: What is the limit of this method as we go forward: Many abundance ratios? Many other
+% statistics of the abundance distribution? How do things change if the abundances track
+% each other exactly? Is that a problem? Note that we scale much better than chemical tagging
+% here.
+% ... What other tags could we have used? Other moments of other tags?
+% Combinations of tags? What might we gain?
 
-...The point that this would be more complex in chaotic regions, and
-maybe effectively inapplicable? Or maybe?
+% ...The point that this would be more complex in chaotic regions, and
+% maybe effectively inapplicable? Or maybe?
 
-... AND That this could be used to calibrate or improve abundances, in
-principle!
+% ... AND That this could be used to calibrate or improve abundances, in
+% principle!
 
 \section{Conclusions}
 \label{sec:conclusions}
