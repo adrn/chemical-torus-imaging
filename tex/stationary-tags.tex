@@ -1383,9 +1383,11 @@ this will impact inferences with \methodname.
 In principle, future implementations could make use of the spiral by explicitly
 modeling the perturbation and its dependence on stellar kinematics and position
 and stellar tags.
-\HOGGTODO{do you want to say more about using the spiral as a PROBE?}
-Beyond the Galactic disk in the stellar halo, like Jeans modeling, \methodname\
-will be biased by the existence of unmixed substructures (streams, shells, and
+That's out of scope for this \documentname, but suggests possible generalizations
+of \methodname\ that account for stellar populations that are incompletely
+angle-mixed.
+Beyond the Galactic disk in the stellar halo, as with Jeans modeling,
+\methodname\ will be biased by the existence of unmixed substructures (streams, shells, and
 merger remnants; e.g., \citealt{TODO}).
 % TODO: comment on phase-mixing timescale as a function of JR, Jphi, Jz?
 % ... The flip side of that is that there are places in phase space where
@@ -1409,8 +1411,10 @@ selecting a small range of surface gravities (and therefore temperatures) along
 the giant branch, but there are known systematic trends in \apogee\ between
 abundances and stellar parameters (\citealt{Wheeler:2020}, Eilers et al., in
 prep.).
-\HOGGTODO{Want to say anything about extensions of this that simultaneously
-update the calibration?}
+In principle, a simultaneous calibration model could be made that simultaneously
+fits for the abundances as a function of conjugate angle and also housekeeping
+data (like stellar surface gravity or spectrograph line-spread function) that
+cause abundance systematics.
 
 % Integrable
 In our current implementation we have made use of transformations to
@@ -1465,11 +1469,26 @@ models, or forward models of the distribution function
 \citep[e.g.,][]{Magorrian:2014}, where element abundances or stellar tags are
 treated as additional invariants.
 
-... We should probably use a flexible
-model for the abundance means, like a GP or etc.
+In the implementation presented here, we use an abundance deviation that is
+based on a nearest-neighbor interpolation in action space
+(see \sectionname~FOO and \appendixname~BAR).
+That is a blunt tool; in principle results could improve if we model the abundance
+distribution moments as a function of actions.
+One kind of option for this modeling would be to use a generative, physical model
+for star-formation history, nucleosynthesis, chemical enrichment, and stellar
+migration.
+Another would be to use a machine-learning method such as a Gaussian process.
 
-... That there is a fully data-driven formulation of this problem; ie, not
-parameterized. And I mean just learn the torus foliation directly.
+In what we present here, we have parameterized the Milky Way mass model with a
+very simple, few-component mass model.
+Another option would be not to parameterize the mass model, but instead
+parameterize the torus foliation of phase space directly.
+This foliation could be very general; any foliation of phase space with closed
+3-tori is in principle possible, dynamically.
+Then the foliation could be interpreted in terms of the force law, and hence the
+potential or mass model.
+That would be more data-driven approach---and with far fewer assumptions---than what's
+been executed here.
 
 ... HOGG: What is the limit of this method as we go forward: Many abundance ratios? Many other
 statistics of the abundance distribution? How do things change if the abundances track
