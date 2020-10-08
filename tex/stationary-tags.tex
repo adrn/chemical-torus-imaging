@@ -1493,6 +1493,19 @@ the force law, and hence the potential or mass model.
 That would be a more data-driven approach---with far fewer assumptions---than
 what has been executed here.
 
+In the experiments performed above, we used the means of
+a set of hand-chosen abundance-ratio deviations
+as our invariant tags. There are many other choices we could have made.
+For example, we could have searched for maximally informative tags from among
+the abundance ratios or functional combinations thereof. We could have used
+moments other than the mean. And we could have used non-abundance tags, such
+as stellar ages. We could even have used the \emph{other actions $J_R, J_\phi$}
+as invariant tags for the vertical-angle $\theta_z$ fits.
+That is an interesting thought for future work, but the actions can only be used
+as tags here if the survey selection function is precisely known and accounted
+for. That condition obviates one of the principal advantages of
+\methodname\ over other methods.
+
 Lastly, here we have focused on the vertical kinematics of stars through the
 vertical action $J_z$ and angle $\theta_z$, but in principle this
 methodology---and any Bayesian extensions---would also work in all three actions
@@ -1610,11 +1623,13 @@ it has a simple closed form:
 \begin{align}
   y_\ast & \leftarrow \hat{a} = \frac{\sum_{i=1}^K w_k\,y_k}{\sum_{i=1}^K w_k}
   \\
-  w_k & = \xi_k\,\sum_{j=1}^K \xi_j - \sum_{j=1}^K \xi_j^2
+  w_k & \equiv \xi_k\,\sum_{j=1}^K \xi_j - \sum_{j=1}^K \xi_j^2
   \quad ,
 \end{align}
 where $\hat{a}$ is the least-squares estimate of the intercept $a$, and that
 estimate is itself a non-trivial weighted sum of the data with weights $w_k$.
+This new estimate $y_\ast$ is much more accurate in the presence of gradients
+in the training set.
 
 \bibliographystyle{aasjournal}
 \bibliography{stationary-tags}
