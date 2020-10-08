@@ -1631,7 +1631,7 @@ it has a simple closed form:
 where $\hat{a}$ is the least-squares estimate of the intercept $a$, and that
 estimate is itself a non-trivial weighted sum of the data with weights $w_k$.
 One implementation note:
-In the (rare) edge case that $\mean{\vec}-\vec{x}_\ast$ underflows the
+In the (rare) edge case that $\mean{\vec{x}}-\vec{x}_\ast$ underflows the
 floating-point representation, the weights $w_k$ should be set to
 unity.
 
