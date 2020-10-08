@@ -1610,9 +1610,10 @@ from the test point
   \xi_k \equiv (\vec{x}_k - \vec{x}_\ast)\cdot(\mean{\vec{x}} - \vec{x}_\ast)
   \quad ,
 \end{equation}
-which are the vector displacements but projected onto the separation between
+which are the individual neighbor vector displacements
+projected onto the displacement between
 the mean position and the test position.
-Then we linear-least-square fit a linear model of the form
+Then we fit (by linear least squares) a linear model of the form
 \begin{equation}
   y_k = a + b\,\xi_k + \mbox{noise}
   \quad ,
@@ -1631,14 +1632,15 @@ it has a simple closed form:
 where $\hat{a}$ is the least-squares estimate of the intercept $a$, and that
 estimate is itself a non-trivial weighted sum of the data with weights $w_k$.
 One implementation note:
-In the (rare) edge case that $\mean{\vec{x}}-\vec{x}_\ast$ underflows the
-floating-point representation, the weights $w_k$ should be set to
-unity.
+In the (rare) edge case that the displacement
+$\mean{\vec{x}}-\vec{x}_\ast$ underflows the
+floating-point representation, the weighted mean should be replaced with the
+na\"ive mean $\mean{y}$.
 
-This new estimate $y_\ast$ is much more accurate in the presence of gradients
-in the training set.
+This new estimate $y_\ast=\hat{a}$ is much more accurate than the na\"ive mean $\mean{y}$
+in the presence of gradients in the training set.
 It is, in some sense, the first-order correction of na\"ive $K$-nearest
-neighbors, the first in a series of corrections to account for non-trivial
+neighbors. It is the first in a series of corrections to account for non-trivial
 training-set distributions.
 
 \bibliographystyle{aasjournal}
