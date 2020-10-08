@@ -1588,7 +1588,7 @@ In standard $K$-nearest-neighbor regression, the estimate of the
 $\vec{x}_\ast$ is the na\"ive mean $\mean{y}$ of the training labels $y_k$ for the $K$
 nearest training-set neighbors $k$ in the vector space $\vec{x}$:
 \begin{equation}
-  y_\ast \leftarrow \mean{y} \equiv \frac{1}{K}\,\sum_{i=1}^K y_k
+  y_\ast \leftarrow \mean{y} \equiv \frac{1}{K}\,\sum_{k=1}^K y_k
   \quad .
 \end{equation}
 Issues arise when the test point $\vec{x}_\ast$ is near the edge of
@@ -1596,7 +1596,7 @@ the training set or at a location of strong gradients in the density
 in the training set.
 In these cases, the na\"ive mean position $\mean{K}$ of the $K$ neighbors
 \begin{equation}
-  \mean{\vec{x}} \equiv \frac{1}{K}\,\sum_{i=1}^K \vec{x}_k
+  \mean{\vec{x}} \equiv \frac{1}{K}\,\sum_{k=1}^K \vec{x}_k
 \end{equation}
 will be substantially displaced from the test point $\vec{x}_\ast$, and
 the na\"ive mean of the labels $y_k$ will not be appropriate for the
@@ -1623,7 +1623,7 @@ fit interpolated to the position $\vec{x}_\ast$ of the test point.
 In detail because this linear fit is just a two-parameter least-square fit,
 it has a simple closed form:
 \begin{align}
-  y_\ast & \leftarrow \hat{a} = \frac{\sum_{i=1}^K w_k\,y_k}{\sum_{i=1}^K w_k}
+  y_\ast & \leftarrow \hat{a} = \frac{\sum_{k=1}^K w_k\,y_k}{\sum_{k=1}^K w_k}
   \\
   w_k & \equiv \xi_k\,\sum_{j=1}^K \xi_j - \sum_{j=1}^K \xi_j^2
   \quad ,
