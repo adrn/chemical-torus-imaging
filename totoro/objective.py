@@ -78,7 +78,7 @@ class TorusImagingObjective:
         w0 = gd.PhaseSpacePosition(galcen.data)
 
         # get galpy potential for this mdisk_f
-        pot = self.get_mw_potential(mdisk_f)
+        pot = self.get_mw_potential(mdisk_f, disk_hz)
         galpy_pot = get_equivalent_galpy(pot)
         aaf = get_staeckel_aaf(galpy_pot, w=w0, gala_potential=pot)
         aaf = at.QTable(at.hstack((aaf, self.t)))
