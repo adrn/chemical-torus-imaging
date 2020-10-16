@@ -7,27 +7,25 @@ import gala.dynamics as gd
 from totoro.config import cache_path, galcen_frame
 from totoro.data import datasets
 from totoro.potentials import potentials, galpy_potentials
-from totoro.actions_staeckel import StaeckelFudgeGrid
+from totoro.actions_staeckel import get_staeckel_aaf
 
 
 def worker(task):
-    data_name, aaf_computer, potential_name, aaf_filename = task
+    data_name, potential_name, aaf_filename = task
 
     # Read APOGEE sample and do parallax & plx s/n cut:
     d = datasets[data_name]
     galcen = d.c.transform_to(galcen_frame)
     w0 = gd.PhaseSpacePosition(galcen.data)
 
-    aaf = aaf_computer.get_aaf(w0, float(potential_name),
-                               galpy_potentials[potential_name])
+    aaf = get_staeckel_aaf(galpy_potentials[potential_name],
+                           w=w0,
+                           gala_potential=potentials[potential_name])
     aaf[d._id_column] = d.t[d._id_column]
     aaf.write(aaf_filename, overwrite=True)
 
 
 def main(pool, overwrite=False):
-
-    # Set up action solver:
-    aaf_computer = StaeckelFudgeGrid()
 
     tasks = []
     for data_name in datasets.keys():
@@ -38,7 +36,6 @@ def main(pool, overwrite=False):
 
             tasks.append((
                 data_name,
-                aaf_computer,
                 potential_name,
                 filename
             ))

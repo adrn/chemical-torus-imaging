@@ -13,14 +13,13 @@ from tqdm import tqdm
 from .data import APOGEEDataset
 from .config import galcen_frame, cache_path
 from .potentials import fiducial_mdisk, get_mw_potential, get_equivalent_galpy
-from .actions_staeckel import StaeckelFudgeGrid
+from .actions_staeckel import get_staeckel_aaf
 from .atm import AbundanceTorusMaschine
 
 
 class TorusImagingObjective:
 
     def __init__(self, dataset, elem_name, tree_K=64):
-        self.aaf_comp = StaeckelFudgeGrid()
         self.c = dataset.c
 
         # Select out the bare minimum columns:
@@ -81,7 +80,7 @@ class TorusImagingObjective:
         # get galpy potential for this mdisk_f
         pot = self.get_mw_potential(mdisk_f)
         galpy_pot = get_equivalent_galpy(pot)
-        aaf = self.aaf_comp.get_aaf(w0, mdisk_f, galpy_pot)
+        aaf = get_staeckel_aaf(galpy_pot, w=w0, gala_potential=pot)
         aaf = at.QTable(at.hstack((aaf, self.t)))
 
         atm = AbundanceTorusMaschine(aaf, tree_K=self.tree_K)
