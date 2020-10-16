@@ -21,7 +21,7 @@ def worker(task):
     res = None
     try:
         res = obj.minimize(x0=x0, method="nelder-mead",
-                           options=dict(maxiter=150))
+                           options=dict(maxiter=250))
         print(f"{i} finished optimizing: {res}")
     except Exception as e:
         print(f"{i} failed: {str(e)}")
@@ -32,9 +32,10 @@ def worker(task):
         xopt = res.x
 
     xopt = {
-        'mdisk_f': [xopt[0]],
-        'zsun': [xopt[1]],
-        'vzsun': [xopt[2]]
+        'zsun': [xopt[0]],
+        'vzsun': [xopt[1]],
+        'mdisk_f': [xopt[2]],
+        'disk_hz': [xopt[3]],
     }
 
     at.Table(xopt).write(tmp_filename, overwrite=True)
@@ -114,7 +115,7 @@ def main(pool, overwrite=False):
 
             # print(f"Finished optimizing full sample: {full_sample_res.x}")
             # x0 = full_sample_res.x
-            x0 = np.array([1.1, 20.8, 7.78])  # HACK: init from fiducial
+            x0 = np.array([20.8, 7.78, 1.1, 0.28])  # HACK: init from fiducial
 
             for k in range(bootstrap_K):
                 idx = rnd.choice(len(d), len(d), replace=True)

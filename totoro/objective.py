@@ -62,13 +62,13 @@ class TorusImagingObjective:
         self._mhalo_interp = interp1d(pot_grid, mhalos, kind='cubic',
                                       bounds_error=False, fill_value='extrapolate')
 
-    def get_mw_potential(self, mdisk_f):
+    def get_mw_potential(self, mdisk_f, disk_hz):
         mhalo = self._mhalo_interp(mdisk_f) * fiducial_mdisk
         mdisk = mdisk_f * fiducial_mdisk
-        return gp.MilkyWayPotential(disk=dict(m=mdisk),
+        return gp.MilkyWayPotential(disk=dict(m=mdisk, b=disk_hz),
                                     halo=dict(m=mhalo))
 
-    def get_atm(self, mdisk_f, zsun, vzsun):
+    def get_atm(self, zsun, vzsun, mdisk_f, disk_hz):
         # get galcen frame for zsun, vzsun
         vsun = self._vsun.copy()
         vsun[2] = vzsun * u.km/u.s
@@ -86,19 +86,21 @@ class TorusImagingObjective:
         atm = AbundanceTorusMaschine(aaf, tree_K=self.tree_K)
         return atm
 
-    def get_coeffs(self, mdisk_f, zsun, vzsun):
-        atm = self.get_atm(mdisk_f, zsun, vzsun)
+    def get_coeffs(self, zsun, vzsun, mdisk_f, disk_hz):
+        atm = self.get_atm(zsun, vzsun, mdisk_f, disk_hz)
         coeff, coeff_cov = atm.get_coeffs_for_elem(self.elem_name)
-
         return coeff
 
     def __call__(self, p):
-        mdisk_f, zsun, vzsun = p
+        zsun, vzsun, mdisk_f, disk_hz = p
 
         if not 0.4 < mdisk_f < 1.8:
             return np.inf
 
-        coeff = self.get_coeffs(mdisk_f, zsun, vzsun)
+        if not 0 < disk_hz < 2.:
+            return np.inf
+
+        coeff = self.get_coeffs(zsun, vzsun, mdisk_f, disk_hz)
         val = coeff[1]**2 + coeff[2]**2 + coeff[3]**2
         return val
 
@@ -106,7 +108,7 @@ class TorusImagingObjective:
         kwargs.setdefault('method', 'nelder-mead')
 
         if x0 is None:
-            x0 = [1.0, 20.8, 7.78]  # Fiducial values
+            x0 = [20.8, 7.78, 1.0, 0.28]  # Fiducial values
 
         res = minimize(self, x0=x0, **kwargs)
 
