@@ -1,15 +1,8 @@
 % To-dos
-% - DF is used before defined?
 % - See comments labeled "TODO" below
-% - Say why we use the low-alpha sequence
-%   - Very old stars are bad because gradients flatten, very young stars are bad
-%     because they are clumpy
-% - Note that we compare to RC-only sample and don't see any major differences
-% - Cite Bland-Hawthorn to note that all solar z positions are ~20–30 pc
 % - Discussion about JEans needs to distinguish Jeans equations vs. typical
 %   Jeans analysis / models - the latter typically assume things about DF,
 %   equilibrium, separability
-% - Remove Jeans comment from abstract
 % - We are similar to assumptions in Schwarzschild (agnostic to DF over
 %   kinematics), but proper Schwarz needs to know selection function
 % - Comment that here we throw all metallcities into a bag, but we could have
@@ -201,8 +194,6 @@
 \section{Introduction}
 \label{sec:intro}
 
-% TODO: work in comments about Sanders/Das EDF stuff
-
 An important goal of modern physics and astronomy is to understand the detailed
 properties of dark matter on astrophysical scales as a way of informing
 constraints on its fundamental nature \citep[see, e.g., recent reviews
@@ -253,9 +244,9 @@ methods as applied to the problem of determining the local dark matter
 density]{Read:2014}.
 When applied in real-world contexts on stars in the Milky Way or dwarf
 spheroidal galaxies, these methods often also require further assumptions, such
-as separability of the \acronym{DF}, or the velocity anisotropy profile, or
-require simple parametrizations of the \acronym{DF} in order to execute these
-analyses.
+as separability of the distribution function (\acronym{DF}), or the velocity
+anisotropy profile, or require simple parametrizations of the \acronym{DF} in
+order to execute these analyses.
 Generic approaches here typically require parametrized models for the
 \acronym{DF} and for the gravitational force field or mass distribution
 \citep[e.g.,][]{McMillan:2013, Magorrian:2014, Binney:2014, Bovy:2016,
@@ -265,8 +256,7 @@ flexible model forms.
 For simplicity and computational efficiency, one of the most common approaches
 used for dynamical inferences is so-called ``Jeans modeling''
 \citep{Binney:2008}, which use simplifications of the Jeans equations to relate
-statistical moments of the tracer distribution function (\acronym{DF}) to
-properties of the force field.
+statistical moments of the tracer \acronym{DF} to properties of the force field.
 While these methods still depend on many of the assumptions laid out above, they
 have the great (computational) advantage of not having to deal with modeling the
 \acronym{DF} directly.
@@ -496,7 +486,7 @@ The \apogee\ catalog contains a small number of duplicates (duplicated source
 identifier \texttt{APOGEE\_ID}); To unique-ify our sample in these cases, we
 keep only the entry with highest signal-to-noise.
 We select the low-$\alpha$ sequence primarily because the high- and low-$\alpha$
-sequences have different scale lengths \citep[e.g.,][]{Bovy:2016}, and our toy
+sequences have different scale heights \citep[e.g.,][]{Bovy:2016}, and our toy
 model is not flexible enough to account for this.
 The final parent sample contains \nstars\ RGB stars with high-quality \apogee\
 and \gaia\ data.
@@ -778,7 +768,6 @@ method is \emph{conditionally} correct, conditioning on these core assumptions:
   violated substantially in the data (as we discuss below; see
   \sectionname~\ref{sec:discussion}), but this is the fundamental assumption of
   the vast majority of inferences of the Milky Way mass distribution.
-  % TODO: make sure to mention the Snail in the discussion
 \item[properly selected] The selection function depends on position (or
   velocity) in the Milky Way, but not on element abundances at a given position.
   In detail, the \apogee\ selection function \emph{will} depend on abundances
@@ -1010,7 +999,6 @@ context of our assumptions below (\sectionname~\ref{sec:discussion}).
   \end{mdframed}
 \end{figure}
 
-% TODO: now we also vary scale height!
 % Another thing we can glean from \figurename~\ref{fig:coeff-mdisk} is that these
 % data seem to favor a different value of the solar position relative to the
 % midplane $z_\odot$ and a different solar velocity $v_{z, \odot}$.
@@ -1019,11 +1007,13 @@ of the disk mass parameter \mratio, there is a finite $m=1$ amplitude for both
 the $\cos$ and $\sin$ terms.
 As noted before, these coefficients are sensitive to the solar motion and solar
 position (in $z$), respectively.
-We therefore simultaneously optimize over the disk mass parameter \mratio, the
-solar position relative to the midplane $z_\odot$, and the solar $z$ velocity
-relative to the local standard of rest $v_{z, \odot}$.
-For each value of our parameters $mratio, z_\odot, v_{z, \odot}$, we compute the
-Fourier coefficients and minimize the objective function
+We therefore simultaneously optimize over four parameters: the solar position
+relative to the midplane $z_\odot$, the solar $z$ velocity relative to the local
+standard of rest $v_{z, \odot}$, the disk mass parameter \mratio, and the disk
+scale height \hz\ \citep[the Miyamoto--Nagai scale height parameter, not an
+exponential scale height;][]{Miyamoto:1975}.
+For each setting of these parameters $\mratio, \hz, z_\odot, v_{z, \odot}$, we
+compute the Fourier coefficients and minimize the objective function
 \begin{equation}
   f(a_1, b_1, a_2 \,;\, \mratio, z_\odot, v_{z, \odot}) =
     a_1^2 + b_1^2 + a_2^2 \quad . \label{eq:objective}
@@ -1045,9 +1035,9 @@ function, as implemented in the \package{scipy} package \citep{scipy}.
   \end{center}
   \caption{%
     A summary of our joint constraints on the disk mass parameter \mratio\ and
-    the solar velocity $h_{z}$ for each element individually (colored ellipses)
-    and the joint constraint (black).
-    Each color shows one- and two-sigma error ellipses.
+    the scale height \hz\ for each element individually (colored ellipses) and
+    the joint constraint (black).
+    Each color shows one- and two-sigma error ellipses for each abundance ratio.
     The means and covariance matrices of each error ellipse are computed from
     optimizing the objective function (\equationname~\ref{eq:objective}) for 128
     bootstrap resamplings of the parent sample.
@@ -1061,19 +1051,12 @@ function, as implemented in the \package{scipy} package \citep{scipy}.
 \end{figure}
 
 \figurename~\ref{fig:elem-ellipses-1} shows a summary of our constraints on the
-disk mass parameter and solar velocity for all of the elements shown in
+disk mass parameter and disk scale height for all of the elements shown in
 \figurename~\ref{fig:zvz-grid} (colorful ellipses), and the joint constraint
 from all of these elements combined (dark, black ellipse).
 Here we show one- and two-sigma error ellipses (darker and lighter ellipses for
 each color), with means and covariance matrices estimated from the optimization
 results for the bootstrap resamplings of the data for each abundance ratio.
-Individually, we find $\mratio = 1.21 \pm 0.03$, $z_\odot = 15.5 \pm 1.0~\pc$,
-and $v_{z, \odot} = 8.6 \pm 0.2~\kms$ for our joint constraints.
-Our results here imply a disk-to-halo mass ratio within the solar circle ${\rm
-M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc) = 2.06 \pm 0.05$, which is
-slightly larger than our fiducial model where this mass ratio is $\approx 1.3$
-\citep{gala} and the implied value for the \texttt{MWPotential2014}
-\citep{Bovy:2015} of $\approx 1.7$.
 
 \figurename~\ref{fig:elem-ellipses-2} is similar to
 \figurename~\ref{fig:elem-ellipses-1}, but shows our joint constraints on the
@@ -1096,6 +1079,19 @@ If the abundance ratio gradients (with respect to vertical action) emphasize
 stars with different vertical actions, we will in general find disagreements
 between the results for different abundance ratios.
 
+Combining all eight abundance ratios, we find $\mratio = 1.21 \pm 0.04$, $\hz =
+0.27 \pm 0.01~\kpc$, $z_\odot = 16.9 \pm 0.8~\pc$, and $v_{z, \odot} = 8.8 \pm
+0.2~\kms$.
+Excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}, which are clear outliers in
+their preferred solar position values, we find $\mratio = 1.07\pm 0.05$, $\hz =
+0.28 \pm 0.01~\kpc$, $z_\odot = 20.6 \pm 0.9~\pc$, and $v_{z, \odot} = 8.4 \pm
+0.3~\kms$
+Our results here imply a disk-to-halo mass ratio within the solar circle ${\rm
+M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc) = 2.3 \pm 0.1$ (all eight
+elements) or $1.6\pm0.1$ (excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}),
+which is slightly larger than our fiducial model where this mass ratio is
+$\approx 1.3$ \citep{gala} and the implied value for the
+\texttt{MWPotential2014} \citep{Bovy:2015} of $\approx 1.7$.
 
 
 % Notebook: figures/5-Optimize-results.ipynb
@@ -1414,7 +1410,14 @@ shells, and merger remnants; e.g., \citealt{TODO}).
 % mixing is maybe incredibly slow, like at low $J_z$. Maybe our disk
 % midplane issues come from this?
 
-\TODO{Comment on how exactly this can bias us with our toy implementation: It can cause variations in the mean abundance anomaly that will be subsumed into our simple parameters and interpreted as incorrect vzsun or zsun or Mdisk. In detail, it will depend on the scale (in angle-space) of the dominant perturbations (if ``large-scale,'' will more impact zsun/vzsun. If ``small-scale,'' will affect mass parameter more). Similar issues with generative versions of the method, but can be accounted for more naturally by explicitly modeling them?}
+\TODO{Comment on how exactly this can bias us with our toy implementation: It
+can cause variations in the mean abundance anomaly that will be subsumed into
+our simple parameters and interpreted as incorrect vzsun or zsun or Mdisk. In
+detail, it will depend on the scale (in angle-space) of the dominant
+perturbations (if ``large-scale,'' will more impact zsun/vzsun. If
+``small-scale,'' will affect mass parameter more). Similar issues with
+generative versions of the method, but can be accounted for more naturally by
+explicitly modeling them?}
 
 % Selection
 Another key assumption that could lead to significant biases for certain stellar
