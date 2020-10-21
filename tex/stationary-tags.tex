@@ -37,6 +37,7 @@
 %   "Fourier expansion model"?
 
 \documentclass[modern]{aastex63}
+\usepackage[ruled,vlined,norelsize]{algorithm2e}
 \usepackage[framemethod=tikz]{mdframed}
 \usetikzlibrary{shadows}
 \definecolor{captiongray}{HTML}{555555}
@@ -102,7 +103,8 @@
 \newcommand{\mdisk}{\ensuremath{\mathrm{M}_\mathrm{disk}}}
 \newcommand{\mratio}{\ensuremath{\mdisk / \mdisk^\star}}
 \newcommand{\hz}{\ensuremath{h_{z, \odot}}}
-
+\newcommand{\zsun}{\ensuremath{z_\odot}}
+\newcommand{\vzsun}{\ensuremath{v_{z, \odot}}}
 
 % trust in Hogg
 \setlength{\parindent}{1.1\baselineskip}
@@ -156,7 +158,8 @@
   the gravitational potential is treated as simple and integrable and the
   distribution function as time-invariant.
   Under these conditions, ``Jeans models'' and ``Schwarzschild models'' are
-  standard tools for measuring properties of the underlying mass distribution.
+  standard tools for measuring properties of the underlying mass distribution
+  from observations of stellar kinematics.
   However, contemporary and near-future spectroscopic surveys measure more than
   just kinematics for huge samples of individual stars within the Milky Way and
   Local Group.
@@ -240,16 +243,15 @@ more orbits to span the phase-space and obtain precise constraints on the mass
 distribution.
 One could argue then that our current task is much harder than Newton and Kepler
 had it:
-We seek to constrain the global, spatially-extended distribution of dark matter
+we seek to constrain the global, spatially-extended distribution of dark matter
 around a galaxy---a time-evolving mass distribution with nontrivial shape and
 radial distribution---with only a snapshot of the tracer kinematics (and often
 only a subset of phase-space dimensions).
 
-% TODO left off here: audit that we say the right things about Jeans...
 The tools we use to constrain the Galactic force field (i.e., the dark matter
 distribution) given only a snapshot of the dynamics are therefore (necessarily)
 statistical in nature and do not depend on knowing the orbits of individual
-stars.
+stars. % TODO: here
 Instead, these methods critically rely on strong assumptions about the
 stationarity of the distribution of tracer orbital properties (i.e., a
 ``steady-state'' or ``equilibrium'' assumption) and the integrability of the
@@ -528,8 +530,8 @@ position and motion with respect to a Galactocentric reference frame.
 
 For the solar position, we use the recent precise measurement of the
 Sun--Galactic center distance from the \acronym{GRAVITY} collaboration, $r_\odot
-= 8.122~\kpc$ \citep{Gravity:2018}, and adopt $z_\odot = 20.8~\pc$ as the solar
-height above the Galactic midplane \citep{Bennett:2019}.
+= 8.122~\kpc$ \citep{Gravity:2018}, and initially adopt $z_\odot = 20.8~\pc$ as
+the solar height above the Galactic midplane \citep{Bennett:2019}.
 In Galactocentric Cartesian coordinates, we use a right-handed coordinate system
 such that the Sun is at $\bs{x}_\odot = (-8.1219, 0, 0.0208)~\kpc$ and the
 solar velocity is $\bs{v}_\odot = (12.9, 245.6, 7.78)~\kms$ \citep{Drimmel:2018,
@@ -850,7 +852,7 @@ the (logarithmic) abundance ratios of its kinematic neighbors (in action-space),
 \begin{equation}
   \Delta^{\abunratio{X}{Y}}_n = \abunratio{X}{Y}_n -
     \mean{\abunratio{X}{Y}}_{\vec{J}}
-    \quad .
+    \quad . \label{eq:mean-abun-dev}
 \end{equation}
 That is, we use a given mass model to compute the three actions $\vec{J}$ for
 each star in the parent sample and choose the closest $K$ neighbors in
@@ -877,7 +879,7 @@ where the five parameters $(c_0, a_1, a_2, b_1, b_2)$ are the coefficients of a
 Fourier series expressed out to $m=2$.
 We fit this model to all of the $N=\nstars$ individual abundance-ratio
 deviations and their uncertainties $(\Delta_n, \sigma_{\Delta_n})_N$ (without
-binning) using least-squares fitting.
+binning) using least-squares fitting. % TODO: should we explicitly write the design matrix and shit?
 This functional form captures our expectations for how the mean abundance-ratio
 deviations will depend on vertical angle when our model is wrong:
 If the orbit contours at a given action have the wrong shape, we expect there to
@@ -936,6 +938,20 @@ minimize a combination of these amplitudes.
   \end{mdframed}
 \end{figure}
 
+\NoCaptionOfAlgo
+\begin{algorithm}[tp]
+  \caption{\textbf{Procedure for computing the classical-statistics objective function}}
+  \SetAlgoLined
+  \KwIn{Parameter vector $(\mdisk, \hz, \zsun, \vzsun)$ and bootstrap sample of parent stellar sample}
+    \qquad Compute the halo mass at fixed $v_{\rm circ}(R_\odot) = 229~\kms$ \\
+    \qquad Compute Galactocentric positions and velocities for each star\\
+    \qquad Compute St\"ackel potential focal length parameter for each star \\
+    \qquad Compute actions and angles for all stars (St\"ackel fudge) \\
+    \qquad Compute action-local mean abundance deviation for each star (\equationname~\ref{eq:mean-abun-dev})\\
+    \qquad Use linear least-squares to compute the optimal Fourier parameters (\equationname~\ref{eq:fouriermodel})\\
+    \qquad Compute the objective function (\equationname~\ref{eq:objective}).
+   \label{alg:objective}
+\end{algorithm}
 
 \figurename~\ref{fig:sinusoid-fits} shows smooth fits of the above model
 computed from bootstrapped resamplings of the data (blue curves) and, for
@@ -1022,14 +1038,14 @@ the $\cos$ and $\sin$ terms.
 As noted before, these coefficients are sensitive to the solar motion and solar
 position (in $z$), respectively.
 We therefore simultaneously optimize over four parameters: the solar position
-relative to the midplane $z_\odot$, the solar $z$ velocity relative to the local
-standard of rest $v_{z, \odot}$, the disk mass parameter \mratio, and the disk
+relative to the midplane \zsun, the solar $z$ velocity relative to the local
+standard of rest \vzsun, the disk mass parameter \mratio, and the disk
 scale height \hz\ \citep[the Miyamoto--Nagai scale height parameter, not an
 exponential scale height;][]{Miyamoto:1975}.
-For each setting of these parameters $\mratio, \hz, z_\odot, v_{z, \odot}$, we
+For each setting of these parameters $\mratio, \hz, \zsun, \vzsun$, we
 compute the Fourier coefficients and minimize the objective function
 \begin{equation}
-  f(a_1, b_1, a_2 \,;\, \mratio, z_\odot, v_{z, \odot}) =
+  f(a_1, b_1, a_2 \,;\, \mratio, \hz, \zsun, \vzsun) =
     a_1^2 + b_1^2 + a_2^2 \quad . \label{eq:objective}
 \end{equation}
 Note that here we ignore the constant term $c_0$ and the amplitude of the $\sin
@@ -1079,7 +1095,7 @@ This figure shows that a few of the element abundance ratios prefer a
 significantly different solar position relative to the midplane:
 While most elements are consistent with past measurements of the solar height of
 $z_\odot \sim 20~\pc$ (\citealt{Bennett:2019} and \citealt{Bland-Hawthorn:2016}
-and references therin), both \abunratio{Mg}{Fe} and \abunratio{Si}{Fe} suggest
+and references therein), both \abunratio{Mg}{Fe} and \abunratio{Si}{Fe} suggest
 that the sun is on the opposite side of the midplane!
 While we do not have a simple explanation for this discrepancy, our constraints
 from different element abundance ratios will effectively weight stars in
@@ -1094,12 +1110,11 @@ stars with different vertical actions, we will in general find disagreements
 between the results for different abundance ratios.
 
 Combining all eight abundance ratios, we find $\mratio = 1.21 \pm 0.04$, $\hz =
-0.27 \pm 0.01~\kpc$, $z_\odot = 16.9 \pm 0.8~\pc$, and $v_{z, \odot} = 8.8 \pm
+0.27 \pm 0.01~\kpc$, $\zsun = 16.9 \pm 0.8~\pc$, and $\vzsun = 8.8 \pm
 0.2~\kms$.
 Excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}, which are clear outliers in
 their preferred solar position values, we find $\mratio = 1.07\pm 0.05$, $\hz =
-0.28 \pm 0.01~\kpc$, $z_\odot = 20.6 \pm 0.9~\pc$, and $v_{z, \odot} = 8.4 \pm
-0.3~\kms$
+0.28 \pm 0.01~\kpc$, $\zsun = 20.6 \pm 0.9~\pc$, and $\vzsun = 8.4 \pm 0.3~\kms$
 Our results here imply a disk-to-halo mass ratio within the solar circle ${\rm
 M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc) = 2.3 \pm 0.1$ (all eight
 elements) or $1.6\pm0.1$ (excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}),
@@ -1118,7 +1133,7 @@ $\approx 1.3$ \citep{gala} and the implied value for the
   \caption{%
   The same as \figurename~\ref{fig:elem-ellipses-1}, but showing other
   projections of our parameter space.
-  Note that in the solar height above the midplane parameter $z_\odot$, we find
+  Note that in the solar height above the midplane parameter \zsun, we find
   some significant disagreements between \abunratio{Mg}{Fe} and
   \abunratio{Si}{Fe} and the rest of the abundance ratios we consider.
   \label{fig:elem-ellipses-2}
