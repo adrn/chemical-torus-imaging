@@ -20,6 +20,9 @@
 %   Scwarzschild in that sense!
 % - Add an algorithm figure or box or table or etc. that gives the
 %   stages of calculation from mass-model parameters to angles to objective.
+% - Point from Rix that statistically, 30 abundances is great. But reason to
+%   believe abundance space is lower-D, so this could end up being a way of
+%   assessing systematics!
 
 % send it to
 % ----------
@@ -51,6 +54,7 @@
   shadowcolor=black!05,
   shadowsize=4pt
 }
+\usepackage{enumitem}
 \input{preamble.tex}
 
 % text macros
@@ -940,17 +944,18 @@ minimize a combination of these amplitudes.
 
 \NoCaptionOfAlgo
 \begin{algorithm}[tp]
-  \caption{\textbf{Procedure for computing the classical-statistics objective function}}
+  \caption{\textbf{Procedure for computing the classical-statistics objective function}}\label{alg:objective}
   \SetAlgoLined
   \KwIn{Parameter vector $(\mdisk, \hz, \zsun, \vzsun)$ and bootstrap sample of parent stellar sample}
-    \qquad Compute the halo mass at fixed $v_{\rm circ}(R_\odot) = 229~\kms$ \\
-    \qquad Compute Galactocentric positions and velocities for each star\\
-    \qquad Compute St\"ackel potential focal length parameter for each star \\
-    \qquad Compute actions and angles for all stars (St\"ackel fudge) \\
-    \qquad Compute action-local mean abundance deviation for each star (\equationname~\ref{eq:mean-abun-dev})\\
-    \qquad Use linear least-squares to compute the optimal Fourier parameters (\equationname~\ref{eq:fouriermodel})\\
-    \qquad Compute the objective function (\equationname~\ref{eq:objective}).
-   \label{alg:objective}
+  \begin{enumerate}[itemsep=0mm]
+    \item Compute the halo mass at fixed $v_{\rm circ}(R_\odot) = 229~\kms$
+    \item Compute Galactocentric positions and velocities for each star
+    \item Compute St\"ackel potential focal length parameter for each star
+    \item Compute actions and angles for all stars (St\"ackel fudge)
+    \item Compute action-local mean abundance deviation for each star (\equationname~\ref{eq:mean-abun-dev})
+    \item Use linear least-squares to compute the optimal Fourier parameters (\equationname~\ref{eq:fouriermodel})
+    \item Compute the objective function (\equationname~\ref{eq:objective}).
+  \end{enumerate}
 \end{algorithm}
 
 \figurename~\ref{fig:sinusoid-fits} shows smooth fits of the above model
