@@ -35,9 +35,10 @@ class Dataset:
 
         # Abundance ratios should be all caps:
         for col in self.t.colnames:
-            if (col.upper().endswith('_FE') or
+            if ((col.upper().endswith('_FE') or
                     col.upper().startswith('FE_') or
-                    col.upper().endswith('_H')):
+                    col.upper().endswith('_H')) and
+                    not col.upper().startswith('FLAG')):
                 self.t.rename_column(col, col.upper())
 
         # Abundance error columns should be _ERR like APOGEE:
@@ -70,7 +71,10 @@ class Dataset:
             self._elem_ratios = ['FE_H'] + sorted([x for x in self.t.colnames
                                                    if x.endswith('_FE') and
                                                    not x.startswith('E_') and
-                                                   not x.startswith('FLAG_')])
+                                                   not x.startswith('FLAG_') and
+                                                   not x.startswith('CHI_') and
+                                                   not x.startswith('FLUX_') and
+                                                   not x.startswith('NR_')])
         return self._elem_ratios
 
     @property
@@ -202,7 +206,7 @@ class APOGEEDataset(Dataset):
 
 class GALAHDataset(Dataset):
     _id_column = 'star_id'
-    _radial_velocity_name = 'rv_synt'
+    _radial_velocity_name = 'rv_galah'
     _elem_err_fmt = 'E_{elem_name}'
 
     # See: 2-High-alpha-Low-alpha.ipynb
@@ -218,7 +222,10 @@ class GALAHDataset(Dataset):
         [0.6, -0.03]])
 
     def _init_mask(self):
-        quality_mask = (self.t['flag_cannon'] == 0)
+        quality_mask = (
+            (self.t['flag_sp'] == 0) &
+            (self.t['flag_fe_h'] == 0)
+        )
 
         # Remove stars targeted in known clusters or dwarf galaxies:
         # TODO: how to do this for GALAH??
@@ -277,8 +284,9 @@ elem_names = {
                            'N_FE', 'O_FE', 'P_FE', 'SI_FE'],
     'apogee-ms-loalpha': ['FE_H', 'AL_FE', 'C_FE', 'MG_FE', 'MN_FE', 'NI_FE',
                           'N_FE', 'O_FE', 'P_FE', 'SI_FE', 'TI_FE'],
-    'galah-rgb-loalpha': ['FE_H', 'CR_FE', 'MG_FE', 'NA_FE', 'O_FE', 'SC_FE',
-                          'TI_FE', 'Y_FE'],
+    'galah-rgb-loalpha': ['FE_H', 'AL_FE', 'BA_FE', 'CA_FE', 'CO_FE', 'CU_FE',
+                          'MG_FE', 'MN_FE', 'NA_FE', 'O_FE', 'SC_FE', 'Y_FE',
+                          'ZN_FE'],
     'galah-ms-loalpha': ['FE_H', 'AL_FE', 'CA_FE', 'K_FE', 'MG_FE', 'MN_FE',
                          'NA_FE', 'SC_FE', 'TI_FE', 'Y_FE']
 }

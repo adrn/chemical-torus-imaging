@@ -89,6 +89,8 @@ def main(pool, overwrite=False):
         for elem_name in elem_names[data_name]:
             print(f"Running element: {elem_name}")
 
+            # TODO: if galah in data_name, filter on flag??
+
             this_cache_path = cache_path / data_name
             this_cache_filename = (this_cache_path /
                                    f'optimize-results-{elem_name}.csv')
