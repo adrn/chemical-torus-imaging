@@ -1,6 +1,7 @@
 # Standard library
 import atexit
 import os
+os.environ["OMP_NUM_THREADS"] = "1"
 import sys
 import traceback
 
