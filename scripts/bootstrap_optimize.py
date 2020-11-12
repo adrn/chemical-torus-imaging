@@ -2,6 +2,7 @@
 import atexit
 import os
 import sys
+import traceback
 
 # Third-party
 from astropy.utils import iers
@@ -25,6 +26,7 @@ def worker(task):
         print(f"{i} finished optimizing: {res}")
     except Exception as e:
         print(f"{i} failed: {str(e)}")
+        traceback.print_exc()
 
     if res is None or not res.success:
         xopt = np.nan * np.array(x0)
