@@ -161,7 +161,7 @@
   Local Group.
   Here we present a new approach for dynamical inference, \methodname, which
   makes use of kinematic measurements and also element abundances (or other
-  stellar labels, e.g., stellar ages).
+  stellar labels, e.g., stellar ages) to measure the Galactic mass distribution.
   The method exploits the fact that stellar labels vary systematically with
   orbit characteristics (such as actions) in the Galaxy, yet must be invariant
   with respect to the (time-variable) conjugate angles.
@@ -266,6 +266,7 @@ Generic approaches here typically require parametrized models for the
 Magorrian:2019}, but become computationally prohibitive for large data sets or
 flexible model forms.
 
+% TODO: audit this paragraph and the shiz we say
 For simplicity and computational efficiency, one of the most common approaches
 used for dynamical inferences is so-called ``Jeans modeling''
 \citep{Binney:2008}, which use simplifications of the Jeans equations to relate
@@ -455,8 +456,8 @@ For demonstrations below, we therefore focus on a subset of eight, well-measured
 \abunratio{Fe}{H}, \abunratio{C}{Fe}, \abunratio{N}{Fe}, \abunratio{O}{Fe},
 \abunratio{Mg}{Fe}, \abunratio{Si}{Fe}, \abunratio{Mn}{Fe}, \abunratio{Ni}{Fe}.
 In some cases, we focus on just a single element abundance, \abunratio{Mg}{Fe},
-which is the most precisely and accurately determined element abundance measured
-with the \dr{16} pipeline \citep{Jonsson:2020}.
+which is one of the most precisely and accurately determined element abundance
+measured with the \dr{16} pipeline \citep{Jonsson:2020}.
 
 \gaia\ is primarily an astrometric mission and survey
 \citep{Gaia-Collaboration:2016} that obtains sky position, proper motion, and
@@ -640,6 +641,9 @@ in Galactocentric Cartesian coordinates.
 As an example, \figurename~\ref{fig:zvz-grid} shows the mean abundance ratios of
 stars in bins of their vertical phase-space coordinates, using data from the
 \apogee\ and \gaia\ surveys (see \sectionname~\ref{sec:data}).
+The stars shown in this figure are selected following the quality cuts defined
+above (\sectionname~\ref{sec:data}) and are selected to lie in the low-alpha
+sequence (\figurename~\ref{fig:mh-am-xy}).
 In these plots, the eye is drawn to \emph{abundance gradients}:
 The stars at small heights and small vertical velocities have different
 abundance ratios, on average, than stars at large heights and large vertical
@@ -806,7 +810,9 @@ method is \emph{conditionally} correct, conditioning on these core assumptions:
   \citep{TODO}. However, we expect the magnitude of this to be unimportant and
   should not dominate our systematics as long as the timescales over which the
   abundances change are sufficiently different from the orbital timescales
-  (hundreds of millions of years).
+  (hundreds of millions of years). Note that we have explicitly excluded carbon
+  and nitrogen abundance ratios from our sample because they are known to change
+  as a star ascends the giant branch.
 \end{description}
 
 In this \documentname, we consider only classical-statistics approaches for
@@ -865,8 +871,11 @@ estimates of the mean abundance values (we discuss this in more detail in
 Appendix~\ref{app:knn-weights}).
 For a specific star, its neighbors are a function of the mass-model parameters
 because all actions will change values in different mass models.
-We choose to use $K=64$ based on experimentation, but find that our results are
-insensitive to this choice.
+We choose to use $K=64$ based on experimentation: Smaller $K$ values more
+accurately resolve the abundance gradients but have more shot noise, but larger
+$K$ values smooth out the abundance gradients.
+However, we find that our results are not very sensitive to this choice (within
+a multiplication or division by a factor of a few).
 
 Our goal then is to minimize (over mass model parameters) the dependence of the
 mean abundance-ratio deviation distribution on the vertical angle $\theta_z$.
@@ -1133,7 +1142,7 @@ $\approx 1.3$ \citep{gala} and the implied value for the
   \begin{mdframed}
     \color{captiongray}
   \begin{center}
-  \includegraphics[width=0.8\textwidth]{other-error-ellipses.pdf}
+  \includegraphics[width=1\textwidth]{other-error-ellipses.pdf}
   \end{center}
   \caption{%
   The same as \figurename~\ref{fig:elem-ellipses-1}, but showing other
