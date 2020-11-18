@@ -1,4 +1,4 @@
-# Chemical Torus Imaging
+# Orbital Torus Imaging
 
 [![PDF](https://img.shields.io/badge/latex-PDF-blueviolet.svg?style=flat)](https://github.com/adrn/chemical-torus-imaging/blob/gh-pages/stationary-tags.pdf)
 
