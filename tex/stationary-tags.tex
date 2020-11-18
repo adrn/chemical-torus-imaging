@@ -13,6 +13,17 @@
 % - Point from Rix that statistically, 30 abundances is great. But reason to
 %   believe abundance space is lower-D, so this could end up being a way of
 %   assessing systematics!
+% - Q from Chris Hayes: It’s not clear to me specifically how this would affect
+%   your modeling, but just to see if you can think of anything, what effect
+%   would it have that you should have some kind of bias/selection function that
+%   relates the metallicities (and therefore other abundances) to z height,
+%   because of the differing target selections used for the disk and halo in
+%   APOGEE, which is essentially that halo pointing (which would be giving you
+%   your larger zs) have a bluer color cut than the disk (which would give your
+%   low zs for the most part)?  So to some extent you are biased against lower
+%   metallicities at low z and more likely to get them at higher z, could this
+%   have some kind of effect?
+% -
 
 % On submission, send this to:
 % ----------------------------
@@ -443,7 +454,7 @@ standard \apogee\ pipeline.
 
 Here we use a recent internal data product (which includes all data taken
 through March 2020) from the \apogee\ surveys (post-\dr{16}) that includes
-$\approx50\%$ more stars than the publicly-available \dr{16} catalogs
+$\approx60\%$ more stars than the publicly-available \dr{16} catalogs
 \citep{DR16, Jonsson:2020}, but was reduced and processed using the same
 pipeline used to produce the \dr{16} release \citep[i.e., the pipeline described
 in][]{Jonsson:2020}.
@@ -487,7 +498,7 @@ In detail, our selections include:
     stellar streams, or moving groups; this \emph{excludes} stars with the
     following bits enabled:
     \begin{itemize}
-      \item \texttt{APOGEE\_TARGET1}: (9. 18, 24, 26)
+      \item \texttt{APOGEE\_TARGET1}: (9, 18, 24, 26)
       \item \texttt{APOGEE\_TARGET2}: (10, 18)
       \item \texttt{APOGEE2\_TARGET1}: (9, 18, 20, 21, 22, 23, 24, 26)
       \item \texttt{APOGEE2\_TARGET2}: (10)
@@ -500,8 +511,8 @@ In detail, our selections include:
   \item \gaia\ parallax signal-to-noise $\varpi / \sigma_\varpi > 8$.
 \end{itemize}
 The \apogee\ catalog contains a small number of duplicates (duplicated source
-identifier \texttt{APOGEE\_ID}); To unique-ify our sample in these cases, we
-keep only the entry with highest signal-to-noise.
+identifier \texttt{APOGEE\_ID}); to avoid duplication in our sample in these
+cases, we keep only the entry with highest signal-to-noise.
 We select the low-$\alpha$ sequence primarily because the high- and low-$\alpha$
 sequences have different scale heights \citep[e.g.,][]{Bovy:2016}, and our toy
 model is not flexible enough to account for this.
@@ -709,7 +720,7 @@ there will be no information to exploit.
 For the sake of illustration and simplicity, we visualize and demonstrate these
 concepts using the vertical kinematics of stars in our parent sample.
 \figurename~\ref{fig:zvz-mgfe} again shows the mean \abunratio{Mg}{Fe} abundance
-ratios (in all panels), but now with two overlaid orbits (white overlaid bands)
+ratios (in all panels), but now with two overlaid orbits (green overlaid bands)
 computed in three different Milky Way models (with varied disk mass, as
 indicated; see \sectionname~\ref{sec:mw-model}).
 The two orbits were chosen for illustrative purposes (one with low $J_z$, one
@@ -841,7 +852,7 @@ different distances and $z$ heights.
 However, our parent sample is selected to contain a relatively small range of
 surface gravities along the red giant branch and is predominantly dominated by
 red clump stars, so we expect these issues to be negligible.\footnote{We tried
-repeating all subsequent analyses in this \documentname using a sample of
+repeating all subsequent analyses in this \documentname\ using a sample of
 high-confidence Red Clump stars \citep[using the selection defined
 in][]{Bovy:2014} and found no appreciable differences in our results.}
 
@@ -892,7 +903,7 @@ deviations and their uncertainties $(\Delta_n, \sigma_{\Delta_n})_N$ (without
 binning) using least-squares fitting. % TODO: should we explicitly write the design matrix and shit?
 This functional form captures our expectations for how the mean abundance-ratio
 deviations will depend on vertical angle when our model is wrong:
-If the orbit contours at a given action have the wrong shape, we expect there to
+if the orbit contours at a given action have the wrong shape, we expect there to
 be an $m=2$ variation to the abundance-ratio deviations (e.g.,
 \figurename~\ref{fig:zvz-mgfe}).
 If our assumed solar position relative to the midplane or solar velocity
@@ -1126,6 +1137,7 @@ between the results for different abundance ratios.
 Combining all eight abundance ratios, we find $\mratio = 1.21 \pm 0.04$, $\hz =
 0.27 \pm 0.01~\kpc$, $\zsun = 16.9 \pm 0.8~\pc$, and $\vzsun = 8.8 \pm
 0.2~\kms$.
+% TODO: how do these compare in precision to other studies?
 Excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}, which are clear outliers in
 their preferred solar position values, we find $\mratio = 1.07\pm 0.05$, $\hz =
 0.28 \pm 0.01~\kpc$, $\zsun = 20.6 \pm 0.9~\pc$, and $\vzsun = 8.4 \pm 0.3~\kms$
@@ -1228,9 +1240,9 @@ inferences.
 This method is also more statistically robust than Jeans modeling in that it
 does not require measuring second moments of the stellar velocity distribution.
 This method does, however, depend on the existence of element-abundance
-gradients with respect to kinematics: The stars on different orbits (i.e., with
-different actions) must have---on average or statistically---different
-compositions.
+gradients with respect to kinematics and our ability to measure these gradients:
+The stars on different orbits (i.e., with different actions) must have---on
+average or statistically---different compositions.
 Fortunately these gradients are ubiquitous and measurable in the Milky Way (and
 most galaxies; e.g., \citealt{Hayden:2015}).
 
@@ -1548,7 +1560,7 @@ treated as additional invariants.
 In the implementation presented here, we use an abundance deviation that is
 based on a nearest-neighbor interpolation in action space (see
 \sectionname~\ref{sec:inferences} and \appendixname~\ref{app:knn-weights}).
-That is a blunt tool; In principle, our results would improve if we instead
+That is a blunt tool; in principle, our results would improve if we instead
 explicitly modeled the abundance distribution moments as functions of the
 actions.
 One option for this modeling would be to use a generative, physical model for
