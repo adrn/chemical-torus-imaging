@@ -13,24 +13,13 @@
 % - Point from Rix that statistically, 30 abundances is great. But reason to
 %   believe abundance space is lower-D, so this could end up being a way of
 %   assessing systematics!
-% - Q from Chris Hayes: It’s not clear to me specifically how this would affect
-%   your modeling, but just to see if you can think of anything, what effect
-%   would it have that you should have some kind of bias/selection function that
-%   relates the metallicities (and therefore other abundances) to z height,
-%   because of the differing target selections used for the disk and halo in
-%   APOGEE, which is essentially that halo pointing (which would be giving you
-%   your larger zs) have a bluer color cut than the disk (which would give your
-%   low zs for the most part)?  So to some extent you are biased against lower
-%   metallicities at low z and more likely to get them at higher z, could this
-%   have some kind of effect?
-% -
 
 % On submission, send this to:
 % ----------------------------
 % - Glenn Van de Ven -- Schwarzschild models of external galaxies
 % - Sarah Loebman -- we discussed in Aspen
-% - Jo Bovy, Jason Sanders, Payel Das, James Binney, Paul McMillan, Scott Tremaine -- all have
-%   worked on DF modeling or extended DF torus things
+% - Jo Bovy, Jason Sanders, Payel Das, James Binney, Paul McMillan, Scott
+%   Tremaine -- all have worked on DF modeling or extended DF torus things
 % - Joss Bland-Hawthorn
 % - Martin Weinberg
 
@@ -1409,9 +1398,16 @@ $\vec{J}$, which are functions of the positions and velocities of
 stars---provided that the selection acts in position- or action-space alone (and
 not abundance-space).
 
-The closest related dynamical methodology we are aware of is ``Orbital
-Roulette'' \citep{TODO}.
-\TODO{describe roulette here...}
+The closest related dynamical methodology we are aware of is \textit{Orbital
+Roulette} \citep{Beloborodov:2004}.
+Like \methodname, \textit{Orbital Roulette} assumes that objects are not
+observed at a special time and therefore that the distributions of phases should
+be uniform.
+This assumption is then turned into an estimator, which can be used to optimize
+for the parameters of a mass model by making the distribution of phases approach
+uniformity.
+Our assumption is weaker: we only assume that the distribution of abundances is
+invariant of phase.
 
 % One of the crazy things about a fully general statement of \methodname\ is
 % that any description of a general distribution in $D$-space
