@@ -228,17 +228,17 @@ phases.
 
 In our current efforts to map dark matter, we are instead in a regime where we
 observe \emph{many} tracers (stars) but have little or no information about
-orbital phase: We observe only a single snapshot (in time) of the stellar
+orbital phase: we observe only a single snapshot (in time) of the stellar
 orbits!
 The closest we come to seeing orbits directly in the Milky Way is in the study
 of stellar streams \citep[e.g.,][]{Johnston:1999, Helmi:1999, Eyre:2011,
-Sanders:2013, Price-Whelan:2014}, where ensembles of stars almost directly
-encode (differential) phase information about the orbit of their progenitor
-systems.
-But stellar streams are relatively sparse, and orbits in the Galaxy have more
-degrees of freedom than orbits in the Solar System, meaning that we need many
-more orbits to span the phase-space and obtain precise constraints on the mass
-distribution.
+Sanders:2013, Price-Whelan:2014, Bonaca:2018}, where ensembles of stars almost
+directly encode (differential) phase information about the orbit of their
+progenitor systems.
+But stellar streams are relatively sparse in the Milky Way, and orbits in the
+Galaxy have more degrees of freedom than orbits in the Solar System, meaning
+that we need many more orbits to span the phase-space and obtain precise
+constraints on the mass distribution.
 One could argue then that our current task is much harder than Newton and Kepler
 had it:
 we seek to constrain the global, spatially-extended distribution of dark matter
@@ -248,42 +248,46 @@ only a subset of phase-space dimensions).
 
 Given only a snapshot of the dynamics, the tools we use to constrain the
 Galactic force field (i.e., the dark matter distribution) are therefore
-statistical in nature and do not depend on knowing the orbits of individual
-stars.
-Instead, these methods critically rely on strong assumptions about the
-stationarity of the distribution of tracer orbital properties (i.e., a
-``steady-state'' or ``equilibrium'' assumption) and the integrability of the
-underlying gravitational potential \citep[see, e.g.,][for a review of such
-methods as applied to the problem of determining the local dark matter
-density]{Read:2014}.
+typically statistical in nature and do not depend on knowing the orbits of
+individual stars.
+Instead, these methods rely on strong assumptions about the distribution
+function (\acronym{DF}) or mass model.
+For example, in the case of Jeans modeling \citep[e.g.,][]{Jeans:1922,
+Oort:1932, Bahcall:1984, Romanowsky:2003, Evans:2009, Watkins:2010, Walker:2011,
+Zhai:2018, Buch:2019}, while the Jeans \textit{equations} are correct for any
+collisionless tracer population of stars, implementing Jeans models in practice
+requires assuming that the system is in steady-state or equilibrium and requires
+specifying an explicit parametrized model for the underlying gravitational
+potential \citep[see, e.g.,][for a review of such methods as applied to the
+problem of determining the local dark matter density]{Read:2014}.
+More general approaches here instead attempt to model the \acronym{DF}
+explicitly \citep[e.g.,][]{McMillan:2013, Magorrian:2014, Binney:2014,
+Bovy:2016, Magorrian:2019}, but these methods become computationally prohibitive
+for large data sets or flexible model forms.
 When applied in real-world contexts on stars in the Milky Way or dwarf
-spheroidal galaxies, these methods often also require further assumptions, such
-as separability of the distribution function (\acronym{DF}), or the velocity
-anisotropy profile, or require simple parametrizations of the \acronym{DF} in
-order to execute these analyses.
-Generic approaches here typically require parametrized models for the
-\acronym{DF} and for the gravitational force field or mass distribution
-\citep[e.g.,][]{McMillan:2013, Magorrian:2014, Binney:2014, Bovy:2016,
-Magorrian:2019}, but become computationally prohibitive for large data sets or
-flexible model forms.
+spheroidal galaxies, standard methods for inferring the underlying mass
+distribution from a population of tracers therefore typically assume an
+equilibrium (or steady-state) distribution function, (coordinate) separability
+of the \acronym{DF}, simple parametrizations of the \acronym{DF} and mass model,
+and more.
 
 % TODO: audit this paragraph and the shiz we say
-For simplicity and computational efficiency, one of the most common approaches
-used for dynamical inferences is so-called ``Jeans modeling''
-\citep{Binney:2008}, which use simplifications of the Jeans equations to relate
-statistical moments of the tracer \acronym{DF} to properties of the force field.
-While these methods still depend on many of the assumptions laid out above, they
-have the great (computational) advantage of not having to deal with modeling the
-\acronym{DF} directly.
-Jeans modeling (or related analyses) have therefore been used in many
-applications:
-For example, to derive constraints on the local dark matter density using the
-vertical ($z$--$v_z$) kinematics of stars in the solar neighborhood
-\citep[e.g.,][]{Jeans:1922, Oort:1932, Bahcall:1984, Buch:2019}, the radial
-profile of the Milky Way halo \citep[e.g.,][]{Watkins:2010, Zhai:2018}, the mass
-profiles of Local Group satellites \citep[e.g.,][]{Evans:2009, Walker:2011}, and
-the mass distributions in elliptical galaxies \citep[e.g.,][]{Romanowsky:2003,
-Mamon:2005, Sonnenfeld:2012}, amongst other applications.
+% For simplicity and computational efficiency, one of the most common approaches
+% used for dynamical inferences is so-called ``Jeans modeling''
+% \citep{Binney:2008}, which use simplifications of the Jeans equations to relate
+% statistical moments of the tracer \acronym{DF} to properties of the force field.
+% While these methods still depend on many of the assumptions laid out above, they
+% have the great (computational) advantage of not having to deal with modeling the
+% \acronym{DF} directly.
+% Jeans modeling (or related analyses) have therefore been used in many
+% applications:
+% For example, to derive constraints on the local dark matter density using the
+% vertical ($z$--$v_z$) kinematics of stars in the solar neighborhood
+% \citep[e.g.,][]{Jeans:1922, Oort:1932, Bahcall:1984, Buch:2019}, the radial
+% profile of the Milky Way halo \citep[e.g.,][]{Watkins:2010, Zhai:2018}, the mass
+% profiles of Local Group satellites \citep[e.g.,][]{Evans:2009, Walker:2011}, and
+% the mass distributions in elliptical galaxies \citep[e.g.,][]{Romanowsky:2003,
+% Mamon:2005, Sonnenfeld:2012}, amongst other applications.
 
 A contemporary ``challenge'' to applying these methods on modern data
 (especially within the Milky Way) is that stellar kinematic data is now very
