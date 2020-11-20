@@ -596,7 +596,7 @@ Our methodology and demonstrations below rely on computing actions and angles
 for stars, which depend on the mass distribution of the Milky Way and the solar
 position and motion with respect to a Galactocentric reference frame.
 
-For the solar position, we use the recent precise measurement of the
+For the solar position, we use the recent, precise measurement of the
 Sun--Galactic center distance from the \acronym{GRAVITY} collaboration, $r_\odot
 = 8.122~\kpc$ \citep{Gravity:2018}, and initially adopt $z_\odot = 20.8~\pc$ as
 the solar height above the Galactic midplane \citep{Bennett:2019}.
@@ -636,9 +636,9 @@ the ``St\"ackel Fudge'' \citep{Binney:2012, Sanders:2012} as implemented in
 \package{galpy} \citep{Bovy:2015}.
 We solve for the focal length, $\Delta$, of the locally-approximating St\"ackel
 potential for each star's orbit by numerically computing the orbit of each star
-for four orbital periods.\footnote{For speed, we actually compute the
-locally-fitting St\"ackel potential focal length parameter $\Delta$
-\citep{Sanders:2012} using \package{gala}.}
+for four orbital periods.\footnote{For computational efficiency, we actually
+compute the locally-fitting St\"ackel potential focal length parameter $\Delta$
+\citep{Sanders:2012} using \package{gala} \citep{gala}.}
 
 We assess the accuracy of using the St\"ackel Fudge for orbits with large
 vertical excursions from the Galactic disk by comparing actions computed with
@@ -663,11 +663,12 @@ max} = 8$ (following \citealt{Sanders:2016}).
 We find that in all cases, the values of the actions agree to within $<10\%,
 <0.1\%, <0.5\%$ for $J_R, J_\phi, J_z$, respectively, with the largest
 disagreements only affecting a small fraction of the stars in our sample
-($<5\%$) with the largest excursions ($\gtrsim 3$ scale heights) from the
+($<8\%$) with the largest excursions ($\gtrsim 3$ scale heights) from the
 Galactic plane.
+% See: Compare-actions-Staeckel-O2GF.ipynb
 
 For computational efficiency, we therefore use the St\"ackel Fudge as our
-primary method for computing actions in what follows.
+primary method for computing actions.
 % the three actions and angles for all stars in
 % our parent sample (see \sectionname~\ref{sec:data}) in each of the 15 potential
 % models with different disk-mass to halo-mass ratios (see above).
@@ -1062,7 +1063,7 @@ the value of \mratio\ that minimizes the (absolute) value of $a_2$.
 We obtain an estimate for the disk mass parameter \mratio\ and an associated
 uncertainty by linearly interpolating the measurements and bootstrap error bars
 onto the $a_2=0$ intercept.
-Our best-fit disk mass and its uncertainty is shown as the square (blue)
+Our best-fit disk mass and its uncertainty is shown as the square (red)
 marker in \figurename~\ref{fig:coeff-mdisk} to emphasize that, though this is a
 simple model and we only vary one parameter in this demonstration, the
 measurement is encouragingly precise with a formal error bar of $\approx$7\% for
@@ -1095,7 +1096,7 @@ context of our assumptions below (\sectionname~\ref{sec:discussion}).
     sensitive to the local density of the disk; it crosses zero when the model
     has the best-fit disk mass.
     The best-fit disk mass and its measurement uncertainty are shown as the
-    square marker and a horizontal error bar.
+    square (red) marker and a horizontal error bar.
     The other terms shown have different dependencies on Milky Way parameters:
     The $\cos\theta_z$ would vary strongly if we varied the solar motion (the
     vertical component of the local standard of rest).
