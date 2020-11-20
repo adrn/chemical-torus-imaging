@@ -340,12 +340,42 @@ method, conditioned on the assumptions.
 \section{Methodological Generalities}
 \label{sec:generalities}
 
-In a well-mixed, equilibrium population, stars are in a kinematic steady state:
-As time goes on, stars move along their orbits, but they do not change their
-dynamical invariants (e.g., actions).
-In such situations, every location in angle (the coordinates conjugate to
-actions) is equally likely, or equally probably populated in any snapshot.
-The ``chemical tagging'' insight \citep{Freeman:2002} is that most stars also
+In a well-mixed, equilibrium population, stars are in a kinematic steady state.
+As time goes on, stars move along their orbits: these orbits can be represented
+by a set of dynamical invariants --- actions --- and a location along an orbit
+can be represented by a set of phase --- conjugate angle --- variables.
+These action--angle coordinates, ($\boldsymbol{J}, \boldsymbol{\theta}$), are
+canonical coordinates (i.e., a transformation from, say, Cartesian position and
+velocity) in which many dynamical computations are simpler or more efficient
+\citep[see, e.g.,][]{Binney:2008}.
+The actions $\boldsymbol{J}$ are integrals of motion like any other (for
+example, energy or angular momentum), but are special in that they form a set of
+momentum coordinates whose conjugate position coordinates are angle variables.
+Action variables are defined as integrals of other canonical momentum
+coordinates $\boldsymbol{p}$ over a closed loop in the conjugate position
+coordinates $\boldsymbol{q}$,
+\begin{equation}
+  J_i = \oint p_i~\dd q_i \quad .
+\end{equation}
+As we will see later, if the motion in a given coordinate pair (e.g., $q_i,
+p_i$) is separable from the other coordinates, the action integral simply
+computes the area enclosed by the orbit in the two-dimensional phase-space
+$(q_i, p_i)$.
+
+For gravitational potentials with more than one degree of freedom, it is not
+guaranteed that actions exist at all locations in phase space: generically,
+regions of phase space can contain chaotic orbits and resonances.
+However, when the resonant structure is weak (as is the case for many simple
+models of Galactic potentials), most of phase-space is typically stable and
+therefore admits transformation to action-space.
+In action--angle coordinates, a steady state distribution function
+(\acronym{DF}) $f$ is simply a function of the actions, $f(\boldsymbol{J})$.
+In such situations, every location in angle-space is equally likely, or equally
+probably populated in any snapshot of the kinematics of a tracers orbiting in
+some mass distribution.
+
+How, then, do stellar abundances relate to dynamics?
+The ``chemical tagging'' insight \citep{Freeman:2002} notes that most stars also
 effectively preserve their surface element abundances (and other stellar labels)
 as they orbit, over many Galactic orbital timescales.
 That is, in an integrable galaxy---a galaxy whose stellar orbits are associated
@@ -364,8 +394,8 @@ This collection of stars will in general have a diversity of element abundances:
 Their abundances are drawn from some distribution in $D$-dimensional
 element-abundance space.
 In general, the abundance distribution will depend on position in phase-space:
-For example, there are observed radial and vertical abundance gradients in the
-Galactic disk \citep[e.g.,][]{Hayden:2015}.
+In the Milky Way, there are observed radial and vertical abundance gradients in
+the Galactic disk \citep[e.g.,][]{Hayden:2015}.
 However, any changes we observe in these element-abundance distributions with
 respect to phase-space coordinates (i.e., the six-gradient with respect to the
 three position and velocity components) must not project onto the directions of
