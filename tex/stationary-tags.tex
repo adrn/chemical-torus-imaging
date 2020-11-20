@@ -110,7 +110,7 @@
 \sloppy\sloppypar\raggedbottom\frenchspacing
 \renewcommand{\doi}[1]{{\footnotesize\href{https://doi.org/#1}{#1}}}
 
-\shorttitle{mapping orbits with chemical torus imaging}
+\shorttitle{Mapping Orbits with \methodname}
 \shortauthors{price-whelan, hogg, johnston, ness, rix}
 
 \begin{document}
@@ -119,8 +119,7 @@
 
 \title{\textbf{%
     \methodname: \\
-    Using element abundances to map orbits and mass in the Milky Way
-    }}
+    Using Element Abundances to Map Orbits and Mass in the Milky Way}}
     % Revealing the orbital foliation of phase space\\
     % through invariances of element-abundance distributions
 
@@ -128,6 +127,10 @@
 \newcommand{\affccpp}{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
 \newcommand{\affmpia}{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg, Germany}
 \newcommand{\affcolumbia}{Department of Astronomy, Columbia University, New York, NY 10027, USA}
+\newcommand{\affutah}{Department of Physics and Astronomy, University of Utah, 115 S. 1400 E., Salt Lake City, UT 84112, USA}
+\newcommand{\affuw}{Department of Astronomy, University of Washington, Box 351580, Seattle, WA 98195, USA}
+\newcommand{\affprinceton}{Department of Astrophysical Sciences, Princeton University, 4 Ivy Lane, Princeton, NJ~08544}
+\newcommand{\affcarnegie}{The Observatories of the Carnegie Institution for Science, 813 Santa Barbara St., Pasadena, CA~91101}
 
 \author[0000-0003-0872-7098]{Adrian~M.~Price-Whelan}
 \affiliation{\affcca}
@@ -148,7 +151,31 @@
 \author[0000-0003-4996-9069]{Hans-Walter~Rix}
 \affiliation{\affmpia}
 
-\author{APOGEE authors}
+% APOGEE authors:
+
+\author[0000-0002-1691-8217]{Rachael L. Beaton}
+\altaffiliation{Carnegie-Princeton Fellow}
+\affiliation{\affprinceton}
+\affiliation{\affcarnegie}
+
+\author{Joel~R.~Brownstein}
+\affiliation{\affutah}
+
+\author{Domingo~An\'ibal~Garc\'ia-Hern\'andez}
+\affiliation{Instituto de Astrof\'isica de Canarias, 38205 La Laguna, Tenerife, Spain}
+
+\author{Sten Hasselquist}
+\altaffiliation{NSF Astronomy and Astrophysics Postdoctoral Fellow}
+\affiliation{\affutah}
+
+\author{Christian~R.~Hayes}
+\affiliation{\affuw}
+
+\author{Richard~R.~Lane}
+\affiliation{Instituto de Astronom\'ia y Ciencias Planetarias de Atacama, Universidad de Atacama, Copayapu 485, Copiap\'o, Chile}
+
+\author{Gail~Zasowski}
+\affiliation{\affutah}
 
 
 \begin{abstract}\noindent
@@ -202,7 +229,7 @@
   surveys
 }
 
-\section*{}\clearpage
+% \section*{}\clearpage
 \section{Introduction}
 \label{sec:intro}
 
@@ -393,7 +420,7 @@ Their abundances are drawn from some distribution in $D$-dimensional
 element-abundance space.
 In general, the abundance distribution will depend on position in phase-space:
 In the Milky Way, there are observed radial and vertical abundance gradients in
-the Galactic disk \citep[e.g.,][]{Hayden:2015}.
+the Galactic disk \citep[e.g.,][]{Hayden:2015, Queiroz:2020}.
 However, any changes we observe in these element-abundance distributions with
 respect to phase-space coordinates (i.e., the six-gradient with respect to the
 three position and velocity components) must not project onto the directions of
@@ -670,7 +697,7 @@ computation of the actions (over stars) using the Python package
   \end{mdframed}
 \end{figure}
 
-A significant motivation for his work came from plots of elemental abundance
+A significant motivation for this work came from plots of elemental abundance
 ratios of stars as a function of vertical height $z$ and vertical velocity $v_z$
 in Galactocentric Cartesian coordinates.
 As an example, \figurename~\ref{fig:zvz-grid} shows the mean abundance ratios of
@@ -1665,6 +1692,7 @@ here for demonstrations.
 It is a pleasure to thank
   Jo Bovy (Toronto),
   Anna-Christina Eilers (MIT),
+  Jos\'e G. Fern\'andez-Trincado (U de Atacama),
   Suroor S. Gandhi (NYU),
   David Spergel (Flatiron),
   Eugene Vasiliev (Cambridge),
@@ -1676,6 +1704,10 @@ DWH was partially supported by HOGG GRANT DETAILS.
 HWR was partially supported by GRANT DETAILS.
 This research was conducted in part at the Aspen Center for Physics,
 which is supported by National Science Foundation grant \acronym{PHY-1607611}.
+
+S.H. is supported by an NSF Astronomy and Astrophysics Postdoctoral Fellowship
+under award AST-1801940.
+KVJ's contributions were enabled by NSF grant AST-1715582.
 
 Funding for the Sloan Digital Sky
 Survey IV has been provided by the
