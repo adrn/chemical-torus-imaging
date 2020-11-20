@@ -451,38 +451,6 @@ measured.
 \section{Data}
 \label{sec:data}
 
-% Notebook: figures/APOGEE-sample.ipynb
-\begin{figure}[!tp]
-  \begin{mdframed}
-  \color{captiongray}
-  \begin{center}
-  \includegraphics[width=\textwidth]{apogee-rgb-loalpha-mh-am-xy.pdf}
-  \end{center}
-  \caption{%
-    The data sample used in this project.
-    Each panel shows a 2D histogram of the stars.
-    \textsl{Top panel:}
-    Bulk abundance ratios measured by \apogee\ and a selection boundary (dashed
-    line) used to exclude the ``high-$\alpha$'' stars that are generally older
-    and kinematically hotter.
-    \textsl{Lower left panel:}
-    Positions of the stars in the parent sample projected onto the Galactic
-    plane, showing the spherical spatial cut and highly non-uniform (\apogee)
-    spatial selection.
-    Heliocentric distances to the stars are obtained by na\"ively inverting
-    their \gaia\ parallax measurements.
-    \textsl{Lower right panel:}
-    The distributions of stars in the parent sample in vertical $z, v_z$ phase
-    space.
-    This panel shows that the sample is less populated at low $z$ (mainly
-    because of the \apogee\ selection function), which in turn shows that the
-    sample is less populated at certain values of vertical angle, $\theta_z$.
-    The methods presented in this paper do not require that all angles are
-    equally populated in the sample.
-    \label{fig:mh-am-xy}}
-  \end{mdframed}
-\end{figure}
-
 In our toy demonstrations below, our main data source is a cross-match between
 spectroscopic data from the \apogee\ surveys \citep{Majewski:2017} and
 astrometric data from the \gaia\ mission \citep{Gaia-Collaboration:2016,
@@ -526,7 +494,7 @@ measured with the \dr{16} pipeline \citep{Jonsson:2020}.
 
 \gaia\ is primarily an astrometric mission and survey
 \citep{Gaia-Collaboration:2016} that obtains sky position, proper motion, and
-parallax measurements for $>1$ billion stars limited only by their apparent
+parallax measurements for $>1$ billion stars, limited only by their apparent
 magnitudes (\gaia\ $G \lesssim 20.7$).
 Here we use parallax and proper motion measurements released in \gaia\ \dr{2}
 \citep{Gaia-Collaboration:2018, Gaia-astrometric:2018}.
@@ -539,7 +507,7 @@ We then apply a number of quality cuts and other selections to limit the catalog
 to chemically thin-disk, red giant branch (RGB) stars with well-measured stellar
 parameters (\logg, \Teff) and abundances (the abundance ratios listed above),
 high signal-to-noise parallax measurements, but excluding stars targeted in
-stellar clusters and dwarf galaxies.
+stellar clusters and dwarf galaxies, as enumerated below.
 In detail, our selections include:
 \begin{itemize}
   \item \acronym{ASPCAP} quality flag (\texttt{ASPCAPFLAG}) must not contain
@@ -569,9 +537,43 @@ identifier \texttt{APOGEE\_ID}); to avoid duplication in our sample in these
 cases, we keep only the entry with highest signal-to-noise.
 We select the low-$\alpha$ sequence primarily because the high- and low-$\alpha$
 sequences have different scale heights \citep[e.g.,][]{Bovy:2016}, and our toy
-model is not flexible enough to account for this.
+model is not currently flexible enough to account for this (however, it is
+possible to include this complexity in our framework, as will be explored in
+future extensions of this model).
 The final parent sample contains \nstars\ RGB stars with high-quality \apogee\
 and \gaia\ data.
+
+% Notebook: figures/APOGEE-sample.ipynb
+\begin{figure}[!tp]
+  \begin{mdframed}
+  \color{captiongray}
+  \begin{center}
+  \includegraphics[width=\textwidth]{apogee-rgb-loalpha-mh-am-xy.pdf}
+  \end{center}
+  \caption{%
+    The data sample used in this project.
+    Each panel shows a 2D histogram of the stars.
+    \textsl{Top panel:}
+    Bulk abundance ratios measured by \apogee\ and a selection boundary (dashed
+    line) used to exclude the ``high-$\alpha$'' stars that are generally older
+    and kinematically hotter.
+    \textsl{Lower left panel:}
+    Positions of the stars in the parent sample projected onto the Galactic
+    plane, showing the spherical spatial cut and highly non-uniform (\apogee)
+    spatial selection.
+    Heliocentric distances to the stars are obtained by na\"ively inverting
+    their \gaia\ parallax measurements.
+    \textsl{Lower right panel:}
+    The distributions of stars in the parent sample in vertical $z, v_z$ phase
+    space.
+    This panel shows that the sample is less populated at low $z$ (mainly
+    because of the \apogee\ selection function), which in turn shows that the
+    sample is less populated at certain values of vertical angle, $\theta_z$.
+    The methods presented in this paper do not require that all angles are
+    equally populated in the sample.
+    \label{fig:mh-am-xy}}
+  \end{mdframed}
+\end{figure}
 
 For each star in the parent sample, we compute na\"ive distance estimates by
 inverting the parallax, $d = 1/\varpi$.
