@@ -1404,8 +1404,8 @@ But \methodname\ is much more general:
 Any statistical moments of any statistics of any invariant stellar labels would
 also be allowed.
 The method also does not assume that the element abundances are uniquely or even
-specifically predicted by the actions:
-The method only requires that there are gradients in some moments of the
+specifically predicted by the actions.
+This method only requires that there are gradients in some moments of the
 abundance distribution.
 Generically, the abundance ratio distributions at any point in action space are
 expected to have (and are observed to have) substantial dispersion.
@@ -1522,8 +1522,8 @@ not abundance-space).
 The closest related dynamical methodology we are aware of is \textit{Orbital
 Roulette} \citep{Beloborodov:2004}.
 Like \methodname, \textit{Orbital Roulette} assumes that objects are not
-observed at a special time and therefore that the distributions of phases should
-be uniform.
+observed at a special time and therefore that the distributions of phases for
+all tracers in some observed population should be uniform.
 This assumption is then turned into an estimator, which can be used to optimize
 for the parameters of a mass model by making the distribution of phases approach
 uniformity.
@@ -1581,20 +1581,20 @@ generalizations of \methodname\ that account for stellar populations that are
 incompletely angle-mixed.
 Beyond the Galactic disk in the stellar halo, as with Jeans modeling,
 \methodname\ will be biased by the existence of unmixed substructures (streams,
-shells, and merger remnants; e.g., \citealt{TODO}).
+shells, and merger remnants; e.g., \citealt{Grillmair:2016, Shipp:2018}).
 % TODO: comment on phase-mixing timescale as a function of JR, Jphi, Jz?
 % ... The flip side of that is that there are places in phase space where
 % mixing is maybe incredibly slow, like at low $J_z$. Maybe our disk
 % midplane issues come from this?
 
-\TODO{Comment on how exactly this can bias us with our toy implementation: It
-can cause variations in the mean abundance anomaly that will be subsumed into
-our simple parameters and interpreted as incorrect vzsun or zsun or Mdisk. In
-detail, it will depend on the scale (in angle-space) of the dominant
-perturbations (if ``large-scale,'' will more impact zsun/vzsun. If
-``small-scale,'' will affect mass parameter more). Similar issues with
-generative versions of the method, but can be accounted for more naturally by
-explicitly modeling them?}
+% TODO: Comment on how exactly this can bias us with our toy implementation: It
+% can cause variations in the mean abundance anomaly that will be subsumed into
+% our simple parameters and interpreted as incorrect vzsun or zsun or Mdisk. In
+% detail, it will depend on the scale (in angle-space) of the dominant
+% perturbations (if ``large-scale,'' will more impact zsun/vzsun. If
+% ``small-scale,'' will affect mass parameter more). Similar issues with
+% generative versions of the method, but can be accounted for more naturally by
+% explicitly modeling them?}
 
 % Selection
 Another key assumption that could lead to significant biases for certain stellar
@@ -1618,13 +1618,14 @@ phase-space will appear to be different from these effects alone.
 % lunch for this crap). A 1-sentence expansion to that nuance might be worth it?
 For the \apogee\ sample used here, we have attempted to mitigate these issues by
 selecting a small range of surface gravities (and therefore temperatures) along
-the giant branch, but there are known systematic trends in \apogee\ between
-abundances and stellar parameters (\citealt{Jonsson:2020, Wheeler:2020}, Eilers
-et al., in prep.).
-In principle, a simultaneous calibration model could be made that simultaneously
-fits for the abundances as a function of conjugate angle and also housekeeping
-data (like stellar surface gravity or spectrograph line-spread function) that
-cause abundance systematics.
+the giant branch.
+However, there are known systematic trends in \apogee\ between abundances and
+stellar parameters (\citealt{Jonsson:2020, Wheeler:2020}, Eilers et al., in
+prep.).
+In principle, a joint dynamics and calibration model could be made that
+simultaneously fits for the abundances as a function of conjugate angle and also
+housekeeping data (like stellar surface gravity or spectrograph line-spread
+function) that cause abundance systematics.
 
 % Integrable
 In our current implementation we have made use of transformations to
@@ -1759,14 +1760,13 @@ It is a pleasure to thank
   the Dynamics and Astronomical Data groups at the Flatiron Institute,
   and the Galaxy group at the MPIA
 for valuable discussions and input.
-DWH was partially supported by HOGG GRANT DETAILS.
+% DWH was partially supported by HOGG GRANT DETAILS.
 HWR was partially supported by GRANT DETAILS.
 This research was conducted in part at the Aspen Center for Physics,
 which is supported by National Science Foundation grant \acronym{PHY-1607611}.
-
+K.V.J.'s contributions were enabled by NSF grant AST-1715582.
 S.H. is supported by an NSF Astronomy and Astrophysics Postdoctoral Fellowship
 under award AST-1801940.
-KVJ's contributions were enabled by NSF grant AST-1715582.
 
 Funding for the Sloan Digital Sky
 Survey IV has been provided by the
@@ -1840,11 +1840,12 @@ participating in the \gaia\ Multilateral Agreement.
 
 \software{
   \package{Astropy} \citep{astropy, astropy:2018},
+  \package{gala} \citep{gala},
   \package{IPython} \citep{ipython},
-  \package{matplotlib} \citep{matplotlib},
-  \package{numpy} \citep{numpy},
-  \package{gala} \citep{gala, galav1_1},
-  \package{schwimmbad} \citep{schwimmbad}
+  \package{matplotlib} \citep{Hunter:2007},
+  \package{numpy} \citep{numpy:2020},
+  \package{schwimmbad} \citep{schwimmbad},
+  \package{scipy} \citep{Virtanen:2020}.
 }
 
 \appendix
