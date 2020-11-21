@@ -914,6 +914,8 @@ repeating all subsequent analyses in this \documentname\ using a sample of
 high-confidence Red Clump stars \citep[using the selection defined
 in][]{Bovy:2014} and found no significant differences in our results.}
 
+\subsection{Initial Demonstration of Fitting Procedure}
+
 As an initial demonstration, we focus here on the vertical kinematics of stars
 (but we do not assume separability) and we ask whether there is a choice of mass
 model that leads to dynamical actions and conjugate angles such that the
@@ -1149,21 +1151,27 @@ context of our assumptions below (\sectionname~\ref{sec:discussion}).
   \end{mdframed}
 \end{figure}
 
-% Another thing we can glean from \figurename~\ref{fig:coeff-mdisk} is that these
-% data seem to favor a different value of the solar position relative to the
-% midplane $z_\odot$ and a different solar velocity $v_{z, \odot}$.
-The upper panels of \figurename~\ref{fig:coeff-mdisk} show that, at all values
-of the disk mass parameter \mratio, there is a finite $m=1$ amplitude for both
-the $\cos$ and $\sin$ terms.
+\subsection{Construction of a Mass Model Objective Function}
+
+The demonstrations above show how we can compute best-fitting coefficients for
+our model of the variations of the mean abundance deviations as a function of
+vertical angle $\theta_z$.
+To use these coefficients in a more general fitting procedure (i.e., to derive
+constraints on the mass model parameters) we construct an objective function
+that we can then optimize over the mass model parameters.
+However, the upper panels of \figurename~\ref{fig:coeff-mdisk} show that, at all
+values of the disk mass parameter \mratio, there is a finite $m=1$ amplitude for
+both the $\cos$ and $\sin$ terms.
 As noted before, these coefficients are sensitive to the solar motion and solar
 position (in $z$), respectively.
-We therefore simultaneously optimize over four parameters: the solar position
-relative to the midplane \zsun, the solar $z$ velocity relative to the local
-standard of rest \vzsun, the disk mass parameter \mratio, and the disk
+We therefore consider four parameters in our objective function: the solar
+position relative to the midplane \zsun, the solar $z$ velocity relative to the
+local standard of rest \vzsun, the disk mass parameter \mratio, and the disk
 scale height \hz\ \citep[the Miyamoto--Nagai scale height parameter, not an
 exponential scale height;][]{Miyamoto:1975}.
-For each setting of these parameters $\mratio, \hz, \zsun, \vzsun$, we
-compute the Fourier coefficients and minimize the objective function
+For each setting of these parameters $\mratio, \hz, \zsun, \vzsun$, we compute
+the Fourier coefficients (as described in the previous section) and minimize the
+objective function
 \begin{equation}
   f(a_1, b_1, a_2 \,;\, \mratio, \hz, \zsun, \vzsun) =
     a_1^2 + b_1^2 + a_2^2 \quad . \label{eq:objective}
