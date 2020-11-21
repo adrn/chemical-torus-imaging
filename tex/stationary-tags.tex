@@ -1141,6 +1141,7 @@ context of our assumptions below (\sectionname~\ref{sec:discussion}).
 \end{figure}
 
 \subsection{Construction of a Mass Model Objective Function}
+\label{sec:objective-func}
 
 The demonstrations above show how we can compute best-fitting coefficients for
 our model of the variations of the mean abundance deviations as a function of
@@ -1171,7 +1172,7 @@ We again perform 128 bootstrap trials per element, and we perform the bootstrap
 resampling outside of the entire procedure (so that each optimization is
 performed independently with a bootstrap sample).
 We use Nelder-Mead optimization \citep{Gao:2012} to minimize our objective
-function, as implemented in the \package{scipy} package \citep{scipy}.
+function, as implemented in the \package{scipy} package \citep{Virtanen:2020}.
 
 % Notebook: figures/5-Optimize-results.ipynb
 \begin{figure}[!tp]
@@ -1744,18 +1745,46 @@ acceleration field) traced by a phase-mixed stellar distribution.
 \methodname\ is novel in that it provides a way of using measurements of element
 abundance ratios and other stellar labels to improve the precision of dynamical
 inferences.
-This method is also more statistically robust than Jeans modeling in that it
-does not require measuring second moments of the stellar velocity distribution.
+This method is also more statistically robust than traditional methods (for
+example, Jeans modeling) in that it does not require measuring second moments of
+the stellar velocity distribution or knowing the spatial (or phase-space) survey
+selection function.
 This method does, however, depend on the existence of element-abundance
 gradients with respect to kinematics and our ability to measure these gradients:
 The stars on different orbits (i.e., with different actions) must have---on
 average or statistically---different compositions.
+% TODO:    v "god provides" - when we submit to arxiv, of course
 Fortunately these gradients are ubiquitous and measurable in the Milky Way (and
-most galaxies; e.g., \citealt{Hayden:2015}).
-% TODO: god provides
+most galaxies; see \figurename~\ref{fig:zvz-grid}).
 
-TODO:
-We have outlined and implemented a classical-statistics approach to \methodname\ and ... with APOGEE data ...
+We have outlined and implemented a classical-statistics approach to \methodname\
+and applied this to the vertical kinematics of a subsample of red giant branch
+stars from the \apogee\ surveys.
+The fundamental concept of this method is that stars do not change their
+abundances appreciably over timescales comparable to Galactic orbital
+timescales.
+With that, and under the assumption that the stellar populations in the Galactic
+disk are phase-mixed, this implies that the stellar abundance distribution at
+any place in phase-space must be independent of phase or conjugate angles and
+can only be a function of dynamical invariants, like orbital actions.
+In our current implementation, we explicitly try to find a setting of the
+gravitational potential parameters disk mass $\mdisk$ and scale height $\hz$
+(and reference frame parameters, the solar position and velocity in $z$) that
+minimize the dependence of the abundance distribution with vertical angle
+$\theta_z$ (see \figurename~\ref{fig:sinusoid-fits}).
+Turning this into an objective function (\sectionname~\ref{sec:objective-func}),
+we then optimize over the four Milky Way parameters using eight independent
+element abundance ratios (see \figurename~\ref{fig:elem-ellipses-1}).
+Individually, the constraints are already encouragingly precise, but combining
+the different abundance ratios provides joint constraints on the four parameters
+that are precise to a few percent (see \tablename~\ref{tbl:results}).
+
+Ongoing and near future spectroscopic surveys (e.g., SDSS-V, GALAH, DESI, 4MOST,
+WEAVE) will provide samples of stars that are a factor of $\approx$10--100
+times larger than that used in this work.
+Combining these stellar data with kinematic measurements from upcoming data
+releases from the \gaia\ mission will enable extremely precise constraints on
+the Galactic mass distribution using \methodname.
 
 
 \acknowledgments
