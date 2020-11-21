@@ -829,7 +829,7 @@ In our method below, we utilize this fact to infer the disk mass.
 \section{Method, Assumptions, and Toy Applications}
 \label{sec:inferences}
 
-There are two families of approaches to \methodname:
+There are two families of approaches to \methodname.
 In the first---which we will call \emph{classical} (in the sense of classical
 statistics)---we make explicit the fact that the element abundance distribution
 should not depend on the conjugate angles.
@@ -854,7 +854,7 @@ method is \emph{conditionally} correct, conditioning on these core assumptions:
   could in principle be relaxed in future implementations.
 \item[phase mixed] The stars in our sample are inherently uniformly distributed
   in angle variables; all angles are equally likely. This assumption will be
-  violated substantially in the data (as we discuss below; see
+  violated in the data (as we discuss below; see
   \sectionname~\ref{sec:discussion}), but this is the fundamental assumption of
   the vast majority of inferences of the Milky Way mass distribution.
 \item[properly selected] The selection function depends on position (or
@@ -870,13 +870,14 @@ method is \emph{conditionally} correct, conditioning on these core assumptions:
   % dependence of the selection function on element abundances.
 \item[measurable gradients] There exist gradients in the abundances with respect
   to the kinematics (i.e., actions) and those gradients are measurable at the
-  precision of the abundance measurements in our spectroscopic dataset.
+  precision of the individual stellar abundance measurements in our
+  spectroscopic dataset.
 \item[invariant abundances] Stellar surface element abundances are
   time-invariant. In detail, this assumption is violated by stellar and
-  planetary evolution, as surface abundances can change slightly over main
-  sequence lifetimes \citep{TODO} and during the red giant branch evolution
-  \citep{TODO}. However, we expect the magnitude of this to be unimportant and
-  should not dominate our systematics as long as the timescales over which the
+  planetary evolution, as surface abundances can change, for example, during red
+  giant branch evolution \citep[e.g.,][]{Iben:1965, Martig:2016} for solar-mass
+  stars. However, we expect the magnitude of this to be unimportant and should
+  not dominate our systematics as long as the timescales over which the
   abundances change are sufficiently different from the orbital timescales
   (hundreds of millions of years). Note that we have explicitly excluded carbon
   and nitrogen abundance ratios from our sample because they are known to change
@@ -884,8 +885,8 @@ method is \emph{conditionally} correct, conditioning on these core assumptions:
 \end{description}
 
 In this \documentname, we consider only classical-statistics approaches for
-illustrative purposes.\footnote{This may surprise some of our readers, but we
-are pragmatic as much as dogmatic about Bayes!}
+illustrative purposes.%\footnote{This may surprise some of our readers, but we
+% are pragmatic as much as dogmatic about Bayes!}
 % The classical approaches are simpler in implementation, make fewer assumptions,
 % and more explicitly embody the orbits-as-isopleths concept that underlies the
 % project descriptions we have given above.
@@ -907,18 +908,16 @@ al., in prep.) dependences on the \apogee\ abundance measurements, and stars
 with different temperatures or surface gravities or luminosities can be seen at
 different distances and $z$ heights.
 However, our parent sample is selected to contain a relatively small range of
-surface gravities along the red giant branch and is predominantly dominated by
+surface gravities along the red giant branch and predominantly consists of
 red clump stars, so we expect these issues to be negligible.\footnote{We tried
 repeating all subsequent analyses in this \documentname\ using a sample of
 high-confidence Red Clump stars \citep[using the selection defined
-in][]{Bovy:2014} and found no appreciable differences in our results.}
+in][]{Bovy:2014} and found no significant differences in our results.}
 
-For simplicity, we focus here on the vertical kinematics of stars and we ask
-whether there is a choice of mass model that leads to dynamical actions and
-conjugate angles such that the abundance ratio distributions do not depend on
-the conjugate angle $\theta_z$.
-We fix all aspects of our mass model except for the ratio of the disk mass to
-the halo mass at fixed circular velocity (see \sectionname~\ref{sec:mw-model}).
+As an initial demonstration, we focus here on the vertical kinematics of stars
+(but we do not assume separability) and we ask whether there is a choice of mass
+model that leads to dynamical actions and conjugate angles such that the
+abundance ratio distributions do not depend on the conjugate angle $\theta_z$.
 To assess the dependence of a particular element abundance ratio
 \abunratio{X}{Y} on the vertical angle, we define a ``mean abundance-ratio
 deviation,'' $\Delta^{\abunratio{X}{Y}}$, for each $n$ star, which is the
@@ -955,10 +954,7 @@ To quantify this dependence, we fit a smooth model of the form
 \end{equation}
 where the five parameters $(c_0, a_1, a_2, b_1, b_2)$ are the coefficients of a
 Fourier series expressed out to $m=2$.
-We fit this model to all of the $N=\nstars$ individual abundance-ratio
-deviations and their uncertainties $(\Delta_n, \sigma_{\Delta_n})_N$ (without
-binning) using least-squares fitting. % TODO: should we explicitly write the design matrix and shit?
-This functional form captures our expectations for how the mean abundance-ratio
+The functional form captures our expectations for how the mean abundance-ratio
 deviations will depend on vertical angle when our model is wrong:
 if the orbit contours at a given action have the wrong shape, we expect there to
 be an $m=2$ variation to the abundance-ratio deviations (e.g.,
@@ -980,6 +976,48 @@ non-phase-mixed structures.
 As we note later, the ``best'' setting of the mass model parameters should
 minimize a combination of these amplitudes.
 
+We fit this model (\equationname~\ref{eq:fouriermodel}) to all of the
+$N=\nstars$ individual abundance-ratio deviations and their uncertainties
+$(\Delta_n, \sigma_{\Delta_n})_N$ (without binning) using least-squares fitting.
+In detail, for a given mass model, we compute start by computing the actions and
+angles for all $N$ stars in our sample.
+We then use the three actions for each star to compute the mean abundance
+deviations $\Delta_n$ and the associated uncertainty $\sigma_{\Delta_n}$ for
+all stars (\equationname~\ref{eq:mean-abun-dev}).
+We construct the design matrix $\mat{M}$ using the vertical angle values
+$\theta_{z, n}$
+\begin{equation}
+  \mat{M} = \begin{pmatrix}
+      1 & \cos{\theta_{z, 1}} & \sin{\theta_{z, 1}}
+        & \cos{2\,\theta_{z, 1}} & \sin{2\,\theta_{z, 1}}\\
+      \vdots & \vdots & \vdots & \vdots & \vdots \\
+      1 & \cos{\theta_{z, N}} & \sin{\theta_{z, N}}
+        & \cos{2\,\theta_{z, N}} & \sin{2\,\theta_{z, N}}
+    \end{pmatrix}
+\end{equation}
+the ``data'' vector $\vec{y}$ using the mean abundance deviations
+\begin{equation}
+  \vec{y} = \begin{pmatrix} \Delta_1 & \cdots & \Delta_N \end{pmatrix}\transp
+\end{equation}
+and the covariance matrix $\mat{C}$ using the mean abundance deviation
+uncertainties
+\begin{equation}
+  \mat{C} = \begin{pmatrix}
+    \sigma_{\Delta_1}^2 & & \\
+    & \ddots & \\
+    & & \sigma_{\Delta_N}^2
+    \end{pmatrix} \quad .
+\end{equation}
+We compute the best-fitting parameter vector $\hat{\vec{g}} = (c_0, a_1, a_2,
+b_1, b_2)$ by solving the linear least-squares problem
+\begin{equation}
+  \hat{\vec{g}} = \left(\mat{M}\transp \, \mat{C}^{-1} \, \mat{M}\right)^{-1}
+    \, \mat{M}\transp \, \mat{C}^{-1} \, \vec{y}
+\end{equation}
+
+% For this initial exploration, we fix all aspects of our mass model except for
+% the ratio of the disk mass to the halo mass at fixed circular velocity (see
+% \sectionname~\ref{sec:mw-model}).
 
 % binning is sinning and all that
 \begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
