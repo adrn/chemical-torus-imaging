@@ -1,15 +1,8 @@
 % # To-dos
 % - See comments labeled "TODO" below
-% - Discussion about JEans needs to distinguish Jeans equations vs. typical
-%   Jeans analysis / models - the latter typically assume things about DF,
-%   equilibrium, separability
-% - We are similar to assumptions in Schwarzschild (agnostic to DF over
-%   kinematics), but proper Schwarz needs to know selection function
 % - Comment that here we throw all metallcities into a bag, but we could have
 %   functional forms for galactic parameters as functions of action to account
 %   for known variations with chemistry (MAPS work, e.g., Bovy & Rix 2016)
-% - We don't have to bake in a simple model of the DF - we're more like
-%   Scwarzschild in that sense!
 % - Point from Rix that statistically, 30 abundances is great. But reason to
 %   believe abundance space is lower-D, so this could end up being a way of
 %   assessing systematics!
@@ -46,6 +39,7 @@
   shadowsize=4pt
 }
 \usepackage{enumitem}
+\usepackage{booktabs}
 \input{preamble.tex}
 
 % text macros
@@ -299,7 +293,6 @@ distribution function, (coordinate) separability of the \acronym{DF},
 symmetries, simple parametrizations of the mass model (e.g., integrable models)
 and \acronym{DF}, among others.
 
-% TODO: audit this paragraph and the shiz we say
 % For simplicity and computational efficiency, one of the most common approaches
 % used for dynamical inferences is so-called ``Jeans modeling''
 % \citep{Binney:2008}, which use simplifications of the Jeans equations to relate
@@ -485,7 +478,6 @@ elements, but these have a variety of physical origins and a range of
 reliabilities and measurement precisions.
 For demonstrations below, we therefore focus on a subset of eight, well-measured
 (log) abundance ratios selected to have varied astrophysical origins:
-% TODO: audit that these are in fact the abundances we use below!
 \abunratio{Fe}{H}, \abunratio{C}{Fe}, \abunratio{N}{Fe}, \abunratio{O}{Fe},
 \abunratio{Mg}{Fe}, \abunratio{Si}{Fe}, \abunratio{Mn}{Fe}, \abunratio{Ni}{Fe}.
 In some cases, we focus on just a single element abundance, \abunratio{Mg}{Fe},
@@ -866,8 +858,6 @@ method is \emph{conditionally} correct, conditioning on these core assumptions:
   \logg) subset of red giant stars that are dominated by red clump stars (see
   \sectionname~\ref{sec:data}), and we discuss this further in
   \sectionname~\ref{sec:discussion}.
-  % TODO: Alternatively, we could use a strongly-constrained model for the
-  % dependence of the selection function on element abundances.
 \item[measurable gradients] There exist gradients in the abundances with respect
   to the kinematics (i.e., actions) and those gradients are measurable at the
   precision of the individual stellar abundance measurements in our
@@ -879,9 +869,8 @@ method is \emph{conditionally} correct, conditioning on these core assumptions:
   stars. However, we expect the magnitude of this to be unimportant and should
   not dominate our systematics as long as the timescales over which the
   abundances change are sufficiently different from the orbital timescales
-  (hundreds of millions of years). Note that we have explicitly excluded carbon
-  and nitrogen abundance ratios from our sample because they are known to change
-  as a star ascends the giant branch.
+  (hundreds of millions of years).
+  % Note that we have explicitly excluded carbon and nitrogen abundance ratios from our sample because they are known to change as a star ascends the giant branch.
 \end{description}
 
 In this \documentname, we consider only classical-statistics approaches for
@@ -1236,20 +1225,28 @@ a different phase and amplitude.
 If the abundance ratio gradients (with respect to vertical action) emphasize
 stars with different vertical actions, we will in general find disagreements
 between the results for different abundance ratios.
-
-Combining all eight abundance ratios, we find $\mratio = 1.21 \pm 0.04$, $\hz =
-0.27 \pm 0.01~\kpc$, $\zsun = 16.9 \pm 0.8~\pc$, and $\vzsun = 8.8 \pm
-0.2~\kms$.
-% TODO: how do these compare in precision to other studies?
-Excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}, which are clear outliers in
-their preferred solar position values, we find $\mratio = 1.07\pm 0.05$, $\hz =
-0.28 \pm 0.01~\kpc$, $\zsun = 20.6 \pm 0.9~\pc$, and $\vzsun = 8.4 \pm 0.3~\kms$
-Our results here imply a disk-to-halo mass ratio within the solar circle ${\rm
-M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc) = 2.3 \pm 0.1$ (all eight
-elements) or $1.6\pm0.1$ (excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}),
-which is slightly larger than our fiducial model where this mass ratio is
-$\approx 1.3$ \citep{gala} and the implied value for the
+Our results are summarized in \tablename~\ref{tbl:results}, where we list the
+joint constraints on our four parameters utilizing all eight abundance ratios
+(center column), or excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe} (right
+column), which are clear outliers in their preferred solar position values.
+We also include two derived quantities: the total disk mass $\mdisk$, and the
+disk to halo mass ratio within the solar circle ${\rm M}_{\rm disk} / {\rm
+M}_{\rm halo} (<8.1~\kpc)$, which we find is slightly larger than both  our
+fiducial model $\approx 1.3$ \citep{gala} and the implied value for the
 \texttt{MWPotential2014} \citep{Bovy:2015} of $\approx 1.7$.
+
+% Combining all eight abundance ratios, we find $\mratio = 1.21 \pm 0.04$, $\hz =
+% 0.27 \pm 0.01~\kpc$, $\zsun = 16.9 \pm 0.8~\pc$, and $\vzsun = 8.8 \pm
+% 0.2~\kms$.
+% Excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}, which are clear outliers in
+% their preferred solar position values, we find $\mratio = 1.07\pm 0.05$, $\hz =
+% 0.28 \pm 0.01~\kpc$, $\zsun = 20.6 \pm 0.9~\pc$, and $\vzsun = 8.4 \pm 0.3~\kms$
+% Our results here imply a disk-to-halo mass ratio within the solar circle ${\rm
+% M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc) = 2.3 \pm 0.1$ (all eight
+% elements) or $1.6\pm0.1$ (excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}),
+% which is slightly larger than our fiducial model where this mass ratio is
+% $\approx 1.3$ \citep{gala} and the implied value for the
+% \texttt{MWPotential2014} \citep{Bovy:2015} of $\approx 1.7$.
 
 
 % Notebook: figures/5-Optimize-results.ipynb
@@ -1270,6 +1267,35 @@ $\approx 1.3$ \citep{gala} and the implied value for the
   \end{mdframed}
 \end{figure}
 
+\begin{table}[ht]
+  \footnotesize
+  \centering
+  \begin{tabular}{c | c | c}
+      % \multicolumn{3}{c}{\textbf{Summary of Results}} \\
+      \toprule
+      Parameter & All eight abundance ratios & Excluding \abunratio{Mg}{Fe}, \abunratio{Si}{Fe}\\
+      \midrule
+      $\mratio$ & $1.21 \pm 0.04$ & $1.07\pm 0.05$\\
+      $\hz$ & $0.27 \pm 0.01~\kpc$ & $0.28 \pm 0.01~\kpc$\\
+      $\zsun$ & $16.9 \pm 0.8~\pc$ & $20.6 \pm 0.9~\pc$\\
+      $\vzsun$ & $8.8 \pm 0.2~\kms$ & $8.4 \pm 0.3~\kms$\\
+      \midrule
+      $\mdisk$ &
+        $7.89 \pm 0.26 \times 10^{10}~\Msun$ &
+        $6.98 \pm 0.32 \times 10^{10}~\Msun$\\
+      ${\rm M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc)$ &
+        $2.11 \pm 0.21$ & $1.51 \pm 0.16$\\
+      \bottomrule
+  \end{tabular}
+  \caption{A summary of our results from combining the constraints on the disk
+  mass, scale height, solar position, and solar motion from eight independent
+  element abundance ratios (center column). We also show joint results for all
+  abundance ratios excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}, which
+  are clear outliers in their preferred solar position parameter values.
+  }
+  \label{tbl:results}
+\end{table}
+
 % Notebook: figures/6-APOGEE-elem-Jz-gradients.ipynb
 % \begin{figure}[!tp]
 %   \begin{mdframed}
@@ -1283,25 +1309,6 @@ $\approx 1.3$ \citep{gala} and the implied value for the
 %   }
 %   \end{mdframed}
 % \end{figure}
-
-% \begin{table}[ht]
-%   \footnotesize
-%   \centering
-%   \begin{tabular}{c | c}
-%       % \multicolumn{3}{c}{\textbf{Summary of Results}} \\
-%       \hline
-%       Parameter & Inferred Value\\
-%       \hline
-%       ${\rm M}_{\rm disk}$ (total) & $7.88 \pm 0.19 \times 10^{10}~\Msun$ \\
-%       ${\rm M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc)$  & $2.06 \pm 0.05$\\
-%       $z_{\odot}$ & $15.5 \pm 1.0~\pc$\\
-%       $v_{z, \odot}$ & $8.6 \pm 0.2~\kms$\\
-%       \hline
-%   \end{tabular}
-%   \caption{For your consideration: Some numbers that have no relevance.
-%   }
-%   \label{tbl:results}
-% \end{table}
 
 % We have shown results for the $\mgfe$ abundance deviation, but we repeat this
 % analysis for several different abundances (the same abundances as shown in
