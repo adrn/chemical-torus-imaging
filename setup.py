@@ -7,7 +7,7 @@ setup(
         "write_to": os.path.join("totoro", "version.py"),
         "write_to_template": '__version__ = "{version}"\n',
     },
-    description="Chemical Torus Imaging",
+    description="Orbital Torus Imaging",
     author="adrn",
     author_email="adrianmpw@gmail.com",
     url="https://github.com/adrn/chemical-torus-imaging",

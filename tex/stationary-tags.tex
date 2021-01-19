@@ -1,43 +1,15 @@
 % # To-dos
 % - See comments labeled "TODO" below
-% - Discussion about JEans needs to distinguish Jeans equations vs. typical
-%   Jeans analysis / models - the latter typically assume things about DF,
-%   equilibrium, separability
-% - We are similar to assumptions in Schwarzschild (agnostic to DF over
-%   kinematics), but proper Schwarz needs to know selection function
 % - Comment that here we throw all metallcities into a bag, but we could have
 %   functional forms for galactic parameters as functions of action to account
 %   for known variations with chemistry (MAPS work, e.g., Bovy & Rix 2016)
-% - KVJ: still unsure why you don't emphasize not needing 'dynamical
-%   equilibrium' as a key assumption you can drop (in abstract and end) .... the
-%   requirement that in Jeans the density distribution of your tracer population
-%   sits in the mass distribution and you're not just tracing orbits. --- She’s
-%   saying that we don’t require *equilibrium* just mixing. I don’t think Jeans
-%   requires equilibrium either, but some models/methods do?? It was a statement
-%   about global equilibrium vs. locally (in an action sense?) mixed. Jeans
-%   equations don't require equlibrium, Jeans models do?
-% - We don't have to bake in a simple model of the DF - we're more like
-%   Scwarzschild in that sense!
-% - Add an algorithm figure or box or table or etc. that gives the
-%   stages of calculation from mass-model parameters to angles to objective.
 % - Point from Rix that statistically, 30 abundances is great. But reason to
 %   believe abundance space is lower-D, so this could end up being a way of
 %   assessing systematics!
 
-% send it to
-% ----------
-% - Glenn Van de Ven -- Schwarzschild models of external galaxies
-% - Loebman -- we discussed in Aspen
-% - Bovy, Sanders, Das, Binney, McMillan, Tremaine -- extended DF torus types
-% - Sigh: Bland-Hawthorn
-% - Martin Weinberg
-
 % style guide
 % -----------
 % - They are abundance RATIOs not abundances.
-% - Is it our sample or our stars or what? "the parent sample"
-% - We need a "name" for our smooth sine-and-cosine fits (blue curves).
-%   "Fourier expansion model"?
 
 \documentclass[modern]{aastex63}
 \usepackage[ruled,vlined,norelsize]{algorithm2e}
@@ -55,10 +27,11 @@
   shadowsize=4pt
 }
 \usepackage{enumitem}
+\usepackage{booktabs}
 \input{preamble.tex}
 
 % text macros
-\newcommand{\methodname}{\textsl{Chemical Torus Imaging}}
+\newcommand{\methodname}{\textsl{Orbital Torus Imaging}}
 % Hogg doesn't like these names because they don't refer to the abundance tags
 % Torus Tomography
 %   Torus Topography (see what I did there?)
@@ -89,9 +62,12 @@
 % The Magical 3-torus of Invariance (MTI)
 % Totoro
 % Torus Imaging
-%   Chemical Torus Imaging
-%   Elemental Torus Imaging
+%   Chemical Torus Imaging -- it isn't chemistry!
+%   Elemental Torus Imaging -- "elemental" has multiple meanings
+%   Magnesium Torus Imaging -- no way
+%   Orbital Torus Imaging -- doesn't refer to tags
 % Chemical Torus Tracing
+% Orbital Torus Imaging
 
 % Project-specific macros - all others go in preamble.tex
 \newcommand{\gaia}{\textsl{Gaia}}
@@ -116,7 +92,7 @@
 \sloppy\sloppypar\raggedbottom\frenchspacing
 \renewcommand{\doi}[1]{{\footnotesize\href{https://doi.org/#1}{#1}}}
 
-\shorttitle{mapping orbits with chemical torus imaging}
+\shorttitle{Mapping Orbits with \methodname}
 \shortauthors{price-whelan, hogg, johnston, ness, rix}
 
 \begin{document}
@@ -125,8 +101,7 @@
 
 \title{\textbf{%
     \methodname: \\
-    Using element abundances to map orbits and mass in the Milky Way
-    }}
+    Using Element Abundances to Map Orbits and Mass in the Milky Way}}
     % Revealing the orbital foliation of phase space\\
     % through invariances of element-abundance distributions
 
@@ -134,6 +109,10 @@
 \newcommand{\affccpp}{Center for Cosmology and Particle Physics, Department of Physics, New York University, 726 Broadway, New York, NY 10003, USA}
 \newcommand{\affmpia}{Max-Planck-Institut f\"ur Astronomie, K\"onigstuhl 17, D-69117 Heidelberg, Germany}
 \newcommand{\affcolumbia}{Department of Astronomy, Columbia University, New York, NY 10027, USA}
+\newcommand{\affutah}{Department of Physics and Astronomy, University of Utah, 115 S. 1400 E., Salt Lake City, UT 84112, USA}
+\newcommand{\affuw}{Department of Astronomy, University of Washington, Box 351580, Seattle, WA 98195, USA}
+\newcommand{\affprinceton}{Department of Astrophysical Sciences, Princeton University, 4 Ivy Lane, Princeton, NJ~08544}
+\newcommand{\affcarnegie}{The Observatories of the Carnegie Institution for Science, 813 Santa Barbara St., Pasadena, CA~91101}
 
 \author[0000-0003-0872-7098]{Adrian~M.~Price-Whelan}
 \affiliation{\affcca}
@@ -147,45 +126,67 @@
 \affiliation{\affcca}
 \affiliation{\affcolumbia}
 
-\author{Melissa~K.~Ness}
+\author[0000-0001-5082-6693]{Melissa~K.~Ness}
 \affiliation{\affcolumbia}
 % \affiliation{\affcca}
 
 \author[0000-0003-4996-9069]{Hans-Walter~Rix}
 \affiliation{\affmpia}
 
-\author{APOGEE authors}
+% APOGEE authors:
+
+\author[0000-0002-1691-8217]{Rachael L. Beaton}
+\altaffiliation{Carnegie-Princeton Fellow}
+\affiliation{\affprinceton}
+\affiliation{\affcarnegie}
+
+\author[0000-0002-8725-1069]{Joel~R.~Brownstein}
+\affiliation{\affutah}
+
+\author[0000-0002-1693-2721]{Domingo~An\'ibal~Garc\'ia-Hern\'andez}
+\affiliation{Instituto de Astrof\'isica de Canarias, 38205 La Laguna, Tenerife, Spain}
+
+\author[0000-0001-5388-0994]{Sten Hasselquist}
+\altaffiliation{NSF Astronomy and Astrophysics Postdoctoral Fellow}
+\affiliation{\affutah}
+
+\author[0000-0003-2969-2445]{Christian~R.~Hayes}
+\affiliation{\affuw}
+
+\author{Richard~R.~Lane}
+\affiliation{Instituto de Astronom\'ia y Ciencias Planetarias de Atacama, Universidad de Atacama, Copayapu 485, Copiap\'o, Chile}
+
+\author[0000-0001-6761-9359]{Gail~Zasowski}
+\affiliation{\affutah}
 
 
 \begin{abstract}\noindent
-  The dynamics of stars in galaxies are often modeled in an approximation where
-  the gravitational potential is treated as simple and integrable and the
-  distribution function as time-invariant.
-  Under these conditions, ``Jeans models'' and ``Schwarzschild models'' are
-  standard tools for measuring properties of the underlying mass distribution
-  from observations of stellar kinematics.
-  However, contemporary and near-future spectroscopic surveys measure more than
-  just kinematics for huge samples of individual stars within the Milky Way and
-  Local Group.
+  Many approaches to galaxy dynamics assume that the gravitational potential is
+  simple and the distribution function is time-invariant.
+  Under these assumptions there are traditional tools for inferring potential
+  parameters given observations of stellar kinematics (e.g., Jeans models).
+  However, spectroscopic surveys measure many stellar properties beyond
+  kinematics.
   Here we present a new approach for dynamical inference, \methodname, which
-  makes use of kinematic measurements and also element abundances (or other
-  stellar labels, e.g., stellar ages).
-  The method exploits the fact that stellar labels vary systematically with
-  orbit characteristics (such as actions) in the Galaxy, yet must be invariant
-  with respect to the (time-variable) conjugate angles.
-  Thus, the orbital foliation of phase space must coincide with isoclinics of
-  all (mean) stellar labels!
-  Both classical-statistics and Bayesian methods can be built on this idea;
-  these methods will be both more robust and require fewer assumptions than
-  standard tools because they neither require knowledge of the (spatial) survey
-  selection function nor depend on velocity dispersion measurements.
+  makes use of kinematic measurements and element abundances (or other invariant
+  labels).
+  We exploit the fact that, in steady state, stellar labels vary systematically
+  with orbit characteristics (actions), yet must be invariant with respect to
+  orbital phases (conjugate angles).
+  The orbital foliation of phase space must therefore coincide with surfaces
+  along which all moments of all stellar label distributions are constant.
+  Both classical-statistics and Bayesian methods can be built on this;
+  these methods will be more robust and require fewer assumptions than
+  traditional tools because they require no knowledge of the (spatial) survey
+  selection function and they do not involve second moments of velocity
+  distributions.
   We perform a classical-statistics demonstration with red giant branch stars
   from the \apogee\ surveys:
-  we model the vertical orbit structure in the Milky Way disk and use mean
-  abundances to constrain the local disk mass, scale height, and the disk--halo
-  mass ratio (at fixed local circular velocity).
+  We model the vertical orbit structure in the Milky Way disk to constrain the
+  local disk mass, scale height, and the disk--halo mass ratio (at fixed local
+  circular velocity).
   We find that the disk mass can be constrained (na\"ively) at the few-percent
-  level with this new method using only eight element abundance ratios,
+  level with \methodname\ using only eight element-abundance ratios,
   demonstrating the promise of combining stellar labels with dynamical
   invariants.
 \end{abstract}
@@ -235,16 +236,16 @@ phases.
 In our current efforts to map dark matter, we are instead in a regime where we
 observe \emph{many} tracers (stars) but have little or no information about
 orbital phase: We observe only a single snapshot (in time) of the stellar
-orbits!
+orbits.
 The closest we come to seeing orbits directly in the Milky Way is in the study
 of stellar streams \citep[e.g.,][]{Johnston:1999, Helmi:1999, Eyre:2011,
-Sanders:2013, Price-Whelan:2014}, where ensembles of stars almost directly
-encode (differential) phase information about the orbit of their progenitor
-systems.
-But stellar streams are relatively sparse, and orbits in the Galaxy have more
-degrees of freedom than orbits in the Solar System, meaning that we need many
-more orbits to span the phase-space and obtain precise constraints on the mass
-distribution.
+Sanders:2013, Price-Whelan:2014, Bonaca:2018}, where ensembles of stars almost
+directly encode (differential) phase information about the orbit of their
+progenitor systems.
+But stellar streams are relatively sparse in the Milky Way, and orbits in the
+Galaxy have more degrees of freedom than orbits in the Solar System, meaning
+that we need many more orbits to span the phase-space and obtain precise
+constraints on the mass distribution.
 One could argue then that our current task is much harder than Newton and Kepler
 had it:
 we seek to constrain the global, spatially-extended distribution of dark matter
@@ -252,43 +253,50 @@ around a galaxy---a time-evolving mass distribution with nontrivial shape and
 radial distribution---with only a snapshot of the tracer kinematics (and often
 only a subset of phase-space dimensions).
 
-The tools we use to constrain the Galactic force field (i.e., the dark matter
-distribution) given only a snapshot of the dynamics are therefore (necessarily)
-statistical in nature and do not depend on knowing the orbits of individual
-stars. % TODO: here
-Instead, these methods critically rely on strong assumptions about the
-stationarity of the distribution of tracer orbital properties (i.e., a
-``steady-state'' or ``equilibrium'' assumption) and the integrability of the
-underlying gravitational potential \citep[see, e.g.,][for a review of such
-methods as applied to the problem of determining the local dark matter
+Given only a snapshot of the dynamics, the tools we use to constrain the
+Galactic force field (i.e., the dark matter distribution) are therefore
+typically statistical in nature and do not depend on knowing the orbits of
+individual stars.
+These methods generally rely on making strong assumptions about the distribution
+function (\acronym{DF}) or mass model.
+For example, in the case of Jeans modeling \citep[e.g.,][]{Jeans:1922,
+Oort:1932, Bahcall:1984, Romanowsky:2003, Evans:2009, Watkins:2010, Walker:2011,
+Zhai:2018, Buch:2019}, investigators make use of the Jeans equations, which
+relate spatial derivatives of velocity second moments to derivatives of the
+gravitational potential.
+The equations are correct for any collisionless tracer population of stars, but
+implementing Jeans models in practice requires assuming that the system is in
+steady-state or equilibrium and requires specifying an explicit, parametrized
+model for the underlying gravitational potential \citep[see, e.g.,][for a review
+of such methods as applied to the problem of determining the local dark matter
 density]{Read:2014}.
+More general approaches here instead attempt to model the \acronym{DF}
+explicitly \citep[e.g.,][]{BoHogg, McMillan:2013, Magorrian:2014, Binney:2014,
+Bovy:2016, Magorrian:2019}, but these methods become computationally prohibitive
+for large data sets or flexible model forms.
 When applied in real-world contexts on stars in the Milky Way or dwarf
-spheroidal galaxies, these methods often also require further assumptions, such
-as separability of the distribution function (\acronym{DF}), or the velocity
-anisotropy profile, or require simple parametrizations of the \acronym{DF} in
-order to execute these analyses.
-Generic approaches here typically require parametrized models for the
-\acronym{DF} and for the gravitational force field or mass distribution
-\citep[e.g.,][]{McMillan:2013, Magorrian:2014, Binney:2014, Bovy:2016,
-Magorrian:2019}, but become computationally prohibitive for large data sets or
-flexible model forms.
+spheroidal galaxies, standard methods for inferring a mass distribution from
+tracer kinematics therefore typically assume an equilibrium (or steady-state)
+distribution function, (coordinate) separability of the \acronym{DF},
+symmetries, simple parametrizations of the mass model (e.g., integrable models)
+and \acronym{DF}, among others.
 
-For simplicity and computational efficiency, one of the most common approaches
-used for dynamical inferences is so-called ``Jeans modeling''
-\citep{Binney:2008}, which use simplifications of the Jeans equations to relate
-statistical moments of the tracer \acronym{DF} to properties of the force field.
-While these methods still depend on many of the assumptions laid out above, they
-have the great (computational) advantage of not having to deal with modeling the
-\acronym{DF} directly.
-Jeans modeling (or related analyses) have therefore been used in many
-applications:
-For example, to derive constraints on the local dark matter density using the
-vertical ($z$--$v_z$) kinematics of stars in the solar neighborhood
-\citep[e.g.,][]{Jeans:1922, Oort:1932, Bahcall:1984, Buch:2019}, the radial
-profile of the Milky Way halo \citep[e.g.,][]{Watkins:2010, Zhai:2018}, the mass
-profiles of Local Group satellites \citep[e.g.,][]{Evans:2009, Walker:2011}, and
-the mass distributions in elliptical galaxies \citep[e.g.,][]{Romanowsky:2003,
-Mamon:2005, Sonnenfeld:2012}, amongst other applications.
+% For simplicity and computational efficiency, one of the most common approaches
+% used for dynamical inferences is so-called ``Jeans modeling''
+% \citep{Binney:2008}, which use simplifications of the Jeans equations to relate
+% statistical moments of the tracer \acronym{DF} to properties of the force field.
+% While these methods still depend on many of the assumptions laid out above, they
+% have the great (computational) advantage of not having to deal with modeling the
+% \acronym{DF} directly.
+% Jeans modeling (or related analyses) have therefore been used in many
+% applications:
+% For example, to derive constraints on the local dark matter density using the
+% vertical ($z$--$v_z$) kinematics of stars in the solar neighborhood
+% \citep[e.g.,][]{Jeans:1922, Oort:1932, Bahcall:1984, Buch:2019}, the radial
+% profile of the Milky Way halo \citep[e.g.,][]{Watkins:2010, Zhai:2018}, the mass
+% profiles of Local Group satellites \citep[e.g.,][]{Evans:2009, Walker:2011}, and
+% the mass distributions in elliptical galaxies \citep[e.g.,][]{Romanowsky:2003,
+% Mamon:2005, Sonnenfeld:2012}, amongst other applications.
 
 A contemporary ``challenge'' to applying these methods on modern data
 (especially within the Milky Way) is that stellar kinematic data is now very
@@ -301,14 +309,16 @@ These data have revealed evidence of dynamical disequilibrium throughout the
 Galactic disk and halo \citep{Antoja:2018, Gaia-Collaboration:2018b,
 Myeong:2018, Koppelman:2018, Eilers:2020}.
 Standard methods for estimating dark matter properties using stellar kinematics
-therefore rely on a list of assumptions about dynamical equilibrium, symmetries,
-or separability that we now know are strongly violated in the real universe and
-Galaxy!
+therefore rely on a list of assumptions that we now \emph{know} are strongly
+violated in the real universe and Galaxy!
 The fact that we still use and apply these methods is a reflection of the fact
-that relaxing these assumptions make dynamical inferences \emph{far} more
-challenging and computationally expensive.
-For example, there are therefore no standard methods (e.g., analogies to Jeans
-modeling) when the assumption of dynamical equilibrium is relaxed.
+that relaxing these assumptions make dynamical inferences\footnote{By
+``dynamical inferences,'' we really mean statistical inferences of a mass model
+(or parameters of a mass model) given noisy observations of stellar kinematics
+(and other stellar labels).}
+\emph{far} more challenging and computationally expensive.
+For example, there are no straightforward methods for measuring the mass
+distribution when the assumption of dynamical equilibrium is relaxed.
 
 One reason to remain hopeful in our goal of precisely constraining the dark
 matter is that, unlike Kepler and Newton, we have excellent working models of
@@ -318,18 +328,18 @@ element abundances of hundreds of thousands, and soon to be millions, of stars
 \citep[e.g.,][]{DR16, Martell:2017, Deng:2012} over large regions of the
 Galactic disk and halo.
 It is therefore promising to think that utilizing stellar ``labels'' (element
-abundances, stellar ages, or other invariant stellar properties) within
-dynamical inferences will provide additional information that may help interpret
-or model the Galaxy \citep[see, e.g.,][for recent methods that begin to move in
-this direction, within the context of equilibrium models]{Sanders:2015,
-Das:2016, Binney:2016, Iorio:2020}.
+abundances, stellar ages, or other effectively-invariant stellar properties)
+within dynamical inferences will provide additional information that may help
+interpret or model the Galaxy \citep[see, e.g.,][for recent methods that begin
+to move in this direction, within the context of equilibrium
+models]{Sanders:2015, Das:2016, Binney:2016, Iorio:2020}.
 
 In this \documentname, we are going to demonstrate that stellar surface
 abundances can be used to illuminate the orbit structure in the Milky Way, and
 are therefore extremely valuable for galaxy dynamics.
 In our current methodology, like all other dynamical inferences, we will work
-only under strong assumptions and are still in the business of revealing the
-orbits indirectly.
+only under strong assumptions and we are therefore still in the business of
+revealing the orbits indirectly.
 However, this class of approaches, here referred to as \methodname\, is
 qualitatively distinct from all previous methods for measuring the mass model.
 There are reasonable regimes in which it will be more precise than any other
@@ -339,18 +349,48 @@ method, conditioned on the assumptions.
 \section{Methodological Generalities}
 \label{sec:generalities}
 
-In a well-mixed, equilibrium population, stars are in a kinematic steady state:
-As time goes on, stars move along their orbits, but they do not change their
-dynamical invariants (e.g., actions).
-In such situations, every location in angle (the coordinates conjugate to
-actions) is equally likely, or equally probably populated in any snapshot.
-The ``chemical tagging'' insight \citep{Freeman:2002} is that most stars also
-preserve their surface element abundances (and other stellar labels) as they
-orbit, over many Galactic orbital timescales.
+In a well-mixed, equilibrium population, stars are in a kinematic steady state.
+As time goes on, stars move along their orbits: these orbits can be represented
+by a set of dynamical invariants --- actions --- and a location along an orbit
+can be represented by a set of phase --- conjugate angle --- variables.
+These action--angle coordinates, ($\boldsymbol{J}, \boldsymbol{\theta}$), are
+canonical coordinates (i.e., a transformation from, say, Cartesian position and
+velocity) in which many dynamical computations are simpler or more efficient
+\citep[see, e.g.,][]{Binney:2008}.
+The actions $\boldsymbol{J}$ are integrals of motion like any other (for
+example, energy or angular momentum), but are special in that they form a set of
+momentum coordinates whose conjugate position coordinates are angle variables.
+Action variables are defined as integrals of other canonical momentum
+coordinates $\boldsymbol{p}$ over a closed loop in the conjugate position
+coordinates $\boldsymbol{q}$,
+\begin{equation}
+  J_i = \oint p_i~\dd q_i \quad .
+\end{equation}
+As we will see later, if the motion in a given coordinate pair (e.g., $q_i,
+p_i$) is separable from the other coordinates, the action integral simply
+computes the area enclosed by the orbit in the two-dimensional phase-space
+$(q_i, p_i)$.
+
+For gravitational potentials with more than one degree of freedom, it is not
+guaranteed that actions exist at all locations in phase space: generically,
+regions of phase space can contain chaotic orbits and resonances.
+However, when the resonant structure is weak (as is the case for many simple
+models of Galactic potentials), most of phase-space is typically stable and
+therefore admits transformation to action-space.
+In action--angle coordinates, a steady state distribution function
+(\acronym{DF}) $f$ is simply a function of the actions, $f(\boldsymbol{J})$.
+In such situations, every location in angle-space is equally likely, or equally
+probably populated in any snapshot of the kinematics of a tracers orbiting in
+some mass distribution.
+
+How, then, do stellar abundances relate to dynamics?
+The ``chemical tagging'' insight \citep{Freeman:2002} notes that most stars also
+effectively preserve their surface element abundances (and other stellar labels)
+as they orbit, over many Galactic orbital timescales.
 That is, in an integrable galaxy---a galaxy whose stellar orbits are associated
 with three invariant actions---the element abundances and the dynamical actions
 have something in common: They are invariant with time.
-Only the conjugate angle coordinates are time-dependent.
+In these models, only the conjugate angle coordinates are time-dependent.
 This means that, for a well-mixed population, the detailed element abundances
 can only be a function of actions, and never a function of conjugate angles.
 That is a remarkably informative constraint on the configuration of the Milky
@@ -358,17 +398,17 @@ Way in the space of positions (dimensionality 3), velocities (3), and
 detailed abundances (10--30, depending on the spectroscopic survey).
 
 Consider a collection of stars (localized, say, in phase space) for which we
-have measured $D$ element abundances.
+have measured abundances for $D$ elements.
 This collection of stars will in general have a diversity of element abundances:
 Their abundances are drawn from some distribution in $D$-dimensional
 element-abundance space.
 In general, the abundance distribution will depend on position in phase-space:
-For example, there are observed radial and vertical abundance gradients in the
-Galactic disk \citep{people}.
+In the Milky Way, there are observed radial and vertical abundance gradients in
+the Galactic disk \citep[e.g.,][]{Hayden:2015, Queiroz:2020}.
 However, any changes we observe in these element-abundance distributions with
-respect to phase-space coordinates (i.e., the six-gradient) must not project
-onto the directions of increasing (or decreasing) conjugate angles in phase
-space.
+respect to phase-space coordinates (i.e., the six-gradient with respect to the
+three position and velocity components) must not project onto the directions of
+increasing (or decreasing) conjugate angles in phase space.
 All gradients with respect to phase-space coordinates of the element-abundance
 distribution must be orthogonal to the directions of increase (or decrease) of
 the conjugate angles, and lie in the subspace of the directions of increase (or
@@ -391,6 +431,97 @@ measured.
 
 \section{Data}
 \label{sec:data}
+
+In our toy demonstrations below, our main data source is a cross-match between
+spectroscopic data from the \apogee\ surveys \citep{Majewski:2017} and
+astrometric data from the \gaia\ mission \citep{Gaia-Collaboration:2016,
+Gaia-Collaboration:2018}.
+
+\apogee\ is a spectroscopic sub-survey and component of the Sloan Digital Sky
+Survey IV (\sdssiv; \citealt{Eisenstein:2011, Blanton:2017}) whose main goal is
+to map the chemical and dynamical properties of stars across the Milky Way disk.
+The survey uses two nearly identical, high-resolution ($R \sim 22,500$;
+\citealt{Wilson:2019}), infrared ($H$-band) spectrographs---one in the Northern
+hemisphere at Apache Point Observatory (APO) using the SDSS 2.5m telescope
+\citep{Gunn:2006}, and one in the Southern hemisphere at Las Campanas
+Observatory (LCO) using the 2.5m du Pont telescope \citep{Bowen:1973}.
+The primary survey targets are selected with simple color and magnitude cuts
+(\citealt{Zasowski:2013, Zasowski:2017}, Santana et al. in prep., Beaton et al.
+in prep.), but the sparse angular sky coverage and limited number of fibers per
+field lead to a ``pencil-beam''-like sampling of the Milky Way stellar density.
+\apogee\ spectra are reduced \citep{Nidever:2015} and then analyzed (i.e., to
+measure stellar parameters and abundances) using the \apogee\ Stellar Parameters
+and Chemical Abundance Pipeline (\acronym{ASPCAP}; \citealt{ASPCAP,
+Holtzman:2018, Jonsson:2020}); here we use abundance measurements from the
+standard \apogee\ pipeline.
+
+Here we use a recent internal data product (which includes all data taken
+through March 2020) from the \apogee\ surveys (post-\dr{16}) that includes
+$\approx60\%$ more stars than the publicly-available \dr{16} catalogs
+\citep{DR16, Jonsson:2020}, but was reduced and processed using the same
+pipeline used to produce the \dr{16} release \citep[i.e., the pipeline described
+in][]{Jonsson:2020}.
+This \apogee\ catalog contains calibrated element abundance measurements for 18
+elements, but these have a variety of physical origins and a range of
+reliabilities and measurement precisions.
+For demonstrations below, we therefore focus on a subset of eight, well-measured
+(log) abundance ratios selected to have varied astrophysical origins:
+\abunratio{Fe}{H}, \abunratio{C}{Fe}, \abunratio{N}{Fe}, \abunratio{O}{Fe},
+\abunratio{Mg}{Fe}, \abunratio{Si}{Fe}, \abunratio{Mn}{Fe}, \abunratio{Ni}{Fe}.
+In some cases, we focus on just a single element abundance, \abunratio{Mg}{Fe},
+which is one of the most precisely and accurately determined element abundance
+measured with the \dr{16} pipeline \citep{Jonsson:2020}.
+
+\gaia\ is primarily an astrometric mission and survey
+\citep{Gaia-Collaboration:2016} that obtains sky position, proper motion, and
+parallax measurements for $>1$ billion stars, limited only by their apparent
+magnitudes (\gaia\ $G \lesssim 20.7$).
+Here we use parallax and proper motion measurements released in \gaia\ \dr{2}
+\citep{Gaia-Collaboration:2018, Gaia-astrometric:2018}.
+
+We cross-match the \apogee\ sample to \gaia\ \dr{2} using the \apogee-provided
+\acronym{2MASS} \citep{Skrutskie:2006} identifiers, and the \gaia-provided
+cross-match between \gaia\ \dr{2} and the final \acronym{2MASS} point source
+catalog \citep{Gaia-crossmatch:2019}.
+We then apply a number of quality cuts and other selections to limit the catalog
+to chemically thin-disk, red giant branch (RGB) stars with well-measured stellar
+parameters (\logg, \Teff) and abundances (the abundance ratios listed above),
+high signal-to-noise parallax measurements, but excluding stars targeted in
+stellar clusters and dwarf galaxies, as enumerated below.
+In detail, our selections include:
+\begin{itemize}
+  \item \acronym{ASPCAP} quality flag (\texttt{ASPCAPFLAG}) must not contain
+    \texttt{STAR\_BAD} or \texttt{STAR\_WARN},
+  \item $3500~\Kel < \Teff < 6500~\Kel$,
+  \item $1.5 < \logg < 3.4$,
+  \item combined spectroscopic signal-to-noise ${\rm SNR} > 20$,
+  \item \apogee\ targeting bit flags must not indicate that the source was part
+    of a special program to observe stellar clusters, dwarf galaxies, M31 stars,
+    stellar streams, or moving groups; this \emph{excludes} stars with the
+    following bits enabled:
+    \begin{itemize}
+      \item \texttt{APOGEE\_TARGET1}: (9, 18, 24, 26)
+      \item \texttt{APOGEE\_TARGET2}: (10, 18)
+      \item \texttt{APOGEE2\_TARGET1}: (9, 18, 20, 21, 22, 23, 24, 26)
+      \item \texttt{APOGEE2\_TARGET2}: (10)
+      \item \texttt{APOGEE2\_TARGET3}: (5, 14, 15)
+    \end{itemize}
+  \item stars are part of the ``low-$\alpha$'' (or ``chemical thin disk'')
+    population (see polygonal selection in the top panel of
+    \figurename~\ref{fig:mh-am-xy}),
+  \item \gaia\ parallax $\varpi > 0.5~\mas$,
+  \item \gaia\ parallax signal-to-noise $\varpi / \sigma_\varpi > 8$.
+\end{itemize}
+The \apogee\ catalog contains a small number of duplicates (duplicated source
+identifier \texttt{APOGEE\_ID}); to avoid duplication in our sample in these
+cases, we keep only the entry with highest signal-to-noise.
+We select the low-$\alpha$ sequence primarily because the high- and low-$\alpha$
+sequences have different scale heights \citep[e.g.,][]{Bovy:2016}, and our toy
+model is not currently flexible enough to account for this (however, it is
+possible to include this complexity in our framework, as will be explored in
+future extensions of this model).
+The final parent sample contains \nstars\ RGB stars with high-quality \apogee\
+and \gaia\ data.
 
 % Notebook: figures/APOGEE-sample.ipynb
 \begin{figure}[!tp]
@@ -424,93 +555,6 @@ measured.
   \end{mdframed}
 \end{figure}
 
-In our toy demonstrations below, our main data source is a cross-match between
-spectroscopic data from the \apogee\ surveys \citep{Majewski:2017} and
-astrometric data from the \gaia\ mission \citep{Gaia-Collaboration:2016,
-Gaia-Collaboration:2018}.
-
-\apogee\ is a spectroscopic sub-survey and component of the Sloan Digital Sky
-Survey IV (\sdssiv; \citealt{Blanton:2017}) whose main goal is to map
-the chemical and dynamical properties of stars across the Milky Way disk.
-The survey uses two nearly identical, high-resolution ($R \sim 22,500$;
-\citealt{Wilson:2019}), infrared ($H$-band) spectrographs---one in the Northern
-hemisphere at Apache Point Observatory (APO) using the SDSS 2.5m telescope
-\citep{Gunn:2006}, and one in the Southern hemisphere at Las Campanas
-Observatory (LCO) using the 2.5m du Pont telescope \citep{Bowen:1973}.
-The primary survey targets are selected with simple color and magnitude cuts
-(\citealt{Zasowski:2013, Zasowski:2017}, Santana et al. in prep., Beaton et al.
-in prep.), but the sparse angular sky coverage and limited number of fibers per
-field lead to a ``pencil-beam''-like sampling of the Milky Way stellar density.
-\apogee\ spectra are reduced \citep{Nidever:2015} and then analyzed (i.e., to
-measure stellar parameters and abundances) using the \apogee\ Stellar Parameters
-and Chemical Abundance Pipeline (\acronym{ASPCAP}; \citealt{ASPCAP,
-Holtzman:2018}); here we use abundance measurements from the standard \apogee\
-pipeline.
-
-Here we use a recent internal data product (which includes all data taken
-through March 2020) from the \apogee\ surveys (post-\dr{16}) that includes
-$\approx\%$ more stars than the publicly-available \dr{16} catalogs \citep{DR16,
-Jonsson:2020}, but was reduced and processed using the same pipeline used to
-produce the \dr{16} release.
-This \apogee\ catalog contains calibrated element abundance measurements for 18
-elements, but these have a variety of physical origins and a range of
-reliabilities and measurement precisions.
-For demonstrations below, we therefore focus on a subset of eight, well-measured
-(log) abundance ratios selected to have varied astrophysical origins:
-\abunratio{Fe}{H}, \abunratio{C}{Fe}, \abunratio{N}{Fe}, \abunratio{O}{Fe},
-\abunratio{Mg}{Fe}, \abunratio{Si}{Fe}, \abunratio{Mn}{Fe}, \abunratio{Ni}{Fe}.
-In some cases, we focus on just a single element abundance, \abunratio{Mg}{Fe},
-which is the most precisely and accurately determined element abundance measured
-with the \dr{16} pipeline \citep{Jonsson:2020}.
-
-\gaia\ is primarily an astrometric mission and survey
-\citep{Gaia-Collaboration:2016} that obtains sky position, proper motion, and
-parallax measurements for $>1$ billion stars limited only by their apparent
-magnitudes (\gaia\ $G \lesssim 20.7$).
-Here we use parallax and proper motion measurements released in \gaia\ \dr{2}
-\citep{Gaia-Collaboration:2018, Gaia-astrometric:2018}.
-
-We cross-match the \apogee\ sample to \gaia\ \dr{2} using the \apogee-provided
-\acronym{2MASS} \citep{Skrutskie:2006} identifiers, and the \gaia-provided
-cross-match between \gaia\ \dr{2} and the final \acronym{2MASS} point source
-catalog \citep{Gaia-crossmatch:2019}.
-We then apply a number of quality cuts and other selections to limit the catalog
-to chemically thin-disk, red giant branch (RGB) stars with well-measured stellar
-parameters and abundances, high signal-to-noise parallax measurements, but
-excluding stars targeted in stellar clusters and dwarf galaxies.
-In detail, our selections include:
-\begin{itemize}
-  \item \acronym{ASPCAP} quality flag (\texttt{ASPCAPFLAG}) must not contain
-    \texttt{STAR\_BAD} or \texttt{STAR\_WARN},
-  \item $3500~\Kel < \Teff < 6500~\Kel$,
-  \item $1.5 < \logg < 3.4$,
-  \item combined spectroscopic signal-to-noise ${\rm SNR} > 20$,
-  \item \apogee\ targeting bit flags must not indicate that the source was part
-    of a special program to observe stellar clusters, dwarf galaxies, M31 stars,
-    stellar streams, or moving groups; this \emph{excludes} stars with the
-    following bits enabled:
-    \begin{itemize}
-      \item \texttt{APOGEE\_TARGET1}: (9. 18, 24, 26)
-      \item \texttt{APOGEE\_TARGET2}: (10, 18)
-      \item \texttt{APOGEE2\_TARGET1}: (9, 18, 20, 21, 22, 23, 24, 26)
-      \item \texttt{APOGEE2\_TARGET2}: (10)
-      \item \texttt{APOGEE2\_TARGET3}: (5, 14, 15)
-    \end{itemize}
-  \item stars are part of the ``low-$\alpha$'' (or ``chemical thin disk'')
-    population (see polygonal selection in the top panel of
-    \figurename~\ref{fig:mh-am-xy}),
-  \item \gaia\ parallax $\varpi > 0.5~\mas$,
-  \item \gaia\ parallax signal-to-noise $\varpi / \sigma_\varpi > 8$.
-\end{itemize}
-The \apogee\ catalog contains a small number of duplicates (duplicated source
-identifier \texttt{APOGEE\_ID}); To unique-ify our sample in these cases, we
-keep only the entry with highest signal-to-noise.
-We select the low-$\alpha$ sequence primarily because the high- and low-$\alpha$
-sequences have different scale heights \citep[e.g.,][]{Bovy:2016}, and our toy
-model is not flexible enough to account for this.
-The final parent sample contains \nstars\ RGB stars with high-quality \apogee\
-and \gaia\ data.
-
 For each star in the parent sample, we compute na\"ive distance estimates by
 inverting the parallax, $d = 1/\varpi$.
 While this is generally not a safe way of computing distance from parallaxes
@@ -532,7 +576,7 @@ Our methodology and demonstrations below rely on computing actions and angles
 for stars, which depend on the mass distribution of the Milky Way and the solar
 position and motion with respect to a Galactocentric reference frame.
 
-For the solar position, we use the recent precise measurement of the
+For the solar position, we use the recent, precise measurement of the
 Sun--Galactic center distance from the \acronym{GRAVITY} collaboration, $r_\odot
 = 8.122~\kpc$ \citep{Gravity:2018}, and initially adopt $z_\odot = 20.8~\pc$ as
 the solar height above the Galactic midplane \citep{Bennett:2019}.
@@ -572,9 +616,9 @@ the ``St\"ackel Fudge'' \citep{Binney:2012, Sanders:2012} as implemented in
 \package{galpy} \citep{Bovy:2015}.
 We solve for the focal length, $\Delta$, of the locally-approximating St\"ackel
 potential for each star's orbit by numerically computing the orbit of each star
-for four orbital periods.\footnote{For speed, we actually compute the
-locally-fitting St\"ackel potential focal length parameter $\Delta$
-\citep{Sanders:2012} using \package{gala}.}
+for four orbital periods.\footnote{For computational efficiency, we actually
+compute the locally-fitting St\"ackel potential focal length parameter $\Delta$
+\citep{Sanders:2012} using \package{gala} \citep{gala}.}
 
 We assess the accuracy of using the St\"ackel Fudge for orbits with large
 vertical excursions from the Galactic disk by comparing actions computed with
@@ -598,11 +642,13 @@ and set the time step to $\Delta t = P_r / 256$. For all stars, we set $N_{\rm
 max} = 8$ (following \citealt{Sanders:2016}).
 We find that in all cases, the values of the actions agree to within $<10\%,
 <0.1\%, <0.5\%$ for $J_R, J_\phi, J_z$, respectively, with the largest
-disagreements only affecting a small fraction of the stars in our sample with
-the largest excursions from the Galactic plane.
+disagreements only affecting a small fraction of the stars in our sample
+($<8\%$) with the largest excursions ($\gtrsim 3$ scale heights) from the
+Galactic plane.
+% See: Compare-actions-Staeckel-O2GF.ipynb
 
 For computational efficiency, we therefore use the St\"ackel Fudge as our
-primary method for computing actions in what follows.
+primary method for computing actions.
 % the three actions and angles for all stars in
 % our parent sample (see \sectionname~\ref{sec:data}) in each of the 15 potential
 % models with different disk-mass to halo-mass ratios (see above).
@@ -637,12 +683,15 @@ computation of the actions (over stars) using the Python package
   \end{mdframed}
 \end{figure}
 
-A significant motivation for his work came from plots of elemental abundance
+A significant motivation for this work came from plots of elemental abundance
 ratios of stars as a function of vertical height $z$ and vertical velocity $v_z$
 in Galactocentric Cartesian coordinates.
 As an example, \figurename~\ref{fig:zvz-grid} shows the mean abundance ratios of
 stars in bins of their vertical phase-space coordinates, using data from the
 \apogee\ and \gaia\ surveys (see \sectionname~\ref{sec:data}).
+The stars shown in this figure are selected following the quality cuts defined
+above (\sectionname~\ref{sec:data}) and are selected to lie in the low-alpha
+sequence (\figurename~\ref{fig:mh-am-xy}).
 In these plots, the eye is drawn to \emph{abundance gradients}:
 The stars at small heights and small vertical velocities have different
 abundance ratios, on average, than stars at large heights and large vertical
@@ -698,17 +747,17 @@ If two small neighborhoods in phase space lie on the same orbit---that is, they
 correspond to the same dynamical actions but with different conjugate
 angles---they must contain stars with the same distribution of element
 abundances.
-This prediction depends on many detailed assumptions, such as that the Galaxy is
-(approximately) phase mixed, and that the potential is (approximately) time
-invariant and integrable.
-And of course the \emph{usefulness} of this prediction for inference depends on
-the existence of gradients: If there are no element-abundance-ratio gradients,
-there will be no information to exploit.
+This prediction depends on many detailed assumptions; for example, that the
+Galaxy is (approximately) phase mixed, and that the potential is (approximately)
+time invariant and integrable.
+Of course, the \emph{usefulness} of this prediction for inference depends on the
+existence of element abundance gradients: if there are no
+element-abundance-ratio gradients, there will be no information to exploit.
 
 For the sake of illustration and simplicity, we visualize and demonstrate these
 concepts using the vertical kinematics of stars in our parent sample.
 \figurename~\ref{fig:zvz-mgfe} again shows the mean \abunratio{Mg}{Fe} abundance
-ratios (in all panels), but now with two overlaid orbits (white overlaid bands)
+ratios (in all panels), but now with two overlaid orbits (green overlaid bands)
 computed in three different Milky Way models (with varied disk mass, as
 indicated; see \sectionname~\ref{sec:mw-model}).
 The two orbits were chosen for illustrative purposes (one with low $J_z$, one
@@ -760,7 +809,7 @@ In our method below, we utilize this fact to infer the disk mass.
 \section{Method, Assumptions, and Toy Applications}
 \label{sec:inferences}
 
-There are two families of approaches to \methodname:
+There are two families of approaches to \methodname.
 In the first---which we will call \emph{classical} (in the sense of classical
 statistics)---we make explicit the fact that the element abundance distribution
 should not depend on the conjugate angles.
@@ -785,7 +834,7 @@ method is \emph{conditionally} correct, conditioning on these core assumptions:
   could in principle be relaxed in future implementations.
 \item[phase mixed] The stars in our sample are inherently uniformly distributed
   in angle variables; all angles are equally likely. This assumption will be
-  violated substantially in the data (as we discuss below; see
+  violated in the data (as we discuss below; see
   \sectionname~\ref{sec:discussion}), but this is the fundamental assumption of
   the vast majority of inferences of the Milky Way mass distribution.
 \item[properly selected] The selection function depends on position (or
@@ -797,24 +846,24 @@ method is \emph{conditionally} correct, conditioning on these core assumptions:
   \logg) subset of red giant stars that are dominated by red clump stars (see
   \sectionname~\ref{sec:data}), and we discuss this further in
   \sectionname~\ref{sec:discussion}.
-  % TODO: Alternatively, we could use a strongly-constrained model for the
-  % dependence of the selection function on element abundances.
 \item[measurable gradients] There exist gradients in the abundances with respect
   to the kinematics (i.e., actions) and those gradients are measurable at the
-  precision of the abundance measurements in our spectroscopic dataset.
+  precision of the individual stellar abundance measurements in our
+  spectroscopic dataset.
 \item[invariant abundances] Stellar surface element abundances are
   time-invariant. In detail, this assumption is violated by stellar and
-  planetary evolution, as surface abundances can change slightly over main
-  sequence lifetimes \citep{TODO} and during the red giant branch evolution
-  \citep{TODO}. However, we expect the magnitude of this to be unimportant and
-  should not dominate our systematics as long as the timescales over which the
+  planetary evolution, as surface abundances can change, for example, during red
+  giant branch evolution \citep[e.g.,][]{Iben:1965, Martig:2016} for solar-mass
+  stars. However, we expect the magnitude of this to be unimportant and should
+  not dominate our systematics as long as the timescales over which the
   abundances change are sufficiently different from the orbital timescales
   (hundreds of millions of years).
+  % Note that we have explicitly excluded carbon and nitrogen abundance ratios from our sample because they are known to change as a star ascends the giant branch.
 \end{description}
 
 In this \documentname, we consider only classical-statistics approaches for
-illustrative purposes.\footnote{This may surprise some of our readers, but we
-are pragmatic as much as dogmatic about Bayes!}
+illustrative purposes.%\footnote{This may surprise some of our readers, but we
+% are pragmatic as much as dogmatic about Bayes!}
 % The classical approaches are simpler in implementation, make fewer assumptions,
 % and more explicitly embody the orbits-as-isopleths concept that underlies the
 % project descriptions we have given above.
@@ -831,23 +880,23 @@ the \gaia\ parallaxes) is $\sigma_d \approx 50~\pc$ and the median velocity
 uncertainty is $\approx 2~\kms$.
 We also here assume that stars in different parts of phase-space receive the
 same quality of abundance measurements, an assumption that we know is weakly
-violated because of known temperature \citep{Wheeler} and \logg\ (Eilers et al.,
-in prep.) dependences on the \apogee\ abundance measurements, and stars with
-different temperatures or surface gravities or luminosities can be seen at
+violated because of known temperature \citep{Jonsson:2020} and \logg\ (Eilers et
+al., in prep.) dependences on the \apogee\ abundance measurements, and stars
+with different temperatures or surface gravities or luminosities can be seen at
 different distances and $z$ heights.
 However, our parent sample is selected to contain a relatively small range of
-surface gravities along the red giant branch and is predominantly dominated by
+surface gravities along the red giant branch and predominantly consists of
 red clump stars, so we expect these issues to be negligible.\footnote{We tried
-repeating all subsequent analyses in this \documentname using a sample of
+repeating all subsequent analyses in this \documentname\ using a sample of
 high-confidence Red Clump stars \citep[using the selection defined
-in][]{Bovy:2014} and found no appreciable differences in our results.}
+in][]{Bovy:2014} and found no significant differences in our results.}
 
-For simplicity, we focus here on the vertical kinematics of stars and we ask
-whether there is a choice of mass model that leads to dynamical actions and
-conjugate angles such that the abundance ratio distributions do not depend on
-the conjugate angle $\theta_z$.
-We fix all aspects of our mass model except for the ratio of the disk mass to
-the halo mass at fixed circular velocity (see \sectionname~\ref{sec:mw-model}).
+\subsection{Initial Demonstration of Fitting Procedure}
+
+As an initial demonstration, we focus here on the vertical kinematics of stars
+(but we do not assume separability) and we ask whether there is a choice of mass
+model that leads to dynamical actions and conjugate angles such that the
+abundance ratio distributions do not depend on the conjugate angle $\theta_z$.
 To assess the dependence of a particular element abundance ratio
 \abunratio{X}{Y} on the vertical angle, we define a ``mean abundance-ratio
 deviation,'' $\Delta^{\abunratio{X}{Y}}$, for each $n$ star, which is the
@@ -868,8 +917,11 @@ estimates of the mean abundance values (we discuss this in more detail in
 Appendix~\ref{app:knn-weights}).
 For a specific star, its neighbors are a function of the mass-model parameters
 because all actions will change values in different mass models.
-We choose to use $K=64$ based on experimentation, but find that our results are
-insensitive to this choice.
+We choose to use $K=64$ based on experimentation: Smaller $K$ values more
+accurately resolve the abundance gradients but have more shot noise, but larger
+$K$ values smooth out the abundance gradients.
+However, we find that our results are not very sensitive to this choice (within
+a multiplication or division by a factor of a few).
 
 Our goal then is to minimize (over mass model parameters) the dependence of the
 mean abundance-ratio deviation distribution on the vertical angle $\theta_z$.
@@ -881,12 +933,9 @@ To quantify this dependence, we fit a smooth model of the form
 \end{equation}
 where the five parameters $(c_0, a_1, a_2, b_1, b_2)$ are the coefficients of a
 Fourier series expressed out to $m=2$.
-We fit this model to all of the $N=\nstars$ individual abundance-ratio
-deviations and their uncertainties $(\Delta_n, \sigma_{\Delta_n})_N$ (without
-binning) using least-squares fitting. % TODO: should we explicitly write the design matrix and shit?
-This functional form captures our expectations for how the mean abundance-ratio
+The functional form captures our expectations for how the mean abundance-ratio
 deviations will depend on vertical angle when our model is wrong:
-If the orbit contours at a given action have the wrong shape, we expect there to
+if the orbit contours at a given action have the wrong shape, we expect there to
 be an $m=2$ variation to the abundance-ratio deviations (e.g.,
 \figurename~\ref{fig:zvz-mgfe}).
 If our assumed solar position relative to the midplane or solar velocity
@@ -906,7 +955,50 @@ non-phase-mixed structures.
 As we note later, the ``best'' setting of the mass model parameters should
 minimize a combination of these amplitudes.
 
+We fit this model (\equationname~\ref{eq:fouriermodel}) to all of the
+$N=\nstars$ individual abundance-ratio deviations and their uncertainties
+$(\Delta_n, \sigma_{\Delta_n})_N$ (without binning) using least-squares fitting.
+In detail, for a given mass model, we compute start by computing the actions and
+angles for all $N$ stars in our sample.
+We then use the three actions for each star to compute the mean abundance
+deviations $\Delta_n$ and the associated uncertainty $\sigma_{\Delta_n}$ for
+all stars (\equationname~\ref{eq:mean-abun-dev}).
+We construct the design matrix $\mat{M}$ using the vertical angle values
+$\theta_{z, n}$
+\begin{equation}
+  \mat{M} = \begin{pmatrix}
+      1 & \cos{\theta_{z, 1}} & \sin{\theta_{z, 1}}
+        & \cos{2\,\theta_{z, 1}} & \sin{2\,\theta_{z, 1}}\\
+      \vdots & \vdots & \vdots & \vdots & \vdots \\
+      1 & \cos{\theta_{z, N}} & \sin{\theta_{z, N}}
+        & \cos{2\,\theta_{z, N}} & \sin{2\,\theta_{z, N}}
+    \end{pmatrix}
+\end{equation}
+the ``data'' vector $\vec{y}$ using the mean abundance deviations
+\begin{equation}
+  \vec{y} = \begin{pmatrix} \Delta_1 & \cdots & \Delta_N \end{pmatrix}\transp
+\end{equation}
+and the covariance matrix $\mat{C}$ using the mean abundance deviation
+uncertainties
+\begin{equation}
+  \mat{C} = \begin{pmatrix}
+    \sigma_{\Delta_1}^2 & & \\
+    & \ddots & \\
+    & & \sigma_{\Delta_N}^2
+    \end{pmatrix} \quad .
+\end{equation}
+We compute the best-fitting parameter vector $\hat{\vec{g}} = (c_0, a_1, a_2,
+b_1, b_2)$ by solving the linear least-squares problem
+\begin{equation}
+  \hat{\vec{g}} = \left(\mat{M}\transp \, \mat{C}^{-1} \, \mat{M}\right)^{-1}
+    \, \mat{M}\transp \, \mat{C}^{-1} \, \vec{y}
+\end{equation}
 
+% For this initial exploration, we fix all aspects of our mass model except for
+% the ratio of the disk mass to the halo mass at fixed circular velocity (see
+% \sectionname~\ref{sec:mw-model}).
+
+% binning is sinning and all that
 \begin{figure}[!tp] % Notebook: figures/Abundance-anomaly-bootstrap.ipynb
   \begin{mdframed}
     \color{captiongray}
@@ -924,7 +1016,7 @@ minimize a combination of these amplitudes.
     In each panel, the mean abundance deviation is shown three ways.
     The black histogram shows the mean of the abundance deviation in small bins
     in vertical angle (binned for visualization purposes only: the binned data
-    are never used in the analysis, because binning is sinning and all that).
+    are never used in the analysis).
     The blue lines show continuous fits to the unbinned data, which are
     continuous linear combinations of sines and cosines (see
     \sectionname~\ref{sec:inferences}); there are 128 blue lines, one for each
@@ -932,6 +1024,8 @@ minimize a combination of these amplitudes.
     The red line shows the mean of the $\cos 2\,\theta_z$ terms across the 128
     bootstrap trials: The amplitude of this parameter is an indication of the
     goodness of fit of a particular choice of mass model parameters.
+    A ``perfect'' fit would produce a red curve that is flat or has minimal
+    amplitude.
     Comparing the three panels, the red curves show an amplitude of opposite
     sign in the highest-disk-mass panel relative to the other panels, suggesting
     that the best setting of the disk mass is in between the fiducial disk mass
@@ -986,7 +1080,7 @@ the value of \mratio\ that minimizes the (absolute) value of $a_2$.
 We obtain an estimate for the disk mass parameter \mratio\ and an associated
 uncertainty by linearly interpolating the measurements and bootstrap error bars
 onto the $a_2=0$ intercept.
-Our best-fit disk mass and its uncertainty is shown as the square (blue)
+Our best-fit disk mass and its uncertainty is shown as the square (red)
 marker in \figurename~\ref{fig:coeff-mdisk} to emphasize that, though this is a
 simple model and we only vary one parameter in this demonstration, the
 measurement is encouragingly precise with a formal error bar of $\approx$7\% for
@@ -1019,7 +1113,7 @@ context of our assumptions below (\sectionname~\ref{sec:discussion}).
     sensitive to the local density of the disk; it crosses zero when the model
     has the best-fit disk mass.
     The best-fit disk mass and its measurement uncertainty are shown as the
-    square marker and a horizontal error bar.
+    square (red) marker and a horizontal error bar.
     The other terms shown have different dependencies on Milky Way parameters:
     The $\cos\theta_z$ would vary strongly if we varied the solar motion (the
     vertical component of the local standard of rest).
@@ -1034,21 +1128,28 @@ context of our assumptions below (\sectionname~\ref{sec:discussion}).
   \end{mdframed}
 \end{figure}
 
-% Another thing we can glean from \figurename~\ref{fig:coeff-mdisk} is that these
-% data seem to favor a different value of the solar position relative to the
-% midplane $z_\odot$ and a different solar velocity $v_{z, \odot}$.
-The upper panels of \figurename~\ref{fig:coeff-mdisk} show that, at all values
-of the disk mass parameter \mratio, there is a finite $m=1$ amplitude for both
-the $\cos$ and $\sin$ terms.
+\subsection{Construction of a Mass Model Objective Function}
+\label{sec:objective-func}
+
+The demonstrations above show how we can compute best-fitting coefficients for
+our model of the variations of the mean abundance deviations as a function of
+vertical angle $\theta_z$.
+To use these coefficients in a more general fitting procedure (i.e., to derive
+constraints on the mass model parameters) we construct an objective function
+that we can then optimize over the mass model parameters.
+However, the upper panels of \figurename~\ref{fig:coeff-mdisk} show that, at all
+values of the disk mass parameter \mratio, there is a finite $m=1$ amplitude for
+both the $\cos$ and $\sin$ terms.
 As noted before, these coefficients are sensitive to the solar motion and solar
 position (in $z$), respectively.
-We therefore simultaneously optimize over four parameters: the solar position
-relative to the midplane \zsun, the solar $z$ velocity relative to the local
-standard of rest \vzsun, the disk mass parameter \mratio, and the disk
+We therefore consider four parameters in our objective function: the solar
+position relative to the midplane \zsun, the solar $z$ velocity relative to the
+local standard of rest \vzsun, the disk mass parameter \mratio, and the disk
 scale height \hz\ \citep[the Miyamoto--Nagai scale height parameter, not an
 exponential scale height;][]{Miyamoto:1975}.
-For each setting of these parameters $\mratio, \hz, \zsun, \vzsun$, we
-compute the Fourier coefficients and minimize the objective function
+For each setting of these parameters $\mratio, \hz, \zsun, \vzsun$, we compute
+the Fourier coefficients (as described in the previous section) and minimize the
+objective function
 \begin{equation}
   f(a_1, b_1, a_2 \,;\, \mratio, \hz, \zsun, \vzsun) =
     a_1^2 + b_1^2 + a_2^2 \quad . \label{eq:objective}
@@ -1059,7 +1160,7 @@ We again perform 128 bootstrap trials per element, and we perform the bootstrap
 resampling outside of the entire procedure (so that each optimization is
 performed independently with a bootstrap sample).
 We use Nelder-Mead optimization \citep{Gao:2012} to minimize our objective
-function, as implemented in the \package{scipy} package \citep{scipy}.
+function, as implemented in the \package{scipy} package \citep{Virtanen:2020}.
 
 % Notebook: figures/5-Optimize-results.ipynb
 \begin{figure}[!tp]
@@ -1080,6 +1181,8 @@ function, as implemented in the \package{scipy} package \citep{scipy}.
     ($\lesssim10\%$) constraints on these parameters, but the joint constraint
     for these eight elements has a precision of $\approx$2.5\% for both of these
     parameters.
+    The dashed vertical and horizontal lines indicate our fiducial values
+    (\sectionname~\ref{sec:mw-model}).
   \label{fig:elem-ellipses-1}
   }
   \end{mdframed}
@@ -1113,19 +1216,28 @@ a different phase and amplitude.
 If the abundance ratio gradients (with respect to vertical action) emphasize
 stars with different vertical actions, we will in general find disagreements
 between the results for different abundance ratios.
-
-Combining all eight abundance ratios, we find $\mratio = 1.21 \pm 0.04$, $\hz =
-0.27 \pm 0.01~\kpc$, $\zsun = 16.9 \pm 0.8~\pc$, and $\vzsun = 8.8 \pm
-0.2~\kms$.
-Excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}, which are clear outliers in
-their preferred solar position values, we find $\mratio = 1.07\pm 0.05$, $\hz =
-0.28 \pm 0.01~\kpc$, $\zsun = 20.6 \pm 0.9~\pc$, and $\vzsun = 8.4 \pm 0.3~\kms$
-Our results here imply a disk-to-halo mass ratio within the solar circle ${\rm
-M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc) = 2.3 \pm 0.1$ (all eight
-elements) or $1.6\pm0.1$ (excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}),
-which is slightly larger than our fiducial model where this mass ratio is
-$\approx 1.3$ \citep{gala} and the implied value for the
+Our results are summarized in \tablename~\ref{tbl:results}, where we list the
+joint constraints on our four parameters utilizing all eight abundance ratios
+(center column), or excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe} (right
+column), which are clear outliers in their preferred solar position values.
+We also include two derived quantities: the total disk mass $\mdisk$, and the
+disk to halo mass ratio within the solar circle ${\rm M}_{\rm disk} / {\rm
+M}_{\rm halo} (<8.1~\kpc)$, which we find is slightly larger than both  our
+fiducial model $\approx 1.3$ \citep{gala} and the implied value for the
 \texttt{MWPotential2014} \citep{Bovy:2015} of $\approx 1.7$.
+
+% Combining all eight abundance ratios, we find $\mratio = 1.21 \pm 0.04$, $\hz =
+% 0.27 \pm 0.01~\kpc$, $\zsun = 16.9 \pm 0.8~\pc$, and $\vzsun = 8.8 \pm
+% 0.2~\kms$.
+% Excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}, which are clear outliers in
+% their preferred solar position values, we find $\mratio = 1.07\pm 0.05$, $\hz =
+% 0.28 \pm 0.01~\kpc$, $\zsun = 20.6 \pm 0.9~\pc$, and $\vzsun = 8.4 \pm 0.3~\kms$
+% Our results here imply a disk-to-halo mass ratio within the solar circle ${\rm
+% M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc) = 2.3 \pm 0.1$ (all eight
+% elements) or $1.6\pm0.1$ (excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}),
+% which is slightly larger than our fiducial model where this mass ratio is
+% $\approx 1.3$ \citep{gala} and the implied value for the
+% \texttt{MWPotential2014} \citep{Bovy:2015} of $\approx 1.7$.
 
 
 % Notebook: figures/5-Optimize-results.ipynb
@@ -1133,7 +1245,7 @@ $\approx 1.3$ \citep{gala} and the implied value for the
   \begin{mdframed}
     \color{captiongray}
   \begin{center}
-  \includegraphics[width=0.8\textwidth]{other-error-ellipses.pdf}
+  \includegraphics[width=1\textwidth]{other-error-ellipses.pdf}
   \end{center}
   \caption{%
   The same as \figurename~\ref{fig:elem-ellipses-1}, but showing other
@@ -1141,10 +1253,41 @@ $\approx 1.3$ \citep{gala} and the implied value for the
   Note that in the solar height above the midplane parameter \zsun, we find
   some significant disagreements between \abunratio{Mg}{Fe} and
   \abunratio{Si}{Fe} and the rest of the abundance ratios we consider.
+  The dashed vertical and horizontal lines indicate our fiducial values
+  (\sectionname~\ref{sec:mw-model}).
   \label{fig:elem-ellipses-2}
   }
   \end{mdframed}
 \end{figure}
+
+\begin{table}[ht]
+  \footnotesize
+  \centering
+  \begin{tabular}{c | c | c}
+      % \multicolumn{3}{c}{\textbf{Summary of Results}} \\
+      \toprule
+      Parameter & All eight abundance ratios & Excluding \abunratio{Mg}{Fe}, \abunratio{Si}{Fe}\\
+      \midrule
+      $\mratio$ & $1.21 \pm 0.04$ & $1.07\pm 0.05$\\
+      $\hz$ & $0.27 \pm 0.01~\kpc$ & $0.28 \pm 0.01~\kpc$\\
+      $\zsun$ & $16.9 \pm 0.8~\pc$ & $20.6 \pm 0.9~\pc$\\
+      $\vzsun$ & $8.8 \pm 0.2~\kms$ & $8.4 \pm 0.3~\kms$\\
+      \midrule
+      $\mdisk$ &
+        $7.89 \pm 0.26 \times 10^{10}~\Msun$ &
+        $6.98 \pm 0.32 \times 10^{10}~\Msun$\\
+      ${\rm M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc)$ &
+        $2.11 \pm 0.21$ & $1.51 \pm 0.16$\\
+      \bottomrule
+  \end{tabular}
+  \caption{A summary of our results from combining the constraints on the disk
+  mass, scale height, solar position, and solar motion from eight independent
+  element abundance ratios (center column). We also show joint results for all
+  abundance ratios excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe}, which
+  are clear outliers in their preferred solar position parameter values.
+  }
+  \label{tbl:results}
+\end{table}
 
 % Notebook: figures/6-APOGEE-elem-Jz-gradients.ipynb
 % \begin{figure}[!tp]
@@ -1159,25 +1302,6 @@ $\approx 1.3$ \citep{gala} and the implied value for the
 %   }
 %   \end{mdframed}
 % \end{figure}
-
-% \begin{table}[ht]
-%   \footnotesize
-%   \centering
-%   \begin{tabular}{c | c}
-%       % \multicolumn{3}{c}{\textbf{Summary of Results}} \\
-%       \hline
-%       Parameter & Inferred Value\\
-%       \hline
-%       ${\rm M}_{\rm disk}$ (total) & $7.88 \pm 0.19 \times 10^{10}~\Msun$ \\
-%       ${\rm M}_{\rm disk} / {\rm M}_{\rm halo} (<8.1~\kpc)$  & $2.06 \pm 0.05$\\
-%       $z_{\odot}$ & $15.5 \pm 1.0~\pc$\\
-%       $v_{z, \odot}$ & $8.6 \pm 0.2~\kms$\\
-%       \hline
-%   \end{tabular}
-%   \caption{For your consideration: Some numbers that have no relevance.
-%   }
-%   \label{tbl:results}
-% \end{table}
 
 % We have shown results for the $\mgfe$ abundance deviation, but we repeat this
 % analysis for several different abundances (the same abundances as shown in
@@ -1210,21 +1334,15 @@ $\approx 1.3$ \citep{gala} and the implied value for the
 \section{Discussion}
 \label{sec:discussion}
 
-In this \documentname, we have presented a new method---\methodname---for
-inferring the mass model (or acceleration field) traced by a phase-mixed
-stellar distribution.
-\methodname\ is novel in that it provides a way of using measurements of element
-abundance ratios and other stellar labels to improve the precision of dynamical
-inferences.
-This method is also more statistically robust than Jeans modeling in that it
-does not require measuring second moments of the stellar velocity distribution.
-This method does, however, depend on the existence of element-abundance
-gradients with respect to kinematics: The stars on different orbits (i.e., with
-different actions) must have---on average or statistically---different
-compositions.
-Fortunately these gradients are ubiquitous and measurable in the Milky Way (and
-most galaxies; \citealt{TODO}).
-
+We have defined and demonstrated a promising new method, \methodname, for using
+measurements of both stellar kinematics and stellar surface abundances to infer
+the underlying mass distribution of the Milky Way.
+This method has promise in that it utilizes the high-dimensional stellar labels
+that are measured by spectroscopic surveys to improve dynamical inferences.
+Here we briefly review the method and its connection to other dynamical
+inference methods, return to the assumptions that underpin \methodname\ and
+discuss their applicability in the Milky Way, and discuss possible extensions or
+reformulations of \methodname\ (e.g., in a Bayesian context).
 
 \subsection{Fundamentals of \methodname}
 
@@ -1273,8 +1391,8 @@ But \methodname\ is much more general:
 Any statistical moments of any statistics of any invariant stellar labels would
 also be allowed.
 The method also does not assume that the element abundances are uniquely or even
-specifically predicted by the actions:
-The method only requires that there are gradients in some moments of the
+specifically predicted by the actions.
+This method only requires that there are gradients in some moments of the
 abundance distribution.
 Generically, the abundance ratio distributions at any point in action space are
 expected to have (and are observed to have) substantial dispersion.
@@ -1340,6 +1458,11 @@ inference methods is that it does not require knowledge of the survey selection
 function, provided that the selection is made in position space (or phase space)
 and does not act strongly on the element-abundance ratios that enter into the
 inference.
+% TODO: from Hayes, "how strongly? could you quantify that in some way? because
+% magnitude and color limits naturally impose metallicity (and alpha) biases, so
+% if you have a differential magnitude or color limit as a function of position
+% on the sky (say galactic latitude to maintain a constant number of targets per
+% observation while the number of options decreases at high latitude)
 This condition is sufficiently satisfied for the \apogee\ data used here, and
 will generally be satisfied for other spectroscopic surveys of stars in the
 Galaxy \citep[e.g., \acronym{GALAH};][]{Martell:2017, Buder:2018}.
@@ -1383,9 +1506,16 @@ $\vec{J}$, which are functions of the positions and velocities of
 stars---provided that the selection acts in position- or action-space alone (and
 not abundance-space).
 
-The closest related dynamical methodology we are aware of is ``Orbital
-Roulette'' \citep{TODO}.
-\TODO{describe roulette here...}
+The closest related dynamical methodology we are aware of is \textit{Orbital
+Roulette} \citep{Beloborodov:2004}.
+Like \methodname, \textit{Orbital Roulette} assumes that objects are not
+observed at a special time and therefore that the distributions of phases for
+all tracers in some observed population should be uniform.
+This assumption is then turned into an estimator, which can be used to optimize
+for the parameters of a mass model by making the distribution of phases approach
+uniformity.
+Our assumption is weaker: we only assume that the distribution of abundances is
+invariant of phase.
 
 % One of the crazy things about a fully general statement of \methodname\ is
 % that any description of a general distribution in $D$-space
@@ -1423,8 +1553,9 @@ strongly violated of our list of assumptions.
 The Galactic disk is now known to show clear signatures of external
 perturbations, intrinsic time-dependent phenomena, and significant phase-space
 substructure \citep[e.g.,][]{Antoja:2018, Schonrich:2018, Hunt:2018,
-Kamdar:2019, Monari:2019, Khanna:2019, Poggio:2020, Laporte:2020}, all of which
-reflect the extent to which the stars in the disk are not phase mixed.
+Kamdar:2019, Monari:2019, Khanna:2019, Poggio:2020, Laporte:2020,
+Coronado:2020}, all of which reflect the extent to which the stars in the disk
+are not phase mixed.
 In the case of vertical kinematics, the most striking illustration of this is
 the recently-discovered phase-space spiral \citep{Antoja:2018}.
 The spiral itself is only a $\approx$10\% perturbation to the local distribution
@@ -1438,20 +1569,20 @@ generalizations of \methodname\ that account for stellar populations that are
 incompletely angle-mixed.
 Beyond the Galactic disk in the stellar halo, as with Jeans modeling,
 \methodname\ will be biased by the existence of unmixed substructures (streams,
-shells, and merger remnants; e.g., \citealt{TODO}).
+shells, and merger remnants; e.g., \citealt{Grillmair:2016, Shipp:2018}).
 % TODO: comment on phase-mixing timescale as a function of JR, Jphi, Jz?
 % ... The flip side of that is that there are places in phase space where
 % mixing is maybe incredibly slow, like at low $J_z$. Maybe our disk
 % midplane issues come from this?
 
-\TODO{Comment on how exactly this can bias us with our toy implementation: It
-can cause variations in the mean abundance anomaly that will be subsumed into
-our simple parameters and interpreted as incorrect vzsun or zsun or Mdisk. In
-detail, it will depend on the scale (in angle-space) of the dominant
-perturbations (if ``large-scale,'' will more impact zsun/vzsun. If
-``small-scale,'' will affect mass parameter more). Similar issues with
-generative versions of the method, but can be accounted for more naturally by
-explicitly modeling them?}
+% TODO: Comment on how exactly this can bias us with our toy implementation: It
+% can cause variations in the mean abundance anomaly that will be subsumed into
+% our simple parameters and interpreted as incorrect vzsun or zsun or Mdisk. In
+% detail, it will depend on the scale (in angle-space) of the dominant
+% perturbations (if ``large-scale,'' will more impact zsun/vzsun. If
+% ``small-scale,'' will affect mass parameter more). Similar issues with
+% generative versions of the method, but can be accounted for more naturally by
+% explicitly modeling them?}
 
 % Selection
 Another key assumption that could lead to significant biases for certain stellar
@@ -1465,15 +1596,24 @@ effects: If a survey selection function implicitly depends on luminosity or
 temperature, and there are systematic trends in the measured abundances with
 surface gravity or temperature, the abundance distributions in any location of
 phase-space will appear to be different from these effects alone.
+% TODO: from Rachael I think you can say not just the “survey selection
+% function” but the sub-sample you select from the survey — I think this is sort
+% of important to comment on. Gaia stuff will get better and folks might try to
+% push this out - and the absolute luminosity biases as you get far away from
+% the solar neighborhood are real and extreme (you can see it in the targeting
+% papers and I think I comment about how with the new selections selection we do
+% way better, but of course that has its own biases, I guess there is no free
+% lunch for this crap). A 1-sentence expansion to that nuance might be worth it?
 For the \apogee\ sample used here, we have attempted to mitigate these issues by
 selecting a small range of surface gravities (and therefore temperatures) along
-the giant branch, but there are known systematic trends in \apogee\ between
-abundances and stellar parameters (\citealt{Wheeler:2020}, Eilers et al., in
+the giant branch.
+However, there are known systematic trends in \apogee\ between abundances and
+stellar parameters (\citealt{Jonsson:2020, Wheeler:2020}, Eilers et al., in
 prep.).
-In principle, a simultaneous calibration model could be made that simultaneously
-fits for the abundances as a function of conjugate angle and also housekeeping
-data (like stellar surface gravity or spectrograph line-spread function) that
-cause abundance systematics.
+In principle, a joint dynamics and calibration model could be made that
+simultaneously fits for the abundances as a function of conjugate angle and also
+housekeeping data (like stellar surface gravity or spectrograph line-spread
+function) that cause abundance systematics.
 
 % Integrable
 In our current implementation we have made use of transformations to
@@ -1531,7 +1671,7 @@ treated as additional invariants.
 In the implementation presented here, we use an abundance deviation that is
 based on a nearest-neighbor interpolation in action space (see
 \sectionname~\ref{sec:inferences} and \appendixname~\ref{app:knn-weights}).
-That is a blunt tool; In principle, our results would improve if we instead
+That is a blunt tool; in principle, our results would improve if we instead
 explicitly modeled the abundance distribution moments as functions of the
 actions.
 One option for this modeling would be to use a generative, physical model for
@@ -1593,24 +1733,73 @@ here for demonstrations.
 \section{Conclusions}
 \label{sec:conclusions}
 
-\TODO{Words.}
+We have presented a new method---\methodname---for inferring the mass model (or
+acceleration field) traced by a phase-mixed stellar distribution.
+\methodname\ is novel in that it provides a way of using measurements of element
+abundance ratios and other stellar labels to improve the precision of dynamical
+inferences.
+This method is also more statistically robust than traditional methods (for
+example, Jeans modeling) in that it does not require measuring second moments of
+the stellar velocity distribution or knowing the spatial (or phase-space) survey
+selection function.
+This method does, however, depend on the existence of element-abundance
+gradients with respect to kinematics and our ability to measure these gradients:
+The stars on different orbits (i.e., with different actions) must have---on
+average or statistically---different compositions.
+% TODO:    v "God provides" - when we submit to arxiv, of course
+Fortunately these gradients are ubiquitous and measurable in the Milky Way (and
+most galaxies; see \figurename~\ref{fig:zvz-grid}).
+
+We have outlined and implemented a classical-statistics approach to \methodname\
+and applied this to the vertical kinematics of a subsample of red giant branch
+stars from the \apogee\ surveys.
+The fundamental concept of this method is that stars do not change their
+abundances appreciably over timescales comparable to Galactic orbital
+timescales.
+With that, and under the assumption that the stellar populations in the Galactic
+disk are phase-mixed, this implies that the stellar abundance distribution at
+any place in phase-space must be independent of phase or conjugate angles and
+can only be a function of dynamical invariants, like orbital actions.
+In our current implementation, we explicitly try to find a setting of the
+gravitational potential parameters disk mass $\mdisk$ and scale height $\hz$
+(and reference frame parameters, the solar position and velocity in $z$) that
+minimize the dependence of the abundance distribution with vertical angle
+$\theta_z$ (see \figurename~\ref{fig:sinusoid-fits}).
+Turning this into an objective function (\sectionname~\ref{sec:objective-func}),
+we then optimize over the four Milky Way parameters using eight independent
+element abundance ratios (see \figurename~\ref{fig:elem-ellipses-1}).
+Individually, the constraints are already encouragingly precise, but combining
+the different abundance ratios provides joint constraints on the four parameters
+that are precise to a few percent (see \tablename~\ref{tbl:results}).
+
+Ongoing and near future spectroscopic surveys (e.g., SDSS-V, GALAH, DESI, 4MOST,
+WEAVE) will provide samples of stars that are a factor of $\approx$10--100
+times larger than that used in this work.
+Combining these stellar data with kinematic measurements from upcoming data
+releases from the \gaia\ mission will enable extremely precise constraints on
+the Galactic mass distribution using \methodname.
 
 
 \acknowledgments
 It is a pleasure to thank
   Jo Bovy (Toronto),
   Anna-Christina Eilers (MIT),
+  Jos\'e G. Fern\'andez-Trincado (U de Atacama),
   Suroor S. Gandhi (NYU),
+  Matt Shetrone (UCO/Lick),
   David Spergel (Flatiron),
   Eugene Vasiliev (Cambridge),
   Adam Wheeler (Columbia),
   the Dynamics and Astronomical Data groups at the Flatiron Institute,
   and the Galaxy group at the MPIA
 for valuable discussions and input.
-DWH was partially supported by HOGG GRANT DETAILS.
-HWR was partially supported by GRANT DETAILS.
+% DWH was partially supported by HOGG GRANT DETAILS.
+% HWR was partially supported by GRANT DETAILS.
 This research was conducted in part at the Aspen Center for Physics,
 which is supported by National Science Foundation grant \acronym{PHY-1607611}.
+K.V.J.'s contributions were enabled by NSF grant AST-1715582.
+S.H. is supported by an NSF Astronomy and Astrophysics Postdoctoral Fellowship
+under award AST-1801940.
 
 Funding for the Sloan Digital Sky
 Survey IV has been provided by the
@@ -1684,11 +1873,12 @@ participating in the \gaia\ Multilateral Agreement.
 
 \software{
   \package{Astropy} \citep{astropy, astropy:2018},
+  \package{gala} \citep{gala},
   \package{IPython} \citep{ipython},
-  \package{matplotlib} \citep{matplotlib},
-  \package{numpy} \citep{numpy},
-  \package{gala} \citep{gala, galav1_1},
-  \package{schwimmbad} \citep{schwimmbad}
+  \package{matplotlib} \citep{Hunter:2007},
+  \package{numpy} \citep{numpy:2020},
+  \package{schwimmbad} \citep{schwimmbad},
+  \package{scipy} \citep{Virtanen:2020}.
 }
 
 \appendix
