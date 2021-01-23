@@ -839,11 +839,12 @@ method is \emph{conditionally} correct, conditioning on these core assumptions:
 \item[integrable] Each stellar orbit is regular and has three
   dynamically-invariant actions and three conjugate angles. This assumption
   could in principle be relaxed in future implementations.
-\item[phase mixed] The stars in our sample are inherently uniformly distributed
-  in angle variables; all angles are equally likely. This assumption will be
-  violated in the data (as we discuss below; see
-  \sectionname~\ref{sec:discussion}), but this is the fundamental assumption of
-  the vast majority of inferences of the Milky Way mass distribution.
+\item[phase mixed] \changes{At any position in action-space,} the stars in our
+  sample are inherently uniformly distributed in angle variables; all angles are
+  equally likely. This assumption will be violated in the data (as we discuss
+  below; see \sectionname~\ref{sec:discussion}), but this is the fundamental
+  assumption of the vast majority of inferences of the Milky Way mass
+  distribution.
 \item[properly selected] The selection function depends on position (or
   velocity) in the Milky Way, but not on element abundances at a given position.
   In detail, the \apogee\ selection function \emph{will} depend on abundances
@@ -897,6 +898,13 @@ red clump stars, so we expect these issues to be negligible.\footnote{We tried
 repeating all subsequent analyses in this \documentname\ using a sample of
 high-confidence Red Clump stars \citep[using the selection defined
 in][]{Bovy:2014} and found no significant differences in our results.}
+\changes{Finally, we additionally here assume that the Milky Way potential
+model is time-independent.
+This is not a strict or core assumption of \methodname: We only require that the
+actions exist, and that the orbital phases of stars are mixed at any location in
+action-space.
+For example, this could still be satisfied in weakly time-dependent potentials
+in which the actions remain adiabatically invariant.}
 
 \subsection{Initial Demonstration of Fitting Procedure}
 
@@ -1646,6 +1654,28 @@ a dominant issue in our analyses.
 However, we are interested in the prospect of moving away from parametrizing the
 mass model directly, as with a large enough sample of stars the abundance
 gradients should be enough to image the orbital tori directly.
+
+% Time-dependence
+\changes{
+As mentioned in \sectionname~\ref{sec:inferences}, dynamically, \methodname\
+only strictly depends on the assumptions of phase-mixing and integrability
+discussed above, which could be satisfied even in weakly time-dependent
+potentials in which the actions remain adiabatically invariant.
+However, there is substantial evidence for non-adiabatic time-dependence in the
+dynamics of stars throughout the Galactic disk
+\citep[e.g.,][]{Price-Whelan:2015, Antoja:2018, Xu:2020}.
+In practice, time-dependence in the Milky Way could therefore cause the actions
+to oscillate \citep[e.g.,][]{Penarrubia:2013, Buist:2015}, possibly with an
+action-dependent amplitude \citep{Burger:2020}, which would lead to a change in
+the mean abundance distribution as a function of actions.
+Our implicit assumption that the potential is time-independent (through other
+core assumptions) could therefore lead to biases in the inferred parameters of
+the adopted time-independent models; This is a limitation of this work, and it
+will be important to quantify the magnitude of the expected biases.
+However, because our assumptions are slightly weaker, these biases may end up
+being less severe than for other methods that strictly require time-independence
+(e.g., Jeans modeling).
+}
 
 % Invariant abundances
 Much of the core methodology described here relies on the assumption that
