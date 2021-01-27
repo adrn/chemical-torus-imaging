@@ -80,6 +80,7 @@
 \newcommand{\hermes}{\acronym{HERMES}}
 \newcommand{\nstars}{56,324}
 
+\newcommand{\ofe}{\abunratio{O}{Fe}}
 \newcommand{\mdisk}{\ensuremath{\mathrm{M}_\mathrm{disk}}}
 \newcommand{\mratio}{\ensuremath{\mdisk / \mdisk^\star}}
 \newcommand{\hz}{\ensuremath{h_{z, \odot}}}
@@ -117,7 +118,7 @@
 \author[0000-0003-0872-7098]{Adrian~M.~Price-Whelan}
 \affiliation{\affcca}
 
-\author[0000-0003-2866-9403]{David~Hogg}
+\author[0000-0003-2866-9403]{David~Wardell~Hogg}
 \affiliation{\affcca}
 \affiliation{\affmpia}
 \affiliation{\affccpp}
@@ -474,7 +475,7 @@ For demonstrations below, we therefore focus on a subset of eight, well-measured
 (log) abundance ratios selected to have varied astrophysical origins:
 \abunratio{Fe}{H}, \abunratio{C}{Fe}, \abunratio{N}{Fe}, \abunratio{O}{Fe},
 \abunratio{Mg}{Fe}, \abunratio{Si}{Fe}, \abunratio{Mn}{Fe}, \abunratio{Ni}{Fe}.
-In some cases, we focus on just a single element abundance, \abunratio{Mg}{Fe},
+In some cases, we focus on just a single element abundance, \abunratio{O}{Fe},
 which is one of the most precisely and accurately determined element abundance
 measured with the \dr{16} pipeline \citep{Jonsson:2020}.
 
@@ -762,7 +763,7 @@ element-abundance-ratio gradients, there will be no information to exploit.
 
 For the sake of illustration and simplicity, we visualize and demonstrate these
 concepts using the vertical kinematics of stars in our parent sample.
-\figurename~\ref{fig:zvz-mgfe} again shows the mean \abunratio{Mg}{Fe} abundance
+\figurename~\ref{fig:zvz-ofe} again shows the mean \abunratio{O}{Fe} abundance
 ratios (in all panels), but now with two overlaid orbits (green overlaid bands)
 computed in three different Milky Way models (with varied disk mass, as
 indicated; see \sectionname~\ref{sec:mw-model}).
@@ -787,10 +788,10 @@ In our method below, we utilize this fact to infer the disk mass.
   \begin{mdframed}
     \color{captiongray}
   \begin{center}
-  \includegraphics[width=\textwidth]{zvz-mean-MG_FE}
+  \includegraphics[width=\textwidth]{zvz-mean-O_FE}
   \end{center}
   \caption{%
-    \textsl{Left panel:} A repeat of the $\mgfe$ panel of
+    \textsl{Left panel:} A repeat of the $\ofe$ panel of
     \figurename~\ref{fig:zvz-grid}.
     \textsl{Other panels:} The same as the left panel, but with the two orbits
     from \figurename~\ref{fig:zvz-demo} over-plotted, for three different Milky
@@ -806,7 +807,7 @@ In our method below, we utilize this fact to infer the disk mass.
     the data by projection in phase space, and the methods we use for the
     inferences we perform (see \sectionname~\ref{sec:inferences}) do not rely
     on or use any projections.
-  \label{fig:zvz-mgfe}
+  \label{fig:zvz-ofe}
   }
   \end{mdframed}
 \end{figure}
@@ -943,7 +944,7 @@ The functional form captures our expectations for how the mean abundance-ratio
 deviations will depend on vertical angle when our model is wrong:
 if the orbit contours at a given action have the wrong shape, we expect there to
 be an $m=2$ variation to the abundance-ratio deviations (e.g.,
-\figurename~\ref{fig:zvz-mgfe}).
+\figurename~\ref{fig:zvz-ofe}).
 If our assumed solar position relative to the midplane or solar velocity
 relative to the local standard of rest are wrong, we expect there to be $\sin$
 and $\cos$ (i.e., $m=1$) variations.
@@ -1012,7 +1013,7 @@ b_1, b_2)$ by solving the linear least-squares problem
   \includegraphics[width=\textwidth]{sinusoid-fits.pdf}
   \end{center}
   \caption{%
-    The mean $\mgfe$ abundance deviation, $\Delta^\abunratio{Mg}{Fe}$, as a
+    The mean $\ofe$ abundance deviation, $\Delta^\ofe$, as a
     function of vertical angle, for three different values of the mass of the
     disk (at fixed circular velocity at the Solar circle).
     The abundance deviation for each star in the sample is the difference
@@ -1064,7 +1065,7 @@ visualization only, we show binned means of the measured abundance-ratio
 deviations (black histogram).
 We emphasize that no binning is performed at any time in performing these fits.
 The results shown in \figurename~\ref{fig:sinusoid-fits} are for abundance
-deviations in $\mgfe$, and just for three particular settings of the disk mass
+deviations in $\ofe$, and just for three particular settings of the disk mass
 parameters, \mratio (with all other mass model parameters fixed).
 The data are bootstrapped prior to the construction of the abundance deviations,
 because the abundance-deviation estimates depend on the data set in play, and
@@ -1080,7 +1081,7 @@ For each mass model (i.e., each setting of \mratio), we estimate the Fourier
 coefficient parameters and uncertainties on the coefficients using 128 bootstrap
 trials.
 \figurename~\ref{fig:coeff-mdisk} shows the inferred coefficients for the
-abundance ratio \mgfe\ as a function of disk mass \mratio.
+abundance ratio \ofe\ as a function of disk mass \mratio.
 Conceptually, to turn this into a constraint on the disk mass, we then look for
 the value of \mratio\ that minimizes the (absolute) value of $a_2$.
 We obtain an estimate for the disk mass parameter \mratio\ and an associated
@@ -1108,7 +1109,7 @@ context of our assumptions below (\sectionname~\ref{sec:discussion}).
   \includegraphics[width=0.9\textwidth]{coeff-vs-mdisk.pdf}
   \end{center}
   \caption{%
-    Parameters of the smooth sine-and-cosine fits to the dependence of \mgfe\
+    Parameters of the smooth sine-and-cosine fits to the dependence of \ofe\
     abundance deviation on vertical angle $\theta_z$ (the blue lines in
     \figurename~\ref{fig:sinusoid-fits}), as a function of the disk-mass
     parameter \mratio.
@@ -1161,10 +1162,19 @@ objective function
     a_1^2 + b_1^2 + a_2^2 \quad . \label{eq:objective}
 \end{equation}
 Note that here we ignore the constant term $c_0$ and the amplitude of the $\sin
-2\theta_z$ term $b_2$.
-We again perform 128 bootstrap trials per element, and we perform the bootstrap
-resampling outside of the entire procedure (so that each optimization is
-performed independently with a bootstrap sample).
+2\theta_z$ term $b_2$\changes{, but we have verified that including these
+coefficients in the objective function does not significantly (within a few per
+cent) change the inferred parameters for any of the elements used here}.
+\changes{This choice of objective function (\equationname~\ref{eq:objective}) is
+somewhat arbitrary, but is sufficient for following the ``classical statistics''
+approach we take in this article.
+A Bayesian or likelihood-based formulation of the ideas described here could
+instead construct a more physical model for $\Delta(\theta_z)$, and directly
+fit for, or sample over (with priors), the mass model and Milky Way parameters;
+we consider this out of scope for this work.}
+Using the objective function above, we again perform 128 bootstrap trials per
+element, and we perform the bootstrap resampling outside of the entire procedure
+(so that each optimization is performed independently with a bootstrap sample).
 We use Nelder-Mead optimization \citep{Gao:2012} to minimize our objective
 function, as implemented in the \package{scipy} package \citep{Virtanen:2020}.
 
@@ -1216,12 +1226,16 @@ from different element abundance ratios will effectively weight stars in
 different parts of action space in ways that may amplify issues with our
 assumptions.
 In particular, there are known asymmetries in the vertical density and
-kinematics of stars in the local disk (i.e., the ``phase-space spiral'';
-\citealt{Antoja:2018}), which affect stars with different vertical actions with
-a different phase and amplitude.
+kinematics of stars in the local disk, \changes{which affect stars with different
+vertical actions with a different phase and amplitude.
+In general, structures that are coherent in orbital phase (for example, the
+known substructure in the local velocity distribution, \citealt{TODO}, or the
+vertical ``phase-space spiral'', \citealt{Antoja:2018}).
+}
 If the abundance ratio gradients (with respect to vertical action) emphasize
 stars with different vertical actions, we will in general find disagreements
 between the results for different abundance ratios.
+
 Our results are summarized in \tablename~\ref{tbl:results}, where we list the
 joint constraints on our four parameters utilizing all eight abundance ratios
 (center column), or excluding \abunratio{Mg}{Fe} and \abunratio{Si}{Fe} (right
@@ -1295,17 +1309,16 @@ fiducial model $\approx 1.3$ \citep{gala} and the implied value for the
   \label{tbl:results}
 \end{table}
 
-% Notebook: figures/6-APOGEE-elem-Jz-gradients.ipynb
+% Notebook: figures/figures/6-APOGEE-elem-Jz-gradients.ipynb
 % \begin{figure}[!tp]
 %   \begin{mdframed}
-  % \color{captiongray}
+%   \color{captiongray}
 %   \begin{center}
 %   \includegraphics[width=\textwidth]{elem-Jz-gradients.pdf}
 %   \end{center}
 %   \caption{%
-%     TODO
-%   \label{fig:elem-Jz-gradients}
-%   }
+%     TODO:
+%     \label{fig:elem-Jz-gradients}}
 %   \end{mdframed}
 % \end{figure}
 
@@ -1454,7 +1467,7 @@ it require accurately measuring second moments (or spatial derivatives of second
 moments) of the velocity distribution.
 We choose in this \documentname\ to focus on the vertical kinematics of stars,
 but we do not assume that motion in $z$ is decoupled from the radial kinematics
-(i.e., the orbits plotted in \figurename~\ref{fig:zvz-mgfe} show finite-width
+(i.e., the orbits plotted in \figurename~\ref{fig:zvz-ofe} show finite-width
 projections onto the vertical phase space).
 We therefore expect \methodname\ to be more stable and less restrictive than
 Jeans methods.
