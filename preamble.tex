@@ -1,0 +1,75 @@
+\usepackage{xcolor}
+\usepackage{amsmath}
+
+\newcommand{\documentname}{\textsl{Article}}
+\newcommand{\sectionname}{Section}
+\renewcommand{\figurename}{Figure}
+\newcommand{\equationname}{Equation}
+\renewcommand{\tablename}{Table}
+
+% Misc.
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+
+% Missions
+\newcommand{\project}[1]{\textsl{#1}}
+
+% Packages / projects / programming
+\newcommand{\package}[1]{\textsl{#1}}
+\newcommand{\acronym}[1]{{\small{#1}}}
+\newcommand{\github}{\package{GitHub}}
+\newcommand{\python}{\package{Python}}
+
+% Stats / probability
+\newcommand{\given}{\,|\,}
+\newcommand{\norm}{\mathcal{N}}
+\newcommand{\pdf}{\textsl{pdf}}
+
+% Maths
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\TT}[1]{\ensuremath{{#1}^{\mathsf{T}}}}
+\newcommand{\transp}{\ensuremath{^{\mathsf{T}}}}
+\newcommand{\inv}[1]{{#1}^{-1}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\newcommand{\mean}[1]{\left\langle #1 \right\rangle}
+
+% Non-scalar variables
+\renewcommand{\vec}[1]{\ensuremath{\bs{#1}}}
+\newcommand{\mat}[1]{\ensuremath{\mathbf{#1}}}
+
+% Unit shortcuts
+\newcommand{\Msun}{\ensuremath{\mathrm{M}_\odot}}
+\newcommand{\Mjup}{\ensuremath{\mathrm{M}_{\mathrm{J}}}}
+\newcommand{\kms}{\ensuremath{\mathrm{km}~\mathrm{s}^{-1}}}
+\newcommand{\mps}{\ensuremath{\mathrm{m}~\mathrm{s}^{-1}}}
+\newcommand{\pc}{\ensuremath{\mathrm{pc}}}
+\newcommand{\kpc}{\ensuremath{\mathrm{kpc}}}
+\newcommand{\kmskpc}{\ensuremath{\mathrm{km}~\mathrm{s}^{-1}~\mathrm{kpc}^{-1}}}
+\newcommand{\dayd}{\ensuremath{\mathrm{d}}}
+\newcommand{\yr}{\ensuremath{\mathrm{yr}}}
+\newcommand{\AU}{\ensuremath{\mathrm{AU}}}
+\newcommand{\Kel}{\ensuremath{\mathrm{K}}}
+\newcommand{\mas}{\ensuremath{\mathrm{mas}}}
+
+% Astronomy
+\newcommand{\DM}{{\rm DM}}
+\newcommand{\abunratio}[2]{\ensuremath{{[\mathrm{#1}/\mathrm{#2}]}}}
+\newcommand{\feh}{\abunratio{Fe}{H}}
+\newcommand{\mh}{\abunratio{M}{H}}
+\newcommand{\alphafe}{\abunratio{\alpha}{Fe}}
+\newcommand{\df}{\acronym{DF}}
+\newcommand{\logg}{\ensuremath{\log g}}
+\newcommand{\Teff}{\ensuremath{T_{\textrm{eff}}}}
+\newcommand{\mtwomin}{\ensuremath{M_{2, {\rm min}}}}
+
+% Colors:
+\definecolor{tabblue}{HTML}{4E79A7}
+\definecolor{taborange}{HTML}{F28E2B}
+\definecolor{tabgreen}{HTML}{59A14F}
+\definecolor{tabred}{HTML}{E15759}
+\definecolor{tabpurple}{HTML}{B07AA1}
+
+% TODO:
+\newcommand{\TODO}[1]{{\color{tabgreen}\textbf{TODO:} #1}}
+\newcommand{\APWTODO}[1]{{\color{tabpurple}\textbf{APW TODO:} #1}}
+\newcommand{\HOGGTODO}[1]{{\color{tabred}\textbf{HOGG TODO:} #1}}
+\newcommand{\changes}[1]{{\color{violet}#1}}
