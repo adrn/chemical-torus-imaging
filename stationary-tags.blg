@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: stationary-tags.aux
+The style file: aasjournal.bst
+Database file #1: stationary-tags.bib
+Reallocated str_pool (elt_size=1) to 130000 items from 65000.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Warning--empty publisher in Binney:2008
+Warning--can't use both author and editor fields in Grillmair:2016
+Warning--empty publisher in Grillmair:2016
+Warning--empty publisher in Jeans:1919b
+You've used 109 entries,
+            3168 wiz_defined-function locations,
+            1522 strings with 92762 characters,
+and the built_in function-call counts, 88389 in all, are:
+= -- 4048
+> -- 12653
+< -- 52
++ -- 4199
+- -- 4298
+* -- 10489
+:= -- 18108
+add.period$ -- 112
+call.type$ -- 109
+change.case$ -- 566
+chr.to.int$ -- 114
+cite$ -- 113
+duplicate$ -- 1823
+empty$ -- 3043
+format.name$ -- 4478
+if$ -- 16001
+int.to.chr$ -- 2
+int.to.str$ -- 0
+missing$ -- 109
+newline$ -- 338
+num.names$ -- 437
+pop$ -- 610
+preamble$ -- 1
+purify$ -- 562
+quote$ -- 0
+skip$ -- 1580
+stack$ -- 0
+substring$ -- 1966
+swap$ -- 10
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 966
+warning$ -- 4
+while$ -- 399
+width$ -- 0
+write$ -- 1198
+(There were 4 warnings)
