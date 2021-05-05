@@ -1,4 +1,12 @@
-# Orbital Torus Imaging
+# Archived!
+
+This repository is archived, and [the paper is
+published](https://arxiv.org/abs/2012.00015)! Future work will use the
+[totoro](https://github.com/adrn/totoro) package for executing inferences, and
+separate repositories for specific projects.
+
+
+## Orbital Torus Imaging
 
 [![PDF](https://img.shields.io/badge/latex-PDF-blueviolet.svg?style=flat)](https://github.com/adrn/chemical-torus-imaging/blob/gh-pages/stationary-tags.pdf)
 
